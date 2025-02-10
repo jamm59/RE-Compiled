@@ -236,7 +236,7 @@ scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_c371e")
 animation = &"Move"
 autoplay = "Move"
-frame_progress = 0.0998315
+frame_progress = 0.222499
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

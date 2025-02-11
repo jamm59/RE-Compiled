@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://bqvo72neem772"]
+[gd_scene load_steps=64 format=3 uid="uid://bqvo72neem772"]
 
 [ext_resource type="Script" path="res://Characters/Enemy/enemy_base.gd" id="1_8eg6q"]
 [ext_resource type="Texture2D" uid="uid://oslhn017kk2n" path="res://Characters/Enemy/monster001eyes.png" id="1_pnlr2"]
@@ -450,6 +450,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rqsn"]
+size = Vector2(143.636, 18.1818)
+
 [node name="EnemyBase" type="CharacterBody2D"]
 position = Vector2(4, -9)
 scale = Vector2(1.1, 1.1)
@@ -461,9 +464,8 @@ shape = SubResource("RectangleShape2D_xfdl0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tgsef")
-animation = &"Walk"
+animation = &"Attack 2"
 autoplay = "Walk"
-frame_progress = 0.455417
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
 target_position = Vector2(17.2727, 0)
@@ -478,3 +480,11 @@ target_position = Vector2(-20, 15.4545)
 [node name="RayCastRightGround" type="RayCast2D" parent="."]
 position = Vector2(1.81818, -0.909091)
 target_position = Vector2(20, 16.3636)
+
+[node name="DetectPlayerArea" type="Area2D" parent="."]
+
+[node name="Detect" type="CollisionShape2D" parent="DetectPlayerArea"]
+position = Vector2(3.63636, -0.909091)
+shape = SubResource("RectangleShape2D_8rqsn")
+
+[connection signal="body_entered" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_entered"]

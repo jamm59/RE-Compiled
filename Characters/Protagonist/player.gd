@@ -44,18 +44,6 @@ var currentPlayerState: PLAYER_STATE = PLAYER_STATE.IDLE
 
 func getGravity() -> float:
 	return JUMP_GRAVITY if velocity.y < 0.0 else FALL_GRAVITY
-	#
-#func ghosting(ghostSprite: Sprite2D, time: float) -> void:
-	#var tweenFade = get_tree().create_tween()
-	#tweenFade.tween_property(ghostSprite, "modulate", Color(1, 1, 1, 0), time )
-	#await tweenFade.finished
-	#ghostSprite.queue_free()
-	#
-#func handlePlayerDashAnimation() -> void:
-	#dash_particle.emitting = true
-
-	#ghosting(ghostSprite, time)
-
 	
 func handleJumpInput(delta: float) -> void:
 	if not is_on_floor():
@@ -78,7 +66,7 @@ func handleJumpInput(delta: float) -> void:
 
 func handleInput(delta: float) -> void:
 	var dir = Input.get_axis("Left", "Right")
-
+	
 	if dir == 0 and velocity.y < 1:
 		currentPlayerState = PLAYER_STATE.IDLE
 	if Input.is_action_just_pressed("Attack"):
@@ -118,11 +106,7 @@ func handleAnimationStateUpdate() -> void:
 		PLAYER_STATE.MOVING_LEFT:
 			animated_sprite_2d.play("Run")
 			velocity.x = move_toward(velocity.x, -1 * SPEED, acceleration)
-
 			
-			
-				
-
 		PLAYER_STATE.DASH:
 			#audio_player.pitch_scale = randf_range(0.5, 0.8)
 			#audio_player.playing = true

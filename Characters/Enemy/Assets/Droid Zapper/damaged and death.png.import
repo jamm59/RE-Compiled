@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://csk5jrkj3hmvo"
-path="res://.godot/imported/damaged and death.png-7268a56b630939bbb24a3380c41e8c40.ctex"
+path="res://.godot/imported/damaged and death.png-31020662ec85e516afe8ced1b84cb7e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Enemy/Droid Zapper/damaged and death.png"
-dest_files=["res://.godot/imported/damaged and death.png-7268a56b630939bbb24a3380c41e8c40.ctex"]
+source_file="res://Characters/Enemy/Assets/Droid Zapper/damaged and death.png"
+dest_files=["res://.godot/imported/damaged and death.png-31020662ec85e516afe8ced1b84cb7e2.ctex"]
 
 [params]
 

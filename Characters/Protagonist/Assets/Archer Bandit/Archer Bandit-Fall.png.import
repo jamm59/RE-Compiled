@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://blvww7gwynasp"
-path="res://.godot/imported/Archer Bandit-Fall.png-5f6a99e627c45a26311773cc68cb992a.ctex"
+path="res://.godot/imported/Archer Bandit-Fall.png-08e8430d849cd88b597105294c88c8ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Protagonist/asssets/Archer Bandit/Archer Bandit-Fall.png"
-dest_files=["res://.godot/imported/Archer Bandit-Fall.png-5f6a99e627c45a26311773cc68cb992a.ctex"]
+source_file="res://Characters/Protagonist/Assets/Archer Bandit/Archer Bandit-Fall.png"
+dest_files=["res://.godot/imported/Archer Bandit-Fall.png-08e8430d849cd88b597105294c88c8ee.ctex"]
 
 [params]
 

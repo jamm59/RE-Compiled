@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6ftrbev4h25w"
-path="res://.godot/imported/Dagger Bandit-Bat Fang Attack.png-cd98912c4f990d804d63c49f386d3138.ctex"
+path="res://.godot/imported/Dagger Bandit-Bat Fang Attack.png-37ac0a265e09bfbb69eebf165a77c98a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Protagonist/asssets/Dagger Bandit/Dagger Bandit-Bat Fang Attack.png"
-dest_files=["res://.godot/imported/Dagger Bandit-Bat Fang Attack.png-cd98912c4f990d804d63c49f386d3138.ctex"]
+source_file="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Bat Fang Attack.png"
+dest_files=["res://.godot/imported/Dagger Bandit-Bat Fang Attack.png-37ac0a265e09bfbb69eebf165a77c98a.ctex"]
 
 [params]
 

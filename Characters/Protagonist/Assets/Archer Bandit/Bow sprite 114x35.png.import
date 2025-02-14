@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpa4uth6rowuk"
-path="res://.godot/imported/Bow sprite 114x35.png-3b439e362436a5f2278bdb2da75d628a.ctex"
+path="res://.godot/imported/Bow sprite 114x35.png-bf53073d4961619a5d4e7cba39f385ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Protagonist/asssets/Archer Bandit/Bow sprite 114x35.png"
-dest_files=["res://.godot/imported/Bow sprite 114x35.png-3b439e362436a5f2278bdb2da75d628a.ctex"]
+source_file="res://Characters/Protagonist/Assets/Archer Bandit/Bow sprite 114x35.png"
+dest_files=["res://.godot/imported/Bow sprite 114x35.png-bf53073d4961619a5d4e7cba39f385ed.ctex"]
 
 [params]
 

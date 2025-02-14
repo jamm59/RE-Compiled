@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6834cgllmw84"
-path="res://.godot/imported/Dagger Bandit-Run.png-c51533f1597f0cfaf46aa622948cb599.ctex"
+path="res://.godot/imported/Dagger Bandit-Run.png-221939c2e9c68c460afd2d021a055cc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Protagonist/asssets/Dagger Bandit/Dagger Bandit-Run.png"
-dest_files=["res://.godot/imported/Dagger Bandit-Run.png-c51533f1597f0cfaf46aa622948cb599.ctex"]
+source_file="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Run.png"
+dest_files=["res://.godot/imported/Dagger Bandit-Run.png-221939c2e9c68c460afd2d021a055cc7.ctex"]
 
 [params]
 

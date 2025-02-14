@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c5x13lc21as42"
-path="res://.godot/imported/Dagger Bandit-Death.png-213994f071d8f281a348409982b89da9.ctex"
+path="res://.godot/imported/Dagger Bandit-Death.png-efb65cd06810e7ef6cad82362aa536be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Protagonist/asssets/Dagger Bandit/Dagger Bandit-Death.png"
-dest_files=["res://.godot/imported/Dagger Bandit-Death.png-213994f071d8f281a348409982b89da9.ctex"]
+source_file="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Death.png"
+dest_files=["res://.godot/imported/Dagger Bandit-Death.png-efb65cd06810e7ef6cad82362aa536be.ctex"]
 
 [params]
 

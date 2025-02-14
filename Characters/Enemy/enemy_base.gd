@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name EnemyBase
 
 
 @export_category("Jump Settings")
@@ -20,16 +21,13 @@ extends CharacterBody2D
 @onready var ray_cast_right_ground: RayCast2D = $RayCastRightGround
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-enum ENEMY_STATE {IDLE, ATTACK, RUN}
+enum ENEMY_STATE {IDLE, ATTACK, RUN, DEAD, DELETE}
 
-const SPEED = 50.0
+var SPEED = 50.0
 #const JUMP_VELOCITY = -400.0
 const axisDir: Array[int] = [1, -1]
 var enemyState: ENEMY_STATE = ENEMY_STATE.IDLE
 var direction: int = axisDir[randi() % 2]
-
-
-
 var followPath = true
 var followPlayer = false
 var PlayerReference: CharacterBody2D = null
@@ -37,6 +35,10 @@ var PlayerReference: CharacterBody2D = null
 
 func getGravity() -> float:
 	return JUMP_GRAVITY if velocity.y < 0.0 else FALL_GRAVITY
+
+func handleEnemyDead() -> void:
+	enemyState = ENEMY_STATE.DEAD
+	animated_sprite_2d.play("Dead 1")
 	
 func handleMoveAndAvoidObstacles()-> void:
 	velocity.x = direction * SPEED
@@ -54,9 +56,8 @@ func handleEnemyState() -> void:
 			animated_sprite_2d.play("Attack 1")
 		ENEMY_STATE.RUN:
 			animated_sprite_2d.play("Run")
-		_:
+		ENEMY_STATE.IDLE:
 			animated_sprite_2d.play("Walk")
-			
 			
 func handleEnemyJump() -> void:
 	velocity.y = JUMP_VELOCITY
@@ -95,17 +96,16 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += getGravity() * delta
 		
-	if followPath:
-		handleMoveAndAvoidObstacles()
-		
-	else:
-		# follow player
-		handleFollowPlayerLogic()
-		
+	if enemyState != ENEMY_STATE.DEAD:
+		if followPath:
+			handleMoveAndAvoidObstacles()
+		else:
+			handleFollowPlayerLogic()
 	handleEnemyState()
 	move_and_slide()
 
-func _on_detect_player_area_body_entered(body: CharacterBody2D) -> void:
-	if body.name == "Player":
+func _on_detect_player_area_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D and body.name == "Player":
 		PlayerReference = body
+		SPEED = 50
 		followPath = false

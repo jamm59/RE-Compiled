@@ -1,10 +1,23 @@
-[gd_scene load_steps=64 format=3 uid="uid://bqvo72neem772"]
+[gd_scene load_steps=74 format=3 uid="uid://bqvo72neem772"]
 
 [ext_resource type="Script" path="res://Characters/Enemy/enemy_base.gd" id="1_8eg6q"]
 [ext_resource type="Texture2D" uid="uid://oslhn017kk2n" path="res://Characters/Enemy/monster001eyes.png" id="1_pnlr2"]
+[ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_5xp7v"]
+[ext_resource type="Script" path="res://Characters/Enemy/health_box_component.gd" id="4_d28dm"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfdl0"]
-size = Vector2(10.9091, 18.1818)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7w5k4"]
+radius = 4.54545
+height = 18.1818
+
+[sub_resource type="GDScript" id="GDScript_pm2dl"]
+
+[sub_resource type="Curve" id="Curve_s1g3o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.790614, 0.331776), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rc4hf"]
+shader = ExtResource("3_5xp7v")
+shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8phok"]
 atlas = ExtResource("1_pnlr2")
@@ -265,7 +278,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y0014")
 }],
-"loop": true,
+"loop": false,
 "name": &"Attack 1",
 "speed": 10.0
 }, {
@@ -294,7 +307,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vgcou")
 }],
-"loop": true,
+"loop": false,
 "name": &"Attack 2",
 "speed": 10.0
 }, {
@@ -326,9 +339,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fes8v")
 }],
-"loop": true,
+"loop": false,
 "name": &"Dead 1",
-"speed": 4.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -358,9 +371,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7o4c4")
 }],
-"loop": true,
+"loop": false,
 "name": &"Dead 2",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -453,18 +466,180 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8rqsn"]
 size = Vector2(143.636, 18.1818)
 
+[sub_resource type="Animation" id="Animation_qr3l8"]
+resource_name = "Damage"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, -0.0872665, 0.0872665, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HealthBoxComponent")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"knockBack"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LabelParent/HealthDamageText:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HealthBoxComponent")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"emitHitSignal"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_o80mw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LabelParent/HealthDamageText:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sjfte"]
+_data = {
+"Damage": SubResource("Animation_qr3l8"),
+"RESET": SubResource("Animation_o80mw")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eibky"]
+size = Vector2(13.6364, 18.1818)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jxyin"]
+font_size = 5
+shadow_size = 3
+shadow_offset = Vector2(2, 2)
+
 [node name="EnemyBase" type="CharacterBody2D"]
 position = Vector2(4, -9)
 scale = Vector2(1.1, 1.1)
 script = ExtResource("1_8eg6q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.81818, -0.90909)
-shape = SubResource("RectangleShape2D_xfdl0")
+position = Vector2(2.72727, -0.909086)
+shape = SubResource("CapsuleShape2D_7w5k4")
+script = SubResource("GDScript_pm2dl")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(3.63636, 0)
+scale = Vector2(-0.70954, -36.9415)
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 1.0
+gravity = Vector2(400, 300)
+initial_velocity_min = 2.0
+initial_velocity_max = 6.0
+damping_max = 29.412
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_s1g3o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_rc4hf")
 sprite_frames = SubResource("SpriteFrames_tgsef")
-animation = &"Attack 2"
+animation = &"Dead 2"
 autoplay = "Walk"
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
@@ -487,4 +662,31 @@ target_position = Vector2(20, 16.3636)
 position = Vector2(3.63636, -0.909091)
 shape = SubResource("RectangleShape2D_8rqsn")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sjfte")
+}
+
+[node name="HealthBoxComponent" type="Area2D" parent="."]
+script = ExtResource("4_d28dm")
+
+[node name="HealthBox" type="CollisionShape2D" parent="HealthBoxComponent"]
+position = Vector2(3.18182, -0.909091)
+shape = SubResource("RectangleShape2D_eibky")
+
+[node name="DeadTimer" type="Timer" parent="HealthBoxComponent"]
+
+[node name="LabelParent" type="Node2D" parent="."]
+
+[node name="HealthDamageText" type="Label" parent="LabelParent"]
+modulate = Color(0.898039, 0.12549, 0.12549, 1)
+offset_left = -11.8182
+offset_top = -18.1818
+offset_right = 1.18182
+offset_bottom = -10.1818
+text = "- 2
+"
+label_settings = SubResource("LabelSettings_jxyin")
+
 [connection signal="body_entered" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_entered"]
+[connection signal="timeout" from="HealthBoxComponent/DeadTimer" to="HealthBoxComponent" method="_on_dead_timer_timeout"]

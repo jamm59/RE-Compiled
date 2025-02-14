@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw6pbvgunhu6q"
-path="res://.godot/imported/attack.png-2bab28ae8f7672961edad3ea596d0e75.ctex"
+uid="uid://fpybgpwoselr"
+path="res://.godot/imported/particle.png-ccca51dc7d8ec7a090d81e3c7f173931.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Enemy/Assets/Droid Zapper/attack.png"
-dest_files=["res://.godot/imported/attack.png-2bab28ae8f7672961edad3ea596d0e75.ctex"]
+source_file="res://Shaders/particle.png"
+dest_files=["res://.godot/imported/particle.png-ccca51dc7d8ec7a090d81e3c7f173931.ctex"]
 
 [params]
 

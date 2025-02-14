@@ -5,7 +5,8 @@ void vertex() {
 }
 
 void fragment() {
-    COLOR = vec4(float(199/255), float(13/255), float(58/255), 1.0);
+	// Called for every pixel the material is visible on.
+	COLOR.rbg = COLOR.ggg;
 }
 
 //void light() {

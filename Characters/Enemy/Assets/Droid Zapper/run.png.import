@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkyb03dodndsl"
-path="res://.godot/imported/run.png-5f8428d68859ace7e70b069867ce3ce7.ctex"
+path="res://.godot/imported/run.png-526c3031326284c38c2ec84b71e3b894.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Enemy/Droid Zapper/run.png"
-dest_files=["res://.godot/imported/run.png-5f8428d68859ace7e70b069867ce3ce7.ctex"]
+source_file="res://Characters/Enemy/Assets/Droid Zapper/run.png"
+dest_files=["res://.godot/imported/run.png-526c3031326284c38c2ec84b71e3b894.ctex"]
 
 [params]
 

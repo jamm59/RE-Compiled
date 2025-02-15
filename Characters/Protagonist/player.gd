@@ -1,14 +1,20 @@
 extends CharacterBody2D
+class_name Player
 
-enum PLAYER_STATE {IDLE, JUMP, DASH, DASH_ATTACK, FALL, LAND, ATTACK, MOVING_LEFT, MOVING_RIGHT}
+enum PLAYER_STATE {IDLE, JUMP, DASH, DASH_ATTACK, FALL, LAND, ATTACK, MOVING_LEFT, MOVING_RIGHT, DEAD}
 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var attack_box: CollisionShape2D = $AttackBoxComponent/AttackBox
 
 @export_category("Jump Settings")
 @export var jump_height : float = 40
 @export var jump_time_to_peak : float = 0.3
 @export var jump_time_to_descent : float = 0.3
+
+@export_category("Player Health")
+@export var MAX_HEALTH: int = 20
 
 
 @onready var JUMP_VELOCITY : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
@@ -16,24 +22,27 @@ enum PLAYER_STATE {IDLE, JUMP, DASH, DASH_ATTACK, FALL, LAND, ATTACK, MOVING_LEF
 @onready var FALL_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 @onready var FALL_GRAVITY_TEMP = FALL_GRAVITY
 
-# WEAPON
-
-
+# Constants
+const DASH_MULTIPLIER: int = 3
+const SPEED: float = 150.0
+const KNOCKBACKVALUE: int = 30
+const DAMAGE_POINT: int = 3
 
 #signal cameraShake
 #signal attackAnimation
 
 var jump_count: int = 2
-const DASH_MULTIPLIER: int = 3
-const SPEED: float = 150.0
+
 var wasOnFloor: bool = false
-var isAttacking: bool = false
 var isWallSliding: bool = false
 var friction: float = 40
 var acceleration: float = 50
 var spriteInitialPosition: float
 var previousDirection: int = 1
 var initialScaleX: float = scale.x
+var isDead: bool = false
+var health: int = 0
+
 
 
 var currentPlayerState: PLAYER_STATE = PLAYER_STATE.IDLE
@@ -64,13 +73,14 @@ func handleInput(delta: float) -> void:
 
 	var dir = Input.get_axis("Left", "Right")
 	
-	if dir == 0 and velocity.y < 1:
+	if currentPlayerState not in [PLAYER_STATE.DEAD, PLAYER_STATE.ATTACK] and (dir == 0 and velocity.y < 1):
 		currentPlayerState = PLAYER_STATE.IDLE
 		
 	if Input.is_action_pressed("Attack"):
 		currentPlayerState = PLAYER_STATE.ATTACK
-		isAttacking = true
-		#animated_sprite_2d.play("Attack")
+		attack_box.disabled = false
+	else:
+		attack_box.disabled = true
 		
 	if Input.is_action_pressed("Left"):
 		currentPlayerState = PLAYER_STATE.MOVING_LEFT
@@ -87,9 +97,11 @@ func handleInput(delta: float) -> void:
 			scale.x = -1 * initialScaleX 
 		else:
 			scale.x = 1 * initialScaleX
+			
 	if Input.is_action_pressed("Dash"): # DASH IS INDEPENDENT OF OTHER EVENTS
 		currentPlayerState = PLAYER_STATE.DASH
 		
+
 	wasOnFloor = is_on_floor()
 	
 	
@@ -97,6 +109,8 @@ func handleInput(delta: float) -> void:
 func handleAnimationStateUpdate() -> void:
 	
 	match currentPlayerState:
+		PLAYER_STATE.DEAD:
+			animated_sprite_2d.play("Dead")
 		PLAYER_STATE.JUMP:
 			animated_sprite_2d.play("Jump")
 		PLAYER_STATE.FALL:
@@ -121,14 +135,50 @@ func handleAnimationStateUpdate() -> void:
 	#if currentPlayerState != PLAYER_STATE.DASH:
 		#dash_particle.emitting = false
 			
-			
+func applyHitDamage(enemy: EnemyBase):
+	if currentPlayerState == PLAYER_STATE.DEAD:
+		return 
+	knockBack(enemy)
+	health -= enemy.DAMAGE_POINT
+	animation_player.play("Hit")
+
+	if health <= 0:
+		animated_sprite_2d.play("Dead")
+		currentPlayerState = PLAYER_STATE.DEAD
+		
+func knockBack(enemy: EnemyBase) -> void:
+	if enemy.position.x > self.position.x:
+		position.x -= KNOCKBACKVALUE
+	else:
+		position.x += KNOCKBACKVALUE
+	
 func _ready() -> void:
 	initialScaleX = self.scale.x
+	health = MAX_HEALTH
 	
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
+
+	if currentPlayerState == PLAYER_STATE.DEAD:
+		return 
+		
+	handleJumpInput(delta)
+	
+	
+	if currentPlayerState == PLAYER_STATE.ATTACK:
+		return
+		
 	handleInput(delta)
 	handleAnimationStateUpdate()
-	handleJumpInput(delta)
 	move_and_slide()
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animated_sprite_2d.animation == "Attack":
+		currentPlayerState = PLAYER_STATE.IDLE
+
+
+func _on_attack_box_component_body_entered(body: Node2D) -> void:
+		if body is EnemyBase:
+			body.apply_damage(DAMAGE_POINT)

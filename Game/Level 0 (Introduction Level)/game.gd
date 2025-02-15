@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var freeze_slow := 0.07
-@export var freeze_time := 0.3
+@export var freeze_time := 0.2
 
 
 func _ready() -> void:

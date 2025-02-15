@@ -20,25 +20,58 @@ class_name EnemyBase
 @onready var ray_cast_left_ground: RayCast2D = $RayCastLeftGround
 @onready var ray_cast_right_ground: RayCast2D = $RayCastRightGround
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var attack_timer: Timer = $AttackTimer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var health_damage_text: Label = $LabelParent/HealthDamageText
 
-enum ENEMY_STATE {IDLE, ATTACK, RUN, DEAD, DELETE}
+@export var MAX_HEALTH: int = 10
 
-var SPEED = 50.0
+enum ENEMY_STATE {IDLE, ATTACK, RUN, DEAD}
+
+const DAMAGE_POINT: int = 2
+const KNOCKBACKVALUE: int = 30
+var SPEED = 40.0
 #const JUMP_VELOCITY = -400.0
 const axisDir: Array[int] = [1, -1]
-var enemyState: ENEMY_STATE = ENEMY_STATE.IDLE
+var enemyState: ENEMY_STATE
 var direction: int = axisDir[randi() % 2]
 var followPath = true
 var followPlayer = false
-var PlayerReference: CharacterBody2D = null
+var PlayerReference: Player = null
+
+
+var health: float
+var dir: int = 1
+var isDead: bool = false
 
 
 func getGravity() -> float:
 	return JUMP_GRAVITY if velocity.y < 0.0 else FALL_GRAVITY
 
+func apply_damage(damagePoint: int) -> void:
+	if isDead:
+		return 
+	health -= damagePoint
+	animation_player.play("Hit")
+	
+	if health <= 0:
+		handleEnemyDead()
+		animation_player.play("Dead")
+		
+func knockBack() -> void:
+	position.x += KNOCKBACKVALUE  * dir
+	
+func emitHitSignal() -> void:
+	SignalManager.emit_signal("enemy_hit")
+	
 func handleEnemyDead() -> void:
 	enemyState = ENEMY_STATE.DEAD
 	animated_sprite_2d.play("Dead 1")
+	PlayerReference = null
+	$HealthBoxComponent.queue_free()
+	$DetectPlayerArea.queue_free()
+	$DetectPlayerArea/Detect.queue_free()
+	$HealthBoxComponent/HealthBox.queue_free()
 	
 func handleMoveAndAvoidObstacles()-> void:
 	velocity.x = direction * SPEED
@@ -63,7 +96,6 @@ func handleEnemyJump() -> void:
 	velocity.y = JUMP_VELOCITY
 	
 func handleFollowPlayerLogic() -> void:
-	
 	if PlayerReference != null:
 		var player_position = PlayerReference.position
 		var angle_between_enemy_and_player = atan2(player_position.y - position.y, player_position.x - position.x)
@@ -81,11 +113,16 @@ func handleFollowPlayerLogic() -> void:
 				if body.name == "Base" and is_on_wall(): # Tilemap base layer
 					handleEnemyJump()
 				if body.name == "Player":
-					enemyState = ENEMY_STATE.ATTACK
+					pass
+					
 	else:
 		enemyState = ENEMY_STATE.RUN
 					
 func _ready() -> void:
+	health = MAX_HEALTH
+	health_damage_text.hide()
+	
+	enemyState = ENEMY_STATE.IDLE
 	if direction == 1:
 		animated_sprite_2d.flip_h = true
 	else:
@@ -93,19 +130,43 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
+	var axis: int = Input.get_axis("Left", "Right")
+	if axis in [1, -1]:
+		dir = axis
+		
 	if not is_on_floor():
 		velocity.y += getGravity() * delta
+	
+	if enemyState == ENEMY_STATE.DEAD:
+		return
 		
-	if enemyState != ENEMY_STATE.DEAD:
-		if followPath:
-			handleMoveAndAvoidObstacles()
-		else:
-			handleFollowPlayerLogic()
 	handleEnemyState()
+	if followPath:
+		handleMoveAndAvoidObstacles()
+	else:
+		handleFollowPlayerLogic()
 	move_and_slide()
 
 func _on_detect_player_area_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D and body.name == "Player":
+	if  PlayerReference == null and body is Player:
 		PlayerReference = body
-		SPEED = 50
 		followPath = false
+
+
+func _on_health_box_component_body_entered(body: Node2D) -> void:
+	if body is Player:
+		if body.currentPlayerState == body.PLAYER_STATE.DEAD:
+			followPath = true
+			enemyState = ENEMY_STATE.IDLE
+		else:
+			enemyState = ENEMY_STATE.ATTACK
+			attack_timer.start()
+
+
+func _on_attack_timer_timeout() -> void:
+	PlayerReference.applyHitDamage(self)
+	attack_timer.stop()
+	
+
+
+	

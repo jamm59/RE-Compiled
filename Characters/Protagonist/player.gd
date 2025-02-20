@@ -15,7 +15,7 @@ enum PLAYER_STATE {IDLE, JUMP, DASH, DASH_ATTACK, FALL, LAND, ATTACK, MOVING_LEF
 
 @export_category("Player Health")
 @export var MAX_HEALTH: int = 20
-
+@export var can_use_controls: bool = false
 
 @onready var JUMP_VELOCITY : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var JUMP_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
@@ -23,24 +23,25 @@ enum PLAYER_STATE {IDLE, JUMP, DASH, DASH_ATTACK, FALL, LAND, ATTACK, MOVING_LEF
 @onready var FALL_GRAVITY_TEMP = FALL_GRAVITY
 
 # Constants
-const DASH_MULTIPLIER: int = 3
-const SPEED: float = 150.0
+const DASH_MULTIPLIER: int = 2
+const SPEED: float = 160.0
 const KNOCKBACKVALUE: int = 30
 const DAMAGE_POINT: int = 3
 
 #signal cameraShake
 #signal attackAnimation
 
-var jump_count: int = 2
-
+var isDead: bool = false
 var wasOnFloor: bool = false
 var isWallSliding: bool = false
-var friction: float = 40
-var acceleration: float = 50
-var spriteInitialPosition: float
+
+var friction: float = 40.0
+var acceleration: float = 50.0
+var spriteInitialPosition: float = 0.0
+var initialScaleX: float = 0.0
+
+var jump_count: int = 2
 var previousDirection: int = 1
-var initialScaleX: float = scale.x
-var isDead: bool = false
 var health: int = 0
 
 
@@ -139,7 +140,7 @@ func applyHitDamage(enemy: EnemyBase):
 	if currentPlayerState == PLAYER_STATE.DEAD:
 		return 
 	knockBack(enemy)
-	health -= enemy.DAMAGE_POINT
+	health = max(health - enemy.DAMAGE_POINT, 0)
 	animation_player.play("Hit")
 
 	if health <= 0:
@@ -164,11 +165,10 @@ func _physics_process(delta: float) -> void:
 		return 
 		
 	handleJumpInput(delta)
-	
-	
 	if currentPlayerState == PLAYER_STATE.ATTACK:
 		return
-		
+	
+	#if can_use_controls:
 	handleInput(delta)
 	handleAnimationStateUpdate()
 	move_and_slide()

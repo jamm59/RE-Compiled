@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://xquo1xb3wqsy"]
+
+[ext_resource type="PackedScene" uid="uid://d2j3oa6ab5xqh" path="res://Characters/Companion/Companion.tscn" id="1_mu4rx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f28q5"]
+font_size = 40
+
+[node name="Dialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Companion" parent="." instance=ExtResource("1_mu4rx")]
+visible = false
+position = Vector2(90, 1143)
+scale = Vector2(10, 10)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -124.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="H" type="VSplitContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="PanelContainer/H"]
+layout_mode = 2
+text = "hello mate"
+label_settings = SubResource("LabelSettings_f28q5")
+
+[node name="Label2" type="Label" parent="PanelContainer/H"]
+layout_mode = 2
+text = "hello mate"
+label_settings = SubResource("LabelSettings_f28q5")

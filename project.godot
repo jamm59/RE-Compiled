@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 SignalManager="*res://AutoLoad/signal_manager.gd"
 Variables="*res://AutoLoad/variables.gd"
 
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+
 [input]
 
 Jump={

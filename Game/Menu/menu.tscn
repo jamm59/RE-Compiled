@@ -1,3 +1,168 @@
-[gd_scene format=3 uid="uid://bikma7beecr67"]
+[gd_scene load_steps=15 format=3 uid="uid://cs4tb7qdetlxj"]
 
-[node name="StartMenu" type="Node2D"]
+[ext_resource type="Script" path="res://Game/Menu/Menu.gd" id="1_4taty"]
+[ext_resource type="Texture2D" uid="uid://dd2k6yooeqf6u" path="res://Assets/Background/1.png" id="2_qelnf"]
+[ext_resource type="Texture2D" uid="uid://06l2dsgrnmwv" path="res://Assets/Background/2.png" id="3_xw8yr"]
+[ext_resource type="Texture2D" uid="uid://cw5ha5wbgov5f" path="res://Assets/Background/3.png" id="4_gi7nt"]
+[ext_resource type="Texture2D" uid="uid://gerc84licafq" path="res://Assets/Background/4.png" id="5_b0fs8"]
+[ext_resource type="Texture2D" uid="uid://bfgc1fopo0iyq" path="res://Assets/Background/5.png" id="6_posa3"]
+[ext_resource type="Texture2D" uid="uid://dilliaq78kefu" path="res://Assets/Background/6.png" id="7_ou4wv"]
+[ext_resource type="FontFile" uid="uid://d4lcfsd3aa7w2" path="res://Assets/Font/Inkos-zrg60.ttf" id="8_1yp52"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gll8e"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.423529, 0.423529, 0.423529, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1j1b"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.42365, 0.423651, 0.42365, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1bdr"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_lvv77"]
+
+[sub_resource type="Theme" id="Theme_kvnxf"]
+default_font = ExtResource("8_1yp52")
+default_font_size = 35
+Button/styles/focus = SubResource("StyleBoxFlat_gll8e")
+Button/styles/hover = SubResource("StyleBoxFlat_k1j1b")
+Button/styles/normal = SubResource("StyleBoxFlat_y1bdr")
+PanelContainer/styles/panel = SubResource("StyleBoxLine_lvv77")
+
+[sub_resource type="LabelSettings" id="LabelSettings_klavt"]
+font = ExtResource("8_1yp52")
+font_size = 80
+
+[node name="Menu" type="Control"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource("1_4taty")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(711, 259)
+
+[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-1, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("2_qelnf")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(711, 259)
+
+[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(-1, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("3_xw8yr")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(711, 259)
+
+[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(-1, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("4_gi7nt")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(711, 259)
+
+[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(-1, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("5_b0fs8")
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(711, 259)
+
+[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2(-1, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("6_posa3")
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(711, 259)
+
+[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
+position = Vector2(-1, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("7_ou4wv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_kvnxf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Re:Compiled
+"
+label_settings = SubResource("LabelSettings_klavt")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Play" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Play"
+
+[node name="Settings" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Options"
+
+[node name="Credit" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Credits
+"
+
+[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Exit
+"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/Play" to="." method="_on_continue_pressed"]

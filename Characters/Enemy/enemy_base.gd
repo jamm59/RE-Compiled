@@ -22,8 +22,6 @@ class_name EnemyBase
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_timer: Timer = $AttackTimer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var health_damage_text: Label = $LabelParent/HealthDamageText
-@onready var label_parent: Node2D = $LabelParent
 
 @export var MAX_HEALTH: int = 10
 
@@ -163,11 +161,12 @@ func _on_health_box_component_body_entered(body: Node2D) -> void:
 			
 
 func _on_attack_timer_timeout() -> void:
-	var distance: Vector2 = abs(player.position - position)
-	var x: float = distance[0]
-	if x <= 27.0:
-		player.applyHitDamage(self)
-	attack_timer.stop()
+	if player:
+		var distance: Vector2 = abs(player.position - position)
+		var x: float = distance[0]
+		if x <= 27.0:
+			player.applyHitDamage(self)
+		attack_timer.stop()
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

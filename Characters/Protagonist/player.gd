@@ -7,6 +7,7 @@ enum PLAYER_STATE {IDLE, JUMP, DASH, DASH_ATTACK, FALL, LAND, ATTACK, MOVING_LEF
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var attack_box: CollisionShape2D = $AttackBoxComponent/AttackBox
+@onready var dash_particle: GPUParticles2D = $GPUParticles2D
 
 @export_category("Jump Settings")
 @export var jump_height : float = 40
@@ -119,9 +120,11 @@ func handleAnimationStateUpdate() -> void:
 		PLAYER_STATE.LAND:
 			animated_sprite_2d.play("Land")
 		PLAYER_STATE.MOVING_RIGHT:
+			dash_particle.material.set("shader_param/facing_left", false)
 			animated_sprite_2d.play("Run")
 			velocity.x = move_toward(velocity.x, 1 * SPEED, acceleration)
 		PLAYER_STATE.MOVING_LEFT:
+			dash_particle.material.set("shader_param/facing_left", true)
 			animated_sprite_2d.play("Run")
 			velocity.x = move_toward(velocity.x, -1 * SPEED, acceleration)
 		PLAYER_STATE.ATTACK:
@@ -129,12 +132,13 @@ func handleAnimationStateUpdate() -> void:
 		PLAYER_STATE.DASH:
 			var axis: int = Input.get_axis("Left", "Right")
 			velocity.x = axis * SPEED * DASH_MULTIPLIER
+			dash_particle.emitting = true
 		PLAYER_STATE.IDLE:
 			animated_sprite_2d.play("Idle")
 			velocity.x = move_toward(velocity.x, 0, friction)
-		
-	#if currentPlayerState != PLAYER_STATE.DASH:
-		#dash_particle.emitting = false
+
+	if currentPlayerState != PLAYER_STATE.DASH:
+		dash_particle.emitting = false
 			
 func applyHitDamage(enemy: EnemyBase):
 	if currentPlayerState == PLAYER_STATE.DEAD:
@@ -160,7 +164,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-
 	if currentPlayerState == PLAYER_STATE.DEAD:
 		return 
 		

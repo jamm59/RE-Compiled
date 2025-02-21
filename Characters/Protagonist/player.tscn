@@ -1,16 +1,38 @@
-[gd_scene load_steps=147 format=3 uid="uid://ce563tpin64kc"]
+[gd_scene load_steps=153 format=3 uid="uid://ce563tpin64kc"]
 
 [ext_resource type="Script" path="res://Characters/Protagonist/player.gd" id="1_m6b1w"]
 [ext_resource type="Texture2D" uid="uid://bwdj0fy7qw8g5" path="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Attack.png" id="2_bdhbv"]
 [ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="2_xsahi"]
 [ext_resource type="Texture2D" uid="uid://djoujqmqlmv0f" path="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Idle.png" id="3_51ypr"]
 [ext_resource type="Texture2D" uid="uid://ba52xijsltwn5" path="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Fall.png" id="3_cdj0l"]
+[ext_resource type="Texture2D" uid="uid://c1vvgl7qdkxpd" path="res://Characters/Protagonist/dash-tile.png" id="3_o5b3u"]
 [ext_resource type="Texture2D" uid="uid://c5x13lc21as42" path="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Death.png" id="4_k1f28"]
 [ext_resource type="Texture2D" uid="uid://biqu2t0cc5mu2" path="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Vanish.png" id="4_r1jxk"]
 [ext_resource type="Texture2D" uid="uid://cq83demiutqtp" path="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Jump.png" id="5_2rvf2"]
 [ext_resource type="Texture2D" uid="uid://b6834cgllmw84" path="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Run.png" id="5_oss4j"]
 [ext_resource type="Texture2D" uid="uid://b6ftrbev4h25w" path="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Bat Fang Attack.png" id="10_tnoit"]
 [ext_resource type="Texture2D" uid="uid://kaxwxn7r523j" path="res://Characters/Protagonist/Assets/Dagger Bandit/Dagger Bandit-Appear.png" id="11_8neub"]
+[ext_resource type="Shader" path="res://Shaders/playerDash.gdshader" id="12_f0a6h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dx6os"]
+shader = ExtResource("12_f0a6h")
+shader_parameter/particles_anim_h_frames = 1
+shader_parameter/particles_anim_v_frames = 1
+shader_parameter/particles_anim_loop = false
+shader_parameter/facing_left = false
+
+[sub_resource type="Curve" id="Curve_4ovmb"]
+_data = [Vector2(0.0150754, 0.506173), 0.0, 0.0, 0, 0, Vector2(0.974874, 0.123457), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_oknna"]
+curve = SubResource("Curve_4ovmb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h6dxk"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color = Color(1, 1, 1, 0.329412)
+alpha_curve = SubResource("CurveTexture_oknna")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mco37"]
 shader = ExtResource("2_xsahi")
@@ -1021,6 +1043,14 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_m6b1w")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_dx6os")
+position = Vector2(29, -9)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_h6dxk")
+texture = ExtResource("3_o5b3u")
+lifetime = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_mco37")

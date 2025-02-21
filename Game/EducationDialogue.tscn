@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://n230xm5v3tu4"]
+
+[ext_resource type="Script" path="res://Game/Dialogue.gd" id="1_c6kcf"]
+[ext_resource type="FontFile" uid="uid://brx2ctuyhv0lt" path="res://Assets/Font/BlazeCircuitRegular-xRvxj.ttf" id="2_rrle7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g1ae3"]
+font = ExtResource("2_rrle7")
+font_size = 40
+
+[node name="EducationDialogue" type="CanvasLayer"]
+script = ExtResource("1_c6kcf")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 4.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HSplitContainer/CenterContainer"]
+layout_mode = 2
+text = "Companion's Position"
+
+[node name="VSplitContainer" type="VSplitContainer" parent="PanelContainer/MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HSplitContainer/VSplitContainer"]
+layout_mode = 2
+text = "11"
+label_settings = SubResource("LabelSettings_g1ae3")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/HSplitContainer/VSplitContainer"]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_g1ae3")
+horizontal_alignment = 1

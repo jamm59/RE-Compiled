@@ -1,0 +1,105 @@
+[gd_scene load_steps=9 format=3 uid="uid://6i2npt6ug54x"]
+
+[ext_resource type="FontFile" uid="uid://d4lcfsd3aa7w2" path="res://Assets/Font/Inkos-zrg60.ttf" id="1_be3ng"]
+[ext_resource type="Script" path="res://Game/Menu/PauseMenu.gd" id="1_g4vf0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jne5s"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.423529, 0.423529, 0.423529, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1i040"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.42365, 0.423651, 0.42365, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cxruc"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_p27ob"]
+color = Color(0.180392, 0.556863, 0.278431, 0.639216)
+
+[sub_resource type="Theme" id="Theme_7ha6y"]
+default_font = ExtResource("1_be3ng")
+default_font_size = 35
+Button/styles/focus = SubResource("StyleBoxFlat_jne5s")
+Button/styles/hover = SubResource("StyleBoxFlat_1i040")
+Button/styles/normal = SubResource("StyleBoxFlat_cxruc")
+PanelContainer/styles/panel = SubResource("StyleBoxLine_p27ob")
+
+[sub_resource type="LabelSettings" id="LabelSettings_8tofo"]
+font = ExtResource("1_be3ng")
+font_size = 80
+
+[node name="PauseMenuUI" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_g4vf0")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_7ha6y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Title" type="Label" parent="Panel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game Paused"
+label_settings = SubResource("LabelSettings_8tofo")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Resume" type="Button" parent="Panel/PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Resume"
+
+[node name="Options" type="Button" parent="Panel/PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Options"
+
+[node name="Exit" type="Button" parent="Panel/PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Exit
+"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

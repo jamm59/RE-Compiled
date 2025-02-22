@@ -1,16 +1,204 @@
-[gd_scene load_steps=3 format=3 uid="uid://pk3ypbe0q8hr"]
+[gd_scene load_steps=28 format=3 uid="uid://pk3ypbe0q8hr"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1y7ud"]
+[ext_resource type="Script" path="res://Platforms/scenes/terminal.gd" id="1_n8xof"]
+[ext_resource type="Texture2D" uid="uid://ceykyc4xu2lnp" path="res://Assets/other/terminal.png" id="1_soir2"]
+[ext_resource type="Shader" path="res://Game/shaders/blackandwhite.gdshader" id="2_3gykg"]
+[ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="2_c0b02"]
+[ext_resource type="Texture2D" uid="uid://ccvbuud12l3oo" path="res://Assets/platforms/Weapons/WR_NightBoundSet_Spritesheet.png" id="2_tmugs"]
+[ext_resource type="Texture2D" uid="uid://nkqj0insxso5" path="res://Assets/platforms/Gears/2.png" id="3_74o7f"]
+[ext_resource type="Texture2D" uid="uid://dq6al1uhi7ote" path="res://Assets/platforms/Gears/3.png" id="4_067gt"]
+[ext_resource type="Texture2D" uid="uid://d3s1am4vbmmpj" path="res://Assets/platforms/Gears/4.png" id="5_rm4qu"]
+[ext_resource type="Texture2D" uid="uid://58g131lxl43l" path="res://Assets/platforms/Gears/5.png" id="6_nvd44"]
+[ext_resource type="Texture2D" uid="uid://dkuy6ulhd1mik" path="res://Assets/platforms/Gears/6.png" id="7_10lml"]
+[ext_resource type="Texture2D" uid="uid://ceeako02pxml1" path="res://Assets/platforms/Gears/7.png" id="8_46sfx"]
+[ext_resource type="Texture2D" uid="uid://bpx3w7jew5m2c" path="res://Assets/platforms/Gears/8.png" id="9_t3h0q"]
+[ext_resource type="Texture2D" uid="uid://cxm83xfecysej" path="res://Assets/platforms/Gears/9.png" id="10_bmm0f"]
+[ext_resource type="Texture2D" uid="uid://c2nx1pbeoayhi" path="res://Assets/platforms/Gears/10.png" id="11_v8f88"]
+[ext_resource type="Texture2D" uid="uid://bt1mpdv63dckt" path="res://Assets/platforms/Gears/11.png" id="12_mvdx5"]
+[ext_resource type="Texture2D" uid="uid://dec752rif58cc" path="res://Assets/platforms/Gears/12.png" id="13_3tx0k"]
+[ext_resource type="Texture2D" uid="uid://tciig8gw3b17" path="res://Assets/platforms/Gears/13.png" id="14_xwqty"]
+[ext_resource type="Texture2D" uid="uid://7f2xhuuq5evw" path="res://Assets/platforms/Gears/14.png" id="15_3gp1l"]
+[ext_resource type="Texture2D" uid="uid://bcd1wkaiyurd" path="res://Assets/platforms/Gears/15.png" id="16_uhfx8"]
+[ext_resource type="Texture2D" uid="uid://bednmkxybft6g" path="res://Assets/platforms/Gears/16.png" id="17_p1v2h"]
+[ext_resource type="Texture2D" uid="uid://bte6oxn55clkd" path="res://Assets/other/antenna.png" id="19_ndun7"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jxlkl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdvc1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k5ypo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_c0b02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_74o7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_067gt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rm4qu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nvd44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_10lml")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_46sfx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_t3h0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_bmm0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_v8f88")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_mvdx5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_3tx0k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_xwqty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3gp1l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_uhfx8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_p1v2h")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 60.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_km35h"]
+shader = ExtResource("2_3gykg")
+
+[sub_resource type="Animation" id="Animation_udm0p"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lever/GearLeft:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lever/LeverStick:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+
+[sub_resource type="Animation" id="Animation_wpotp"]
+resource_name = "Lever-pull"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lever/GearLeft:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 2.356, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lever/LeverStick:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(3.142, -0.25, 0, 0.25, 0, 2.356, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d0iqb"]
+_data = {
+"Lever-pull": SubResource("Animation_wpotp"),
+"RESET": SubResource("Animation_udm0p")
+}
 
 [node name="TerminalControl" type="Node2D"]
+material = SubResource("ShaderMaterial_hdvc1")
+script = ExtResource("1_n8xof")
 
-[node name="Computer" type="Sprite2D" parent="."]
-texture = SubResource("CompressedTexture2D_1y7ud")
+[node name="Lever" type="Node2D" parent="."]
 
-[node name="Podium" type="Sprite2D" parent="."]
-modulate = Color(0.430877, 0.239103, 0.534271, 1)
-position = Vector2(0, 14)
-scale = Vector2(1.6875, 1)
-texture = SubResource("CompressedTexture2D_jxlkl")
+[node name="LeverStick" type="Sprite2D" parent="Lever"]
+position = Vector2(-74, 82.0049)
+rotation = 3.142
+scale = Vector2(3, 3)
+texture = ExtResource("2_tmugs")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 105.792, 8.20187, 38.4047)
+
+[node name="GearLeft" type="Sprite2D" parent="Lever"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+position = Vector2(-73, 84.0049)
+texture = ExtResource("2_c0b02")
+
+[node name="Large" type="AnimatedSprite2D" parent="Lever"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+position = Vector2(31, 68)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_k5ypo")
+animation = &"Spin"
+autoplay = "Spin"
+frame_progress = 0.824893
+
+[node name="Small" type="AnimatedSprite2D" parent="Lever"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+position = Vector2(-3, 84)
+sprite_frames = SubResource("SpriteFrames_k5ypo")
+animation = &"Spin"
+autoplay = "Spin"
+frame_progress = 0.407783
+
+[node name="Antenna" type="Sprite2D" parent="Lever"]
+modulate = Color(0.742985, 0.727965, 0.645029, 1)
+position = Vector2(101, 60)
+texture = ExtResource("19_ndun7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 1.0
+offset_right = 65.0
+offset_bottom = 101.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 5
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+material = SubResource("ShaderMaterial_km35h")
+layout_mode = 2
+texture = ExtResource("1_soir2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_d0iqb")
+}

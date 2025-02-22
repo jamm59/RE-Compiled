@@ -120,11 +120,13 @@ func handleAnimationStateUpdate() -> void:
 		PLAYER_STATE.LAND:
 			animated_sprite_2d.play("Land")
 		PLAYER_STATE.MOVING_RIGHT:
-			dash_particle.material.set("shader_param/facing_left", false)
+			if not dash_particle.emitting:
+				dash_particle.material.set("shader_param/facing_left", false)
 			animated_sprite_2d.play("Run")
 			velocity.x = move_toward(velocity.x, 1 * SPEED, acceleration)
 		PLAYER_STATE.MOVING_LEFT:
-			dash_particle.material.set("shader_param/facing_left", true)
+			if not dash_particle.emitting:
+				dash_particle.material.set("shader_param/facing_left", true)
 			animated_sprite_2d.play("Run")
 			velocity.x = move_toward(velocity.x, -1 * SPEED, acceleration)
 		PLAYER_STATE.ATTACK:

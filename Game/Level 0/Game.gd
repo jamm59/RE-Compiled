@@ -53,6 +53,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 		animation_player.play("start")
 		Engine.time_scale = 1
+		camera_2d.position_smoothing_enabled = true
 		body.can_use_controls = true
 		$StartArea.disconnect("body_entered", _on_area_2d_body_entered)
 	
@@ -60,5 +61,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func _on_companion_introduction_body_entered(body: Node2D) -> void:
 	if body is Player:
+		Dialogic.start("first-timeline")
 		companionCanFollowPlayer = true
 		$CompanionIntroduction.disconnect("body_entered", _on_companion_introduction_body_entered)

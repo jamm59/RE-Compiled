@@ -1,0 +1,4 @@
+Yo!
+What's up?
+[text_input var="response"]
+if {response} == "game":

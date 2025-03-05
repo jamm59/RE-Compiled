@@ -12,18 +12,24 @@ class_name EnemyBase
 @onready var JUMP_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var FALL_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 @onready var FALL_GRAVITY_TEMP = FALL_GRAVITY
-
+#
+#@onready var monster_animated_sprite: AnimatedSprite2D = $MonsterAnimatedSprite
+#@onready var ghoul_animated_sprite: AnimatedSprite2D = $GhoulAnimatedSprite
+#@onready var droid_animated_sprite: AnimatedSprite2D = $DroidAnimatedSprite
+#@onready var mecha_animated_sprite: AnimatedSprite2D = $MechaAnimatedSprite
+#@onready var spitter_animated_sprite: AnimatedSprite2D = $SpitterAnimatedSprite
+#@onready var summoner_animated_sprite: AnimatedSprite2D = $SummonerAnimatedSprite
 
 
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
 @onready var ray_cast_right: RayCast2D = $RayCastRight
 @onready var ray_cast_left_ground: RayCast2D = $RayCastLeftGround
 @onready var ray_cast_right_ground: RayCast2D = $RayCastRightGround
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_timer: Timer = $AttackTimer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-@export var MAX_HEALTH: int = 10
+@export var MAX_HEALTH: int = 20
 
 enum ENEMY_STATE {IDLE, ATTACK, RUN, DEAD}
 
@@ -142,8 +148,6 @@ func _physics_process(delta: float) -> void:
 	handleEnemyState()
 	move_and_slide()
 
-
-
 func _on_detect_player_area_body_entered(body: Node2D) -> void:
 	if not isDead and (not player and body is Player):
 		player = body
@@ -164,7 +168,7 @@ func _on_attack_timer_timeout() -> void:
 	if player:
 		var distance: Vector2 = abs(player.position - position)
 		var x: float = distance[0]
-		if x <= 27.0:
+		if x <= 29.0:
 			player.applyHitDamage(self)
 		attack_timer.stop()
 

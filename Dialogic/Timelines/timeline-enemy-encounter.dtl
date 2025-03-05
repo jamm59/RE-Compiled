@@ -1,0 +1,12 @@
+Companion: Here is your first enemy encounter [color=red]the CIH Virus[/color].
+Companion: The CIH Virus, also known as [i]Chernobyl[/i], was a devastating malware from the late '90s. It could corrupt system files and even erase entire hard drives.
+Companion: In this simulation, it represents [b]data corruption[/b], preventing you from progressing. If it touches you, it will "corrupt" your system.
+Unknown: [center][b]Controls Tutorial[/b][/center]\
+- Press [b]W[/b] or [b]↑[/b] for Light attack.
+Unknown: [center][b]Controls Tutorial[/b][/center]\
+- Press [b]J[/b] for Heavy attack.
+[center][b]Controls Tutorial[/b][/center]\
+- Move carefully to avoid its reach.
+Unknown: [center][b]Controls Tutorial[/b][/center]\
+- Press [b]Z[/b] to zoom out and see your environment[br][br]
+[signal arg="timeline-enemy-encounter"]

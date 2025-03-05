@@ -1,0 +1,102 @@
+{
+	"timelines": {
+		"timeline_1": [
+			{
+				"speaker": "Player",
+				"text": "[b]What is this?[/b]"
+			},
+			{
+				"speaker": "Player",
+				"text": "[b]Where am I?[/b]"
+			},
+		],
+		"timeline_2": [
+			{
+				"speaker": "Companion",
+				"text": "[b]Hello, Jake. Welcome to the simulation.[/b]"
+			},
+			{
+				"speaker": "Player",
+				"text": "[b]Whoa! Who are you? And what’s happening to me?![/b]"
+			},
+			{
+				"speaker": "Companion",
+				"text": "I am your [b]Personal Learning Assistant[/b], a program designed to guide you."
+			},
+			{
+				"speaker": "Companion",
+				"text": "You attempted to bypass learning with AI. Now, you must [b]truly understand[/b] computing to escape."
+			},
+			{
+				"speaker": "Player",
+				"text": "[b]So… I’m stuck here?[/b]"
+			},
+			{
+				"speaker": "Companion",
+				"text": "[b]Not forever.[/b] If you complete the required tasks, you will regain control."
+			},
+			{
+				"speaker": "Player",
+				"text": "[b]Tasks? What kind of tasks?[/b]"
+			},
+			{
+				"speaker": "Companion",
+				"text": "You’ll be navigating through a structured computing simulation, designed to teach you fundamental concepts. Think of it as a crash course—except failing isn’t an option."
+			},
+			{
+				"speaker": "Player",
+				"text": "[b]Wait… what do you mean by 'computing simulation'?[/b]"
+			},
+			{
+				"speaker": "Companion",
+				"text": "This world is built on the core principles of computer science. You’ll interact with binary data, construct logic gates, optimize algorithms, and even battle real-world-inspired viruses that corrupt the system."
+			},
+			{
+				"speaker": "Player",
+				"text": "[b]So, I have to… code my way out?[/b]"
+			},
+			{
+				"speaker": "Companion",
+				"text": "More like learn how everything in a computer actually works—from the smallest bits and bytes to the most complex AI-driven systems."
+			},
+			{
+				"speaker": "Player",
+				"text": "[b]And what happens if I fail?[/b]"
+			},
+			{
+				"speaker": "Companion",
+				"text": "Let’s just say you won’t like the results. But don’t worry! I’ll be here to guide you through every step. Now, let’s get started."
+			}
+		],
+		"timeline_3": [
+			{
+				"speaker": "Companion",
+				"text": "This system is [b]not secure[/b]. Malicious programs roam freely."
+			},
+			{
+				"speaker": "Player",
+				"text": "[b]Wait… you mean viruses? Like the ones that infect computers?[/b]"
+			},
+			{
+				"speaker": "Companion",
+				"text": "[b]Correct.[/b] You will encounter various [b]hostile entities[/b], each modeled after real-world malware."
+			},
+			{
+				"speaker": "Companion",
+				"text": "Some will corrupt data, others will replicate, and some may even try to erase you."
+			},
+			{
+				"speaker": "Player",
+				"text": "[b]That sounds... terrible.[/b]"
+			},
+			{
+				"speaker": "Companion",
+				"text": "It is. But knowledge is power. The more you learn, the better you can [b]debug and survive.[/b]"
+			},
+			{
+				"speaker": "Companion",
+				"text": "Let’s start with the first type: [b]The Worm.[/b] Unlike other threats, it spreads rapidly across systems..."
+			}
+		]
+	}
+}

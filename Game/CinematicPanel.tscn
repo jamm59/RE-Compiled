@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dha0vqlum5jni"]
+
+[ext_resource type="Theme" uid="uid://c71vkmso5xu4b" path="res://Resources/panel-dark-theme.tres" id="1_1mhxh"]
+
+[node name="Cinematic" type="CanvasLayer"]
+
+[node name="TopPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 80)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme = ExtResource("1_1mhxh")
+
+[node name="BottomPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 80)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_1mhxh")

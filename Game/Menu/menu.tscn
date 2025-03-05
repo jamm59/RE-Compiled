@@ -50,7 +50,7 @@ font = ExtResource("8_1yp52")
 font_size = 80
 
 [node name="Menu" type="Control"]
-modulate = Color(0.717647, 0.701961, 0.615686, 1)
+modulate = Color(0.855663, 0.845673, 0.789233, 1)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,7 +115,7 @@ texture = ExtResource("7_ou4wv")
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="MenuScreen" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,45 +124,96 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_kvnxf")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuScreen"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="Title" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MenuScreen/VBoxContainer"]
 layout_mode = 2
 text = "Re:Compiled
 "
 label_settings = SubResource("LabelSettings_klavt")
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuScreen/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 15
 
-[node name="Play" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="Play" type="Button" parent="MenuScreen/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Play"
 
-[node name="Settings" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="MenuScreen/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Options"
 
-[node name="Credit" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="Credit" type="Button" parent="MenuScreen/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Credits
 "
 
-[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="MenuScreen/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Exit
 "
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/Play" to="." method="_on_continue_pressed"]
+[node name="PlaySceen" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_kvnxf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlaySceen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Title" type="Label" parent="PlaySceen/VBoxContainer"]
+layout_mode = 2
+text = "Re:Compiled
+"
+label_settings = SubResource("LabelSettings_klavt")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlaySceen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Continue" type="Button" parent="PlaySceen/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Continue"
+
+[node name="NewGame" type="Button" parent="PlaySceen/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "New Game"
+
+[node name="MultiplayerMode" type="Button" parent="PlaySceen/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Multiplayer"
+
+[node name="Back" type="Button" parent="PlaySceen/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Back"
+
+[connection signal="pressed" from="MenuScreen/VBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MenuScreen/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="PlaySceen/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="PlaySceen/VBoxContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

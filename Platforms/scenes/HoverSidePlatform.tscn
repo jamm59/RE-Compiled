@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/TX Village Props.png" id="1_yoo4i"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="2_8cu7s"]
-[ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tileset.png" id="2_m5od5"]
+[ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tilesets/Tileset.png" id="2_m5od5"]
 [ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/TX Tileset Ground.png" id="3_yxd67"]
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="4_1ahgr"]
 [ext_resource type="Texture2D" uid="uid://c1n7ailb82ure" path="res://Assets/platforms/Gears2/1.png" id="4_r5icb"]

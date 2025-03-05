@@ -1,6 +1,7 @@
-[gd_scene load_steps=33 format=4 uid="uid://dq0v2nkulgl05"]
+[gd_scene load_steps=34 format=4 uid="uid://dq0v2nkulgl05"]
 
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="1_7lnid"]
+[ext_resource type="Script" path="res://Platforms/scripts/hover_platform.gd" id="1_77a2x"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="2_gdvr7"]
 [ext_resource type="Texture2D" uid="uid://nkqj0insxso5" path="res://Assets/platforms/Gears/2.png" id="2_q0pg0"]
 [ext_resource type="Texture2D" uid="uid://dq6al1uhi7ote" path="res://Assets/platforms/Gears/3.png" id="3_3sms7"]
@@ -2398,6 +2399,7 @@ _data = {
 }
 
 [node name="HoverPlatform" type="Node2D"]
+script = ExtResource("1_77a2x")
 
 [node name="SideSupport" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAGABIAAAAHABAAAAAGABEAAAAHAA8AAAAGABAAAAAHAA8AAAAGAA8AAAAHAA8AAAAGAA4AAAAHAA8AAAAGAA0AAAAHAA8AAAAGAAwAAAAHAA8AAAAGAAsAAAAHAA8AAAAGAAoAAAAHAA8AAAAGAAkAAAAHAA8AAAAGAAgAAAAHAA8AAAAGAAcAAAAHAA8AAAAGAAYAAAAHAA8AAAAGAAUAAAAHAA8AAAAGAAQAAAAHAA8AAAAGAAMAAAAHAA8AAAAGAAIAAAAHAA8AAAAGAAEAAAAHAA8AAAAGAAAAAAAHAA8AAAAGAP//AAAHAA8AAAAGAP7/AAAHAA8AAAAGAP3/AAAHAA8AAAAGAPz/AAAHAA8AAAAGAPv/AAAHAA8AAAAGAPr/AAAHAA8AAAAGAPn/AAAHAA8AAAAGAPj/AAAHAA8AAAAGAPf/AAAHAA8AAAAGAPb/AAAHAA8AAAAGAPX/AAAHAA8AAAAGAPT/AAAHAA8AAAAGAPP/AAAHAA8AAAAGAPL/AAAHAA4AAAAHAPn/AAAJAA8AAAAHAPj/AAAJAA8AAAAHAPf/AAAJAA8AAAAHAPb/AAAJAA8AAAAHAPX/AAAJAA8AAAAHAPT/AAAJAA8AAAAHAPP/AAAJAA8AAAAHAPL/AAAJAA4AAAAHABIAAAAJABAAAAAHABEAAAAJAA8AAAAHABAAAAAJAA8AAAAHAA8AAAAJAA8AAAAHAA4AAAAJAA8AAAAHAA0AAAAJAA8AAAAHAAwAAAAJAA8AAAAHAAsAAAAJAA8AAAAHAAoAAAAJAA8AAAAHAAkAAAAJAA8AAAAHAAgAAAAJAA8AAAAHAAcAAAAJAA8AAAAHAAYAAAAJAA8AAAAHAAUAAAAJAA8AAAAHAAQAAAAJAA8AAAAHAAMAAAAJAA8AAAAHAAIAAAAJAA8AAAAHAAEAAAAJAA8AAAAHAAAAAAAJAA8AAAAHAP//AAAJAA8AAAAHAP7/AAAJAA8AAAAHAP3/AAAJAA8AAAAHAPz/AAAJAA8AAAAHAPv/AAAJAA8AAAAHAPr/AAAJAA8AAAD1//T/AAAJABAAAAD1//P/AAAJAA8AAAD1//L/AAAJAA4AAAD0//T/AAAHABAAAAD0//P/AAAHAA8AAAD0//L/AAAHAA4AAAD7//P/AAAJAA8AAAD7//L/AAAJAA4AAAD6//T/AAAHABAAAAD6//P/AAAHAA8AAAD6//L/AAAHAA4AAAAAAPT/AAAJABAAAAAAAPP/AAAJAA8AAAAAAPL/AAAJAA4AAAD///T/AAAHABAAAAD///P/AAAHAA8AAAD///L/AAAHAA4AAAAEAPT/AAAJABAAAAAEAPP/AAAJAA8AAAAEAPL/AAAJAA4AAAADAPT/AAAHABAAAAADAPP/AAAHAA8AAAADAPL/AAAHAA4AAAAKAPT/AAAJABAAAAAKAPP/AAAJAA8AAAAKAPL/AAAJAA4AAAAJAPT/AAAHABAAAAAJAPP/AAAHAA8AAAAJAPL/AAAHAA4AAAD7//T/AAAJABAAAAA=")
@@ -2414,7 +2416,6 @@ modulate = Color(0.717647, 0.701961, 0.615686, 1)
 position = Vector2(-218, -201.5)
 sprite_frames = SubResource("SpriteFrames_rgqg7")
 animation = &"Spin"
-autoplay = "Spin"
 frame_progress = 0.968665
 
 [node name="TopRight" type="AnimatedSprite2D" parent="OtherGears"]
@@ -2422,7 +2423,6 @@ modulate = Color(0.717647, 0.701961, 0.615686, 1)
 position = Vector2(113, -201.5)
 sprite_frames = SubResource("SpriteFrames_rgqg7")
 animation = &"Spin"
-autoplay = "Spin"
 frame_progress = 0.932173
 
 [node name="BottomRight" type="AnimatedSprite2D" parent="OtherGears"]
@@ -2430,7 +2430,6 @@ modulate = Color(0.717647, 0.701961, 0.615686, 1)
 position = Vector2(113, 279.5)
 sprite_frames = SubResource("SpriteFrames_rgqg7")
 animation = &"Spin"
-autoplay = "Spin"
 frame_progress = 0.504123
 
 [node name="Gears" type="AnimatableBody2D" parent="."]
@@ -2441,7 +2440,6 @@ modulate = Color(0.717647, 0.701961, 0.615686, 1)
 position = Vector2(118, -52)
 sprite_frames = SubResource("SpriteFrames_rgqg7")
 animation = &"Spin"
-autoplay = "Spin"
 frame_progress = 0.659976
 
 [node name="Medium" type="AnimatedSprite2D" parent="Gears"]
@@ -2450,7 +2448,6 @@ position = Vector2(79, -31)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_rgqg7")
 animation = &"Spin"
-autoplay = "Spin"
 frame_progress = 0.310537
 speed_scale = 0.8
 
@@ -2460,7 +2457,6 @@ position = Vector2(17, 1)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_rgqg7")
 animation = &"Spin"
-autoplay = "Spin"
 frame_progress = 0.0693625
 speed_scale = 0.5
 
@@ -2473,7 +2469,6 @@ position = Vector2(0, -33.4025)
 zoom = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gears"]
-visible = false
 position = Vector2(16, 8.00928)
 shape = SubResource("RectangleShape2D_yolpd")
 
@@ -2481,4 +2476,3 @@ shape = SubResource("RectangleShape2D_yolpd")
 libraries = {
 "": SubResource("AnimationLibrary_46hb3")
 }
-autoplay = "hover"

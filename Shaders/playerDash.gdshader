@@ -18,7 +18,7 @@ void vertex() {
     }
     vec2 scale_uv = UV / vec2(h_frames, v_frames);
     UV = scale_uv + vec2(mod(particle_frame, h_frames) / h_frames, floor((particle_frame + 0.5) / h_frames) / v_frames);
-    
+
     if (facing_left) {
         UV.x = 1.0 - UV.x;
     }

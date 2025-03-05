@@ -1,0 +1,7 @@
+Companion: This system is [b]not secure[/b]. Malicious programs roam freely.
+Player: [b]Wait… you mean viruses? Like the ones that infect computers?[/b]
+Companion: [b]Correct.[/b] You will encounter various [b]hostile entities[/b], each modeled after real-world malware.
+Companion: Some will corrupt data, others will replicate, and some may even try to erase you.
+Player: [b]That sounds... terrible.[/b]
+Companion: It is. But knowledge is power. The more you learn, the better you can [b]debug and survive.[/b]
+[signal arg="timeline-first-enemy"]

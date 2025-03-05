@@ -1,36 +1,39 @@
 extends CharacterBody2D
 class_name Player
 
-enum PLAYER_STATE {IDLE, JUMP, DASH, DASH_ATTACK, FALL, LAND, ATTACK, MOVING_LEFT, MOVING_RIGHT, DEAD}
+enum PLAYER_STATE {IDLE, JUMP, DASH, DASH_ATTACK, FALL, LAND, LIGHT_ATTACK, HEAVY_ATTACK, MOVING_LEFT, MOVING_RIGHT, DEAD}
 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var top_animated_sprite_2d: AnimatedSprite2D = $TopAnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var attack_box: CollisionShape2D = $AttackBoxComponent/AttackBox
 @onready var dash_particle: GPUParticles2D = $GPUParticles2D
 
 @export_category("Jump Settings")
-@export var jump_height : float = 40
+@export var jump_height : float = 50
 @export var jump_time_to_peak : float = 0.3
 @export var jump_time_to_descent : float = 0.3
 
 @export_category("Player Health")
 @export var MAX_HEALTH: int = 20
+
+@export_category("Other Settings")
 @export var can_use_controls: bool = false
 
 @onready var JUMP_VELOCITY : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var JUMP_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var FALL_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
-@onready var FALL_GRAVITY_TEMP = FALL_GRAVITY
+@onready var WALL_FALL_GRAVITY: float = JUMP_VELOCITY / 3
 
 # Constants
 const DASH_MULTIPLIER: int = 2
-const SPEED: float = 160.0
+const SPEED: float = 180.0
 const KNOCKBACKVALUE: int = 30
 const DAMAGE_POINT: int = 3
+const WALL_PUSHBACK: int = 200
 
-#signal cameraShake
-#signal attackAnimation
+var toggle_gravity: bool =  false
 
 var isDead: bool = false
 var wasOnFloor: bool = false
@@ -46,23 +49,36 @@ var previousDirection: int = 1
 var health: int = 0
 
 
-
 var currentPlayerState: PLAYER_STATE = PLAYER_STATE.IDLE
 
 func getGravity() -> float:
+	if isWallSliding:
+		return WALL_FALL_GRAVITY
 	return JUMP_GRAVITY if velocity.y < 0.0 else FALL_GRAVITY
+
 	
 func handleJumpInput(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y += getGravity() * delta
-	else:
-		jump_count = 2
+	if not toggle_gravity:
+		if not is_on_floor():
+			velocity.y += getGravity() * delta
+		else:
+			jump_count = 2
+			
+	if currentPlayerState == PLAYER_STATE.DEAD:
+		return 
 		
 	if Input.is_action_just_pressed("Jump"):
-		if jump_count == 1 or is_on_floor() and jump_count > 0:
+		if jump_count > 0 or is_on_floor():
 			currentPlayerState = PLAYER_STATE.JUMP
 			velocity.y = JUMP_VELOCITY
 			jump_count -= 1
+		
+		if is_on_wall() and Input.is_action_pressed("Right"):
+			velocity.y = JUMP_VELOCITY
+			velocity.x = -WALL_PUSHBACK
+		if is_on_wall() and Input.is_action_pressed("Left"):
+			velocity.y = JUMP_VELOCITY
+			velocity.x = WALL_PUSHBACK
 	
 	if not is_on_floor() and velocity.y > 0:
 		currentPlayerState = PLAYER_STATE.FALL
@@ -75,12 +91,20 @@ func handleInput(delta: float) -> void:
 
 	var dir = Input.get_axis("Left", "Right")
 	
-	if currentPlayerState not in [PLAYER_STATE.DEAD, PLAYER_STATE.ATTACK] and (dir == 0 and velocity.y < 1):
+	if currentPlayerState not in [PLAYER_STATE.DEAD, PLAYER_STATE.LIGHT_ATTACK, PLAYER_STATE.HEAVY_ATTACK] and (dir == 0 and velocity.y < 1):
 		currentPlayerState = PLAYER_STATE.IDLE
 		
-	if Input.is_action_pressed("Attack"):
-		currentPlayerState = PLAYER_STATE.ATTACK
+	if not can_use_controls:
+		return 
+		
+	if Input.is_action_pressed("Light_A"):
+		currentPlayerState = PLAYER_STATE.LIGHT_ATTACK
 		attack_box.disabled = false
+		
+	elif Input.is_action_pressed("Heavy_A"):
+		currentPlayerState = PLAYER_STATE.HEAVY_ATTACK
+		attack_box.disabled = false
+		
 	else:
 		attack_box.disabled = true
 		
@@ -109,36 +133,43 @@ func handleInput(delta: float) -> void:
 	
 		
 func handleAnimationStateUpdate() -> void:
-	
+	var animationName: String = ""
+	var topAnimationName: String = "Idle"
 	match currentPlayerState:
 		PLAYER_STATE.DEAD:
-			animated_sprite_2d.play("Dead")
+			animationName = "Dead"
 		PLAYER_STATE.JUMP:
-			animated_sprite_2d.play("Jump")
+			animationName = "Jump"
 		PLAYER_STATE.FALL:
-			animated_sprite_2d.play("Fall")
+			animationName = "Fall"
 		PLAYER_STATE.LAND:
-			animated_sprite_2d.play("Land")
+			animationName = "Land"
 		PLAYER_STATE.MOVING_RIGHT:
-			if not dash_particle.emitting:
-				dash_particle.material.set("shader_param/facing_left", false)
-			animated_sprite_2d.play("Run")
+			animationName = "Run"
 			velocity.x = move_toward(velocity.x, 1 * SPEED, acceleration)
 		PLAYER_STATE.MOVING_LEFT:
-			if not dash_particle.emitting:
-				dash_particle.material.set("shader_param/facing_left", true)
-			animated_sprite_2d.play("Run")
+			animationName = "Run"
 			velocity.x = move_toward(velocity.x, -1 * SPEED, acceleration)
-		PLAYER_STATE.ATTACK:
-			animated_sprite_2d.play("Attack")
+		PLAYER_STATE.LIGHT_ATTACK:
+			animationName = "Light"
+		PLAYER_STATE.HEAVY_ATTACK:
+			animationName = "Heavy"
+			topAnimationName = "Heavy"
 		PLAYER_STATE.DASH:
 			var axis: int = Input.get_axis("Left", "Right")
+			if axis == 1:
+				dash_particle.material.set_shader_parameter("facing_left", false)
+			elif axis == -1:
+				dash_particle.material.set_shader_parameter("facing_left", true)
 			velocity.x = axis * SPEED * DASH_MULTIPLIER
 			dash_particle.emitting = true
 		PLAYER_STATE.IDLE:
-			animated_sprite_2d.play("Idle")
+			animationName = "Idle"
 			velocity.x = move_toward(velocity.x, 0, friction)
-
+			
+	animated_sprite_2d.play(animationName)
+	top_animated_sprite_2d.play(topAnimationName)
+	
 	if currentPlayerState != PLAYER_STATE.DASH:
 		dash_particle.emitting = false
 			
@@ -164,23 +195,18 @@ func _ready() -> void:
 	health = MAX_HEALTH
 	
 func _physics_process(delta: float) -> void:
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	if currentPlayerState == PLAYER_STATE.DEAD:
-		return 
-		
 	handleJumpInput(delta)
-	if currentPlayerState == PLAYER_STATE.ATTACK:
+	
+	if currentPlayerState in [PLAYER_STATE.DEAD, PLAYER_STATE.LIGHT_ATTACK, PLAYER_STATE.HEAVY_ATTACK]:
 		return
 	
-	#if can_use_controls:
 	handleInput(delta)
 	handleAnimationStateUpdate()
 	move_and_slide()
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite_2d.animation == "Attack":
+	if animated_sprite_2d.animation in ["Light", "Heavy"]:
 		currentPlayerState = PLAYER_STATE.IDLE
 
 

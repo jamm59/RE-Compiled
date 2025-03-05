@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://6i2npt6ug54x"]
 
 [ext_resource type="FontFile" uid="uid://d4lcfsd3aa7w2" path="res://Assets/Font/Inkos-zrg60.ttf" id="1_be3ng"]
-[ext_resource type="Script" path="res://Game/Menu/PauseMenu.gd" id="1_g4vf0"]
+[ext_resource type="Script" uid="uid://cnru3c6nyh16p" path="res://Game/Menu/PauseMenu.gd" id="1_g4vf0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ie440"]
 bg_color = Color(0.101961, 0.101961, 0.113725, 1)

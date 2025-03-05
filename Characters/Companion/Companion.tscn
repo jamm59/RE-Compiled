@@ -1,8 +1,8 @@
 [gd_scene load_steps=40 format=3 uid="uid://d2j3oa6ab5xqh"]
 
 [ext_resource type="Texture2D" uid="uid://dvxdfhcbv11ee" path="res://Characters/Companion/Drone Zapper/attack.png" id="1_ctkee"]
-[ext_resource type="Script" path="res://Characters/Companion/companion.gd" id="1_kkq6f"]
-[ext_resource type="Shader" path="res://Shaders/theme-color.gdshader" id="1_p500q"]
+[ext_resource type="Script" uid="uid://bch3c6j458eqs" path="res://Characters/Companion/companion.gd" id="1_kkq6f"]
+[ext_resource type="Shader" uid="uid://d0et2e3vm0cn7" path="res://Shaders/theme-color.gdshader" id="1_p500q"]
 [ext_resource type="Texture2D" uid="uid://c2n58w5danmgq" path="res://Characters/Companion/Drone Zapper/dronmove.png" id="1_pl1qd"]
 [ext_resource type="Texture2D" uid="uid://b8hundmkv1u6x" path="res://Characters/Companion/Drone Zapper/dronewake.png" id="3_58qrn"]
 
@@ -264,8 +264,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4c4un"]
 _data = {
-"RESET": SubResource("Animation_6dt7e"),
-"hover": SubResource("Animation_231a6")
+&"RESET": SubResource("Animation_6dt7e"),
+&"hover": SubResource("Animation_231a6")
 }
 
 [node name="Companion" type="Node2D"]
@@ -283,6 +283,6 @@ flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_4c4un")
+&"": SubResource("AnimationLibrary_4c4un")
 }
 autoplay = "hover"

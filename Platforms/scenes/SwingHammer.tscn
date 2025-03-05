@@ -663,8 +663,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m3qv0"]
 _data = {
-"RESET": SubResource("Animation_jbckh"),
-"Swing": SubResource("Animation_n46ih")
+&"RESET": SubResource("Animation_jbckh"),
+&"Swing": SubResource("Animation_n46ih")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0jub"]
@@ -678,7 +678,7 @@ tile_set = SubResource("TileSet_85mi7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_m3qv0")
+&"": SubResource("AnimationLibrary_m3qv0")
 }
 autoplay = "Swing"
 

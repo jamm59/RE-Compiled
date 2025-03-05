@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=4 uid="uid://d05ggmsp2cxcx"]
+[gd_scene load_steps=16 format=4 uid="uid://d05ggmsp2cxcx"]
 
-[ext_resource type="Script" path="res://Platforms/scripts/falling_platform.gd" id="1_1ibrm"]
+[ext_resource type="Script" uid="uid://b2cexys628wqe" path="res://Platforms/scripts/falling_platform.gd" id="1_1ibrm"]
 [ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/TX Village Props.png" id="1_wb5u0"]
 [ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/TX Tileset Ground.png" id="2_ypdp5"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="3_kyuqn"]
-[ext_resource type="FontFile" uid="uid://mahn77ksmk7" path="res://Assets/Font/yoster.ttf" id="4_xae2t"]
 
 [sub_resource type="Animation" id="Animation_mk1a1"]
 resource_name = "Disappear"
@@ -51,8 +50,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_30b5n"]
 _data = {
-"Disappear": SubResource("Animation_mk1a1"),
-"RESET": SubResource("Animation_74ps0")
+&"Disappear": SubResource("Animation_mk1a1"),
+&"RESET": SubResource("Animation_74ps0")
 }
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oigij"]
@@ -1275,11 +1274,9 @@ sources/1 = SubResource("TileSetAtlasSource_l76br")
 sources/2 = SubResource("TileSetAtlasSource_rxnau")
 
 [sub_resource type="LabelSettings" id="LabelSettings_5q7of"]
-font = ExtResource("4_xae2t")
 font_color = Color(0.400698, 0.400698, 0.400698, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_6jqhs"]
-font = ExtResource("4_xae2t")
 font_size = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwhq5"]

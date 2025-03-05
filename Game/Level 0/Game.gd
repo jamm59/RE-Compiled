@@ -113,14 +113,6 @@ func _on_enemy_encounter_two_scene_body_entered(body: Node2D) -> void:
 		showDialogue("timeline-enemy-encounter")
 		$CinematicAreas/EnemyEncounterTwoScene.disconnect("body_entered", _on_enemy_encounter_two_scene_body_entered)
 		
-func _on_ladder_body_entered(body: Node2D) -> void:
-	if body is Player:
-		player.toggle_gravity = true
-
-func _on_ladder_body_exited(body: Node2D) -> void:
-	if body is Player:
-		player.toggle_gravity = false
-		
 func DialogueDone() -> void:
 	cinematic.visible = false
 	player.can_use_controls = true
@@ -145,3 +137,8 @@ func _on_dialogic_signal(argument: String):
 		"timeline-enemy-encounter":
 			pass
 		
+
+
+func _on_interact_body_entered(body: Node2D) -> void:
+	if body is Player:
+		showDialogue("timeline-tutorial-interact")

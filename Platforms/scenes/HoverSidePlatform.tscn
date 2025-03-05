@@ -2740,8 +2740,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ekv3m"]
 _data = {
-"Hover": SubResource("Animation_lb0im"),
-"RESET": SubResource("Animation_a5bsy")
+&"Hover": SubResource("Animation_lb0im"),
+&"RESET": SubResource("Animation_a5bsy")
 }
 
 [node name="HoverSidePlatform" type="Node2D"]

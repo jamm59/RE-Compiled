@@ -38,6 +38,7 @@ var toggle_gravity: bool =  false
 var isDead: bool = false
 var wasOnFloor: bool = false
 var isWallSliding: bool = false
+var canClimbLadder: bool = false
 
 var friction: float = 40.0
 var acceleration: float = 50.0
@@ -64,21 +65,20 @@ func handleJumpInput(delta: float) -> void:
 		else:
 			jump_count = 2
 			
+		if Input.is_action_just_pressed("Jump"):
+			if jump_count > 0 or is_on_floor():
+				currentPlayerState = PLAYER_STATE.JUMP
+				velocity.y = JUMP_VELOCITY
+				jump_count -= 1
+				
+	else:
+		velocity.y = JUMP_VELOCITY
+		
+	if canClimbLadder and Input.is_action_pressed("Interact"):
+		toggle_gravity = true
+		
 	if currentPlayerState == PLAYER_STATE.DEAD:
 		return 
-		
-	if Input.is_action_just_pressed("Jump"):
-		if jump_count > 0 or is_on_floor():
-			currentPlayerState = PLAYER_STATE.JUMP
-			velocity.y = JUMP_VELOCITY
-			jump_count -= 1
-		
-		if is_on_wall() and Input.is_action_pressed("Right"):
-			velocity.y = JUMP_VELOCITY
-			velocity.x = -WALL_PUSHBACK
-		if is_on_wall() and Input.is_action_pressed("Left"):
-			velocity.y = JUMP_VELOCITY
-			velocity.x = WALL_PUSHBACK
 	
 	if not is_on_floor() and velocity.y > 0:
 		currentPlayerState = PLAYER_STATE.FALL
@@ -104,7 +104,6 @@ func handleInput(delta: float) -> void:
 	elif Input.is_action_pressed("Heavy_A"):
 		currentPlayerState = PLAYER_STATE.HEAVY_ATTACK
 		attack_box.disabled = false
-		
 	else:
 		attack_box.disabled = true
 		
@@ -211,5 +210,14 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 
 func _on_attack_box_component_body_entered(body: Node2D) -> void:
-		if body is EnemyBase:
+	if body is EnemyBase:
 			body.apply_damage(DAMAGE_POINT)
+			
+func _on_ladder_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		canClimbLadder = true
+
+func _on_ladder_area_body_exited(body: Node2D) -> void:
+	if body is Player:
+		canClimbLadder = false
+		toggle_gravity = false

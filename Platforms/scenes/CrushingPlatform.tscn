@@ -2611,8 +2611,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3cew5"]
 _data = {
-"Hover": SubResource("Animation_sa0n2"),
-"RESET": SubResource("Animation_jpvby")
+&"Hover": SubResource("Animation_sa0n2"),
+&"RESET": SubResource("Animation_jpvby")
 }
 
 [node name="CrushingPlatform" type="Node2D"]

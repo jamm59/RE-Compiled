@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=4 uid="uid://dq0v2nkulgl05"]
 
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="1_7lnid"]
-[ext_resource type="Script" path="res://Platforms/scripts/hover_platform.gd" id="1_77a2x"]
+[ext_resource type="Script" uid="uid://bvcy5emgfuoao" path="res://Platforms/scripts/hover_platform.gd" id="1_77a2x"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="2_gdvr7"]
 [ext_resource type="Texture2D" uid="uid://nkqj0insxso5" path="res://Assets/platforms/Gears/2.png" id="2_q0pg0"]
 [ext_resource type="Texture2D" uid="uid://dq6al1uhi7ote" path="res://Assets/platforms/Gears/3.png" id="3_3sms7"]
@@ -2394,8 +2394,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_46hb3"]
 _data = {
-"RESET": SubResource("Animation_2x0m4"),
-"hover": SubResource("Animation_lfpps")
+&"RESET": SubResource("Animation_2x0m4"),
+&"hover": SubResource("Animation_lfpps")
 }
 
 [node name="HoverPlatform" type="Node2D"]
@@ -2474,5 +2474,5 @@ shape = SubResource("RectangleShape2D_yolpd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_46hb3")
+&"": SubResource("AnimationLibrary_46hb3")
 }

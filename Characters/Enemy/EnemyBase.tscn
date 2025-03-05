@@ -1,8 +1,8 @@
 [gd_scene load_steps=72 format=3 uid="uid://bqvo72neem772"]
 
-[ext_resource type="Script" path="res://Characters/Enemy/enemy_base.gd" id="1_8eg6q"]
+[ext_resource type="Script" uid="uid://biibrdjf0sknw" path="res://Characters/Enemy/enemy_base.gd" id="1_8eg6q"]
 [ext_resource type="Texture2D" uid="uid://oslhn017kk2n" path="res://Characters/Enemy/monster001eyes.png" id="1_pnlr2"]
-[ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_5xp7v"]
+[ext_resource type="Shader" uid="uid://dpf3btpbxnldy" path="res://Shaders/HitFlash.gdshader" id="3_5xp7v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lt8sq"]
 size = Vector2(10, 18)
@@ -605,9 +605,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sjfte"]
 _data = {
-"Dead": SubResource("Animation_3x37w"),
-"Hit": SubResource("Animation_qr3l8"),
-"RESET": SubResource("Animation_o80mw")
+&"Dead": SubResource("Animation_3x37w"),
+&"Hit": SubResource("Animation_qr3l8"),
+&"RESET": SubResource("Animation_o80mw")
 }
 
 [node name="EnemyBase" type="CharacterBody2D"]
@@ -680,7 +680,7 @@ autoplay = "Walk"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_sjfte")
+&"": SubResource("AnimationLibrary_sjfte")
 }
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]

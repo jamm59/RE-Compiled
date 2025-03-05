@@ -1363,8 +1363,8 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5c3rl"]
 _data = {
-"RESET": SubResource("Animation_f2y24"),
-"SpikeUp": SubResource("Animation_jefpq")
+&"RESET": SubResource("Animation_f2y24"),
+&"SpikeUp": SubResource("Animation_jefpq")
 }
 
 [node name="BottomSpikes" type="Node2D"]

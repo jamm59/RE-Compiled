@@ -663,8 +663,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m3qv0"]
 _data = {
-"RESET": SubResource("Animation_jbckh"),
-"Swing": SubResource("Animation_n46ih")
+&"RESET": SubResource("Animation_jbckh"),
+&"Swing": SubResource("Animation_n46ih")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v74ut"]

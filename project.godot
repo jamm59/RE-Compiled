@@ -14,7 +14,6 @@ config/name="Re:Compiled"
 run/main_scene="uid://dsvplo6l32j5b"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/image="uid://ja5lq73yo5h"
 config/icon="res://icon.svg"
 
 [autoload]

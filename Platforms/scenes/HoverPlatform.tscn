@@ -18,8 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://7f2xhuuq5evw" path="res://Assets/platforms/Gears/14.png" id="14_1wvki"]
 [ext_resource type="Texture2D" uid="uid://bcd1wkaiyurd" path="res://Assets/platforms/Gears/15.png" id="15_qmkcb"]
 [ext_resource type="Texture2D" uid="uid://bednmkxybft6g" path="res://Assets/platforms/Gears/16.png" id="16_fanmr"]
-[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/TX Village Props.png" id="17_7p4mc"]
-[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/TX Tileset Ground.png" id="18_4svx8"]
+[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/Props.png" id="17_7p4mc"]
+[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/Tileset.png" id="18_4svx8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smr7f"]
 texture = ExtResource("17_7p4mc")
@@ -2425,13 +2425,6 @@ sprite_frames = SubResource("SpriteFrames_rgqg7")
 animation = &"Spin"
 frame_progress = 0.932173
 
-[node name="BottomRight" type="AnimatedSprite2D" parent="OtherGears"]
-modulate = Color(0.717647, 0.701961, 0.615686, 1)
-position = Vector2(113, 279.5)
-sprite_frames = SubResource("SpriteFrames_rgqg7")
-animation = &"Spin"
-frame_progress = 0.504123
-
 [node name="Gears" type="AnimatableBody2D" parent="."]
 position = Vector2(-4, 0)
 
@@ -2444,7 +2437,7 @@ frame_progress = 0.659976
 
 [node name="Medium" type="AnimatedSprite2D" parent="Gears"]
 modulate = Color(0.717647, 0.701961, 0.615686, 1)
-position = Vector2(79, -31)
+position = Vector2(77, -31)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_rgqg7")
 animation = &"Spin"

@@ -22,4 +22,5 @@ void vertex() {
     if (facing_left) {
         UV.x = 1.0 - UV.x;
     }
+
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://pk3ypbe0q8hr"]
+[gd_scene load_steps=17 format=3 uid="uid://pk3ypbe0q8hr"]
 
 [ext_resource type="Script" uid="uid://cui724sv0codj" path="res://Platforms/scenes/terminal.gd" id="1_n8xof"]
 [ext_resource type="Shader" uid="uid://cm30ghxsl8exq" path="res://Shaders/blackandwhite.gdshader" id="2_3gykg"]
@@ -6,84 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="2_c0b02"]
 [ext_resource type="Texture2D" uid="uid://c6kyl0pjx1hls" path="res://Assets/other/tower.png" id="2_ef44j"]
 [ext_resource type="Texture2D" uid="uid://ccvbuud12l3oo" path="res://Assets/platforms/Weapons/WR_NightBoundSet_Spritesheet.png" id="2_tmugs"]
-[ext_resource type="Texture2D" uid="uid://nkqj0insxso5" path="res://Assets/platforms/Gears/2.png" id="3_74o7f"]
-[ext_resource type="Texture2D" uid="uid://dq6al1uhi7ote" path="res://Assets/platforms/Gears/3.png" id="4_067gt"]
-[ext_resource type="Texture2D" uid="uid://d3s1am4vbmmpj" path="res://Assets/platforms/Gears/4.png" id="5_rm4qu"]
-[ext_resource type="Texture2D" uid="uid://58g131lxl43l" path="res://Assets/platforms/Gears/5.png" id="6_nvd44"]
-[ext_resource type="Texture2D" uid="uid://dkuy6ulhd1mik" path="res://Assets/platforms/Gears/6.png" id="7_10lml"]
-[ext_resource type="Texture2D" uid="uid://ceeako02pxml1" path="res://Assets/platforms/Gears/7.png" id="8_46sfx"]
-[ext_resource type="Texture2D" uid="uid://bpx3w7jew5m2c" path="res://Assets/platforms/Gears/8.png" id="9_t3h0q"]
-[ext_resource type="Texture2D" uid="uid://cxm83xfecysej" path="res://Assets/platforms/Gears/9.png" id="10_bmm0f"]
-[ext_resource type="Texture2D" uid="uid://c2nx1pbeoayhi" path="res://Assets/platforms/Gears/10.png" id="11_v8f88"]
-[ext_resource type="Texture2D" uid="uid://bt1mpdv63dckt" path="res://Assets/platforms/Gears/11.png" id="12_mvdx5"]
-[ext_resource type="Texture2D" uid="uid://dec752rif58cc" path="res://Assets/platforms/Gears/12.png" id="13_3tx0k"]
-[ext_resource type="Texture2D" uid="uid://tciig8gw3b17" path="res://Assets/platforms/Gears/13.png" id="14_xwqty"]
-[ext_resource type="Texture2D" uid="uid://7f2xhuuq5evw" path="res://Assets/platforms/Gears/14.png" id="15_3gp1l"]
-[ext_resource type="Texture2D" uid="uid://bcd1wkaiyurd" path="res://Assets/platforms/Gears/15.png" id="16_uhfx8"]
-[ext_resource type="Texture2D" uid="uid://bednmkxybft6g" path="res://Assets/platforms/Gears/16.png" id="17_p1v2h"]
-[ext_resource type="Texture2D" uid="uid://mx55qcg5kf0g" path="res://Assets/other/terminal-pos.png" id="20_6bb1l"]
-[ext_resource type="Texture2D" uid="uid://gbxsxfo07cb2" path="res://Assets/other/keypad.png" id="21_5wqa5"]
+[ext_resource type="Texture2D" uid="uid://dpitg7s5gwu8x" path="res://Assets/other/computer3.png" id="22_sitg0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hdvc1"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o41li"]
-shader = ExtResource("2_3gykg")
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_k5ypo"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_c0b02")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_74o7f")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_067gt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_rm4qu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_nvd44")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_10lml")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_46sfx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_t3h0q")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_bmm0f")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_v8f88")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_mvdx5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_3tx0k")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_xwqty")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_3gp1l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_uhfx8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_p1v2h")
-}],
-"loop": true,
-"name": &"Spin",
-"speed": 36.0
-}]
 
 [sub_resource type="Theme" id="Theme_uy8f6"]
 default_font_size = 15
@@ -95,7 +20,7 @@ shader = ExtResource("2_3gykg")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m2bac"]
 shader = ExtResource("2_3gykg")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_km35h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d2njh"]
 shader = ExtResource("2_3gykg")
 
 [sub_resource type="Animation" id="Animation_wpotp"]
@@ -155,51 +80,29 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ydxi6"]
-size = Vector2(321, 170)
+size = Vector2(451, 176)
 
 [node name="TerminalControl" type="Node2D"]
 modulate = Color(0.855663, 0.845673, 0.789233, 1)
 material = SubResource("ShaderMaterial_hdvc1")
-position = Vector2(65, -100)
 script = ExtResource("1_n8xof")
 
-[node name="Gears" type="Node2D" parent="."]
-
-[node name="Medium" type="AnimatedSprite2D" parent="Gears"]
-modulate = Color(0.717647, 0.701961, 0.615686, 1)
-material = SubResource("ShaderMaterial_o41li")
-position = Vector2(-34, 48)
-scale = Vector2(1.2, 1.2)
-sprite_frames = SubResource("SpriteFrames_k5ypo")
-animation = &"Spin"
-frame_progress = 0.276909
-
-[node name="MarginContainer" type="MarginContainer" parent="Gears"]
-offset_left = -69.0
-offset_top = -80.0
-offset_right = 29.0
-offset_bottom = -45.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = -64.0
+offset_top = -107.0
+offset_right = 34.0
+offset_bottom = -72.0
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ProgressBar" type="ProgressBar" parent="Gears/MarginContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer"]
 layout_mode = 2
 theme = SubResource("Theme_uy8f6")
 
-[node name="Tower" type="Sprite2D" parent="."]
-position = Vector2(-17, 52)
-scale = Vector2(1.59375, 1.40625)
-texture = ExtResource("2_ef44j")
-
-[node name="Wifi" type="Sprite2D" parent="."]
-position = Vector2(-17, 4)
-scale = Vector2(1.9, 1.9)
-texture = ExtResource("2_6dcin")
-
 [node name="Handle" type="Node2D" parent="."]
-position = Vector2(-22, 0)
+position = Vector2(-22, 4)
 
 [node name="LeverStick" type="Sprite2D" parent="Handle"]
 material = SubResource("ShaderMaterial_hxjj6")
@@ -227,32 +130,21 @@ material = SubResource("ShaderMaterial_m2bac")
 position = Vector2(100.254, 79.0049)
 texture = ExtResource("2_c0b02")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(50, 0)
-offset_left = -62.0
-offset_top = 44.0
-offset_right = 36.0
-offset_bottom = 112.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-size_flags_stretch_ratio = 0.0
-theme_override_constants/separation = 0
+[node name="Tower" type="Sprite2D" parent="."]
+position = Vector2(-17, 52)
+scale = Vector2(1.59375, 1.40625)
+texture = ExtResource("2_ef44j")
 
-[node name="HSplitContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+[node name="Wifi" type="Sprite2D" parent="."]
+position = Vector2(-17, -27)
+scale = Vector2(1.9, 1.9)
+texture = ExtResource("2_6dcin")
 
-[node name="Terminal" type="TextureRect" parent="VBoxContainer/HSplitContainer"]
-material = SubResource("ShaderMaterial_km35h")
-layout_mode = 2
-texture = ExtResource("20_6bb1l")
-
-[node name="KeyPad" type="TextureRect" parent="VBoxContainer/HSplitContainer"]
-visible = false
-material = SubResource("ShaderMaterial_km35h")
-layout_mode = 2
-texture = ExtResource("21_5wqa5")
+[node name="Computer" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_d2njh")
+position = Vector2(-14, 70)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("22_sitg0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -260,10 +152,9 @@ libraries = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(97.5, 14)
+position = Vector2(162.5, 17)
 shape = SubResource("RectangleShape2D_ydxi6")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

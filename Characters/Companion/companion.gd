@@ -8,7 +8,9 @@ class_name Companion
 func _physics_process(delta: float) -> void:
 	if not companionCanFollowPlayer:
 		return 
-	var dir: int  = Input.get_axis("Left", "Right")
-	if dir == 0:
-		return 
-	animated_sprite_2d.flip_h = dir == -1
+	var dir: float  = Input.get_axis("Left", "Right")
+	
+	if dir > 0.0:
+		animated_sprite_2d.flip_h = false
+	elif dir < 0.0:
+		animated_sprite_2d.flip_h = true

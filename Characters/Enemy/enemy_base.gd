@@ -45,7 +45,7 @@ var player: Player = null
 
 
 var health: float
-var dir: int = 1
+var dir: float = 1.0
 var isDead: bool = false
 
 
@@ -55,8 +55,8 @@ func getGravity() -> float:
 func apply_damage(damagePoint: int) -> void:
 	if isDead:
 		return 
-	health  = max(health - damagePoint, 0)
 	animation_player.play("Hit")
+	health  = max(health - damagePoint, 0)
 	
 	if health <= 0:
 		animation_player.play("Dead")
@@ -127,8 +127,8 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
-	var axis: int = Input.get_axis("Left", "Right")
-	if axis in [1, -1]:
+	var axis: float = Input.get_axis("Left", "Right")
+	if axis != 0:
 		dir = axis
 		
 	if not is_on_floor():

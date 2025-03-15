@@ -1,14 +1,20 @@
 extends CharacterBody2D
 class_name Player
 
-enum PLAYER_STATE {IDLE, JUMP, DASH, DASH_ATTACK, FALL, LAND, LIGHT_ATTACK, HEAVY_ATTACK, MOVING_LEFT, MOVING_RIGHT, DEAD}
+enum PLAYER_STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, LIGHT_ATTACK, HEAVY_ATTACK, MOVING_LEFT, MOVING_RIGHT, DEAD}
 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var top_animated_sprite_2d: AnimatedSprite2D = $TopAnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var attack_box: CollisionShape2D = $AttackBoxComponent/AttackBox
+
 @onready var dash_particle: GPUParticles2D = $GPUParticles2D
+@onready var attack_box_right: CollisionShape2D = $AttackBoxComponent/AttackBoxRight
+@onready var attack_box_left: CollisionShape2D = $AttackBoxComponent/AttackBoxLeft
+
+@onready var white: AnimatedSprite2D = $AnimatedSprites/White
+@onready var red: AnimatedSprite2D = $AnimatedSprites/Red
+@onready var dark: AnimatedSprite2D = $AnimatedSprites/Dark
+
 
 @export_category("Jump Settings")
 @export var jump_height : float = 50
@@ -20,6 +26,7 @@ enum PLAYER_STATE {IDLE, JUMP, DASH, DASH_ATTACK, FALL, LAND, LIGHT_ATTACK, HEAV
 
 @export_category("Other Settings")
 @export var can_use_controls: bool = false
+@export var previousAnimation: String = "Red"
 
 @onready var JUMP_VELOCITY : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var JUMP_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
@@ -32,6 +39,7 @@ const SPEED: float = 180.0
 const KNOCKBACKVALUE: int = 30
 const DAMAGE_POINT: int = 3
 const WALL_PUSHBACK: int = 200
+const FALL_DISTANCE_THRESHOLD: int = 100
 
 var toggle_gravity: bool =  false
 
@@ -46,10 +54,10 @@ var spriteInitialPosition: float = 0.0
 var initialScaleX: float = 0.0
 
 var jump_count: int = 2
-var previousDirection: int = 1
+var previousDirection: float = 1.0
 var health: int = 0
 
-
+var last_ground_y: float = 0
 var currentPlayerState: PLAYER_STATE = PLAYER_STATE.IDLE
 
 func getGravity() -> float:
@@ -57,7 +65,6 @@ func getGravity() -> float:
 		return WALL_FALL_GRAVITY
 	return JUMP_GRAVITY if velocity.y < 0.0 else FALL_GRAVITY
 
-	
 func handleJumpInput(delta: float) -> void:
 	if not toggle_gravity:
 		if not is_on_floor():
@@ -65,17 +72,20 @@ func handleJumpInput(delta: float) -> void:
 		else:
 			jump_count = 2
 			
-		if Input.is_action_just_pressed("Jump"):
+		if can_use_controls and Input.is_action_just_pressed("Jump"):
 			if jump_count > 0 or is_on_floor():
 				currentPlayerState = PLAYER_STATE.JUMP
+				animated_sprite_2d.play("Jump")
 				velocity.y = JUMP_VELOCITY
 				jump_count -= 1
-				
 	else:
-		velocity.y = JUMP_VELOCITY
+		currentPlayerState = PLAYER_STATE.JUMP
+		velocity.y = JUMP_VELOCITY + 50
+		animated_sprite_2d.play("Jump")
 		
 	if canClimbLadder and Input.is_action_pressed("Interact"):
 		toggle_gravity = true
+		can_use_controls = false
 		
 	if currentPlayerState == PLAYER_STATE.DEAD:
 		return 
@@ -85,13 +95,26 @@ func handleJumpInput(delta: float) -> void:
 	
 	if is_on_floor() and not wasOnFloor:
 		currentPlayerState = PLAYER_STATE.LAND
+		if global_position.y - last_ground_y > FALL_DISTANCE_THRESHOLD:
+			SignalManager.emit_signal("large_fall_detected")
+		last_ground_y = global_position.y  
 		
+func handleAttackBoxVisibility() -> void:
+	if currentPlayerState in [PLAYER_STATE.LIGHT_ATTACK, PLAYER_STATE.HEAVY_ATTACK]:
+		if previousDirection < 0:
+			attack_box_left.disabled = false
+			attack_box_right.disabled = true
+		elif previousDirection > 0:
+			attack_box_left.disabled = true
+			attack_box_right.disabled = false
+	else:
+		attack_box_left.disabled = true
+		attack_box_right.disabled = true
 
-func handleInput(delta: float) -> void:
-
+func handleInput() -> void:
 	var dir = Input.get_axis("Left", "Right")
 	
-	if currentPlayerState not in [PLAYER_STATE.DEAD, PLAYER_STATE.LIGHT_ATTACK, PLAYER_STATE.HEAVY_ATTACK] and (dir == 0 and velocity.y < 1):
+	if currentPlayerState not in [PLAYER_STATE.DEAD, PLAYER_STATE.LIGHT_ATTACK, PLAYER_STATE.HEAVY_ATTACK] and (dir == 0 and velocity.y == 0.0):
 		currentPlayerState = PLAYER_STATE.IDLE
 		
 	if not can_use_controls:
@@ -99,41 +122,40 @@ func handleInput(delta: float) -> void:
 		
 	if Input.is_action_pressed("Light_A"):
 		currentPlayerState = PLAYER_STATE.LIGHT_ATTACK
-		attack_box.disabled = false
-		
 	elif Input.is_action_pressed("Heavy_A"):
 		currentPlayerState = PLAYER_STATE.HEAVY_ATTACK
-		attack_box.disabled = false
-	else:
-		attack_box.disabled = true
-		
+
 	if Input.is_action_pressed("Left"):
 		currentPlayerState = PLAYER_STATE.MOVING_LEFT
-		if previousDirection != -1:
-			previousDirection = -1
-			scale.x = -1 * initialScaleX 
-		else: 
-			scale.x = 1 * initialScaleX
+		animated_sprite_2d.flip_h = true
 			
-	elif Input.is_action_pressed("Right"):
+	if Input.is_action_pressed("Right"):
 		currentPlayerState = PLAYER_STATE.MOVING_RIGHT
-		if previousDirection != 1:
-			previousDirection = 1
-			scale.x = -1 * initialScaleX 
-		else:
-			scale.x = 1 * initialScaleX
+		animated_sprite_2d.flip_h = false
 			
 	if Input.is_action_pressed("Dash"): # DASH IS INDEPENDENT OF OTHER EVENTS
 		currentPlayerState = PLAYER_STATE.DASH
 		
-
+	if Input.is_action_pressed("Roll"):
+		currentPlayerState = PLAYER_STATE.ROLL
+		$HitBoxComponent.disabled = true
+		$RollHitBoxComponent.disabled = false
+	else:
+		$HitBoxComponent.disabled = false
+		$RollHitBoxComponent.disabled = true
+		
 	wasOnFloor = is_on_floor()
-	
-	
+	previousDirection = dir if dir != 0 else previousDirection
 		
 func handleAnimationStateUpdate() -> void:
+	var axis: float = Input.get_axis("Left", "Right")
+	if axis > 0:
+		dash_particle.material.set_shader_parameter("facing_left", false)
+	elif axis < 0:
+		dash_particle.material.set_shader_parameter("facing_left", true)
+		
 	var animationName: String = ""
-	var topAnimationName: String = "Idle"
+	
 	match currentPlayerState:
 		PLAYER_STATE.DEAD:
 			animationName = "Dead"
@@ -141,33 +163,31 @@ func handleAnimationStateUpdate() -> void:
 			animationName = "Jump"
 		PLAYER_STATE.FALL:
 			animationName = "Fall"
-		PLAYER_STATE.LAND:
-			animationName = "Land"
 		PLAYER_STATE.MOVING_RIGHT:
-			animationName = "Run"
+			animationName = "Run" if velocity.y == 0.0 else ""
 			velocity.x = move_toward(velocity.x, 1 * SPEED, acceleration)
 		PLAYER_STATE.MOVING_LEFT:
-			animationName = "Run"
+			animationName = "Run" if velocity.y == 0.0 else "" 
 			velocity.x = move_toward(velocity.x, -1 * SPEED, acceleration)
 		PLAYER_STATE.LIGHT_ATTACK:
-			animationName = "Light"
+			animationName = ["Light1", "Light2", "Light3"].pick_random()
 		PLAYER_STATE.HEAVY_ATTACK:
 			animationName = "Heavy"
-			topAnimationName = "Heavy"
 		PLAYER_STATE.DASH:
-			var axis: int = Input.get_axis("Left", "Right")
-			if axis == 1:
-				dash_particle.material.set_shader_parameter("facing_left", false)
-			elif axis == -1:
-				dash_particle.material.set_shader_parameter("facing_left", true)
-			velocity.x = axis * SPEED * DASH_MULTIPLIER
-			dash_particle.emitting = true
+			#velocity.x = axis * SPEED * DASH_MULTIPLIER
+			if axis != 0:
+				velocity.x = move_toward(velocity.x, previousDirection * SPEED * DASH_MULTIPLIER, acceleration)
+				if velocity.y == 0.0:	
+					dash_particle.emitting = true
+					animationName = "Dash"
+		PLAYER_STATE.ROLL:
+			velocity.x = move_toward(velocity.x, previousDirection * SPEED * DASH_MULTIPLIER, acceleration)
+			animationName = "Roll" if velocity.y == 0.0 else ""
 		PLAYER_STATE.IDLE:
 			animationName = "Idle"
 			velocity.x = move_toward(velocity.x, 0, friction)
 			
 	animated_sprite_2d.play(animationName)
-	top_animated_sprite_2d.play(topAnimationName)
 	
 	if currentPlayerState != PLAYER_STATE.DASH:
 		dash_particle.emitting = false
@@ -190,28 +210,49 @@ func knockBack(enemy: EnemyBase) -> void:
 		position.x += KNOCKBACKVALUE
 	
 func _ready() -> void:
-	initialScaleX = self.scale.x
+	if previousAnimation == "Red":
+		updateAnimatedSprite(red, true, false, false)
+	else:
+		updateAnimatedSprite(white, false, true, false)
 	health = MAX_HEALTH
 	
 func _physics_process(delta: float) -> void:
+	if is_on_ceiling() and currentPlayerState == PLAYER_STATE.FALL: #Checking if we stuck between a ceiling and floor
+		position.x += previousDirection * 10
+		
 	handleJumpInput(delta)
-	
 	if currentPlayerState in [PLAYER_STATE.DEAD, PLAYER_STATE.LIGHT_ATTACK, PLAYER_STATE.HEAVY_ATTACK]:
 		return
-	
-	handleInput(delta)
+
+	handleInput()
+	handleAttackBoxVisibility()
 	handleAnimationStateUpdate()
 	move_and_slide()
 
-
+func updateAnimatedSprite(aSprite: AnimatedSprite2D, red_visible: bool, white_visible: bool, dark_visible: bool) -> void:
+	var isFlipped: bool = animated_sprite_2d.flip_h
+	aSprite.flip_h = isFlipped
+	animated_sprite_2d = aSprite
+	red.visible = red_visible
+	white.visible = white_visible
+	dark.visible = dark_visible
+	
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite_2d.animation in ["Light", "Heavy"]:
+	if animated_sprite_2d.animation in ["Light1","Light2","Light3","AttackCombo", "Heavy", "Roll"]:
 		currentPlayerState = PLAYER_STATE.IDLE
-
-
+		
+	if animated_sprite_2d.animation == "Heavy" and animated_sprite_2d.name in ["Red", "White"]:
+		previousAnimation = animated_sprite_2d.name
+		updateAnimatedSprite(dark, false, false, true)
+	elif animated_sprite_2d.animation == "Heavy" and animated_sprite_2d.name == "Dark":
+		if previousAnimation == "Red":
+			updateAnimatedSprite(red, true, false, false)
+		elif previousAnimation == "White":
+			updateAnimatedSprite(white, false, true, false)
+		
 func _on_attack_box_component_body_entered(body: Node2D) -> void:
 	if body is EnemyBase:
-			body.apply_damage(DAMAGE_POINT)
+		body.apply_damage(DAMAGE_POINT)
 			
 func _on_ladder_area_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -221,3 +262,4 @@ func _on_ladder_area_body_exited(body: Node2D) -> void:
 	if body is Player:
 		canClimbLadder = false
 		toggle_gravity = false
+		can_use_controls = true

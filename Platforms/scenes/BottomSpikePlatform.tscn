@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=4 uid="uid://vximcsbicvuj"]
 
 [ext_resource type="Texture2D" uid="uid://ccvbuud12l3oo" path="res://Assets/platforms/Weapons/WR_NightBoundSet_Spritesheet.png" id="1_82viu"]
-[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/TX Village Props.png" id="2_at4w4"]
-[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/TX Tileset Ground.png" id="3_nehlp"]
+[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/Props.png" id="2_at4w4"]
+[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/Tileset.png" id="3_nehlp"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="4_82kpo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6cudh"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://dc354bxr5g42m"]
+[gd_scene load_steps=13 format=4 uid="uid://dc354bxr5g42m"]
 
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="1_5si78"]
+[ext_resource type="Script" uid="uid://x6833kq40ljh" path="res://Platforms/scripts/swing_hammer.gd" id="1_fg82h"]
 [ext_resource type="Texture2D" uid="uid://ccvbuud12l3oo" path="res://Assets/platforms/Weapons/WR_NightBoundSet_Spritesheet.png" id="1_ngoxl"]
+[ext_resource type="Shader" uid="uid://cm30ghxsl8exq" path="res://Shaders/blackandwhite.gdshader" id="4_o4r6p"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="5_neb2n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbel2"]
@@ -567,7 +569,6 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_wbel2")
 
 [sub_resource type="Animation" id="Animation_jbckh"]
-length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -575,9 +576,9 @@ tracks/0/path = NodePath("Gears/Hammer:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-3.14159, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.571, -0.25, 0, 0.25, 0, 4.712, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0, 1)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -586,9 +587,9 @@ tracks/1/path = NodePath("Gears/Gear:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.571, -0.25, 0, 0.25, 0, 4.712, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0, 1)
 }
 tracks/2/type = "bezier"
 tracks/2/imported = false
@@ -597,9 +598,9 @@ tracks/2/path = NodePath("Gears/GearLeft:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1.571, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.571, -0.25, 0, 0.25, 0, 4.712, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0, 1)
 }
 tracks/3/type = "bezier"
 tracks/3/imported = false
@@ -608,9 +609,9 @@ tracks/3/path = NodePath("Gears/GearRight:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1.571, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.571, -0.25, 0, 0.25, 0, -1.571, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0, 1)
 }
 
 [sub_resource type="Animation" id="Animation_n46ih"]
@@ -667,10 +668,14 @@ _data = {
 &"Swing": SubResource("Animation_n46ih")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6crkr"]
+shader = ExtResource("4_o4r6p")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0jub"]
 size = Vector2(40.5711, 80.949)
 
 [node name="SwingHammer" type="Node2D"]
+script = ExtResource("1_fg82h")
 
 [node name="TopSupport" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD9//7/AQAOABYAAAD9////AQAOABcAAAD9/wAAAQAOABgAAAD+//7/AQAPABYAAAD+////AQAPABcAAAD+/wAAAQAPABgAAAD///7/AQAPABYAAAD/////AQAPABcAAAD//wAAAQAPABgAAAAAAP7/AQAPABYAAAAAAP//AQAPABcAAAAAAAAAAQAPABgAAAABAP7/AQAPABYAAAABAP//AQAPABcAAAABAAAAAQAPABgAAAACAP7/AQAQABYAAAACAP//AQAQABcAAAACAAAAAQAQABgAAAA=")
@@ -702,8 +707,9 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_5si78")
 
 [node name="Hammer" type="Sprite2D" parent="Gears"]
+material = SubResource("ShaderMaterial_6crkr")
 position = Vector2(2, -12)
-rotation = -3.14159
+rotation = 1.571
 scale = Vector2(5, 5)
 texture = ExtResource("1_ngoxl")
 offset = Vector2(0, -20)
@@ -722,4 +728,5 @@ shape = SubResource("RectangleShape2D_g0jub")
 [node name="Gear" type="Sprite2D" parent="Gears"]
 modulate = Color(0.717647, 0.701961, 0.615686, 1)
 position = Vector2(2, -12)
+rotation = 1.571
 texture = ExtResource("1_5si78")

@@ -678,7 +678,7 @@ tile_set = SubResource("TileSet_7g267")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_m3qv0")
+&"": SubResource("AnimationLibrary_m3qv0")
 }
 autoplay = "Swing"
 

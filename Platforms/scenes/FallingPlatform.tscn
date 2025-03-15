@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=4 uid="uid://d05ggmsp2cxcx"]
+[gd_scene load_steps=14 format=4 uid="uid://d05ggmsp2cxcx"]
 
 [ext_resource type="Script" uid="uid://b2cexys628wqe" path="res://Platforms/scripts/falling_platform.gd" id="1_1ibrm"]
-[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/TX Village Props.png" id="1_wb5u0"]
-[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/TX Tileset Ground.png" id="2_ypdp5"]
+[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/Props.png" id="1_wb5u0"]
+[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/Tileset.png" id="2_ypdp5"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="3_kyuqn"]
 
 [sub_resource type="Animation" id="Animation_mk1a1"]
@@ -54,7 +54,7 @@ _data = {
 &"RESET": SubResource("Animation_74ps0")
 }
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oigij"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f028c"]
 texture = ExtResource("1_wb5u0")
 1:0/0 = 0
 2:0/0 = 0
@@ -531,7 +531,7 @@ texture = ExtResource("1_wb5u0")
 30:30/0 = 0
 31:30/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l76br"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3mfdk"]
 texture = ExtResource("2_ypdp5")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -750,7 +750,7 @@ texture = ExtResource("2_ypdp5")
 14:15/0 = 0
 15:15/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rxnau"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fbm1d"]
 texture = ExtResource("3_kyuqn")
 0:0/0 = 0
 1:0/0 = 0
@@ -1269,15 +1269,9 @@ physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = " Platform"
 terrain_set_0/terrain_0/color = Color(0.591479, 0.0742097, 0.683024, 1)
-sources/0 = SubResource("TileSetAtlasSource_oigij")
-sources/1 = SubResource("TileSetAtlasSource_l76br")
-sources/2 = SubResource("TileSetAtlasSource_rxnau")
-
-[sub_resource type="LabelSettings" id="LabelSettings_5q7of"]
-font_color = Color(0.400698, 0.400698, 0.400698, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_6jqhs"]
-font_size = 10
+sources/0 = SubResource("TileSetAtlasSource_f028c")
+sources/1 = SubResource("TileSetAtlasSource_3mfdk")
+sources/2 = SubResource("TileSetAtlasSource_fbm1d")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwhq5"]
 size = Vector2(208, 48)
@@ -1290,7 +1284,7 @@ script = ExtResource("1_1ibrm")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_30b5n")
+&"": SubResource("AnimationLibrary_30b5n")
 }
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
@@ -1298,25 +1292,6 @@ libraries = {
 [node name="Platform" type="TileMapLayer" parent="AnimatableBody2D"]
 tile_map_data = PackedByteArray("AAAKAAEAAQACAAEAAAAKAAAAAQACAAAAAAAJAAEAAQABAAEAAAAJAAAAAQABAAAAAAAIAAEAAQABAAEAAAAIAAAAAQABAAAAAAAHAAEAAQABAAEAAAAHAAAAAQABAAAAAAAGAAEAAQABAAEAAAAGAAAAAQABAAAAAAAFAAEAAQABAAEAAAAFAAAAAQABAAAAAAAEAAEAAQABAAEAAAAEAAAAAQABAAAAAAADAAEAAQABAAEAAAADAAAAAQABAAAAAAACAAEAAQABAAEAAAACAAAAAQAAAAAAAAABAAEAAQABAAAAAAAAAAEAAQAAAAAAAAAJAAIAAQABAAIAAAAIAAIAAQABAAIAAAAHAAIAAQABAAIAAAAGAAIAAQABAAIAAAAFAAIAAQABAAIAAAAEAAIAAQABAAIAAAADAAIAAQABAAIAAAACAAIAAQABAAIAAAABAAIAAQABAAIAAAAAAAIAAQAAAAIAAAAKAAIAAQACAAIAAAABAAAAAAAHABQAAAAAAAAAAAAHABQAAAD//wIAAAAHABQAAAD+/wIAAAAHABQAAAD+/wEAAAAEAAEAAAD//wEAAAAEAAEAAAD//wAAAAADABAAAAD+/wAAAAADABAAAAA=")
 tile_set = SubResource("TileSet_47i7t")
-
-[node name="Label" type="Label" parent="AnimatableBody2D"]
-visible = false
-offset_left = 26.0
-offset_top = 13.0
-offset_right = 60.0
-offset_bottom = 30.0
-text = "404"
-label_settings = SubResource("LabelSettings_5q7of")
-
-[node name="Label2" type="Label" parent="AnimatableBody2D"]
-visible = false
-offset_left = 66.0
-offset_top = 28.0
-offset_right = 156.0
-offset_bottom = 40.0
-text = "Error block
-"
-label_settings = SubResource("LabelSettings_6jqhs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 position = Vector2(72, 24)

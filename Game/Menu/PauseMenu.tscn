@@ -96,6 +96,12 @@ layout_mode = 2
 size_flags_vertical = 4
 text = "Resume"
 
+[node name="CheckPoint" type="Button" parent="Panel/PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Last Checkpoint
+"
+
 [node name="Options" type="Button" parent="Panel/PanelContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
@@ -108,4 +114,5 @@ text = "Exit
 "
 
 [connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/CheckPoint" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -12,14 +12,14 @@ void fragment() {
 
 	// Find the maximum value among the color components.
 	float max_color = max(red, max(green, blue));
-
-	if (max_color == red) {
-	    COLOR.rgb = COLOR.rrr;
-	} else if (max_color == green) {
-	    COLOR.rgb = COLOR.ggg;
-	} else if (max_color == blue) {
-	    COLOR.rgb = COLOR.bbb;
-	}
+	COLOR.rgb = COLOR.ggg;
+	//if (max_color == red) {
+	    //COLOR.rgb = COLOR.rrr;
+	//} else if (max_color == green) {
+	    //COLOR.rgb = COLOR.ggg;
+	//} else if (max_color == blue) {
+	    //COLOR.rgb = COLOR.bbb;
+	//}
 
 
 	//COLOR.rbg = COLOR.bbb;

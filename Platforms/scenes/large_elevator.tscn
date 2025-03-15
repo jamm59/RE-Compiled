@@ -1,0 +1,116 @@
+[gd_scene load_steps=13 format=3 uid="uid://cqtyoc8h8rqkf"]
+
+[ext_resource type="Texture2D" uid="uid://dq1psyohguleb" path="res://Assets/platforms/Animated/elevator 1.png" id="1_8bbjm"]
+[ext_resource type="Script" uid="uid://cs2ovphvcbj7q" path="res://Platforms/scripts/large_elevator.gd" id="1_fcvjo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8naq6"]
+atlas = ExtResource("1_8bbjm")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvo1d"]
+atlas = ExtResource("1_8bbjm")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvjvq"]
+atlas = ExtResource("1_8bbjm")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rcsw"]
+atlas = ExtResource("1_8bbjm")
+region = Rect2(64, 32, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1bhnj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8naq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvo1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvjvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rcsw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldrsj"]
+size = Vector2(64, 10)
+
+[sub_resource type="Animation" id="Animation_e7nml"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_fcvjo"]
+resource_name = "left-right"
+
+[sub_resource type="Animation" id="Animation_8bbjm"]
+resource_name = "up-down"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(131, -0.25, 0, 0.25, 0, -131, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e7nml"]
+_data = {
+&"RESET": SubResource("Animation_e7nml"),
+&"left-right": SubResource("Animation_fcvjo"),
+&"up-down": SubResource("Animation_8bbjm")
+}
+
+[node name="LargeElevator" type="Node2D"]
+script = ExtResource("1_fcvjo")
+
+[node name="Marker2DTop" type="Marker2D" parent="."]
+position = Vector2(0, -131)
+
+[node name="Marker2DBottom" type="Marker2D" parent="."]
+position = Vector2(0, 131)
+
+[node name="Marker2DLeft" type="Marker2D" parent="."]
+position = Vector2(-131, 0)
+
+[node name="Marker2DRight" type="Marker2D" parent="."]
+position = Vector2(131, 0)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="Large" type="AnimatedSprite2D" parent="AnimatableBody2D"]
+sprite_frames = SubResource("SpriteFrames_1bhnj")
+autoplay = "default"
+frame_progress = 0.970726
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_ldrsj")
+one_way_collision = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_e7nml")
+}
+autoplay = "up-down"

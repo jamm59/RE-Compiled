@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqhq6qcfyd7k2"]
+
+[ext_resource type="Texture2D" uid="uid://dq1psyohguleb" path="res://Assets/platforms/Animated/elevator 1.png" id="1_ilu23"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8naq6"]
+atlas = ExtResource("1_ilu23")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvo1d"]
+atlas = ExtResource("1_ilu23")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvjvq"]
+atlas = ExtResource("1_ilu23")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rcsw"]
+atlas = ExtResource("1_ilu23")
+region = Rect2(64, 32, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1bhnj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8naq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvo1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvjvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rcsw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldrsj"]
+size = Vector2(64, 10)
+
+[node name="Elevator" type="AnimatableBody2D"]
+
+[node name="Large" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1bhnj")
+frame_progress = 0.238075
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_ldrsj")
+one_way_collision = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

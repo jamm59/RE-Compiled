@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfe58tc3vuhk8"]
+
+[ext_resource type="Texture2D" uid="uid://bdpxf8gustvxy" path="res://Assets/platforms/Animated/elevator2.png" id="1_lv5vx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dfqm"]
+atlas = ExtResource("1_lv5vx")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfjli"]
+atlas = ExtResource("1_lv5vx")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0n4g"]
+atlas = ExtResource("1_lv5vx")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgeng"]
+atlas = ExtResource("1_lv5vx")
+region = Rect2(64, 32, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lv5vx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dfqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfjli")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0n4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgeng")
+}],
+"loop": true,
+"name": &"Move",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_houl4"]
+size = Vector2(32, 12)
+
+[node name="SmallElevator" type="Node2D"]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatableBody2D"]
+sprite_frames = SubResource("SpriteFrames_lv5vx")
+animation = &"Move"
+autoplay = "Move"
+frame_progress = 0.440084
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_houl4")
+one_way_collision = true

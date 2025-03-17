@@ -66,7 +66,7 @@ func knockBack() -> void:
 	position.x += KNOCKBACKVALUE  * dir
 	
 func emitHitSignal() -> void:
-	SignalManager.emit_signal("enemy_hit")
+	SignalManager.emit_signal("body_hit")
 	
 func handleEnemyDead() -> void:
 	enemyState = ENEMY_STATE.DEAD

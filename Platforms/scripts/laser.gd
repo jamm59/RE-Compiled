@@ -3,6 +3,7 @@ class_name Laser
 
 @onready var laser_layers: Node2D = $LaserLayers
 @onready var head: AnimatedSprite2D = $Head
+const DAMAGE_POINT: float = 5
 
 func deactivateLasers() -> void:
 	for laser: AnimatedSprite2D in laser_layers.get_children():
@@ -13,4 +14,5 @@ func deactivateLasers() -> void:
 	
 func _on_laser_area_body_entered(body: Node2D) -> void:
 	if body is Player:
-		print("Applying serious damage")
+		print("applying damage")
+		body.applyHitDamage(self)

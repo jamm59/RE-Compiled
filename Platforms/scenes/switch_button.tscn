@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbb6nh3jgxbnq"]
+[gd_scene load_steps=11 format=3 uid="uid://cbb6nh3jgxbnq"]
 
 [ext_resource type="Script" uid="uid://cuy7kl2y4vhk0" path="res://Platforms/scripts/switch_button.gd" id="1_7iok3"]
 [ext_resource type="Texture2D" uid="uid://byidmn8rumbal" path="res://Assets/platforms/Animated/fan activ 1.png" id="3_nhom0"]
@@ -13,23 +13,8 @@ ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lq0kt"]
 size = Vector2(354, 114)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_saw0h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ac6f8"]
 shader = ExtResource("3_saw0h")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ba1tg"]
-atlas = ExtResource("3_nhom0")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7iok3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ba1tg")
-}],
-"loop": false,
-"name": &"Idle",
-"speed": 5.0
-}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_igjtn"]
 shader = ExtResource("3_saw0h")
@@ -91,12 +76,13 @@ theme = SubResource("Theme_lq0kt")
 position = Vector2(0, -25)
 shape = SubResource("RectangleShape2D_lq0kt")
 
-[node name="Tower" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_saw0h")
+[node name="Tower" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ac6f8")
+position = Vector2(0, 1)
 scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_7iok3")
-animation = &"Idle"
-autoplay = "Idle"
+texture = ExtResource("3_nhom0")
+region_enabled = true
+region_rect = Rect2(35.974, 1.82769, 24.0936, 30.1229)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -16.0
@@ -112,6 +98,8 @@ scale = Vector2(0.9, 0.7)
 sprite_frames = SubResource("SpriteFrames_nhom0")
 animation = &"Activate"
 autoplay = "Idle"
+frame = 5
+frame_progress = 1.0
 flip_h = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

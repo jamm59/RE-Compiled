@@ -1,7 +1,7 @@
 extends Node
 
 
-signal enemy_hit
+signal body_hit
 
 signal large_fall_detected
 

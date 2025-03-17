@@ -1,0 +1,36 @@
+res://Characters/Protagonist/player.tscn
+res://Resources/panel-dark-theme.tres
+res://Characters/Companion/Companion.gdshader
+res://Dialogic/Characters/Player.dch
+res://Game/Level 0/Game.tscn
+res://Characters/NPCs/scene/npc_base.tscn
+res://Characters/Enemy/EnemyBase.tscn
+res://Characters/NPCs/scene/deer_npc.tscn
+res://Platforms/scenes/HoverSidePlatform.tscn
+res://Characters/NPCs/scene/grass_food.tscn
+res://Platforms/scenes/switch_button.tscn
+res://Platforms/scenes/BottomSpikePlatform.tscn
+res://Characters/Companion/Companion.tscn
+res://Characters/Protagonist/player.gd
+res://Game/CinematicPanel.tscn
+res://Platforms/scenes/laser.tscn
+res://Platforms/scripts/laser.gd
+res://AutoLoad/signal_manager.gd
+res://Characters/Enemy/enemy_base.gd
+res://Game/Level 0/game.gd
+res://Shaders/blackandwhite.gdshader
+res://Platforms/scenes/Terminal.tscn
+res://Shaders/custom-black-white.gdshader
+res://Game/UserInterface/hud.tscn
+res://Game/UserInterface/CinematicPanel.tscn
+res://Game/UserInterface/hud.gd
+res://Platforms/scenes/large_elevator.tscn
+res://Characters/NPCs/scene/elk_npc.tscn
+res://Characters/NPCs/scripts/elk_npc.gd
+res://Characters/NPCs/scripts/deer_npc.gd
+res://Characters/NPCs/scene/fox_npc.tscn
+res://Characters/NPCs/scripts/fox_npc.gd
+res://Characters/NPCs/scripts/npc_base.gd
+res://Characters/NPCs/scene/crow_npc.tscn
+res://Characters/NPCs/scripts/crow_npc.gd
+res://Platforms/scenes/terminal.gd

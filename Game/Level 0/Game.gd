@@ -20,7 +20,6 @@ var speed: float = 7.0
 var companionScaleX: float = 0.0
 var shake_amount: int 
 var cameraShake: bool = false
-var isCinematic: bool = false
 
 
 func _ready() -> void:
@@ -32,7 +31,7 @@ func _ready() -> void:
 	#player.can_use_controls = false
 	
 	#Signals
-	SignalManager.connect("enemy_hit", _freeze_engine)
+	SignalManager.connect("body_hit", _freeze_engine)
 	SignalManager.connect("large_fall_detected", _large_fall_detected)
 	SignalManager.connect("terminal_control_signal_emit", _terminal_control)
 	SignalManager.connect("remote_control_session_complete", _remote_control_session_complete)
@@ -61,7 +60,7 @@ func _input(event):
 	elif event.is_action_pressed("Zoom"):
 		zoom_camera(Vector2(2, 2))  # Zoom in
 	elif event.is_action_released("Zoom") or event.is_action_released("Control"):
-		zoom_camera(Vector2(4, 4))  # Zoom out
+		zoom_camera(Vector2(3, 3))  # Zoom out
 		
 
 func zoom_camera(target_zoom: Vector2, time: float = 0.4):
@@ -71,8 +70,14 @@ func zoom_camera(target_zoom: Vector2, time: float = 0.4):
 func showDialogue(timeline: String) -> void:
 	Dialogic.start(timeline)
 	cinematic.visible = true
+	player.hud.visible = false
 	player.can_use_controls = false
 		
+func DialogueDone() -> void:
+	cinematic.visible = false
+	player.hud.visible = true
+	player.can_use_controls = true
+	
 func _terminal_control(pos: Vector2, name: String) -> void:
 	var platform: Node2D = null
 	var previousDistance: float = INF
@@ -95,11 +100,15 @@ func _terminal_control(pos: Vector2, name: String) -> void:
 	if platform is Laser:
 		platform.deactivateLasers()
 	if platform:
+		cinematic.visible = true
+		player.hud.visible = false
 		player.can_use_controls = false
 		camera_2d.global_position = platform.position
 		await get_tree().create_timer(2).timeout
-		camera_2d.global_position = camera_pos.global_position
+		cinematic.visible = false
+		player.hud.visible = true
 		player.can_use_controls = true
+		camera_2d.global_position = camera_pos.global_position
 
 
 func _freeze_engine() -> void:
@@ -122,8 +131,7 @@ func _remote_control_session_complete() -> void:
 	
 func _on_player_introduction_body_entered(body: Node2D) -> void:
 	if body is Player:
-		zoom_camera(Vector2(3,3), 2)
-		await get_tree().create_timer(2).timeout
+		zoom_camera(Vector2(3,3), 0.5)
 		showDialogue("timeline-1")
 		$CinematicAreas/PlayerIntroduction.disconnect("body_entered", _on_player_introduction_body_entered)
 
@@ -152,13 +160,9 @@ func _on_interact_body_entered(body: Node2D) -> void:
 		showDialogue("timeline-tutorial-interact")
 		$CinematicAreas/Interact.disconnect("body_entered", _on_interact_body_entered)
 		
-func DialogueDone() -> void:
-	cinematic.visible = false
-	player.can_use_controls = true
 	
 func _on_dialogic_signal(argument: String):
-	if argument.length() > 0:
-		DialogueDone()
+	DialogueDone()
 	match argument:
 		"timeline-2":
 			companion.companionCanFollowPlayer= true

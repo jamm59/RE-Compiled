@@ -1,9 +1,8 @@
-[gd_scene load_steps=53 format=4 uid="uid://3vb8tf5ogjcv"]
+[gd_scene load_steps=52 format=4 uid="uid://3vb8tf5ogjcv"]
 
-[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/TX Village Props.png" id="1_yoo4i"]
+[ext_resource type="Texture2D" uid="uid://cjulhckf86it2" path="res://Assets/Tilesets/Props.png" id="1_yoo4i"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="2_8cu7s"]
-[ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tilesets/Tileset.png" id="2_m5od5"]
-[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/Tileset.png" id="3_yxd67"]
+[ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tilesets/Tileset.png" id="3_yxd67"]
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="4_1ahgr"]
 [ext_resource type="Texture2D" uid="uid://c1n7ailb82ure" path="res://Assets/platforms/Gears2/1.png" id="4_r5icb"]
 [ext_resource type="Texture2D" uid="uid://nkqj0insxso5" path="res://Assets/platforms/Gears/2.png" id="5_5yc8y"]
@@ -549,7 +548,7 @@ texture = ExtResource("1_yoo4i")
 8:15/0/terrains_peering_bit/top_side = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y0whf"]
-texture = ExtResource("2_m5od5")
+texture = ExtResource("3_yxd67")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 1

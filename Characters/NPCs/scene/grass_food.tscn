@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://duoe3svamj6et"]
+
+[ext_resource type="Script" uid="uid://jhs0coarnggb" path="res://Characters/NPCs/scripts/grass_food.gd" id="1_k858e"]
+[ext_resource type="Texture2D" uid="uid://cjulhckf86it2" path="res://Assets/Tilesets/Props.png" id="1_lnswb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k858e"]
+size = Vector2(9, 19)
+
+[node name="GrassFood" type="StaticBody2D"]
+script = ExtResource("1_k858e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+texture = ExtResource("1_lnswb")
+region_enabled = true
+region_rect = Rect2(287.538, 285.131, 49.1875, 20.1693)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, 3)
+texture = ExtResource("1_lnswb")
+region_enabled = true
+region_rect = Rect2(177.616, 289, 30.2702, 17.3699)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture = ExtResource("1_lnswb")
+region_enabled = true
+region_rect = Rect2(225.499, 283.904, 46.3463, 21.6852)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 0.5)
+shape = SubResource("RectangleShape2D_k858e")

@@ -4,6 +4,8 @@ class_name Player
 enum PLAYER_STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, LIGHT_ATTACK, HEAVY_ATTACK, MOVING_LEFT, MOVING_RIGHT, DEAD}
 
 
+@onready var hud: PlayerHUD = $HUD
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -14,6 +16,7 @@ enum PLAYER_STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, LIGHT_ATTACK
 @onready var white: AnimatedSprite2D = $AnimatedSprites/White
 @onready var red: AnimatedSprite2D = $AnimatedSprites/Red
 @onready var dark: AnimatedSprite2D = $AnimatedSprites/Dark
+@onready var dead_aimation: AnimatedSprite2D = $DeadAimation
 
 
 @export_category("Jump Settings")
@@ -22,7 +25,7 @@ enum PLAYER_STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, LIGHT_ATTACK
 @export var jump_time_to_descent : float = 0.3
 
 @export_category("Player Health")
-@export var MAX_HEALTH: int = 20
+@export var MAX_HEALTH: float = 20.0
 
 @export_category("Other Settings")
 @export var can_use_controls: bool = false
@@ -55,17 +58,50 @@ var initialScaleX: float = 0.0
 
 var jump_count: int = 2
 var previousDirection: float = 1.0
-var health: int = 0
+var health: float = 0.0
+var stamina: float = 100.0
+var statsInitDone: bool = false
 
 var last_ground_y: float = 0
 var currentPlayerState: PLAYER_STATE = PLAYER_STATE.IDLE
 
+func _ready() -> void:
+	updateAnimatedSprite(red if previousAnimation == "Red" else white, true, false, false)
+	health = MAX_HEALTH
+	tweenProgressBar(hud.health, scaleHealth(health), 1.0)
+	tweenProgressBar(hud.stamina, stamina, 1.0)
+	
+func _physics_process(delta: float) -> void:
+	if currentPlayerState == PLAYER_STATE.DEAD:
+		return 
+	handleJumpInput(delta)
+	if currentPlayerState in [PLAYER_STATE.LIGHT_ATTACK, PLAYER_STATE.HEAVY_ATTACK]:
+		return
+
+	handleInput()
+	handleAttackBoxVisibility()
+	handleAnimationStateUpdate()
+	move_and_slide()
+	
+	
+func scaleHealth(health: float) -> float:
+	return (health / MAX_HEALTH) * 100
+	
+func tweenProgressBar(progressBar: ProgressBar, value:float, time: float = 0.3) -> void:
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(progressBar, "value", value, time).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	await tween.finished
+	statsInitDone = true
+	
 func getGravity() -> float:
 	if isWallSliding:
 		return WALL_FALL_GRAVITY
 	return JUMP_GRAVITY if velocity.y < 0.0 else FALL_GRAVITY
 
 func handleJumpInput(delta: float) -> void:
+	if is_on_ceiling() and currentPlayerState == PLAYER_STATE.FALL: #Checking if we stuck between a ceiling and floor
+		position.x += previousDirection * 10
+		
 	if not toggle_gravity:
 		if not is_on_floor():
 			velocity.y += getGravity() * delta
@@ -149,13 +185,11 @@ func handleInput() -> void:
 		
 func handleAnimationStateUpdate() -> void:
 	var axis: float = Input.get_axis("Left", "Right")
-	if axis > 0:
-		dash_particle.material.set_shader_parameter("facing_left", false)
-	elif axis < 0:
-		dash_particle.material.set_shader_parameter("facing_left", true)
-		
 	var animationName: String = ""
 	
+	if axis != 0.0:
+		dash_particle.material.set_shader_parameter("facing_left", false if axis > 0 else true)
+		
 	match currentPlayerState:
 		PLAYER_STATE.DEAD:
 			animationName = "Dead"
@@ -163,23 +197,18 @@ func handleAnimationStateUpdate() -> void:
 			animationName = "Jump"
 		PLAYER_STATE.FALL:
 			animationName = "Fall"
-		PLAYER_STATE.MOVING_RIGHT:
+		PLAYER_STATE.MOVING_RIGHT, PLAYER_STATE.MOVING_LEFT:
 			animationName = "Run" if velocity.y == 0.0 else ""
-			velocity.x = move_toward(velocity.x, 1 * SPEED, acceleration)
-		PLAYER_STATE.MOVING_LEFT:
-			animationName = "Run" if velocity.y == 0.0 else "" 
-			velocity.x = move_toward(velocity.x, -1 * SPEED, acceleration)
+			velocity.x = move_toward(velocity.x, previousDirection * SPEED, acceleration)
 		PLAYER_STATE.LIGHT_ATTACK:
 			animationName = ["Light1", "Light2", "Light3"].pick_random()
 		PLAYER_STATE.HEAVY_ATTACK:
 			animationName = "Heavy"
 		PLAYER_STATE.DASH:
-			#velocity.x = axis * SPEED * DASH_MULTIPLIER
-			if axis != 0:
-				velocity.x = move_toward(velocity.x, previousDirection * SPEED * DASH_MULTIPLIER, acceleration)
-				if velocity.y == 0.0:	
-					dash_particle.emitting = true
-					animationName = "Dash"
+			velocity.x = move_toward(velocity.x, previousDirection * SPEED * DASH_MULTIPLIER, acceleration)
+			if velocity.y == 0.0:	
+				dash_particle.emitting = true
+				animationName = "Dash"
 		PLAYER_STATE.ROLL:
 			velocity.x = move_toward(velocity.x, previousDirection * SPEED * DASH_MULTIPLIER, acceleration)
 			animationName = "Roll" if velocity.y == 0.0 else ""
@@ -189,19 +218,37 @@ func handleAnimationStateUpdate() -> void:
 			
 	animated_sprite_2d.play(animationName)
 	
+	
+	if statsInitDone:
+		var deductStaminaSpeed: float = 20
+		var increaseStaminaSpeed: float = 40
+		if animationName in ["Dash", "Roll"]:
+			stamina = max(stamina - deductStaminaSpeed, 10)
+		else:
+			stamina = min(stamina + increaseStaminaSpeed, 100)
+		tweenProgressBar(hud.stamina, stamina)
+	
 	if currentPlayerState != PLAYER_STATE.DASH:
 		dash_particle.emitting = false
 			
-func applyHitDamage(enemy: EnemyBase):
+func applyHitDamage(body: Node2D):
+	animation_player.play("Hit")
+	SignalManager.emit_signal("body_hit")
 	if currentPlayerState == PLAYER_STATE.DEAD:
 		return 
-	knockBack(enemy)
-	health = max(health - enemy.DAMAGE_POINT, 0)
-	animation_player.play("Hit")
-
-	if health <= 0:
+	if body is EnemyBase:
+		knockBack(body)
+		health = max(health - body.DAMAGE_POINT, 0.0)
+	if body is Laser:
+		health = max(health - body.DAMAGE_POINT, 0.0)
+	
+	tweenProgressBar(hud.health, scaleHealth(health))
+	
+	if health <= 0.0:
 		animated_sprite_2d.play("Dead")
 		currentPlayerState = PLAYER_STATE.DEAD
+		dead_aimation.visible = true
+		dead_aimation.flip_h = animated_sprite_2d.flip_h
 		
 func knockBack(enemy: EnemyBase) -> void:
 	if enemy.position.x > self.position.x:
@@ -209,26 +256,6 @@ func knockBack(enemy: EnemyBase) -> void:
 	else:
 		position.x += KNOCKBACKVALUE
 	
-func _ready() -> void:
-	if previousAnimation == "Red":
-		updateAnimatedSprite(red, true, false, false)
-	else:
-		updateAnimatedSprite(white, false, true, false)
-	health = MAX_HEALTH
-	
-func _physics_process(delta: float) -> void:
-	if is_on_ceiling() and currentPlayerState == PLAYER_STATE.FALL: #Checking if we stuck between a ceiling and floor
-		position.x += previousDirection * 10
-		
-	handleJumpInput(delta)
-	if currentPlayerState in [PLAYER_STATE.DEAD, PLAYER_STATE.LIGHT_ATTACK, PLAYER_STATE.HEAVY_ATTACK]:
-		return
-
-	handleInput()
-	handleAttackBoxVisibility()
-	handleAnimationStateUpdate()
-	move_and_slide()
-
 func updateAnimatedSprite(aSprite: AnimatedSprite2D, red_visible: bool, white_visible: bool, dark_visible: bool) -> void:
 	var isFlipped: bool = animated_sprite_2d.flip_h
 	aSprite.flip_h = isFlipped

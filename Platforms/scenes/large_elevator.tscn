@@ -113,4 +113,3 @@ one_way_collision = true
 libraries = {
 &"": SubResource("AnimationLibrary_e7nml")
 }
-autoplay = "up-down"

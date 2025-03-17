@@ -1,7 +1,10 @@
-[gd_scene load_steps=600 format=3 uid="uid://ce563tpin64kc"]
+[gd_scene load_steps=605 format=3 uid="uid://ce563tpin64kc"]
 
 [ext_resource type="Script" uid="uid://pmkmrb3srgfy" path="res://Characters/Protagonist/player.gd" id="1_m6b1w"]
 [ext_resource type="Texture2D" uid="uid://bknk26cfceyvk" path="res://Characters/Protagonist/Assets/AssetPack/SpriteSheet/dash.png" id="3_nu55e"]
+[ext_resource type="Shader" uid="uid://dpf3btpbxnldy" path="res://Shaders/HitFlash.gdshader" id="4_nu55e"]
+[ext_resource type="Texture2D" uid="uid://cbonhgmvlgq0a" path="res://Characters/Protagonist/Assets/AssetPack/Bonus/face1.png" id="8_bxn5h"]
+[ext_resource type="PackedScene" uid="uid://dmcea5ceiuldk" path="res://Game/UserInterface/hud.tscn" id="9_ks101"]
 [ext_resource type="Shader" uid="uid://b3ntv3c7nmla" path="res://Shaders/playerDash.gdshader" id="12_f0a6h"]
 [ext_resource type="Texture2D" uid="uid://ci5rygfto3pia" path="res://Characters/Protagonist/Assets/AssetPack/SpriteSheet/White with FX.png" id="12_g333k"]
 [ext_resource type="Texture2D" uid="uid://co6icsi8a4hwk" path="res://Characters/Protagonist/Assets/AssetPack/SpriteSheet/Light with FX.png" id="16_2abuy"]
@@ -53,12 +56,12 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
+tracks/0/path = NodePath("AnimatedSprites/Red:material:shader_parameter/active")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(0.392292, 0.392292, 0.392292, 0.392292, 0.392292),
+"transitions": PackedFloat32Array(1, 0.392292, 0.392292, 0.392292, 0.392292),
 "update": 1,
 "values": [false, true, false, true, false]
 }
@@ -68,7 +71,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
+tracks/0/path = NodePath("AnimatedSprites/Red:material:shader_parameter/active")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -84,7 +87,24 @@ _data = {
 &"RESET": SubResource("Animation_7e0ws")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1y1s"]
+atlas = ExtResource("8_bxn5h")
+region = Rect2(0, 0, 66, 57)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4tmb5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1y1s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bxn5h"]
+shader = ExtResource("4_nu55e")
+shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k62iy"]
 atlas = ExtResource("17_nei06")
@@ -3814,6 +3834,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vdtew")
 }, {
 "duration": 1.0,
@@ -4359,11 +4387,11 @@ position = Vector2(31, -8)
 sprite_frames = SubResource("SpriteFrames_n5422")
 
 [node name="HitBoxComponent" type="CollisionShape2D" parent="."]
-position = Vector2(8, -8.5)
+position = Vector2(8, -9)
 shape = SubResource("CapsuleShape2D_n5422")
 
 [node name="RollHitBoxComponent" type="CollisionShape2D" parent="."]
-position = Vector2(8, -5.5)
+position = Vector2(8, -6)
 shape = SubResource("CapsuleShape2D_nu55e")
 disabled = true
 
@@ -4387,12 +4415,19 @@ libraries = {
 [node name="Timer" type="Timer" parent="."]
 wait_time = 6.0
 
+[node name="DeadAimation" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(9, -3)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_4tmb5")
+autoplay = "default"
+
 [node name="AnimatedSprites" type="Node2D" parent="."]
 
 [node name="Dark" type="AnimatedSprite2D" parent="AnimatedSprites"]
 visible = false
 material = SubResource("ShaderMaterial_bxn5h")
-position = Vector2(7, -27)
+position = Vector2(6, -26)
 scale = Vector2(0.8, 0.831)
 sprite_frames = SubResource("SpriteFrames_2abuy")
 animation = &"Idle"
@@ -4413,8 +4448,12 @@ material = SubResource("ShaderMaterial_bxn5h")
 position = Vector2(6, -26)
 scale = Vector2(0.8, 0.831)
 sprite_frames = SubResource("SpriteFrames_7867e")
-animation = &"Light1"
+animation = &"Idle"
 autoplay = "Idle"
+
+[node name="UserInterface" type="Node2D" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("9_ks101")]
 
 [connection signal="body_entered" from="AttackBoxComponent" to="." method="_on_attack_box_component_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprites/Dark" to="." method="_on_animated_sprite_2d_animation_finished"]

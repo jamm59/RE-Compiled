@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=4 uid="uid://vximcsbicvuj"]
 
 [ext_resource type="Texture2D" uid="uid://ccvbuud12l3oo" path="res://Assets/platforms/Weapons/WR_NightBoundSet_Spritesheet.png" id="1_82viu"]
-[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/Props.png" id="2_at4w4"]
-[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/Tileset.png" id="3_nehlp"]
+[ext_resource type="Texture2D" uid="uid://cjulhckf86it2" path="res://Assets/Tilesets/Props.png" id="2_at4w4"]
+[ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tilesets/Tileset.png" id="3_nehlp"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="4_82kpo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6cudh"]
@@ -1425,6 +1425,6 @@ region_rect = Rect2(42.7046, 196.713, 3.73486, 33.4327)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_5c3rl")
+&"": SubResource("AnimationLibrary_5c3rl")
 }
 autoplay = "SpikeUp"

@@ -31,7 +31,7 @@ var wall_speed: float = 100.0
 var jump_force: float = -300.0
 var previousDirection: float = 0.0
 
-var direction: float = 0.0
+var direction: float = [1.0, -1.0].pick_random()
 
 var toggleGravity: bool = false
 var animal_in_danger: bool = false 
@@ -64,7 +64,6 @@ func apply_gravity(delta: float) -> void:
 		
 func move_freely(delta: float) -> void:
 	state = NPCSTATE.MOVE
-	velocity.x = direction * speed
 	if not ray_cast_right_ground.is_colliding() or ray_cast_right.is_colliding():
 		direction = -1
 		animal.flip_h = true
@@ -72,6 +71,7 @@ func move_freely(delta: float) -> void:
 	elif not ray_cast_left_ground.is_colliding() or ray_cast_left.is_colliding():
 		direction = 1
 		animal.flip_h = false
+
 	
 func handle_input(delta: float) -> void:
 	if not remote_control_activated:
@@ -110,10 +110,13 @@ func update_state_animation() -> void:
 	match state:
 		NPCSTATE.IDLE:
 			var hasEatingAnimation: bool = animal.sprite_frames.get_animation_names().has("Eating")
-			if not hasEatingAnimation:
+			if not hasEatingAnimation and not remote_control_activated:
 				animal.play("Idle")
-			else:
+			elif hasEatingAnimation and not remote_control_activated:
 				animal.play("Eating")
+			
+			if remote_control_activated:
+				animal.play("Idle")
 		NPCSTATE.MOVE, NPCSTATE.JUMP, NPCSTATE.FALL:
 			animal.play("Move")
-			velocity.x = move_toward(velocity.x, previousDirection * speed, acceleration)
+			velocity.x = move_toward(velocity.x, direction * speed, acceleration)

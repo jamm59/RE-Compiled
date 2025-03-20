@@ -716,12 +716,12 @@ offset = Vector2(0, -20)
 region_enabled = true
 region_rect = Rect2(176.982, 103.976, 16.1628, 40.1169)
 
-[node name="Area2D" type="Area2D" parent="Gears/Hammer"]
+[node name="KillDamage" type="Area2D" parent="Gears/Hammer"]
 position = Vector2(5.52311, 32.8837)
 rotation = 1.58532
 scale = Vector2(0.2, 0.2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Gears/Hammer/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gears/Hammer/KillDamage"]
 position = Vector2(-339.704, 32.8735)
 shape = SubResource("RectangleShape2D_g0jub")
 
@@ -730,3 +730,5 @@ modulate = Color(0.717647, 0.701961, 0.615686, 1)
 position = Vector2(2, -12)
 rotation = 1.571
 texture = ExtResource("1_5si78")
+
+[connection signal="body_entered" from="Gears/Hammer/KillDamage" to="." method="_on_kill_damage_body_entered"]

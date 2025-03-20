@@ -374,9 +374,9 @@ target_position = Vector2(25, 19)
 [node name="Deer" type="AnimatedSprite2D" parent="."]
 position = Vector2(28, -27)
 sprite_frames = SubResource("SpriteFrames_384f2")
-animation = &"Dead"
+animation = &"Detected"
 autoplay = "Idle"
-frame = 14
+frame = 13
 frame_progress = 1.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

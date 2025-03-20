@@ -1,36 +1,19 @@
-res://Characters/Protagonist/player.tscn
+res://Platforms/scenes/short_range_terminal.tscn
+res://Resources/panel-hud-theme.tres
+res://Resources/progress-bar-theme.tres
 res://Resources/panel-dark-theme.tres
-res://Characters/Companion/Companion.gdshader
-res://Dialogic/Characters/Player.dch
-res://Game/Level 0/Game.tscn
-res://Characters/NPCs/scene/npc_base.tscn
-res://Characters/Enemy/EnemyBase.tscn
-res://Characters/NPCs/scene/deer_npc.tscn
-res://Platforms/scenes/HoverSidePlatform.tscn
-res://Characters/NPCs/scene/grass_food.tscn
-res://Platforms/scenes/switch_button.tscn
-res://Platforms/scenes/BottomSpikePlatform.tscn
-res://Characters/Companion/Companion.tscn
+res://Platforms/scripts/short_range_terminal.gd
 res://Characters/Protagonist/player.gd
-res://Game/CinematicPanel.tscn
-res://Platforms/scenes/laser.tscn
-res://Platforms/scripts/laser.gd
-res://AutoLoad/signal_manager.gd
-res://Characters/Enemy/enemy_base.gd
-res://Game/Level 0/game.gd
-res://Shaders/blackandwhite.gdshader
+res://Game/Level 0/Game.tscn
+res://Characters/Protagonist/player.tscn
 res://Platforms/scenes/Terminal.tscn
-res://Shaders/custom-black-white.gdshader
-res://Game/UserInterface/hud.tscn
-res://Game/UserInterface/CinematicPanel.tscn
-res://Game/UserInterface/hud.gd
-res://Platforms/scenes/large_elevator.tscn
-res://Characters/NPCs/scene/elk_npc.tscn
-res://Characters/NPCs/scripts/elk_npc.gd
+res://Resources/game-save/player-save.gd
+res://Game/Level 0/game.gd
+res://Dialogic/Timelines/timeline-short-range.dtl
+res://AutoLoad/signal_manager.gd
 res://Characters/NPCs/scripts/deer_npc.gd
-res://Characters/NPCs/scene/fox_npc.tscn
-res://Characters/NPCs/scripts/fox_npc.gd
 res://Characters/NPCs/scripts/npc_base.gd
-res://Characters/NPCs/scene/crow_npc.tscn
-res://Characters/NPCs/scripts/crow_npc.gd
-res://Platforms/scenes/terminal.gd
+res://Characters/NPCs/scene/deer_npc.tscn
+res://Platforms/scripts/swing_hammer.gd
+res://Platforms/scenes/SwingHammer.tscn
+res://Platforms/scenes/SpikeHammer.tscn

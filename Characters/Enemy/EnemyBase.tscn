@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://bqvo72neem772"]
+[gd_scene load_steps=71 format=3 uid="uid://bqvo72neem772"]
 
 [ext_resource type="Script" uid="uid://biibrdjf0sknw" path="res://Characters/Enemy/enemy_base.gd" id="1_8eg6q"]
 [ext_resource type="Texture2D" uid="uid://ch0ne3jrey7w6" path="res://Characters/Enemy/Assets/monster.png" id="1_pnlr2"]
@@ -6,10 +6,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lt8sq"]
 size = Vector2(10, 18)
-
-[sub_resource type="Curve" id="Curve_s1g3o"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.790614, 0.331776), 0.0, 0.0, 0, 0]
-point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eibky"]
 size = Vector2(18.1818, 18.1818)
@@ -21,6 +17,7 @@ size = Vector2(143.636, 18.1818)
 resource_local_to_scene = true
 shader = ExtResource("3_5xp7v")
 shader_parameter/active = false
+shader_parameter/black_white = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8phok"]
 atlas = ExtResource("1_pnlr2")
@@ -254,7 +251,7 @@ region = Rect2(288, 96, 48, 48)
 atlas = ExtResource("1_pnlr2")
 region = Rect2(336, 96, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_tgsef"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_oj2mq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -514,26 +511,28 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, false, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [false, true, false, true, false, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"knockBack"
+}]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -542,20 +541,6 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"knockBack"
-}]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -611,11 +596,7 @@ _data = {
 }
 
 [node name="EnemyBase" type="CharacterBody2D"]
-scale = Vector2(1.4, 1.3)
 script = ExtResource("1_8eg6q")
-
-[node name="DeadTimer" type="Timer" parent="."]
-wait_time = 3.0
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -625,35 +606,21 @@ one_shot = true
 position = Vector2(2, -1)
 shape = SubResource("RectangleShape2D_lt8sq")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2(3.63636, 0)
-scale = Vector2(-0.70954, -36.9415)
-emitting = false
-amount = 3
-one_shot = true
-explosiveness = 1.0
-gravity = Vector2(400, 500)
-initial_velocity_min = 4.0
-initial_velocity_max = 6.0
-damping_max = 29.412
-scale_amount_min = 3.0
-scale_amount_max = 5.0
-scale_amount_curve = SubResource("Curve_s1g3o")
-color = Color(0.0962047, 0.0962048, 0.0962047, 1)
+[node name="RayCast" type="Node2D" parent="."]
 
-[node name="RayCastRight" type="RayCast2D" parent="."]
+[node name="RayCastRight" type="RayCast2D" parent="RayCast"]
 modulate = Color(0.868475, 0.63282, 1, 1)
 target_position = Vector2(17.2727, 0)
 
-[node name="RayCastLeft" type="RayCast2D" parent="."]
+[node name="RayCastLeft" type="RayCast2D" parent="RayCast"]
 modulate = Color(0.868475, 0.63282, 1, 1)
 target_position = Vector2(-14.5455, 0)
 
-[node name="RayCastLeftGround" type="RayCast2D" parent="."]
+[node name="RayCastLeftGround" type="RayCast2D" parent="RayCast"]
 position = Vector2(1.81818, -0.909091)
 target_position = Vector2(-20, 15.4545)
 
-[node name="RayCastRightGround" type="RayCast2D" parent="."]
+[node name="RayCastRightGround" type="RayCast2D" parent="RayCast"]
 position = Vector2(1.81818, -0.909091)
 target_position = Vector2(20, 16.3636)
 
@@ -673,8 +640,8 @@ shape = SubResource("RectangleShape2D_8rqsn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_nuhhi")
-sprite_frames = SubResource("SpriteFrames_tgsef")
-animation = &"Walk"
+sprite_frames = SubResource("SpriteFrames_oj2mq")
+animation = &"Attack 2"
 autoplay = "Walk"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

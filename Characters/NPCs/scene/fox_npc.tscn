@@ -245,17 +245,16 @@ target_position = Vector2(-25, 0.0909119)
 
 [node name="RayCastLeftGround" type="RayCast2D" parent="RayCast"]
 position = Vector2(-1, 0)
-target_position = Vector2(-24, 19)
+target_position = Vector2(-15, 15)
 
 [node name="RayCastRightGround" type="RayCast2D" parent="RayCast"]
 position = Vector2(-1, 0)
-target_position = Vector2(25, 19)
+target_position = Vector2(19, 13)
 
 [node name="Fox" type="AnimatedSprite2D" parent="."]
 position = Vector2(10, -7)
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_csuux")
-animation = &"Dead"
+animation = &"Eating"
 autoplay = "Idle"
-frame = 6
-frame_progress = 1.0
+frame_progress = 0.441782

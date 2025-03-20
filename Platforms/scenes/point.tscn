@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://ca02wr1ybnjym"]
+
+[ext_resource type="Texture2D" uid="uid://dv7hdmygjibxl" path="res://Assets/other/ram.png" id="1_7gnpa"]
+[ext_resource type="Texture2D" uid="uid://ce3x74cfj6pcl" path="res://Assets/other/ram-memory.png" id="2_j2gyl"]
+
+[sub_resource type="Animation" id="Animation_7gnpa"]
+resource_name = "Hover"
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parent:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -50, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_j2gyl"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parent:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j2gyl"]
+_data = {
+&"Hover": SubResource("Animation_7gnpa"),
+&"RESET": SubResource("Animation_j2gyl")
+}
+
+[node name="RamStick" type="Node2D"]
+
+[node name="Parent" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parent"]
+texture = ExtResource("1_7gnpa")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parent"]
+texture = ExtResource("2_j2gyl")
+region_enabled = true
+region_rect = Rect2(0, 32.4044, 64, 22.5939)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_j2gyl")
+}
+autoplay = "Hover"

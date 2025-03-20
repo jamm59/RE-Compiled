@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://pk3ypbe0q8hr"]
+[gd_scene load_steps=18 format=3 uid="uid://pk3ypbe0q8hr"]
 
 [ext_resource type="Script" uid="uid://cui724sv0codj" path="res://Platforms/scenes/terminal.gd" id="1_n8xof"]
 [ext_resource type="Shader" uid="uid://cm30ghxsl8exq" path="res://Shaders/blackandwhite.gdshader" id="2_3gykg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="2_c0b02"]
 [ext_resource type="Texture2D" uid="uid://c6kyl0pjx1hls" path="res://Assets/other/tower.png" id="2_ef44j"]
 [ext_resource type="Texture2D" uid="uid://ccvbuud12l3oo" path="res://Assets/platforms/Weapons/WR_NightBoundSet_Spritesheet.png" id="2_tmugs"]
+[ext_resource type="Shader" uid="uid://dvgk6116kbqbr" path="res://Shaders/custom-black-white.gdshader" id="7_c26dp"]
 [ext_resource type="Texture2D" uid="uid://dpitg7s5gwu8x" path="res://Assets/other/computer3.png" id="22_sitg0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hdvc1"]
@@ -21,7 +22,7 @@ shader = ExtResource("2_3gykg")
 shader = ExtResource("2_3gykg")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d2njh"]
-shader = ExtResource("2_3gykg")
+shader = ExtResource("7_c26dp")
 
 [sub_resource type="Animation" id="Animation_wpotp"]
 resource_name = "Lever-pull"

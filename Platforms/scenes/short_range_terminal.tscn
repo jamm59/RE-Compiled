@@ -1,0 +1,117 @@
+[gd_scene load_steps=12 format=3 uid="uid://brkcx526yv5p4"]
+
+[ext_resource type="Script" uid="uid://v5xxqexhchy0" path="res://Platforms/scripts/short_range_terminal.gd" id="1_0e0fa"]
+[ext_resource type="Texture2D" uid="uid://c6kyl0pjx1hls" path="res://Assets/other/tower.png" id="1_xmtmh"]
+[ext_resource type="Shader" uid="uid://dvgk6116kbqbr" path="res://Shaders/custom-black-white.gdshader" id="2_0e0fa"]
+[ext_resource type="Texture2D" uid="uid://cv2ta72nh8era" path="res://Assets/other/wifi.png" id="3_0e0fa"]
+[ext_resource type="Texture2D" uid="uid://br85yc8kiutkk" path="res://Assets/other/short-range.png" id="3_xmtmh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e0fa"]
+size = Vector2(16, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dlcqv"]
+shader = ExtResource("2_0e0fa")
+
+[sub_resource type="Animation" id="Animation_7ajy2"]
+resource_name = "Activate"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parent/Controller:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(14, -0.25, 0, 0.25, 0, -26, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_dlcqv"]
+resource_name = "Hover"
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parent:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -15, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_0e0fa"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parent:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Parent/Controller:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(14, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ajy2"]
+_data = {
+&"Activate": SubResource("Animation_7ajy2"),
+&"Hover": SubResource("Animation_dlcqv"),
+&"RESET": SubResource("Animation_0e0fa")
+}
+
+[node name="ShortRange" type="Node2D"]
+script = ExtResource("1_0e0fa")
+usable = null
+specific_platform_name = null
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8, -10)
+shape = SubResource("RectangleShape2D_0e0fa")
+
+[node name="Parent" type="Node2D" parent="."]
+position = Vector2(5.96046e-08, 0)
+scale = Vector2(0.2, 0.2)
+
+[node name="Controller" type="Node2D" parent="Parent"]
+position = Vector2(-1, 14)
+
+[node name="Wifi" type="Sprite2D" parent="Parent/Controller"]
+position = Vector2(40.6, -74.4785)
+scale = Vector2(1.9, 1.9)
+texture = ExtResource("3_0e0fa")
+
+[node name="Tower" type="Sprite2D" parent="Parent/Controller"]
+position = Vector2(40, -42.9668)
+scale = Vector2(1.59375, 1.40625)
+texture = ExtResource("1_xmtmh")
+region_enabled = true
+region_rect = Rect2(23.7404, 0, 16.9454, 39.1067)
+
+[node name="Short-range" type="Sprite2D" parent="Parent"]
+material = SubResource("ShaderMaterial_dlcqv")
+position = Vector2(42, -31)
+texture = ExtResource("3_xmtmh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7ajy2")
+}
+autoplay = "Hover"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

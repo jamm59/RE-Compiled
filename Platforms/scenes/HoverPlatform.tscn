@@ -18,8 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://7f2xhuuq5evw" path="res://Assets/platforms/Gears/14.png" id="14_1wvki"]
 [ext_resource type="Texture2D" uid="uid://bcd1wkaiyurd" path="res://Assets/platforms/Gears/15.png" id="15_qmkcb"]
 [ext_resource type="Texture2D" uid="uid://bednmkxybft6g" path="res://Assets/platforms/Gears/16.png" id="16_fanmr"]
-[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/Props.png" id="17_7p4mc"]
-[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/Tileset.png" id="18_4svx8"]
+[ext_resource type="Texture2D" uid="uid://cjulhckf86it2" path="res://Assets/Tilesets/Props.png" id="17_7p4mc"]
+[ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tilesets/Tileset.png" id="18_4svx8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smr7f"]
 texture = ExtResource("17_7p4mc")

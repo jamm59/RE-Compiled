@@ -1,15 +1,2 @@
-ColorRect
 CollisionShape2D
-StaticBody2D
-AnimatedSprite2D
-CharacterBody2D
-HBoxContainer
-RichTextLabel
-Label
-MarginContainer
-Node2D
-ProgressBar
-VBoxContainer
-VSplitContainer
-HSplitContainer
-CanvasLayer
+Area2D

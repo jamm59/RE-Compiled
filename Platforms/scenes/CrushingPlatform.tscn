@@ -1,7 +1,6 @@
-[gd_scene load_steps=35 format=4 uid="uid://bhfh4a3ulesys"]
+[gd_scene load_steps=34 format=4 uid="uid://bhfh4a3ulesys"]
 
-[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/Props.png" id="1_byowg"]
-[ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tilesets/Tileset.png" id="2_lt4bk"]
+[ext_resource type="Texture2D" uid="uid://cjulhckf86it2" path="res://Assets/Tilesets/Props.png" id="1_byowg"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="3_svei4"]
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="4_lst7i"]
 [ext_resource type="Texture2D" uid="uid://nkqj0insxso5" path="res://Assets/platforms/Gears/2.png" id="5_d6555"]
@@ -19,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://7f2xhuuq5evw" path="res://Assets/platforms/Gears/14.png" id="17_jtl2b"]
 [ext_resource type="Texture2D" uid="uid://bcd1wkaiyurd" path="res://Assets/platforms/Gears/15.png" id="18_575ve"]
 [ext_resource type="Texture2D" uid="uid://bednmkxybft6g" path="res://Assets/platforms/Gears/16.png" id="19_qv1pd"]
-[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/Tileset.png" id="20_dvdyl"]
+[ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tilesets/Tileset.png" id="20_dvdyl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3kifs"]
 texture = ExtResource("1_byowg")
@@ -533,7 +532,7 @@ texture = ExtResource("1_byowg")
 8:15/0/terrains_peering_bit/top_side = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6ox8b"]
-texture = ExtResource("2_lt4bk")
+texture = ExtResource("20_dvdyl")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 1

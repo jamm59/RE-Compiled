@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=4 uid="uid://d05ggmsp2cxcx"]
 
 [ext_resource type="Script" uid="uid://b2cexys628wqe" path="res://Platforms/scripts/falling_platform.gd" id="1_1ibrm"]
-[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/Props.png" id="1_wb5u0"]
-[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/Tileset.png" id="2_ypdp5"]
+[ext_resource type="Texture2D" uid="uid://cjulhckf86it2" path="res://Assets/Tilesets/Props.png" id="1_wb5u0"]
+[ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tilesets/Tileset.png" id="2_ypdp5"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="3_kyuqn"]
 
 [sub_resource type="Animation" id="Animation_mk1a1"]

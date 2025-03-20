@@ -6,8 +6,7 @@ func _ready() -> void:
 		
 	
 func _physics_process(delta: float) -> void:
-	super(delta)
-
+	super(delta)   
 
 func move_freely(delta: float) -> void:	
 	for ray: RayCast2D in [ray_cast_right, ray_cast_right_ground,ray_cast_left, ray_cast_left_ground]:
@@ -31,13 +30,7 @@ func move_freely(delta: float) -> void:
 		direction = 1
 		animal.flip_h = false
 		
-func update_state_animation():
-	match state:
-		NPCSTATE.IDLE:
-			animal.play("Idle")
-		NPCSTATE.MOVE, NPCSTATE.JUMP, NPCSTATE.FALL:
-			animal.play("Move")
-			
+		
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 		animal.play("Detected")

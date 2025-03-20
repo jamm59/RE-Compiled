@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://0x3cejfm2rp8"]
+[gd_scene load_steps=11 format=4 uid="uid://0x3cejfm2rp8"]
 
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="1_ftppv"]
+[ext_resource type="Script" uid="uid://x6833kq40ljh" path="res://Platforms/scripts/swing_hammer.gd" id="1_xhp5b"]
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="2_sr0mt"]
 [ext_resource type="Texture2D" uid="uid://ccvbuud12l3oo" path="res://Assets/platforms/Weapons/WR_NightBoundSet_Spritesheet.png" id="3_oi8v8"]
 
@@ -671,6 +672,7 @@ _data = {
 radius = 39.0518
 
 [node name="SpikeHammer" type="Node2D"]
+script = ExtResource("1_xhp5b")
 
 [node name="TopSupport" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD9//7/AQAOABYAAAD9////AQAOABcAAAD9/wAAAQAOABgAAAD+//7/AQAPABYAAAD+////AQAPABcAAAD+/wAAAQAPABgAAAD///7/AQAPABYAAAD/////AQAPABcAAAD//wAAAQAPABgAAAAAAP7/AQAPABYAAAAAAP//AQAPABcAAAAAAAAAAQAPABgAAAABAP7/AQAPABYAAAABAP//AQAPABcAAAABAAAAAQAPABgAAAACAP7/AQAQABYAAAACAP//AQAQABcAAAACAAAAAQAQABgAAAA=")
@@ -710,12 +712,12 @@ offset = Vector2(0, -20)
 region_enabled = true
 region_rect = Rect2(145.677, 96.4599, 14.7064, 47.1311)
 
-[node name="Area2D" type="Area2D" parent="Gears/Hammer"]
+[node name="KillDamage" type="Area2D" parent="Gears/Hammer"]
 position = Vector2(5.52311, 32.8837)
 rotation = 1.58532
 scale = Vector2(0.2, 0.2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Gears/Hammer/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gears/Hammer/KillDamage"]
 position = Vector2(-344.494, 32.8601)
 shape = SubResource("CircleShape2D_v74ut")
 
@@ -723,3 +725,5 @@ shape = SubResource("CircleShape2D_v74ut")
 modulate = Color(0.717647, 0.701961, 0.615686, 1)
 position = Vector2(2, -12)
 texture = ExtResource("2_sr0mt")
+
+[connection signal="body_entered" from="Gears/Hammer/KillDamage" to="." method="_on_kill_damage_body_entered"]

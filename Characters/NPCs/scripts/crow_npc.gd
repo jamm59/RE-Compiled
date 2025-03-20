@@ -9,7 +9,6 @@ func _physics_process(delta: float) -> void:
 
 func tweenRotation(ref: Node2D, target_angle: float, time: float = 0.1) -> void:
 	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(ref, "rotation_degrees", target_angle, time)
 
 func handle_input(delta: float) -> void:
 	super(delta)

@@ -8,65 +8,67 @@
 script = ExtResource("1_f5l8x")
 
 [node name="TopPanel" type="Panel" parent="."]
-custom_minimum_size = Vector2(0, 50)
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 100.0
-grow_horizontal = 2
-theme = ExtResource("1_4dw5v")
-
-[node name="MarginContainer" type="MarginContainer" parent="TopPanel"]
-layout_mode = 1
-anchors_preset = 15
+custom_minimum_size = Vector2(0, 80)
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+grow_vertical = 0
+theme = ExtResource("1_4dw5v")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel"]
 layout_mode = 2
+offset_left = 30.0
+offset_top = 3.0
+offset_right = 1152.0
+offset_bottom = 73.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TopPanel/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VSplitContainer" parent="TopPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Label" type="RichTextLabel" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(70, 0)
+[node name="Label" type="RichTextLabel" parent="TopPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-text = "[center][font_size=13][b]Health[/b][/font_size][/center]"
-horizontal_alignment = 1
+text = "[right][font_size=10
+][b]Processing Power[/b][/font_size][/right]"
+horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Health" type="ProgressBar" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 25)
+[node name="Health" type="ProgressBar" parent="TopPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 theme = ExtResource("2_4dw5v")
 show_percentage = false
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="TopPanel/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+alignment = 1
 
-[node name="Stamina" type="ProgressBar" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(100, 25)
+[node name="Label" type="RichTextLabel" parent="TopPanel/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme = ExtResource("2_4dw5v")
-show_percentage = false
-
-[node name="Label" type="RichTextLabel" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(70, 0)
-layout_mode = 2
+size_flags_horizontal = 0
 bbcode_enabled = true
-text = "[center][font_size=13][b]Stamina[/b][/font_size][/center]"
+text = "[right][font_size=10
+][b]Thermal Limit[/b][/font_size][/right]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Stamina" type="ProgressBar" parent="TopPanel/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 20)
+layout_mode = 2
+theme = ExtResource("2_4dw5v")
+show_percentage = false

@@ -1,6 +1,7 @@
 shader_type canvas_item;
 
 uniform bool active = false;
+uniform bool black_white = false;
 
 void fragment() {
 	vec4 previous_color = texture(TEXTURE, UV);
@@ -11,4 +12,9 @@ void fragment() {
 		new_color = white_color;
 	}
 	COLOR = new_color;
+	
+	if (black_white){
+		COLOR.rgb = COLOR.ggg;
+	}
+
 }

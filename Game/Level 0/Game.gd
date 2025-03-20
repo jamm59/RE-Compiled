@@ -8,24 +8,21 @@ extends Node2D
 @onready var companion: Companion = $Companion
 @onready var props_layer: TileMapLayer = $TileMap/PropsLayer
 @onready var cinematic: CanvasLayer = $UserInterface/Cinematic
-@onready var left_pos: Marker2D = $Player/LeftPos
-@onready var right_pos: Marker2D = $Player/RightPos
-@onready var companion_location: Node2D = $Player/CompanionLocation
 @onready var camera_pos: Marker2D = $Player/CameraPos
 
 const ENEMY_SHAKE_AMOUNT: int = 3
 const FALL_SHAKE_AMOUNT: int = 5
 
-var speed: float = 7.0
-var companionScaleX: float = 0.0
 var shake_amount: int 
 var cameraShake: bool = false
 
-
+func save_player_state(body: Player) -> void:
+	pass
 func _ready() -> void:
+	
+	var loaded_game: Resource = SaveGame.load_savegame()
 	#Variables
-	companionScaleX = companion.scale.x
-	companion.companionCanFollowPlayer = false
+	companion.companion_can_follow = false
 	camera_2d.zoom = Vector2(3,3)
 	Engine.time_scale = 0.9
 	#player.can_use_controls = false
@@ -34,6 +31,7 @@ func _ready() -> void:
 	SignalManager.connect("body_hit", _freeze_engine)
 	SignalManager.connect("large_fall_detected", _large_fall_detected)
 	SignalManager.connect("terminal_control_signal_emit", _terminal_control)
+	SignalManager.connect("termianl_control_npc_signal", _short_range_terminal_control)
 	SignalManager.connect("remote_control_session_complete", _remote_control_session_complete)
 	Dialogic.signal_event.connect(_on_dialogic_signal)
 
@@ -43,16 +41,8 @@ func _process(delta: float) -> void:
 		randf_range(-1.0, 1.0) * shake_amount, \
 		randf_range(-1.0, 1.0) * shake_amount \
 		))
-	if not companion.companionCanFollowPlayer:
-		return 
-	var dir: float = Input.get_axis("Left", "Right")
-	if dir > 0:
-		companion_location.global_position = left_pos.global_position
-	elif dir < 0:
-		companion_location.global_position = right_pos.global_position
 		
-	companion.global_position = lerp(companion.global_position, companion_location.global_position, speed * delta)
-	
+	companion.move(delta)
 
 func _input(event):
 	if event.is_action_pressed("Control"):
@@ -72,12 +62,35 @@ func showDialogue(timeline: String) -> void:
 	cinematic.visible = true
 	player.hud.visible = false
 	player.can_use_controls = false
+	companion.activate_companion_controls = false
 		
 func DialogueDone() -> void:
 	cinematic.visible = false
 	player.hud.visible = true
 	player.can_use_controls = true
+	companion.activate_companion_controls = true
 	
+func _short_range_terminal_control(pos: Vector2, name: String) -> void:
+	var npc_animal: Node2D = null
+	var previousDistance: float = INF
+	if name.length() > 0:
+		for npc: Node2D in $NPCs.get_children():
+			if name == npc.name:
+				npc_animal = npc
+				break
+				
+	if not npc_animal or name.length() == 0:
+		for npc: Node2D in $NPCs.get_children():
+			var distance: float = pos.distance_to(npc.global_position)
+			if distance < previousDistance:
+				previousDistance = distance
+				npc_animal = npc
+				
+	if npc_animal is FoxNPC or npc_animal is DeerNPC:
+		npc_animal.remote_control_activated = true
+		player.can_use_controls = false
+	
+				
 func _terminal_control(pos: Vector2, name: String) -> void:
 	var platform: Node2D = null
 	var previousDistance: float = INF
@@ -160,11 +173,16 @@ func _on_interact_body_entered(body: Node2D) -> void:
 		showDialogue("timeline-tutorial-interact")
 		$CinematicAreas/Interact.disconnect("body_entered", _on_interact_body_entered)
 		
+func _on_short_range_terminal_body_entered(body: Node2D) -> void:
+	if body is Player:
+		body.short_range_terminal.usable = true # makes it accessible to the player
+		showDialogue("timeline-short-range")
+		$CinematicAreas/ShortRangeTerminal.disconnect("body_entered", _on_short_range_terminal_body_entered)
 	
 func _on_dialogic_signal(argument: String):
 	DialogueDone()
 	match argument:
 		"timeline-2":
-			companion.companionCanFollowPlayer= true
+			companion.companion_can_follow= true
 			companion.animated_sprite_2d.flip_h = false
 		

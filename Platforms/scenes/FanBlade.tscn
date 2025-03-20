@@ -1,11 +1,10 @@
-[gd_scene load_steps=37 format=4 uid="uid://c40rctnulgplc"]
+[gd_scene load_steps=36 format=4 uid="uid://c40rctnulgplc"]
 
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="1_yx7j2"]
-[ext_resource type="Texture2D" uid="uid://h55f3xt001gn" path="res://Assets/Tilesets/Props.png" id="2_hq50w"]
+[ext_resource type="Texture2D" uid="uid://cjulhckf86it2" path="res://Assets/Tilesets/Props.png" id="2_hq50w"]
 [ext_resource type="Texture2D" uid="uid://cfi7cry8v0h62" path="res://Assets/platforms/Weapons/fan-sprite.png" id="2_s0a8y"]
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="2_yu12i"]
 [ext_resource type="Texture2D" uid="uid://nkqj0insxso5" path="res://Assets/platforms/Gears/2.png" id="3_g2o3r"]
-[ext_resource type="Texture2D" uid="uid://dtsengba58tu" path="res://Assets/Tilesets/Tileset.png" id="3_uvyvw"]
 [ext_resource type="Texture2D" uid="uid://dq6al1uhi7ote" path="res://Assets/platforms/Gears/3.png" id="4_atqmb"]
 [ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tilesets/Tileset.png" id="5_08nef"]
 [ext_resource type="Texture2D" uid="uid://d3s1am4vbmmpj" path="res://Assets/platforms/Gears/4.png" id="5_51ic7"]
@@ -498,7 +497,7 @@ texture = ExtResource("2_hq50w")
 31:30/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4xqi5"]
-texture = ExtResource("3_uvyvw")
+texture = ExtResource("5_08nef")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0

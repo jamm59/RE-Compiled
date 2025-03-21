@@ -457,7 +457,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_shcts")
 }],
 "loop": true,
-"name": &"Run",
+"name": &"Move",
 "speed": 10.0
 }, {
 "frames": [{
@@ -647,6 +647,12 @@ target_position = Vector2(-20, 15.4545)
 position = Vector2(1.81818, -0.909091)
 target_position = Vector2(20, 16.3636)
 
+[node name="RayCastTopRight" type="RayCast2D" parent="RayCast"]
+target_position = Vector2(19, -12)
+
+[node name="RayCastTopLeft" type="RayCast2D" parent="RayCast"]
+target_position = Vector2(-15, -13)
+
 [node name="HealthBoxComponent" type="Area2D" parent="."]
 position = Vector2(-3.63636, 0)
 
@@ -666,7 +672,7 @@ material = SubResource("ShaderMaterial_qxvek")
 position = Vector2(1, -3)
 scale = Vector2(-0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_h32i5")
-animation = &"Attack 1"
+animation = &"Move"
 autoplay = "Walk"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

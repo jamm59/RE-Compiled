@@ -229,6 +229,7 @@ shape = SubResource("RectangleShape2D_3kt0o")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-16, 11)
 zoom = Vector2(4, 4)
+position_smoothing_enabled = true
 
 [node name="RayCast" type="Node2D" parent="."]
 position = Vector2(11, -4)
@@ -236,12 +237,12 @@ position = Vector2(11, -4)
 [node name="RayCastRight" type="RayCast2D" parent="RayCast"]
 modulate = Color(0.868475, 0.63282, 1, 1)
 position = Vector2(-1, -0.0909119)
-target_position = Vector2(26, 0.0909119)
+target_position = Vector2(17, 0.0909119)
 
 [node name="RayCastLeft" type="RayCast2D" parent="RayCast"]
 modulate = Color(0.868475, 0.63282, 1, 1)
 position = Vector2(-1, -0.0909119)
-target_position = Vector2(-25, 0.0909119)
+target_position = Vector2(-16, 0.0909119)
 
 [node name="RayCastLeftGround" type="RayCast2D" parent="RayCast"]
 position = Vector2(-1, 0)

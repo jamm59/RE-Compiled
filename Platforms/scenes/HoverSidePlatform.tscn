@@ -1,40 +1,24 @@
-[gd_scene load_steps=52 format=4 uid="uid://3vb8tf5ogjcv"]
+[gd_scene load_steps=35 format=4 uid="uid://3vb8tf5ogjcv"]
 
 [ext_resource type="Texture2D" uid="uid://cjulhckf86it2" path="res://Assets/Tilesets/Props.png" id="1_yoo4i"]
 [ext_resource type="Texture2D" uid="uid://cqcuwuf2xv18y" path="res://Assets/Tilesets/PropsFlipped.png" id="2_8cu7s"]
 [ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tilesets/Tileset.png" id="3_yxd67"]
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="4_1ahgr"]
-[ext_resource type="Texture2D" uid="uid://c1n7ailb82ure" path="res://Assets/platforms/Gears2/1.png" id="4_r5icb"]
 [ext_resource type="Texture2D" uid="uid://nkqj0insxso5" path="res://Assets/platforms/Gears/2.png" id="5_5yc8y"]
-[ext_resource type="Texture2D" uid="uid://7hrar2jl426t" path="res://Assets/platforms/Gears2/2.png" id="5_bv43n"]
 [ext_resource type="Texture2D" uid="uid://dq6al1uhi7ote" path="res://Assets/platforms/Gears/3.png" id="6_ipfwu"]
-[ext_resource type="Texture2D" uid="uid://ck8s1osbga1i" path="res://Assets/platforms/Gears2/3.png" id="6_sf032"]
 [ext_resource type="Texture2D" uid="uid://d3s1am4vbmmpj" path="res://Assets/platforms/Gears/4.png" id="7_1vv37"]
-[ext_resource type="Texture2D" uid="uid://bm0ajat7x1cvl" path="res://Assets/platforms/Gears2/4.png" id="7_vrv0v"]
-[ext_resource type="Texture2D" uid="uid://di18tcll0qerq" path="res://Assets/platforms/Gears2/5.png" id="8_hvfl4"]
 [ext_resource type="Texture2D" uid="uid://58g131lxl43l" path="res://Assets/platforms/Gears/5.png" id="8_oides"]
 [ext_resource type="Texture2D" uid="uid://dkuy6ulhd1mik" path="res://Assets/platforms/Gears/6.png" id="9_4n4he"]
-[ext_resource type="Texture2D" uid="uid://dfbba0w4posu3" path="res://Assets/platforms/Gears2/6.png" id="9_hxpvk"]
 [ext_resource type="Texture2D" uid="uid://ceeako02pxml1" path="res://Assets/platforms/Gears/7.png" id="10_wmcip"]
-[ext_resource type="Texture2D" uid="uid://xaf174lyh0no" path="res://Assets/platforms/Gears2/7.png" id="10_wwn66"]
 [ext_resource type="Texture2D" uid="uid://bpx3w7jew5m2c" path="res://Assets/platforms/Gears/8.png" id="11_crob2"]
-[ext_resource type="Texture2D" uid="uid://dg5gogqxq5rkg" path="res://Assets/platforms/Gears2/8.png" id="11_j5763"]
 [ext_resource type="Texture2D" uid="uid://cxm83xfecysej" path="res://Assets/platforms/Gears/9.png" id="12_cyo3t"]
-[ext_resource type="Texture2D" uid="uid://bp377wbsygdx" path="res://Assets/platforms/Gears2/9.png" id="12_sl06q"]
-[ext_resource type="Texture2D" uid="uid://0rnq6kctwpt" path="res://Assets/platforms/Gears2/10.png" id="13_2ohs2"]
 [ext_resource type="Texture2D" uid="uid://c2nx1pbeoayhi" path="res://Assets/platforms/Gears/10.png" id="13_2xg0w"]
-[ext_resource type="Texture2D" uid="uid://wwcmukjcer2o" path="res://Assets/platforms/Gears2/11.png" id="14_0goi3"]
 [ext_resource type="Texture2D" uid="uid://bt1mpdv63dckt" path="res://Assets/platforms/Gears/11.png" id="14_ws3c6"]
-[ext_resource type="Texture2D" uid="uid://buop03lcijn6y" path="res://Assets/platforms/Gears2/12.png" id="15_ajd8r"]
 [ext_resource type="Texture2D" uid="uid://dec752rif58cc" path="res://Assets/platforms/Gears/12.png" id="15_fpcri"]
-[ext_resource type="Texture2D" uid="uid://c6qx0t31gylj8" path="res://Assets/platforms/Gears2/13.png" id="16_gig8a"]
 [ext_resource type="Texture2D" uid="uid://tciig8gw3b17" path="res://Assets/platforms/Gears/13.png" id="16_ugx1e"]
-[ext_resource type="Texture2D" uid="uid://cnjl66c8bkdww" path="res://Assets/platforms/Gears2/14.png" id="17_5qexf"]
 [ext_resource type="Texture2D" uid="uid://7f2xhuuq5evw" path="res://Assets/platforms/Gears/14.png" id="17_cnqw2"]
-[ext_resource type="Texture2D" uid="uid://d1ltcw5tnivor" path="res://Assets/platforms/Gears2/15.png" id="18_owiyd"]
 [ext_resource type="Texture2D" uid="uid://bcd1wkaiyurd" path="res://Assets/platforms/Gears/15.png" id="18_vo48e"]
 [ext_resource type="Texture2D" uid="uid://bednmkxybft6g" path="res://Assets/platforms/Gears/16.png" id="19_8fyby"]
-[ext_resource type="Texture2D" uid="uid://00c558w5s3lu" path="res://Assets/platforms/Gears2/16.png" id="19_esnmd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cl6ov"]
 texture = ExtResource("1_yoo4i")
@@ -1384,7 +1368,7 @@ animations = [{
 "speed": 60.0
 }]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5k2it"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qmjnf"]
 texture = ExtResource("1_yoo4i")
 1:0/0 = 0
 2:0/0 = 0
@@ -1859,7 +1843,7 @@ texture = ExtResource("1_yoo4i")
 30:30/0 = 0
 31:30/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_15txq"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6s5ku"]
 texture = ExtResource("3_yxd67")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -2069,7 +2053,7 @@ texture = ExtResource("3_yxd67")
 14:15/0 = 0
 15:15/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_knfa4"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tupm4"]
 texture = ExtResource("2_8cu7s")
 0:0/0 = 0
 1:0/0 = 0
@@ -2588,65 +2572,9 @@ physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = " Platform"
 terrain_set_0/terrain_0/color = Color(0.591479, 0.0742097, 0.683024, 1)
-sources/0 = SubResource("TileSetAtlasSource_5k2it")
-sources/1 = SubResource("TileSetAtlasSource_15txq")
-sources/2 = SubResource("TileSetAtlasSource_knfa4")
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_x8kg1"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_r5icb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_bv43n")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_sf032")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_vrv0v")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_hvfl4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_hxpvk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_wwn66")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_j5763")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_sl06q")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_2ohs2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_0goi3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_ajd8r")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_gig8a")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_5qexf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_owiyd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_esnmd")
-}],
-"loop": true,
-"name": &"default",
-"speed": 60.0
-}]
+sources/0 = SubResource("TileSetAtlasSource_qmjnf")
+sources/1 = SubResource("TileSetAtlasSource_6s5ku")
+sources/2 = SubResource("TileSetAtlasSource_tupm4")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nafo"]
 size = Vector2(351, 63)
@@ -2790,15 +2718,8 @@ frame_progress = 0.0107467
 speed_scale = 0.5
 
 [node name="Platform" type="TileMapLayer" parent="AnimatableBody2D"]
-tile_map_data = PackedByteArray("AAADAAYAAQABAAEAAAADAAcAAQABAAEAAAAEAAYAAQABAAEAAAAEAAcAAQABAAEAAAAFAAYAAQABAAEAAAAFAAcAAQABAAEAAAAGAAYAAQABAAEAAAAGAAcAAQABAAEAAAAHAAYAAQABAAEAAAAHAAcAAQABAAEAAAAIAAYAAQABAAEAAAAIAAcAAQABAAEAAAAJAAYAAQABAAEAAAAJAAcAAQABAAEAAAAKAAYAAQABAAEAAAAKAAcAAQABAAEAAAALAAYAAQABAAEAAAALAAcAAQABAAEAAAAMAAYAAQABAAEAAAAMAAcAAQABAAEAAAANAAYAAQABAAEAAAANAAcAAQABAAEAAAAOAAYAAQABAAEAAAAOAAcAAQABAAEAAAAPAAYAAQABAAEAAAAPAAcAAQABAAEAAAAQAAYAAQABAAEAAAAQAAcAAQABAAEAAAATAAcAAQABAAEAAAATAAYAAQABAAEAAAASAAcAAQABAAEAAAASAAYAAQABAAEAAAARAAcAAQABAAEAAAARAAYAAQABAAEAAAAVAAcAAQACAAEAAAAVAAYAAQACAAEAAAAUAAcAAQABAAEAAAAUAAYAAQABAAEAAAACAAcAAQABAAEAAAACAAYAAQABAAEAAAABAAcAAQABAAEAAAABAAYAAQABAAEAAAAAAAcAAQAAAAEAAAAAAAYAAQAAAAEAAAAVAAgAAQACAAIAAAAUAAgAAQABAAIAAAATAAgAAQABAAIAAAASAAgAAQABAAIAAAARAAgAAQABAAIAAAAQAAgAAQABAAIAAAAPAAgAAQABAAIAAAAOAAgAAQABAAIAAAANAAgAAQABAAIAAAAMAAgAAQABAAIAAAALAAgAAQABAAIAAAAKAAgAAQABAAIAAAAJAAgAAQABAAIAAAAIAAgAAQABAAIAAAAHAAgAAQABAAIAAAAGAAgAAQABAAIAAAAFAAgAAQABAAIAAAAEAAgAAQABAAIAAAADAAgAAQABAAIAAAACAAgAAQABAAIAAAABAAgAAQABAAIAAAAAAAgAAQAAAAIAAAAVAAUAAQACAAAAAAAUAAUAAQABAAAAAAATAAUAAQABAAAAAAASAAUAAQABAAAAAAARAAUAAQABAAAAAAAQAAUAAQABAAAAAAAPAAUAAQABAAAAAAAOAAUAAQABAAAAAAANAAUAAQABAAAAAAAMAAUAAQABAAAAAAALAAUAAQABAAAAAAAKAAUAAQABAAAAAAAJAAUAAQABAAAAAAAIAAUAAQABAAAAAAAHAAUAAQABAAAAAAAGAAUAAQABAAAAAAAFAAUAAQABAAAAAAAEAAUAAQABAAAAAAADAAUAAQABAAAAAAACAAUAAQABAAAAAAABAAUAAQABAAAAAAAAAAUAAQAAAAAAAAABAAkAAgAOABYAAAACAAkAAgAPABYAAAADAAkAAgAOABYAAAAEAAkAAgAPABYAAAAFAAkAAgAOABYAAAAGAAkAAgAPABYAAAAHAAkAAgAOABYAAAAIAAkAAgAPABYAAAAJAAkAAgAOABYAAAAKAAkAAgAPABYAAAALAAkAAgAOABYAAAAMAAkAAgAPABYAAAANAAkAAgAOABYAAAAOAAkAAgAPABYAAAAPAAkAAgAOABYAAAAQAAkAAgAPABYAAAARAAkAAgAOABYAAAASAAkAAgAPABYAAAATAAkAAgAOABYAAAAUAAkAAgAPABYAAAAHAAQAAAAMAA4AAAAIAAQAAAANAA4AAAAJAAQAAAABAAcAAAAKAAMAAAACAAYAAAAKAAQAAAACAAcAAAAEAAMAAAASAA8AAAAEAAQAAAASABAAAAAAAAMAAAARAA8AAAAAAAQAAAARABAAAAAJAAIAAAABAAUAAAAJAAMAAAABAAYAAAAKAAIAAAACAAUAAAALAAIAAAADAAUAAAALAAMAAAADAAYAAAALAAQAAAADAAcAAAAVAAQAAAAEAAEAAAAUAAQAAAAEAAEAAAARAAQAAAAEAAEAAAAQAAQAAAAEAAEAAAARAAMAAAAGAAEAAAAVAAMAAAAEAAEAAAAUAAMAAAAGAAEAAAAQAAMAAAAGAAEAAAASAAQAAAAGAAEAAAATAAQAAAAGAAEAAAA=")
+tile_map_data = PackedByteArray("AAADAAYAAQABAAEAAAADAAcAAQABAAEAAAAEAAYAAQABAAEAAAAEAAcAAQABAAEAAAAFAAYAAQABAAEAAAAFAAcAAQABAAEAAAAGAAYAAQABAAEAAAAGAAcAAQABAAEAAAAHAAYAAQABAAEAAAAHAAcAAQABAAEAAAAIAAYAAQABAAEAAAAIAAcAAQABAAEAAAAJAAYAAQABAAEAAAAJAAcAAQABAAEAAAAKAAYAAQABAAEAAAAKAAcAAQABAAEAAAALAAYAAQABAAEAAAALAAcAAQABAAEAAAAMAAYAAQABAAEAAAAMAAcAAQABAAEAAAANAAYAAQABAAEAAAANAAcAAQABAAEAAAAOAAYAAQABAAEAAAAOAAcAAQABAAEAAAAPAAYAAQABAAEAAAAPAAcAAQABAAEAAAAQAAYAAQABAAEAAAAQAAcAAQABAAEAAAARAAcAAQABAAEAAAARAAYAAQABAAEAAAACAAcAAQABAAEAAAACAAYAAQABAAEAAAABAAcAAQABAAEAAAABAAYAAQABAAEAAAAAAAcAAQAAAAEAAAAAAAYAAQAAAAEAAAARAAgAAQABAAIAAAAQAAgAAQABAAIAAAAPAAgAAQABAAIAAAAOAAgAAQABAAIAAAANAAgAAQABAAIAAAAMAAgAAQABAAIAAAALAAgAAQABAAIAAAAKAAgAAQABAAIAAAAJAAgAAQABAAIAAAAIAAgAAQABAAIAAAAHAAgAAQABAAIAAAAGAAgAAQABAAIAAAAFAAgAAQABAAIAAAAEAAgAAQABAAIAAAADAAgAAQABAAIAAAACAAgAAQABAAIAAAABAAgAAQABAAIAAAAAAAgAAQAAAAIAAAARAAUAAQABAAAAAAAQAAUAAQABAAAAAAAPAAUAAQABAAAAAAAOAAUAAQABAAAAAAANAAUAAQABAAAAAAAMAAUAAQABAAAAAAALAAUAAQABAAAAAAAKAAUAAQABAAAAAAAJAAUAAQABAAAAAAAIAAUAAQABAAAAAAAHAAUAAQABAAAAAAAGAAUAAQABAAAAAAAFAAUAAQABAAAAAAAEAAUAAQABAAAAAAADAAUAAQABAAAAAAACAAUAAQABAAAAAAABAAUAAQABAAAAAAAAAAUAAQAAAAAAAAABAAkAAgAOABYAAAACAAkAAgAPABYAAAADAAkAAgAOABYAAAAEAAkAAgAPABYAAAAFAAkAAgAOABYAAAAGAAkAAgAPABYAAAAHAAkAAgAOABYAAAAIAAkAAgAPABYAAAAJAAkAAgAOABYAAAAKAAkAAgAPABYAAAALAAkAAgAOABYAAAAMAAkAAgAPABYAAAANAAkAAgAOABYAAAAOAAkAAgAPABYAAAAPAAkAAgAOABYAAAAQAAkAAgAPABYAAAARAAkAAgAOABYAAAAHAAQAAAAMAA4AAAAIAAQAAAANAA4AAAAEAAMAAAASAA8AAAAEAAQAAAASABAAAAAAAAMAAAARAA8AAAAAAAQAAAARABAAAAASAAUAAQABAAAAAAASAAYAAQABAAEAAAASAAcAAQABAAEAAAASAAgAAQABAAIAAAASAAkAAgAPABYAAAATAAUAAQABAAAAAAATAAYAAQABAAEAAAATAAcAAQABAAEAAAATAAgAAQABAAIAAAATAAkAAgAOABYAAAAUAAUAAQABAAAAAAAUAAYAAQABAAEAAAAUAAcAAQABAAEAAAAUAAgAAQABAAIAAAAUAAkAAgAPABYAAAAVAAUAAQACAAAAAAAVAAYAAQACAAEAAAAVAAcAAQACAAEAAAAVAAgAAQACAAIAAAARAAIAAAABAAUAAAARAAMAAAABAAYAAAARAAQAAAABAAcAAAASAAIAAAACAAUAAAASAAMAAAACAAYAAAASAAQAAAACAAcAAAATAAIAAAADAAUAAAATAAMAAAADAAYAAAATAAQAAAADAAcAAAA=")
 tile_set = SubResource("TileSet_7yjvu")
-
-[node name="PowerGear" type="AnimatedSprite2D" parent="AnimatableBody2D"]
-modulate = Color(0.717647, 0.701961, 0.615686, 1)
-position = Vector2(112, 117)
-sprite_frames = SubResource("SpriteFrames_x8kg1")
-autoplay = "default"
-frame_progress = 0.946118
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 visible = false

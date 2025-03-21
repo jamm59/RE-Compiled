@@ -19,11 +19,8 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if hover or not usable:
 		return 
-		
-	if Input.is_action_just_pressed("Interact-Short"):
-		visible = not visible
 
-	if visible and Input.is_action_just_pressed("Interact"):
+	if Input.is_action_just_pressed("Interact-Short"):
 		handleEmitAnimation()
 
 func _process(delta: float) -> void:
@@ -35,11 +32,13 @@ func _draw() -> void:
 	draw_arc(Vector2.ZERO, radius, 0, 360, 100, Color(1, 1, 1, 0.7), 10, true )
 
 func handleEmitAnimation() -> void:
+	visible = true
 	animation_player.play("Activate")
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(self, "radius", 2000, 3)
 	await tween.finished
 	# Reset the radius to delete the arc
+	visible = false
 	radius = 0
 	animation_player.play_backwards("Activate")
 	SignalManager.emit_signal("termianl_control_npc_signal", global_position, specific_platform_name)

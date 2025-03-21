@@ -17,6 +17,8 @@ class_name EnemyBase
 @onready var ray_cast_left: RayCast2D = $RayCast/RayCastLeft
 @onready var ray_cast_left_ground: RayCast2D = $RayCast/RayCastLeftGround
 @onready var ray_cast_right_ground: RayCast2D = $RayCast/RayCastRightGround
+@onready var ray_cast_top_right: RayCast2D = $RayCast/RayCastTopRight
+@onready var ray_cast_top_left: RayCast2D = $RayCast/RayCastTopLeft
 
 @onready var attack_timer: Timer = $AttackTimer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -69,11 +71,11 @@ func handleEnemyDead() -> void:
 	
 func handleMoveAndAvoidObstacles()-> void:
 	velocity.x = start_direction * SPEED
-	if not ray_cast_left_ground.is_colliding() or ray_cast_left.is_colliding():
+	if not ray_cast_left_ground.is_colliding() or ray_cast_left.is_colliding() or ray_cast_top_left.is_colliding():
 		start_direction = 1
 		animated_sprite_2d.flip_h = false
 		
-	elif not ray_cast_right_ground.is_colliding() or ray_cast_right.is_colliding():
+	elif not ray_cast_right_ground.is_colliding() or ray_cast_right.is_colliding() or ray_cast_top_right.is_colliding():
 		start_direction = -1
 		animated_sprite_2d.flip_h = true
 
@@ -82,7 +84,7 @@ func handlestate() -> void:
 		STATE.ATTACK:
 			animated_sprite_2d.play("Attack 1")
 		STATE.RUN:
-			animated_sprite_2d.play("Run")
+			animated_sprite_2d.play("Move")
 		STATE.IDLE:
 			animated_sprite_2d.play("Walk")
 			
@@ -91,6 +93,10 @@ func handleEnemyJump() -> void:
 	
 func handleFollowPlayerLogic() -> void:
 	if player != null:
+		if player.state == player.STATE.DEAD:
+			followPath = true
+			state = STATE.IDLE
+			return 
 		var player_position = player.position
 		var angle_between_enemy_and_player = atan2(player_position.y - position.y, player_position.x - position.x)
 		var dir_x = round(cos(angle_between_enemy_and_player))
@@ -106,7 +112,7 @@ func handleFollowPlayerLogic() -> void:
 				var body = coll.get_collider()
 				if not body:
 					continue
-				if (body is TileMapLayer and is_on_wall()) or (body is EnemyBase): # Tilemap base layer
+				if (body is TileMapLayer and is_on_wall()) or (body is EnemyBase and body.state == body.STATE.DEAD): # Tilemap base layer
 					handleEnemyJump()
 		else:
 			state = STATE.RUN
@@ -115,16 +121,10 @@ func _ready() -> void:
 	health = MAX_HEALTH
 	animated_sprite_2d.flip_h = true if start_direction != 1 else false
 	
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	var axis: float = Input.get_axis("Left", "Right")
-	if axis != 0:
-		dir = axis
-		
-	if not is_on_floor():
-		velocity.y += getGravity() * delta
-		
+func _physics_process(delta: float) -> void:		
 	if state == STATE.DEAD:
+		apply_gravity(delta)
+		move_and_slide()
 		return
 		
 	if state == STATE.ATTACK:
@@ -135,8 +135,22 @@ func _physics_process(delta: float) -> void:
 	else:
 		handleFollowPlayerLogic()
 	
+	apply_gravity(delta)
+	handle_input()
 	handlestate()
 	move_and_slide()
+	
+	
+func handle_input() -> void:
+	# Add the gravity.
+	var axis: float = Input.get_axis("Left", "Right")
+	if axis != 0:
+		dir = axis
+		
+
+func apply_gravity(delta: float) -> void:
+	if not is_on_floor():
+		velocity.y += getGravity() * delta
 
 func _on_detect_player_area_body_entered(body: Node2D) -> void:
 	if not isDead and (not player and body is Player):
@@ -156,9 +170,8 @@ func _on_health_box_component_body_entered(body: Node2D) -> void:
 		
 func _on_attack_timer_timeout() -> void:
 	if player:
-		var distance: Vector2 = abs(player.position - position)
-		var x: float = distance[0]
-		if x <= 29.0:
+		var distance: float = player.global_position.distance_to(global_position)
+		if distance <= 29.0:
 			player.applyHitDamage(self)
 		attack_timer.stop()
 

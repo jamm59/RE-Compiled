@@ -75,8 +75,6 @@ _data = {
 
 [node name="ShortRange" type="Node2D"]
 script = ExtResource("1_0e0fa")
-usable = null
-specific_platform_name = null
 
 [node name="Area2D" type="Area2D" parent="."]
 

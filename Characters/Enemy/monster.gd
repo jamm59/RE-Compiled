@@ -1,6 +1,5 @@
 extends EnemyBase
 
-
 func _ready() -> void:
 	super()
 	

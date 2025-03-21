@@ -18,6 +18,7 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, LIGHT_AT
 @onready var dead_aimation: AnimatedSprite2D = $DeadAimation
 
 @onready var short_range_terminal: ShortRangeTerminal = $Inventory/ShortRange
+@onready var ray_cast_2d: RayCast2D = $RayCast2D
 
 @export_category("Jump Settings")
 @export var jump_height : float = 50
@@ -82,6 +83,7 @@ func _physics_process(delta: float) -> void:
 		return 
 		
 	if state in [STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK]:
+		applyDeadFallGravity(delta)
 		move_and_slide()
 		return
 
@@ -173,22 +175,20 @@ func handleInput() -> void:
 		
 	if not can_use_controls:
 		return 
-
+	
+	if ray_cast_2d.is_colliding():
+		var body: Node2D = ray_cast_2d.get_collider()
+		if body is EnemyBase:
+			state = STATE.JUMP
+			velocity.y += JUMP_VELOCITY
 		
-	if Input.is_action_pressed("Light_A") and is_on_floor():
-		state = STATE.LIGHT_ATTACK
-	elif Input.is_action_pressed("Heavy_A") and is_on_floor():
-		state = STATE.HEAVY_ATTACK
-
 	if Input.is_action_pressed("Left"):
 		state = STATE.MOVING_LEFT
 		animated_sprite_2d.flip_h = true
-		
 			
 	if Input.is_action_pressed("Right"):
 		state = STATE.MOVING_RIGHT
 		animated_sprite_2d.flip_h = false
-		
 			
 	if Input.is_action_pressed("Dash"): # DASH IS INDEPENDENT OF OTHER EVENTS
 		state = STATE.DASH
@@ -200,6 +200,12 @@ func handleInput() -> void:
 	else:
 		$HitBoxComponent.disabled = false
 		$RollHitBoxComponent.disabled = true
+		
+	if Input.is_action_pressed("Light_A") and is_on_floor():
+		state = STATE.LIGHT_ATTACK
+	elif Input.is_action_pressed("Heavy_A") and is_on_floor():
+		state = STATE.HEAVY_ATTACK
+
 		
 	wasOnFloor = is_on_floor()
 	previousDirection = dir if dir != 0 else previousDirection
@@ -221,12 +227,12 @@ func handleAnimationStateUpdate() -> void:
 		STATE.WALLSLIDE:
 			animationName = "Move"
 		STATE.MOVING_RIGHT, STATE.MOVING_LEFT:
-			animationName = "Move" if velocity.y == 0.0 else ""
+			animationName = "Move" if velocity.y == 0.0 and is_on_floor() else ""
 			velocity.x = move_toward(velocity.x, previousDirection * SPEED, acceleration)
 		STATE.LIGHT_ATTACK:
-			animationName = ["Light1", "Light2", "Light3"].pick_random()
+			animationName = ["Light1", "Light2"].pick_random()
 		STATE.HEAVY_ATTACK:
-			animationName = "Heavy"
+			animationName = "Light3"
 		STATE.DASH:
 			velocity.x = move_toward(velocity.x, previousDirection * SPEED * DASH_MULTIPLIER, acceleration)
 			if velocity.y == 0.0:	
@@ -262,7 +268,7 @@ func applyHitDamage(body: Node2D):
 	if body is EnemyBase:
 		knockBack(body)
 		health = max(health - body.DAMAGE_POINT, 0.0)
-	if body is Laser or body is SwingHammer:
+	if body is Laser or body is SwingHammer or body is FanBlade:
 		health = max(health - body.DAMAGE_POINT, 0.0)
 	
 	tweenProgressBar(hud.health, scaleHealth(health))
@@ -272,7 +278,17 @@ func applyHitDamage(body: Node2D):
 		state = STATE.DEAD
 		dead_aimation.visible = true
 		dead_aimation.flip_h = animated_sprite_2d.flip_h
+		await get_tree().create_timer(2).timeout
+		SignalManager.emit_signal("player_dead")
 		
+func _reset_player(checkpoint: Vector2) -> void:
+	state = STATE.IDLE
+	health = MAX_HEALTH
+	dead_aimation.visible = false
+	tweenProgressBar(hud.stamina, stamina, 1.0)
+	tweenProgressBar(hud.health, scaleHealth(health), 1.0)
+	global_position = Vector2(checkpoint.x, checkpoint.y - 100)
+	
 func knockBack(enemy: EnemyBase) -> void:
 	position.x -= KNOCKBACKVALUE if enemy.position.x > self.position.x else -KNOCKBACKVALUE
 	
@@ -287,7 +303,6 @@ func updateAnimatedSprite(aSprite: AnimatedSprite2D, red_visible: bool, white_vi
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation in ["Light1","Light2","Light3","AttackCombo", "Heavy", "Roll"]:
 		state = STATE.IDLE
-		
 	if animated_sprite_2d.animation == "Heavy" and animated_sprite_2d.name in ["Red", "White"]:
 		previousAnimation = animated_sprite_2d.name
 		updateAnimatedSprite(dark, false, false, true)
@@ -301,12 +316,3 @@ func _on_attack_box_component_body_entered(body: Node2D) -> void:
 	if body is EnemyBase:
 		body.apply_damage(DAMAGE_POINT)
 			
-func _on_ladder_area_body_entered(body: Node2D) -> void:
-	if body is Player:
-		canClimbLadder = true
-
-func _on_ladder_area_body_exited(body: Node2D) -> void:
-	if body is Player:
-		canClimbLadder = false
-		toggle_gravity = false
-		can_use_controls = true

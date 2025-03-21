@@ -4429,9 +4429,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_vul0s")
 }
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 6.0
-
 [node name="DeadAimation" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(9, -3)
@@ -4464,9 +4461,10 @@ material = SubResource("ShaderMaterial_bxn5h")
 position = Vector2(6, -26)
 scale = Vector2(0.8, 0.831)
 sprite_frames = SubResource("SpriteFrames_7867e")
-animation = &"Move"
+animation = &"Light3"
 autoplay = "Idle"
-frame_progress = 0.560441
+frame = 10
+frame_progress = 1.0
 
 [node name="UserInterface" type="Node2D" parent="."]
 
@@ -4480,7 +4478,6 @@ position = Vector2(16, 0)
 scale = Vector2(0.7, 0.7)
 hover = false
 usable = true
-specific_platform_name = ""
 
 [node name="LeftPosition" type="Marker2D" parent="Inventory/ShortRange"]
 position = Vector2(-22.8571, 0)
@@ -4488,6 +4485,12 @@ scale = Vector2(1.42857, 1.42857)
 
 [node name="RightPosition" type="Marker2D" parent="Inventory/ShortRange"]
 scale = Vector2(1.42857, 1.42857)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(9, -7)
+target_position = Vector2(0, 14)
+
+[node name="Timer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="AttackBoxComponent" to="." method="_on_attack_box_component_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprites/Dark" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -472,7 +472,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_lfgju")
 }],
 "loop": true,
-"name": &"Run",
+"name": &"Move",
 "speed": 10.0
 }, {
 "frames": [{
@@ -662,6 +662,12 @@ target_position = Vector2(-20, 15.4545)
 position = Vector2(1.81818, -0.909091)
 target_position = Vector2(20, 16.3636)
 
+[node name="RayCastTopRight" type="RayCast2D" parent="RayCast"]
+target_position = Vector2(19, -12)
+
+[node name="RayCastTopLeft" type="RayCast2D" parent="RayCast"]
+target_position = Vector2(-15, -13)
+
 [node name="HealthBoxComponent" type="Area2D" parent="."]
 position = Vector2(-3.63636, 0)
 
@@ -681,9 +687,8 @@ material = SubResource("ShaderMaterial_cdqee")
 position = Vector2(13, -4)
 scale = Vector2(1.6, 1.5)
 sprite_frames = SubResource("SpriteFrames_yvmsm")
-animation = &"Ilde"
+animation = &"Move"
 autoplay = "Ilde"
-frame_progress = 0.927096
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

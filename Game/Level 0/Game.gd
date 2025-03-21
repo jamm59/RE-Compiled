@@ -13,6 +13,9 @@ extends Node2D
 const ENEMY_SHAKE_AMOUNT: int = 3
 const FALL_SHAKE_AMOUNT: int = 5
 
+
+var checkpoint: Vector2 = Vector2(0, 0)
+
 var shake_amount: int 
 var cameraShake: bool = false
 
@@ -29,6 +32,7 @@ func _ready() -> void:
 	
 	#Signals
 	SignalManager.connect("body_hit", _freeze_engine)
+	SignalManager.connect("player_dead", _on_player_dead)
 	SignalManager.connect("large_fall_detected", _large_fall_detected)
 	SignalManager.connect("terminal_control_signal_emit", _terminal_control)
 	SignalManager.connect("termianl_control_npc_signal", _short_range_terminal_control)
@@ -51,6 +55,7 @@ func _input(event):
 		zoom_camera(Vector2(2, 2))  # Zoom in
 	elif event.is_action_released("Zoom") or event.is_action_released("Control"):
 		zoom_camera(Vector2(3, 3))  # Zoom out
+		
 		
 
 func zoom_camera(target_zoom: Vector2, time: float = 0.4):
@@ -86,7 +91,7 @@ func _short_range_terminal_control(pos: Vector2, name: String) -> void:
 				previousDistance = distance
 				npc_animal = npc
 				
-	if npc_animal is FoxNPC or npc_animal is DeerNPC:
+	if npc_animal is FoxNPC:
 		npc_animal.remote_control_activated = true
 		player.can_use_controls = false
 	
@@ -108,7 +113,7 @@ func _terminal_control(pos: Vector2, name: String) -> void:
 				platform = plat
 			
 		
-	if platform is HoverPlatform or platform is SwingHammer or platform is GateDoor:
+	if platform is HoverPlatform or platform is SwingHammer or platform is GateDoor or platform is FanBlade:
 		platform.activate()
 	if platform is Laser:
 		platform.deactivateLasers()
@@ -144,7 +149,11 @@ func _remote_control_session_complete() -> void:
 	
 func _on_player_introduction_body_entered(body: Node2D) -> void:
 	if body is Player:
-		zoom_camera(Vector2(3,3), 0.5)
+		zoom_camera(Vector2(3,3), 0.3)
+		await get_tree().create_timer(1).timeout
+		$UserInterface/TitleCard.visible = true
+		await get_tree().create_timer(5).timeout
+		$UserInterface/TitleCard.visible = false
 		showDialogue("timeline-1")
 		$CinematicAreas/PlayerIntroduction.disconnect("body_entered", _on_player_introduction_body_entered)
 
@@ -185,4 +194,32 @@ func _on_dialogic_signal(argument: String):
 		"timeline-2":
 			companion.companion_can_follow= true
 			companion.animated_sprite_2d.flip_h = false
-		
+
+func _on_player_dead():
+	player._reset_player(checkpoint)
+	
+func _on_ladder_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		player.canClimbLadder = true
+
+func _on_ladder_area_body_exited(body: Node2D) -> void:
+	if body is Player:
+		player.canClimbLadder = false
+		player.toggle_gravity = false
+		player.can_use_controls = true
+
+func _on_check_points_body_entered(body: Node2D) -> void:
+	if body is Player:
+		checkpoint = body.global_position
+
+
+func _on_gravity_room_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		player.canClimbLadder = true
+
+
+func _on_gravity_room_area_body_exited(body: Node2D) -> void:
+	if body is Player:
+		player.canClimbLadder = false
+		player.toggle_gravity = false
+		player.can_use_controls = true

@@ -4,8 +4,10 @@ class_name TerminalControlBase
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var progress_bar: ProgressBar = $MarginContainer/ProgressBar
+@onready var gears: Array[AnimatedSprite2D] = [$Extra/Gear2, $Extra/Gear3]
 
 @export var specific_platform_name: String = ""
+
 
 var radius: float = 0
 var hasActivatedTerminal: bool = false
@@ -26,7 +28,10 @@ func _input(event: InputEvent) -> void:
 func handleProgressBarAnimation() -> void:
 	if hasActivatedTerminal:
 		return 
-
+	
+	for gear: AnimatedSprite2D in gears:
+		gear.play("Spin")
+		
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(progress_bar, "value", 100, 2)
 	tween.tween_property(self, "radius", 5000, 3)

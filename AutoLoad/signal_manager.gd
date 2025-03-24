@@ -12,3 +12,5 @@ signal terminal_control_signal_emit(pos: Vector2, name: String)
 signal termianl_control_npc_signal(pos: Vector2, name: String)
 
 signal player_dead
+
+signal last_checkpoint

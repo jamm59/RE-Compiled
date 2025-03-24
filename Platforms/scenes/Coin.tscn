@@ -1,0 +1,157 @@
+[gd_scene load_steps=16 format=3 uid="uid://cp152vcvw70rc"]
+
+[ext_resource type="Script" uid="uid://d0i585m3vkm51" path="res://Platforms/scripts/ram_stick.gd" id="1_k8ucx"]
+[ext_resource type="Texture2D" uid="uid://ch2l3hlkuruai" path="res://Assets/other/coin/C1011.png" id="2_0wfy5"]
+[ext_resource type="Texture2D" uid="uid://bcgsneamjkne8" path="res://Assets/other/coin/S1011.png" id="2_a8f1t"]
+[ext_resource type="Texture2D" uid="uid://iejuigefnltr" path="res://Assets/other/coin/C1012.png" id="3_7xqsi"]
+[ext_resource type="Texture2D" uid="uid://dynnopsc8s3gf" path="res://Assets/other/coin/S1012.png" id="3_n4vsr"]
+[ext_resource type="Texture2D" uid="uid://d1y6axral70om" path="res://Assets/other/coin/S1013.png" id="4_bl5px"]
+[ext_resource type="Texture2D" uid="uid://dnohfbth7ngdt" path="res://Assets/other/coin/C1013.png" id="4_xn8cv"]
+[ext_resource type="Texture2D" uid="uid://ccyf4fmpdyn4u" path="res://Assets/other/coin/C1014.png" id="5_3tnsa"]
+[ext_resource type="Texture2D" uid="uid://cuy407pr6o2qo" path="res://Assets/other/coin/S1014.png" id="5_64fgx"]
+[ext_resource type="AudioStream" uid="uid://cvih2ggwholsl" path="res://Assets/Music/coin.wav" id="10_n4vsr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vhw3"]
+size = Vector2(70, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k8ucx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a8f1t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_n4vsr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bl5px")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_64fgx")
+}],
+"loop": true,
+"name": &"Dark",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0wfy5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7xqsi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xn8cv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3tnsa")
+}],
+"loop": true,
+"name": &"Gold",
+"speed": 8.0
+}]
+
+[sub_resource type="Animation" id="Animation_n4vsr"]
+resource_name = "Coin"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Parent/AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_bl5px"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Parent/AnimatedSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_64fgx"]
+_data = {
+&"Coin": SubResource("Animation_n4vsr"),
+&"RESET": SubResource("Animation_bl5px")
+}
+
+[node name="Coin" type="Node2D"]
+script = ExtResource("1_k8ucx")
+
+[node name="Parent" type="Node2D" parent="."]
+position = Vector2(4, -7)
+scale = Vector2(0.15, 0.15)
+
+[node name="Area2D" type="Area2D" parent="Parent"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parent/Area2D"]
+position = Vector2(5, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_6vhw3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Parent"]
+position = Vector2(0, 4.76837e-06)
+sprite_frames = SubResource("SpriteFrames_k8ucx")
+animation = &"Gold"
+autoplay = "Gold"
+frame_progress = 0.915262
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_n4vsr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_64fgx")
+}
+
+[connection signal="body_entered" from="Parent/Area2D" to="." method="_on_area_2d_body_entered"]

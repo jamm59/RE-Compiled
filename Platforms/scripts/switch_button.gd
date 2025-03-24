@@ -3,6 +3,9 @@ class_name SwitchButtonControl
 
 @onready var progress_bar: ProgressBar = $MarginContainer/ProgressBar
 @onready var button: AnimatedSprite2D = $Button
+@onready var gear_4: AnimatedSprite2D = $Extra/Gear4
+@onready var gear_5: AnimatedSprite2D = $Extra/Gear5
+@onready var gear_3: AnimatedSprite2D = $Extra/Gear3
 
 @export var specific_platform_name: String = ""
 
@@ -27,6 +30,9 @@ func handleProgressBarAnimation() -> void:
 	await tween.finished
 	
 	# Reset the radius to delete the arc
+	gear_3.play("Spin")
+	gear_4.play_backwards("Spin")
+	gear_5.play("Spin")
 	button.play_backwards("Activate")
 	radius = 0
 	hasActivatedTerminal = true

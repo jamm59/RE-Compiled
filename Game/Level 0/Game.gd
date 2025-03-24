@@ -10,27 +10,32 @@ extends Node2D
 @onready var cinematic: CanvasLayer = $UserInterface/Cinematic
 @onready var camera_pos: Marker2D = $Player/CameraPos
 
+
 const ENEMY_SHAKE_AMOUNT: int = 3
 const FALL_SHAKE_AMOUNT: int = 5
 
-
 var checkpoint: Vector2 = Vector2(0, 0)
+var zoomValue: float = 3
+var defaultZoom: Vector2 = Vector2(zoomValue, zoomValue)
 
 var shake_amount: int 
 var cameraShake: bool = false
 
 func save_player_state(body: Player) -> void:
 	pass
-func _ready() -> void:
 	
+	
+func _ready() -> void:
 	var loaded_game: Resource = SaveGame.load_savegame()
 	#Variables
+	checkpoint = $Player/startPosition.global_position
 	companion.companion_can_follow = false
-	camera_2d.zoom = Vector2(3,3)
+	camera_2d.zoom = defaultZoom
 	Engine.time_scale = 0.9
 	#player.can_use_controls = false
 	
 	#Signals
+	SignalManager.connect("last_checkpoint", _last_checkpoint)
 	SignalManager.connect("body_hit", _freeze_engine)
 	SignalManager.connect("player_dead", _on_player_dead)
 	SignalManager.connect("large_fall_detected", _large_fall_detected)
@@ -48,16 +53,18 @@ func _process(delta: float) -> void:
 		
 	companion.move(delta)
 
-func _input(event):
+func _input(event) -> void:
 	if event.is_action_pressed("Control"):
 		zoom_camera(Vector2(1, 1))  # Zoom in
 	elif event.is_action_pressed("Zoom"):
 		zoom_camera(Vector2(2, 2))  # Zoom in
 	elif event.is_action_released("Zoom") or event.is_action_released("Control"):
-		zoom_camera(Vector2(3, 3))  # Zoom out
+		zoom_camera(defaultZoom)  # Zoom out
 		
 		
-
+func _last_checkpoint() -> void:
+	player.global_position = checkpoint
+	
 func zoom_camera(target_zoom: Vector2, time: float = 0.4):
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(camera_2d, "zoom", target_zoom, time).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
@@ -223,3 +230,10 @@ func _on_gravity_room_area_body_exited(body: Node2D) -> void:
 		player.canClimbLadder = false
 		player.toggle_gravity = false
 		player.can_use_controls = true
+
+
+func _on_dead_area_2d_body_entered(body: Node2D) -> void:
+	if body is Player:
+		player._reset_player(checkpoint)
+	if body is EnemyBase:
+		body.queue_free()

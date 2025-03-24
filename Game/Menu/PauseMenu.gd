@@ -16,8 +16,14 @@ func _on_resume_pressed() -> void:
 	visible = false
 	get_tree().paused = false
 
-
 func _on_exit_pressed() -> void:
 	visible = false
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Game/Menu/Menu.tscn")
+
+
+func _on_check_point_pressed() -> void:
+	await get_tree().create_timer(1).timeout
+	visible = false
+	get_tree().paused = false
+	SignalManager.emit_signal("last_checkpoint")

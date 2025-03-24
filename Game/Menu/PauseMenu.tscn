@@ -114,5 +114,5 @@ text = "Exit
 "
 
 [connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/CheckPoint" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/CheckPoint" to="." method="_on_check_point_pressed"]
 [connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

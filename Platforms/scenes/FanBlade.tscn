@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c40rctnulgplc"]
+[gd_scene load_steps=33 format=3 uid="uid://c40rctnulgplc"]
 
 [ext_resource type="Script" uid="uid://bttbv575rxawo" path="res://Platforms/scripts/fan_blade.gd" id="1_adxky"]
 [ext_resource type="Texture2D" uid="uid://cfi7cry8v0h62" path="res://Assets/platforms/Weapons/fan-sprite.png" id="2_s0a8y"]
@@ -181,6 +181,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adxky"]
 size = Vector2(61, 32)
 
+[sub_resource type="Gradient" id="Gradient_adxky"]
+offsets = PackedFloat32Array(0, 0.995536)
+colors = PackedColorArray(1, 1, 1, 0.00784314, 1, 1, 1, 0.827451)
+
 [node name="FanBlade" type="Node2D"]
 script = ExtResource("1_adxky")
 
@@ -223,9 +227,10 @@ rotation = -1.5708
 scale = Vector2(0.0991526, 0.148)
 sprite_frames = SubResource("SpriteFrames_v7h7o")
 animation = &"Spin"
+frame_progress = 0.794063
 
 [node name="Extra" type="Node2D" parent="Parent"]
-position = Vector2(55, -99)
+position = Vector2(54.9996, -99.0002)
 rotation = 3.14159
 
 [node name="LeverStick3" type="Sprite2D" parent="Parent/Extra"]
@@ -270,3 +275,17 @@ animation = &"Spin"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 position = Vector2(1.5, 2)
 shape = SubResource("RectangleShape2D_adxky")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-2, -27)
+emitting = false
+amount = 60
+lifetime = 5.0
+preprocess = 2.0
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(50, 1)
+gravity = Vector2(0, -980)
+scale_amount_min = 20.0
+scale_amount_max = 20.0
+color_ramp = SubResource("Gradient_adxky")

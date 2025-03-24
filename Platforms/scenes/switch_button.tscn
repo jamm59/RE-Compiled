@@ -1,10 +1,28 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbb6nh3jgxbnq"]
+[gd_scene load_steps=33 format=3 uid="uid://cbb6nh3jgxbnq"]
 
 [ext_resource type="Script" uid="uid://cuy7kl2y4vhk0" path="res://Platforms/scripts/switch_button.gd" id="1_7iok3"]
+[ext_resource type="Shader" uid="uid://dvgk6116kbqbr" path="res://Shaders/custom-black-white.gdshader" id="2_7gaqu"]
 [ext_resource type="Texture2D" uid="uid://byidmn8rumbal" path="res://Assets/platforms/Animated/fan activ 1.png" id="3_nhom0"]
 [ext_resource type="Shader" uid="uid://cm30ghxsl8exq" path="res://Shaders/blackandwhite.gdshader" id="3_saw0h"]
 [ext_resource type="Texture2D" uid="uid://t4f862rux5w" path="res://Assets/other/buttons/tile000.png" id="4_o2dbm"]
 [ext_resource type="Texture2D" uid="uid://dsq1i6h0g6886" path="res://Assets/other/buttons/tile001.png" id="5_ba1tg"]
+[ext_resource type="Texture2D" uid="uid://ccvbuud12l3oo" path="res://Assets/platforms/Weapons/WR_NightBoundSet_Spritesheet.png" id="6_v7i8u"]
+[ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="7_7gaqu"]
+[ext_resource type="Texture2D" uid="uid://nkqj0insxso5" path="res://Assets/platforms/Gears/2.png" id="8_lp5m2"]
+[ext_resource type="Texture2D" uid="uid://dq6al1uhi7ote" path="res://Assets/platforms/Gears/3.png" id="9_7qmaj"]
+[ext_resource type="Texture2D" uid="uid://d3s1am4vbmmpj" path="res://Assets/platforms/Gears/4.png" id="10_p4j2d"]
+[ext_resource type="Texture2D" uid="uid://58g131lxl43l" path="res://Assets/platforms/Gears/5.png" id="11_bc50t"]
+[ext_resource type="Texture2D" uid="uid://dkuy6ulhd1mik" path="res://Assets/platforms/Gears/6.png" id="12_5012l"]
+[ext_resource type="Texture2D" uid="uid://ceeako02pxml1" path="res://Assets/platforms/Gears/7.png" id="13_jx52j"]
+[ext_resource type="Texture2D" uid="uid://bpx3w7jew5m2c" path="res://Assets/platforms/Gears/8.png" id="14_30lpt"]
+[ext_resource type="Texture2D" uid="uid://cxm83xfecysej" path="res://Assets/platforms/Gears/9.png" id="15_q7eue"]
+[ext_resource type="Texture2D" uid="uid://c2nx1pbeoayhi" path="res://Assets/platforms/Gears/10.png" id="16_ss0fi"]
+[ext_resource type="Texture2D" uid="uid://bt1mpdv63dckt" path="res://Assets/platforms/Gears/11.png" id="17_f7p7d"]
+[ext_resource type="Texture2D" uid="uid://dec752rif58cc" path="res://Assets/platforms/Gears/12.png" id="18_abwn2"]
+[ext_resource type="Texture2D" uid="uid://tciig8gw3b17" path="res://Assets/platforms/Gears/13.png" id="19_g5u8k"]
+[ext_resource type="Texture2D" uid="uid://7f2xhuuq5evw" path="res://Assets/platforms/Gears/14.png" id="20_sw1m3"]
+[ext_resource type="Texture2D" uid="uid://bcd1wkaiyurd" path="res://Assets/platforms/Gears/15.png" id="21_7uckj"]
+[ext_resource type="Texture2D" uid="uid://bednmkxybft6g" path="res://Assets/platforms/Gears/16.png" id="22_mlfhf"]
 
 [sub_resource type="Theme" id="Theme_lq0kt"]
 default_font_size = 15
@@ -12,6 +30,71 @@ ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lq0kt"]
 size = Vector2(354, 114)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fd56f"]
+shader = ExtResource("3_saw0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3uve"]
+shader = ExtResource("3_saw0h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7gaqu"]
+shader = ExtResource("2_7gaqu")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sj0ij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_7gaqu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lp5m2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7qmaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_p4j2d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bc50t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5012l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jx52j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_30lpt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_q7eue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ss0fi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_f7p7d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_abwn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_g5u8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_sw1m3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_7uckj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_mlfhf")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 60.0
+}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ac6f8"]
 shader = ExtResource("3_saw0h")
@@ -75,6 +158,81 @@ theme = SubResource("Theme_lq0kt")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -25)
 shape = SubResource("RectangleShape2D_lq0kt")
+
+[node name="Extra" type="Node2D" parent="."]
+position = Vector2(82, 169)
+rotation = 3.14159
+
+[node name="LeverStick3" type="Sprite2D" parent="Extra"]
+material = SubResource("ShaderMaterial_fd56f")
+position = Vector2(79.9996, 144)
+rotation = -3.14159
+scale = Vector2(3, 3)
+texture = ExtResource("6_v7i8u")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 118.122, 8.20187, 26.0746)
+
+[node name="LeverStick4" type="Sprite2D" parent="Extra"]
+material = SubResource("ShaderMaterial_t3uve")
+position = Vector2(178, 167)
+rotation = 1.5708
+scale = Vector2(3, 3)
+texture = ExtResource("6_v7i8u")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 105.792, 8.20187, 38.4047)
+
+[node name="LeverStick5" type="Sprite2D" parent="Extra"]
+material = SubResource("ShaderMaterial_t3uve")
+position = Vector2(-15.0001, 53)
+rotation = -1.5708
+scale = Vector2(3, 3)
+texture = ExtResource("6_v7i8u")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 105.792, 8.20187, 38.4047)
+
+[node name="LeverStick6" type="Sprite2D" parent="Extra"]
+material = SubResource("ShaderMaterial_t3uve")
+position = Vector2(178, 149)
+rotation = 3.14159
+scale = Vector2(3, 3)
+texture = ExtResource("6_v7i8u")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 105.792, 8.20187, 38.4047)
+
+[node name="Gear4" type="AnimatedSprite2D" parent="Extra"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+material = SubResource("ShaderMaterial_7gaqu")
+position = Vector2(180, 166)
+rotation = 1.5708
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_sj0ij")
+animation = &"Spin"
+frame_progress = 0.077398
+
+[node name="Gear5" type="AnimatedSprite2D" parent="Extra"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+material = SubResource("ShaderMaterial_7gaqu")
+position = Vector2(-21.5501, 52.8999)
+rotation = 1.5708
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_sj0ij")
+animation = &"Spin"
+frame_progress = 0.247126
+
+[node name="Gear3" type="AnimatedSprite2D" parent="Extra"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+material = SubResource("ShaderMaterial_7gaqu")
+position = Vector2(79.9999, 54.0002)
+rotation = 1.5708
+scale = Vector2(1.1, 1.1)
+sprite_frames = SubResource("SpriteFrames_sj0ij")
+animation = &"Spin"
+frame = 11
+frame_progress = 0.753438
 
 [node name="Tower" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ac6f8")

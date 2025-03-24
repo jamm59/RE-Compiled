@@ -19,6 +19,7 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, LIGHT_AT
 
 @onready var short_range_terminal: ShortRangeTerminal = $Inventory/ShortRange
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $Node2D/AudioStreamPlayer2D
 
 @export_category("Jump Settings")
 @export var jump_height : float = 50
@@ -36,6 +37,21 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, LIGHT_AT
 @onready var JUMP_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var FALL_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 @onready var WALL_FALL_GRAVITY: float = FALL_GRAVITY / 10
+
+
+const CHIP = preload("res://Assets/Music/chip.mp3")
+const COGWHEEL = preload("res://Assets/Music/cogwheel.mp3")
+const HEAVY_LAND = preload("res://Assets/Music/heavy-land.mp3")
+const HELLO = preload("res://Assets/Music/hello.mp3")
+const HUH_2 = preload("res://Assets/Music/huh-2.mp3")
+const HUH = preload("res://Assets/Music/huh.mp3")
+const LAND = preload("res://Assets/Music/land.mp3")
+const LEVER = preload("res://Assets/Music/lever.mp3")
+const SLASH = preload("res://Assets/Music/slash.mp3")
+const STEP_1 = preload("res://Assets/Music/step-1.mp3")
+const STEP_2 = preload("res://Assets/Music/step-2.mp3")
+const STOMP_255897 = preload("res://Assets/Music/stomp-255897.mp3")
+const SWORD_HIT = preload("res://Assets/Music/sword-hit.mp3")
 
 # Constants
 const DASH_MULTIPLIER: int = 2
@@ -138,6 +154,8 @@ func handleJumpInput(delta: float) -> void:
 	if is_on_floor() and not wasOnFloor:
 		state = STATE.LAND
 		if global_position.y - last_ground_y > FALL_DISTANCE_THRESHOLD:
+			audio_stream_player_2d.stream = LAND
+			audio_stream_player_2d.play()
 			SignalManager.emit_signal("large_fall_detected")
 		last_ground_y = global_position.y  
 		
@@ -268,7 +286,7 @@ func applyHitDamage(body: Node2D):
 	if body is EnemyBase:
 		knockBack(body)
 		health = max(health - body.DAMAGE_POINT, 0.0)
-	if body is Laser or body is SwingHammer or body is FanBlade:
+	if body is Laser or body is SwingHammer or body is FanBlade or body is CrushingPlatform:
 		health = max(health - body.DAMAGE_POINT, 0.0)
 	
 	tweenProgressBar(hud.health, scaleHealth(health))
@@ -276,12 +294,15 @@ func applyHitDamage(body: Node2D):
 	if health <= 0.0:
 		animated_sprite_2d.play("Dead")
 		state = STATE.DEAD
+		dash_particle.emitting = false
 		dead_aimation.visible = true
+		can_use_controls = false
 		dead_aimation.flip_h = animated_sprite_2d.flip_h
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(1).timeout
 		SignalManager.emit_signal("player_dead")
 		
 func _reset_player(checkpoint: Vector2) -> void:
+	can_use_controls = true
 	state = STATE.IDLE
 	health = MAX_HEALTH
 	dead_aimation.visible = false

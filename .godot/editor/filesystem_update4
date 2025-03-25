@@ -1,26 +1,25 @@
-res://Game/Level 0/Game.tscn
+res://Platforms/scenes/CrushingPlatform.tscn
 res://Resources/panel-hud-theme.tres
 res://Resources/progress-bar-theme.tres
+res://Shaders/blackandwhite.gdshader
 res://Resources/panel-dark-theme.tres
-res://Game/Level 0/game.gd
+res://Game/UserInterface/education_modal.tscn
+res://Game/UserInterface/education_modal.gd
+res://Game/Level 0/Game.tscn
+res://Platforms/scenes/switch_button.tscn
 res://Platforms/scenes/FanBlade.tscn
 res://Platforms/scenes/Terminal.tscn
 res://Platforms/scenes/GateDoor.tscn
-res://Platforms/scenes/CrushingPlatform.tscn
 res://Platforms/scenes/HoverPlatform.tscn
 res://Characters/Protagonist/player.tscn
-res://Characters/Protagonist/player.gd
-res://Platforms/scripts/fan_blade.gd
-res://Platforms/scenes/room_elevator.tscn
-res://Platforms/scenes/terminal.gd
-res://Platforms/scenes/switch_button.tscn
-res://Shaders/blackandwhite.gdshader
-res://Platforms/scripts/switch_button.gd
-res://Game/Menu/PauseMenu.gd
 res://Game/Menu/PauseMenu.tscn
-res://AutoLoad/signal_manager.gd
-res://Platforms/scripts/crushing_platform.gd
 res://Platforms/scenes/short_range_terminal.tscn
-res://Platforms/scenes/RamStick.tscn
 res://Platforms/scenes/Coin.tscn
-res://Platforms/scripts/ram_stick.gd
+res://Game/UserInterface/window_education_modal.tscn
+res://Game/UserInterface/window_education_modal.gd
+res://Characters/Enemy/scene/bat_eyes.tscn
+res://Game/game_start.tscn
+res://Game/game_start.gd
+res://Dialogic/Timelines/timeline-enemy-killed.dtl
+res://Game/Level 0/game.gd
+res://Characters/Protagonist/player.gd

@@ -91,19 +91,20 @@ position = Vector2(-1, 14)
 
 [node name="Wifi" type="Sprite2D" parent="Parent/Controller"]
 position = Vector2(40.6, -74.4785)
-scale = Vector2(1.9, 1.9)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_0e0fa")
 
 [node name="Tower" type="Sprite2D" parent="Parent/Controller"]
 position = Vector2(40, -42.9668)
-scale = Vector2(1.59375, 1.40625)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_xmtmh")
 region_enabled = true
 region_rect = Rect2(23.7404, 0, 16.9454, 39.1067)
 
 [node name="Short-range" type="Sprite2D" parent="Parent"]
 material = SubResource("ShaderMaterial_dlcqv")
-position = Vector2(42, -31)
+position = Vector2(40, -30)
+scale = Vector2(4, 4)
 texture = ExtResource("3_xmtmh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -33,6 +33,7 @@ directories/dtl_directory={
 "timeline-1": "res://Dialogic/Timelines/timeline-1.dtl",
 "timeline-2": "res://Dialogic/Timelines/timeline-2.dtl",
 "timeline-enemy-encounter": "res://Dialogic/Timelines/timeline-enemy-encounter.dtl",
+"timeline-enemy-killed": "res://Dialogic/Timelines/timeline-enemy-killed.dtl",
 "timeline-first-enemy": "res://Dialogic/Timelines/timeline-first-enemy.dtl",
 "timeline-short-range": "res://Dialogic/Timelines/timeline-short-range.dtl",
 "timeline-tutorial-interact": "res://Dialogic/Timelines/timeline-tutorial-interact.dtl",
@@ -89,7 +90,7 @@ translation/add_separator=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/markdownlabel/plugin.cfg")
 
 [gui]
 
@@ -180,6 +181,11 @@ Bottom={
 Interact-Short={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":73,"key_label":0,"unicode":105,"location":0,"echo":false,"script":null)
+]
+}
+MoreInfo={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":77,"key_label":0,"unicode":109,"location":0,"echo":false,"script":null)
 ]
 }
 

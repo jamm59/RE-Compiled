@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm4webg4e5uqi"]
+
+[ext_resource type="PackedScene" uid="uid://6i2npt6ug54x" path="res://Game/Menu/PauseMenu.tscn" id="1_be0sg"]
+[ext_resource type="Script" uid="uid://cv3tcwir4gevp" path="res://Game/game_start.gd" id="1_u4x5m"]
+[ext_resource type="PackedScene" uid="uid://dsvplo6l32j5b" path="res://Game/Level 0/Game.tscn" id="2_4emtb"]
+[ext_resource type="PackedScene" uid="uid://d1606cgleh1lq" path="res://Game/UserInterface/education_modal.tscn" id="2_u4x5m"]
+
+[node name="GameStart" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u4x5m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/HBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Game" parent="CanvasLayer/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_4emtb")]
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/HBoxContainer/SubViewportContainer2"]
+handle_input_locally = false
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="EducationModal" parent="CanvasLayer/HBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("2_u4x5m")]
+
+[node name="userInterfaces" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseMenuUI" parent="userInterfaces" instance=ExtResource("1_be0sg")]

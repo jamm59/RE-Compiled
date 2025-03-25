@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://dsvplo6l32j5b"]
+[gd_scene load_steps=57 format=4 uid="uid://dsvplo6l32j5b"]
 
 [ext_resource type="Script" uid="uid://baqrjx66b4gxg" path="res://Game/Level 0/game.gd" id="1_manin"]
 [ext_resource type="AudioStream" uid="uid://j2607eybtej" path="res://Assets/Music/background.mp3" id="2_6c6s3"]
@@ -33,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://duoe3svamj6et" path="res://Characters/NPCs/scene/grass_food.tscn" id="24_2uda0"]
 [ext_resource type="PackedScene" uid="uid://dkpwee7xh20ud" path="res://Game/UserInterface/title-card.tscn" id="27_6c6s3"]
 [ext_resource type="PackedScene" uid="uid://brkcx526yv5p4" path="res://Platforms/scenes/short_range_terminal.tscn" id="27_ljxnx"]
+[ext_resource type="PackedScene" uid="uid://d1606cgleh1lq" path="res://Game/UserInterface/education_modal.tscn" id="28_0fyry"]
 [ext_resource type="PackedScene" uid="uid://cp152vcvw70rc" path="res://Platforms/scenes/Coin.tscn" id="33_6c6s3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v6i4c"]
@@ -995,7 +996,7 @@ companion_location = NodePath("../Player/CompanionLocation")
 
 [node name="Player" parent="." instance=ExtResource("2_xaqkc")]
 z_index = 1
-position = Vector2(854, 788)
+position = Vector2(2084, 1191)
 can_use_controls = true
 
 [node name="LeftPos" type="Marker2D" parent="Player"]
@@ -1174,6 +1175,8 @@ position = Vector2(3440, 0)
 visible = false
 
 [node name="PauseMenuUI" parent="UserInterface" instance=ExtResource("4_dsghd")]
+
+[node name="EducationModal" parent="UserInterface" instance=ExtResource("28_0fyry")]
 visible = false
 
 [node name="Cinematic" parent="UserInterface" instance=ExtResource("8_mycyj")]

@@ -16,6 +16,7 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, LIGHT_AT
 @onready var red: AnimatedSprite2D = $AnimatedSprites/Red
 @onready var dark: AnimatedSprite2D = $AnimatedSprites/Dark
 @onready var dead_aimation: AnimatedSprite2D = $DeadAimation
+@onready var vfx: AnimatedSprite2D = $Vfx
 
 @onready var short_range_terminal: ShortRangeTerminal = $Inventory/ShortRange
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
@@ -219,14 +220,16 @@ func handleInput() -> void:
 		$HitBoxComponent.disabled = false
 		$RollHitBoxComponent.disabled = true
 		
-	if Input.is_action_pressed("Light_A") and is_on_floor():
+	if Input.is_action_pressed("Light_A"):
 		state = STATE.LIGHT_ATTACK
-	elif Input.is_action_pressed("Heavy_A") and is_on_floor():
+	elif Input.is_action_pressed("Heavy_A"):
 		state = STATE.HEAVY_ATTACK
 
 		
 	wasOnFloor = is_on_floor()
 	previousDirection = dir if dir != 0 else previousDirection
+	vfx.flip_h = animated_sprite_2d.flip_h
+	vfx.global_position = attack_box_left.global_position if vfx.flip_h else attack_box_right.global_position
 		
 func handleAnimationStateUpdate() -> void:
 	var axis: float = Input.get_axis("Left", "Right")
@@ -249,8 +252,11 @@ func handleAnimationStateUpdate() -> void:
 			velocity.x = move_toward(velocity.x, previousDirection * SPEED, acceleration)
 		STATE.LIGHT_ATTACK:
 			animationName = ["Light1", "Light2"].pick_random()
+			var array = vfx.sprite_frames.get_animation_names() as Array[String]
+			vfx.play(array.pick_random())
 		STATE.HEAVY_ATTACK:
 			animationName = "Light3"
+			vfx.play("BigSlash")
 		STATE.DASH:
 			velocity.x = move_toward(velocity.x, previousDirection * SPEED * DASH_MULTIPLIER, acceleration)
 			if velocity.y == 0.0:	
@@ -323,7 +329,10 @@ func updateAnimatedSprite(aSprite: AnimatedSprite2D, red_visible: bool, white_vi
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation in ["Light1","Light2","Light3","AttackCombo", "Heavy", "Roll"]:
-		state = STATE.IDLE
+		if is_on_floor():
+			state = STATE.IDLE
+		else:
+			state = STATE.FALL
 	if animated_sprite_2d.animation == "Heavy" and animated_sprite_2d.name in ["Red", "White"]:
 		previousAnimation = animated_sprite_2d.name
 		updateAnimatedSprite(dark, false, false, true)

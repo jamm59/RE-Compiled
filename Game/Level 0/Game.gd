@@ -77,6 +77,7 @@ func showDialogue(timeline: String) -> void:
 	companion.activate_companion_controls = false
 		
 func DialogueDone() -> void:
+	Dialogic.end_timeline(true)
 	cinematic.visible = false
 	player.hud.visible = true
 	player.can_use_controls = true

@@ -1,7 +1,7 @@
 class_name GrassFood 
 extends StaticBody2D
 
-@onready var food: Array[Sprite2D] = [$Sprite2D, $Sprite2D2, $Sprite2D3]
+@onready var food: Array[Sprite2D] = [$Sprite2D, $Sprite2D2, $Sprite2D3, $Sprite2D4, $Sprite2D5, $Sprite2D6, $Sprite2D7, $Sprite2D8]
 
 var foodHealth: float = 10
 

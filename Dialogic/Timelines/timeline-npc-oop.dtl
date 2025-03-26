@@ -1,0 +1,4 @@
+Companion: See that deer? I’ve patched a remote signal to it. Think of it like a connected node in a network
+Player: So I can control it?
+Companion: For a short time, yeah. Guide it to attack those enemies. think of it as sending a command over a network.
+[signal arg="timeline-npc_oop"]

@@ -1,10 +1,10 @@
-Great job, you just defeated a virus! But did you know that just like in programming, this enemy is part of a bigger system?
-What do you mean?
-In [i]Object-Oriented Programming[/i], we have something called '[b]classes[/b].' Think of a class like a blueprint for creating objects, like our enemy.
-So, the enemy is like an [b]object[/b]
-Exactly! And we can have different types of enemies [i]inheriting[/i] from a base class called '[b]Virus[/b].' Each type can have unique behaviors.
-Like what?
-Well, some might move faster or shoot projectiles. This is called '[b]inheritance[/b].' And if we want to change how they behave in different situations, that's '[b]polymorphism[/b]
-I see! So each enemy can act differently even if they come from the same class.
-"Exactly! Keep this in mind as you explore the simulation.
+Companion: Great job, you just defeated a virus! But did you know that just like in programming, this enemy is part of a bigger system?
+Player: What do you mean?
+Companion: In [i]Object-Oriented Programming[/i], we have something called '[b]classes[/b].' Think of a class like a blueprint for creating objects, like our enemy.
+Player: So, the enemy is like an [b]object[/b]
+Companion: Exactly! And we can have different types of enemies [i]inheriting[/i] from a base class called '[b]Virus[/b].' Each type can have unique behaviors.
+Player: Like what?
+Companion: Well, some might move faster or shoot projectiles. This is called '[b]inheritance[/b].' And if we want to change how they behave in different situations, that's '[b]polymorphism[/b]
+Player: I see! So each enemy can act differently even if they come from the same class.
+Companion: "Exactly! Keep this in mind as you explore the simulation.
 [signal arg="timeline-enemy-killed"]

@@ -4686,10 +4686,8 @@ material = SubResource("ShaderMaterial_bxn5h")
 position = Vector2(6, -26)
 scale = Vector2(0.8, 0.831)
 sprite_frames = SubResource("SpriteFrames_7867e")
-animation = &"Light3"
+animation = &"Move"
 autoplay = "Idle"
-frame = 10
-frame_progress = 1.0
 
 [node name="Vfx" type="AnimatedSprite2D" parent="."]
 position = Vector2(32, -9)

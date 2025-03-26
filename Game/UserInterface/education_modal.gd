@@ -6,7 +6,7 @@ class_name EducationModal
 @onready var markdownText: MarkdownLabel = $Panel/MarginContainer/MarkdownLabel
 @onready var http_request: HTTPRequest = $HTTPRequest
 
-var titleText: String = "[font_size=30][center][b]More Information[/b][/center][/font_size]\n\n"
+var titleText: String = "[font_size=25][center][b]More Information[/b][/center][/font_size]\t\t [font_size=30][center][b]Object Oriented Programming[/b][/center][/font_size]\n\n"
 var text: String = "**Hello **"
 	
 enum EducationTopics {OOP, Binary, LogicGates, Networking}
@@ -15,7 +15,7 @@ var typingFinished: bool = false
 
 func _ready() -> void:
 	displayText.text = titleText
-	
+	SignalManager.connect("more_information_on_topic", _on_get_information_about_topic)
 	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("MoreInfo"):
@@ -32,21 +32,45 @@ func clear() -> void:
 	await get_tree().create_timer(0.5).timeout
 	displayText.text = ""
 	
+
+func load_json(path: String) -> Dictionary:
+	var file := FileAccess.open(path, FileAccess.READ)
+	if not file:
+		print("Error: Unable to open file at %s" % path)
+		return {}
 	
-func showEducationInformation(topic: EducationTopics) -> void:
-	#visible = true
-	match topic:
-		EducationTopics.OOP: 
-			textTypingAnimation(text)
-		EducationTopics.Binary: 
-			textTypingAnimation(text)
-		EducationTopics.LogicGates: 
-			textTypingAnimation(text)
-		EducationTopics.Networking:
-			textTypingAnimation(text)
-			
-			
-func makeRequest() -> void:
+	var content = file.get_as_text()
+	var parsed_json = JSON.parse_string(content)
+	
+	if parsed_json == null:
+		print("Error: Failed to parse JSON.")
+		return {}
+
+	return parsed_json
+
+# Function to retrieve topic information from storage
+func get_topic_information_from_storage(topic: String) -> String:
+	var data := load_json("res://Assets/Json_data/education_data.json")
+	if topic in data:
+		return data[topic]
+	else:
+		return ""
+
+func _on_get_information_about_topic(topic: String) -> void:
+	var topicInformation: String = get_topic_information_from_storage(topic)
+	if topicInformation:
+		textTypingAnimation(topicInformation)
+		return 
+		
+	var prompt: String = "You are an assistant AI inside a digital simulation designed to teach programming concepts interactively. \
+						 Your responses will be used in an educational 2D platformer game called 'Re:Compiled.' The game’s world is a computer system, \
+						 and the player learns by interacting with elements in the environment. \n\nExplain " + topic + " in a clear and concise manner, \
+						using in-game elements as examples where appropriate. Avoid unnecessary introductions or filler words. Structure your response as if \
+						guiding the player through the simulation, keeping explanations engaging and relevant to the world they are exploring."
+	getTopicInformationRequest(prompt)
+
+
+func getTopicInformationRequest(prompt: String) -> void:
 	var godot_key: String = "44ac8821-5a3b-41ce-a3b0-e8fdf6e901b4"
 	# Perform a GET request. The URL below returns JSON as of writing.
 	# Set up request parameters
@@ -57,7 +81,7 @@ func makeRequest() -> void:
 	]
 	var payload = {
 		"model": "Mistral-Nemo-12B-Instruct-2407",
-		"prompt": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are an assistant AI.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nExplain Object-Oriented Programming at a basic level, starting from blueprints and classes. Keep it concise. Cover the four main components. Make sure to output as godot richtextlabel bbcode mode<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+		"prompt": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n" + prompt +  "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
 		"repetition_penalty": 1.1,
 		"temperature": 0.7,
 		"top_p": 0.9,

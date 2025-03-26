@@ -13,4 +13,8 @@ signal termianl_control_npc_signal(pos: Vector2, name: String)
 
 signal player_dead
 
-signal last_checkpoint
+signal enemy_dead
+
+signal last_checkpoint(name: String)
+
+signal more_information_on_topic(topic: String)

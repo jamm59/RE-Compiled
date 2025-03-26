@@ -35,6 +35,8 @@ directories/dtl_directory={
 "timeline-enemy-encounter": "res://Dialogic/Timelines/timeline-enemy-encounter.dtl",
 "timeline-enemy-killed": "res://Dialogic/Timelines/timeline-enemy-killed.dtl",
 "timeline-first-enemy": "res://Dialogic/Timelines/timeline-first-enemy.dtl",
+"timeline-npc-oop": "res://Dialogic/Timelines/timeline-npc-oop.dtl",
+"timeline-platform-oop": "res://Dialogic/Timelines/timeline-platform-oop.dtl",
 "timeline-short-range": "res://Dialogic/Timelines/timeline-short-range.dtl",
 "timeline-tutorial-interact": "res://Dialogic/Timelines/timeline-tutorial-interact.dtl",
 "timeline-tutorial-jump": "res://Dialogic/Timelines/timeline-tutorial-jump.dtl"

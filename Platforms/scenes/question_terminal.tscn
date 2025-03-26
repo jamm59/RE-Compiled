@@ -1,0 +1,288 @@
+[gd_scene load_steps=28 format=3 uid="uid://cwjfvt43rwlkq"]
+
+[ext_resource type="Script" uid="uid://bygd4wo3txn30" path="res://Platforms/scripts/question_terminal.gd" id="1_4te5c"]
+[ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="1_do2k0"]
+[ext_resource type="Texture2D" uid="uid://b3frfa1dbmka3" path="res://Assets/other/monitor.png" id="1_ewtqr"]
+[ext_resource type="Texture2D" uid="uid://nkqj0insxso5" path="res://Assets/platforms/Gears/2.png" id="2_4te5c"]
+[ext_resource type="Texture2D" uid="uid://dq6al1uhi7ote" path="res://Assets/platforms/Gears/3.png" id="3_6qwk5"]
+[ext_resource type="Texture2D" uid="uid://d3s1am4vbmmpj" path="res://Assets/platforms/Gears/4.png" id="4_73o0j"]
+[ext_resource type="Texture2D" uid="uid://58g131lxl43l" path="res://Assets/platforms/Gears/5.png" id="5_aymhk"]
+[ext_resource type="Texture2D" uid="uid://dkuy6ulhd1mik" path="res://Assets/platforms/Gears/6.png" id="6_37ve6"]
+[ext_resource type="Texture2D" uid="uid://ceeako02pxml1" path="res://Assets/platforms/Gears/7.png" id="7_kf6j7"]
+[ext_resource type="Texture2D" uid="uid://bpx3w7jew5m2c" path="res://Assets/platforms/Gears/8.png" id="8_5v7ws"]
+[ext_resource type="Texture2D" uid="uid://cxm83xfecysej" path="res://Assets/platforms/Gears/9.png" id="9_xqog4"]
+[ext_resource type="Texture2D" uid="uid://c2nx1pbeoayhi" path="res://Assets/platforms/Gears/10.png" id="10_kui80"]
+[ext_resource type="Texture2D" uid="uid://bt1mpdv63dckt" path="res://Assets/platforms/Gears/11.png" id="11_2a7wf"]
+[ext_resource type="Texture2D" uid="uid://dec752rif58cc" path="res://Assets/platforms/Gears/12.png" id="12_1276s"]
+[ext_resource type="Texture2D" uid="uid://tciig8gw3b17" path="res://Assets/platforms/Gears/13.png" id="13_ap8xh"]
+[ext_resource type="Texture2D" uid="uid://7f2xhuuq5evw" path="res://Assets/platforms/Gears/14.png" id="14_ins1o"]
+[ext_resource type="Texture2D" uid="uid://bcd1wkaiyurd" path="res://Assets/platforms/Gears/15.png" id="15_jbabm"]
+[ext_resource type="Texture2D" uid="uid://bednmkxybft6g" path="res://Assets/platforms/Gears/16.png" id="16_4q8nj"]
+[ext_resource type="Shader" uid="uid://cm30ghxsl8exq" path="res://Shaders/blackandwhite.gdshader" id="17_5ra1n"]
+[ext_resource type="Texture2D" uid="uid://ccvbuud12l3oo" path="res://Assets/platforms/Weapons/WR_NightBoundSet_Spritesheet.png" id="18_e6gux"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_do2k0"]
+shader = ExtResource("17_5ra1n")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vs1pq"]
+shader = ExtResource("17_5ra1n")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tqtf2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_do2k0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4te5c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6qwk5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_73o0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_aymhk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_37ve6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kf6j7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5v7ws")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xqog4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kui80")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2a7wf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_1276s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ap8xh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ins1o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_jbabm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_4q8nj")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 60.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4te5c"]
+size = Vector2(134, 62)
+
+[sub_resource type="Animation" id="Animation_4te5c"]
+resource_name = "Lever-pull"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Handle/LeverStick:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(3.142, -0.25, 0, 0.25, 0, 3.927, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Handle/GearLeft:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(5.236, -0.25, 0, 0.25, 0, 3.927, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_6qwk5"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Handle/LeverStick:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-3.14159, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Handle/GearLeft:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6qwk5"]
+_data = {
+&"Lever-pull": SubResource("Animation_4te5c"),
+&"RESET": SubResource("Animation_6qwk5")
+}
+
+[node name="QuestionTerminal" type="Node2D"]
+script = ExtResource("1_4te5c")
+
+[node name="Handle" type="Node2D" parent="."]
+position = Vector2(-48, -32)
+
+[node name="LeverStick" type="Sprite2D" parent="Handle"]
+material = SubResource("ShaderMaterial_do2k0")
+position = Vector2(99.2536, 78.0049)
+rotation = -3.14159
+texture = ExtResource("18_e6gux")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 105.792, 8.20187, 38.4047)
+
+[node name="LeverStick2" type="Sprite2D" parent="Handle"]
+material = SubResource("ShaderMaterial_do2k0")
+position = Vector2(98, 79)
+rotation = 1.5708
+texture = ExtResource("18_e6gux")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 105.792, 8.20187, 38.4047)
+
+[node name="GearLeft" type="Sprite2D" parent="Handle"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+position = Vector2(99, 78)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_do2k0")
+
+[node name="OtherParts" type="Node2D" parent="."]
+
+[node name="LeverStick" type="Sprite2D" parent="OtherParts"]
+material = SubResource("ShaderMaterial_vs1pq")
+position = Vector2(-1, 15)
+texture = ExtResource("18_e6gux")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 105.792, 8.20187, 38.4047)
+
+[node name="LeverStick2" type="Sprite2D" parent="OtherParts"]
+material = SubResource("ShaderMaterial_vs1pq")
+position = Vector2(-3, 19)
+rotation = 0.523599
+texture = ExtResource("18_e6gux")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 105.792, 8.20187, 38.4047)
+
+[node name="LeverStick3" type="Sprite2D" parent="OtherParts"]
+material = SubResource("ShaderMaterial_vs1pq")
+position = Vector2(2, 19)
+rotation = -0.523599
+texture = ExtResource("18_e6gux")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 105.792, 8.20187, 38.4047)
+
+[node name="LeverStick4" type="Sprite2D" parent="OtherParts"]
+material = SubResource("ShaderMaterial_vs1pq")
+position = Vector2(4, 47)
+rotation = 1.5708
+texture = ExtResource("18_e6gux")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 123.913, 8.20187, 20.2842)
+
+[node name="LeverStick5" type="Sprite2D" parent="OtherParts"]
+material = SubResource("ShaderMaterial_vs1pq")
+position = Vector2(-6, 47)
+rotation = -1.5708
+texture = ExtResource("18_e6gux")
+offset = Vector2(0, 15)
+region_enabled = true
+region_rect = Rect2(212.864, 123.913, 8.20187, 20.2842)
+
+[node name="Extra" type="Node2D" parent="OtherParts"]
+position = Vector2(81, 156)
+rotation = 3.14159
+
+[node name="Gear2" type="AnimatedSprite2D" parent="OtherParts/Extra"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+position = Vector2(81.9997, 110)
+rotation = 1.5708
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_tqtf2")
+animation = &"Spin"
+autoplay = "Spin"
+frame_progress = 0.938289
+
+[node name="Gear3" type="AnimatedSprite2D" parent="OtherParts/Extra"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+position = Vector2(99.9997, 109)
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_tqtf2")
+animation = &"Spin"
+autoplay = "Spin"
+frame_progress = 0.0118803
+
+[node name="Gear4" type="AnimatedSprite2D" parent="OtherParts/Extra"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
+position = Vector2(62.8997, 109.8)
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_tqtf2")
+animation = &"Spin"
+autoplay = "Spin"
+frame_progress = 0.297537
+
+[node name="Monitor" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Monitor"]
+offset_left = -13.0
+offset_top = -8.0
+offset_right = 13.0
+offset_bottom = 21.0
+color = Color(1, 1, 1, 0.298039)
+
+[node name="TopMonitor" type="Sprite2D" parent="Monitor"]
+texture = ExtResource("1_ewtqr")
+region_enabled = true
+region_rect = Rect2(0, 1.9326, 24, 13.5302)
+
+[node name="BottomMonitor" type="Sprite2D" parent="Monitor"]
+position = Vector2(0, 13)
+rotation = 3.14159
+texture = ExtResource("1_ewtqr")
+region_enabled = true
+region_rect = Rect2(0, 1.9326, 24, 13.5302)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(42, 23)
+shape = SubResource("RectangleShape2D_4te5c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6qwk5")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

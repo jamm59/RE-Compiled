@@ -1,25 +1,37 @@
-res://Platforms/scenes/CrushingPlatform.tscn
+res://Game/UserInterface/education_modal.tscn
 res://Resources/panel-hud-theme.tres
 res://Resources/progress-bar-theme.tres
 res://Shaders/blackandwhite.gdshader
 res://Resources/panel-dark-theme.tres
-res://Game/UserInterface/education_modal.tscn
-res://Game/UserInterface/education_modal.gd
+res://AutoLoad/signal_manager.gd
+res://Characters/Enemy/enemy_base.gd
+res://Game/Level 0/game.gd
+res://Dialogic/Timelines/timeline-enemy-killed.dtl
 res://Game/Level 0/Game.tscn
 res://Platforms/scenes/switch_button.tscn
 res://Platforms/scenes/FanBlade.tscn
 res://Platforms/scenes/Terminal.tscn
 res://Platforms/scenes/GateDoor.tscn
+res://Platforms/scenes/CrushingPlatform.tscn
 res://Platforms/scenes/HoverPlatform.tscn
 res://Characters/Protagonist/player.tscn
 res://Game/Menu/PauseMenu.tscn
 res://Platforms/scenes/short_range_terminal.tscn
 res://Platforms/scenes/Coin.tscn
 res://Game/UserInterface/window_education_modal.tscn
-res://Game/UserInterface/window_education_modal.gd
 res://Characters/Enemy/scene/bat_eyes.tscn
 res://Game/game_start.tscn
-res://Game/game_start.gd
-res://Dialogic/Timelines/timeline-enemy-killed.dtl
-res://Game/Level 0/game.gd
-res://Characters/Protagonist/player.gd
+res://Game/UserInterface/skip_dialogue.tscn
+res://Game/UserInterface/hud.tscn
+res://Game/UserInterface/education_modal.gd
+res://Assets/Json_data/education_data.json
+res://Dialogic/Timelines/timeline-platform-oop.dtl
+res://Dialogic/Timelines/timeline-npc-oop.dtl
+res://Platforms/scenes/question_terminal.tscn
+res://Platforms/scripts/question_terminal.gd
+res://Characters/NPCs/scene/grass_food.tscn
+res://Characters/NPCs/scripts/grass_food.gd
+res://Characters/NPCs/scene/crow_npc.tscn
+res://Characters/NPCs/scene/fox_npc.tscn
+res://Game/UserInterface/mcq_u_i.tscn
+res://Game/UserInterface/mcq_u_i.gd

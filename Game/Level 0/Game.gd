@@ -35,9 +35,10 @@ func _ready() -> void:
 	#player.can_use_controls = false
 	
 	#Signals
-	SignalManager.connect("last_checkpoint", _last_checkpoint)
 	SignalManager.connect("body_hit", _freeze_engine)
+	SignalManager.connect("enemy_dead", _on_enemy_dead)
 	SignalManager.connect("player_dead", _on_player_dead)
+	SignalManager.connect("last_checkpoint", _last_checkpoint)
 	SignalManager.connect("large_fall_detected", _large_fall_detected)
 	SignalManager.connect("terminal_control_signal_emit", _terminal_control)
 	SignalManager.connect("termianl_control_npc_signal", _short_range_terminal_control)
@@ -54,6 +55,8 @@ func _process(delta: float) -> void:
 	companion.move(delta)
 
 func _input(event) -> void:
+	if Input.is_action_just_pressed("Roll") and not player.can_use_controls:
+		DialogueDone()
 	if event.is_action_pressed("Control"):
 		zoom_camera(Vector2(1, 1))  # Zoom in
 	elif event.is_action_pressed("Zoom"):
@@ -70,11 +73,11 @@ func zoom_camera(target_zoom: Vector2, time: float = 0.4):
 	tween.tween_property(camera_2d, "zoom", target_zoom, time).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 
 func showDialogue(timeline: String) -> void:
-	Dialogic.start(timeline)
-	cinematic.visible = true
+	companion.activate_companion_controls = false
 	player.hud.visible = false
 	player.can_use_controls = false
-	companion.activate_companion_controls = false
+	cinematic.visible = true
+	Dialogic.start(timeline)
 		
 func DialogueDone() -> void:
 	Dialogic.end_timeline(true)
@@ -203,9 +206,14 @@ func _on_dialogic_signal(argument: String):
 			companion.companion_can_follow= true
 			companion.animated_sprite_2d.flip_h = false
 
-func _on_player_dead():
+func _on_player_dead() -> void:
 	player._reset_player(checkpoint)
 	
+func _on_enemy_dead(name: String) -> void:
+	if name == "Monster": # first enemy encountered
+		await get_tree().create_timer(1).timeout
+		showDialogue("timeline-enemy-killed")
+		
 func _on_ladder_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		player.canClimbLadder = true

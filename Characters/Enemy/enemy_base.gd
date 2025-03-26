@@ -68,6 +68,7 @@ func handleEnemyDead() -> void:
 	state = STATE.DEAD
 	rotation_degrees = 0.0
 	animated_sprite_2d.play("Dead 1")
+	SignalManager.emit_signal("enemy_dead", self.name)
 	
 func handleMoveAndAvoidObstacles()-> void:
 	velocity.x = start_direction * SPEED

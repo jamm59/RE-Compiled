@@ -1,4 +1,4 @@
-[gd_scene load_steps=636 format=3 uid="uid://ce563tpin64kc"]
+[gd_scene load_steps=637 format=3 uid="uid://ce563tpin64kc"]
 
 [ext_resource type="Script" uid="uid://pmkmrb3srgfy" path="res://Characters/Protagonist/player.gd" id="1_m6b1w"]
 [ext_resource type="Texture2D" uid="uid://bknk26cfceyvk" path="res://Characters/Protagonist/Assets/AssetPack/SpriteSheet/dash.png" id="3_nu55e"]
@@ -113,6 +113,9 @@ animations = [{
 shader = ExtResource("4_nu55e")
 shader_parameter/active = false
 shader_parameter/black_white = false
+shader_parameter/tolerance = 0.1
+shader_parameter/prev_color = Color(1, 1, 1, 1)
+shader_parameter/new_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k62iy"]
 atlas = ExtResource("17_nei06")
@@ -2974,6 +2977,14 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvhf4"]
+shader = ExtResource("4_nu55e")
+shader_parameter/active = false
+shader_parameter/black_white = false
+shader_parameter/tolerance = 0.1
+shader_parameter/prev_color = Color(1, 1, 1, 1)
+shader_parameter/new_color = Color(1, 1, 1, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_sw72e"]
 atlas = ExtResource("16_2abuy")
 region = Rect2(0, 1056, 75, 88)
@@ -4682,7 +4693,7 @@ animation = &"Move"
 autoplay = "Idle"
 
 [node name="Red" type="AnimatedSprite2D" parent="AnimatedSprites"]
-material = SubResource("ShaderMaterial_bxn5h")
+material = SubResource("ShaderMaterial_jvhf4")
 position = Vector2(6, -26)
 scale = Vector2(0.8, 0.831)
 sprite_frames = SubResource("SpriteFrames_7867e")

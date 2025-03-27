@@ -52,8 +52,7 @@ font_size = 80
 
 [node name="PauseMenuUI" type="CanvasLayer"]
 process_mode = 3
-layer = 3
-visible = false
+layer = 4
 script = ExtResource("1_g4vf0")
 
 [node name="Panel" type="Panel" parent="."]

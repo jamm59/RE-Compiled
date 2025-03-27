@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cwjfvt43rwlkq"]
+[gd_scene load_steps=29 format=3 uid="uid://cwjfvt43rwlkq"]
 
 [ext_resource type="Script" uid="uid://bygd4wo3txn30" path="res://Platforms/scripts/question_terminal.gd" id="1_4te5c"]
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="1_do2k0"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bednmkxybft6g" path="res://Assets/platforms/Gears/16.png" id="16_4q8nj"]
 [ext_resource type="Shader" uid="uid://cm30ghxsl8exq" path="res://Shaders/blackandwhite.gdshader" id="17_5ra1n"]
 [ext_resource type="Texture2D" uid="uid://ccvbuud12l3oo" path="res://Assets/platforms/Weapons/WR_NightBoundSet_Spritesheet.png" id="18_e6gux"]
+[ext_resource type="PackedScene" uid="uid://dwey2803cs42s" path="res://Game/UserInterface/mcq_u_i.tscn" id="21_6qwk5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_do2k0"]
 shader = ExtResource("17_5ra1n")
@@ -144,6 +145,7 @@ _data = {
 
 [node name="QuestionTerminal" type="Node2D"]
 script = ExtResource("1_4te5c")
+activate_multiple = null
 
 [node name="Handle" type="Node2D" parent="."]
 position = Vector2(-48, -32)
@@ -283,6 +285,8 @@ shape = SubResource("RectangleShape2D_4te5c")
 libraries = {
 &"": SubResource("AnimationLibrary_6qwk5")
 }
+
+[node name="MCQ_U_I" parent="." instance=ExtResource("21_6qwk5")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -13,8 +13,6 @@ var radius = 0
 func _ready() -> void:
 	if not hover:
 		animation_player.play("RESET")
-	else:
-		visible = true
 		
 func _input(event: InputEvent) -> void:
 	if hover or not usable:
@@ -46,5 +44,4 @@ func handleEmitAnimation() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player and hover:
-		await get_tree().create_timer(0.2).timeout
-		queue_free()
+		animation_player.play("Collect")

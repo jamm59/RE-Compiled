@@ -14,7 +14,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65cmw"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+bg_color = Color(0.141176, 0.141176, 0.141176, 0.588235)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3pk3"]
 corner_radius_top_left = 5
@@ -33,9 +33,12 @@ Panel/styles/panel = SubResource("StyleBoxFlat_65cmw")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_l3pk3")
 
 [node name="MCQ_U_I" type="CanvasLayer"]
+process_mode = 3
+layer = 3
 script = ExtResource("1_aoldv")
 
 [node name="Control" type="Control" parent="."]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -144,7 +147,7 @@ theme_override_constants/margin_bottom = 5
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "[font_size=20][b]59.0[/b][/font_size]
+text = "[font_size=20][b]15.0[/b][/font_size]
 "
 fit_content = true
 horizontal_alignment = 1

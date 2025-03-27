@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://brkcx526yv5p4"]
+[gd_scene load_steps=14 format=3 uid="uid://brkcx526yv5p4"]
 
 [ext_resource type="Script" uid="uid://v5xxqexhchy0" path="res://Platforms/scripts/short_range_terminal.gd" id="1_0e0fa"]
 [ext_resource type="Texture2D" uid="uid://c6kyl0pjx1hls" path="res://Assets/other/tower.png" id="1_xmtmh"]
 [ext_resource type="Shader" uid="uid://dvgk6116kbqbr" path="res://Shaders/custom-black-white.gdshader" id="2_0e0fa"]
 [ext_resource type="Texture2D" uid="uid://cv2ta72nh8era" path="res://Assets/other/wifi.png" id="3_0e0fa"]
 [ext_resource type="Texture2D" uid="uid://br85yc8kiutkk" path="res://Assets/other/short-range.png" id="3_xmtmh"]
+[ext_resource type="AudioStream" uid="uid://deg7dqc8jbg4f" path="res://Assets/Music/chip.mp3" id="6_7ajy2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0e0fa"]
 size = Vector2(16, 20)
@@ -24,6 +25,47 @@ tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(14, -0.25, 0, 0.25, 0, -26, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_sff53"]
+resource_name = "Collect"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_dlcqv"]
@@ -65,15 +107,41 @@ tracks/1/keys = {
 "points": PackedFloat32Array(14, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ajy2"]
 _data = {
 &"Activate": SubResource("Animation_7ajy2"),
+&"Collect": SubResource("Animation_sff53"),
 &"Hover": SubResource("Animation_dlcqv"),
 &"RESET": SubResource("Animation_0e0fa")
 }
 
 [node name="ShortRange" type="Node2D"]
+visible = false
 script = ExtResource("1_0e0fa")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -95,7 +163,7 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_0e0fa")
 
 [node name="Tower" type="Sprite2D" parent="Parent/Controller"]
-position = Vector2(40, -42.9668)
+position = Vector2(40, -47.9668)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_xmtmh")
 region_enabled = true
@@ -106,6 +174,9 @@ material = SubResource("ShaderMaterial_dlcqv")
 position = Vector2(40, -30)
 scale = Vector2(4, 4)
 texture = ExtResource("3_xmtmh")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7ajy2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

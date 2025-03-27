@@ -141,7 +141,6 @@ animations = [{
 script = ExtResource("1_bql6r")
 jump_height = 40.0
 jump_time_to_peak = 0.3
-jump_time_to_descent = 0.4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(24, -10)
@@ -179,8 +178,8 @@ target_position = Vector2(25, 19)
 zoom = Vector2(4, 4)
 
 [node name="Crow" type="AnimatedSprite2D" parent="."]
-position = Vector2(25, -9)
+position = Vector2(25, -7)
+scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_6vbwi")
-animation = &"Fall"
+animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.68655

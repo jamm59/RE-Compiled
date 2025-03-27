@@ -11,8 +11,10 @@ func tweenRotation(ref: Node2D, target_angle: float, time: float = 0.1) -> void:
 	var tween: Tween = get_tree().create_tween()
 
 func handle_input(delta: float) -> void:
+	if not remote_control_activated:
+		return 
+		
 	super(delta)
-	
 	if direction == 0.0:
 		velocity.x = move_toward(velocity.x, 0, friction)
 		state = NPCSTATE.IDLE if velocity.y == 0.0 and velocity.x == 0.0 else NPCSTATE.MOVE

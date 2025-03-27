@@ -9,6 +9,7 @@ extends Node2D
 @onready var props_layer: TileMapLayer = $TileMap/PropsLayer
 @onready var cinematic: CanvasLayer = $UserInterface/Cinematic
 @onready var camera_pos: Marker2D = $Player/CameraPos
+@onready var title_card: TitleCard = $UserInterface/TitleCard
 
 
 const ENEMY_SHAKE_AMOUNT: int = 3
@@ -43,6 +44,7 @@ func _ready() -> void:
 	SignalManager.connect("terminal_control_signal_emit", _terminal_control)
 	SignalManager.connect("termianl_control_npc_signal", _short_range_terminal_control)
 	SignalManager.connect("remote_control_session_complete", _remote_control_session_complete)
+	SignalManager.connect("termianl_control_education_signal", _terminal_control_education_signal)
 	Dialogic.signal_event.connect(_on_dialogic_signal)
 
 func _process(delta: float) -> void:
@@ -102,7 +104,7 @@ func _short_range_terminal_control(pos: Vector2, name: String) -> void:
 				previousDistance = distance
 				npc_animal = npc
 				
-	if npc_animal is FoxNPC:
+	if npc_animal is FerretNPC:
 		npc_animal.remote_control_activated = true
 		player.can_use_controls = false
 	
@@ -123,8 +125,35 @@ func _terminal_control(pos: Vector2, name: String) -> void:
 				previousDistance = distance
 				platform = plat
 			
+	activatePlatform(platform)
+
+func _terminal_control_education_signal(pos: Vector2, name: String, activate_multiple: bool) -> void:
+	if activate_multiple:
+		for plat: Node2D in $Platforms.get_children():
+			if plat.name.contains(name):
+				if plat is LargeElevator:
+					activatePlatform(plat)
+		return
+	
+	var platform: Node2D = null
+	var previousDistance: float = INF
+	if name.length() > 0:
+		for plat: Node2D in $CanActivatePlatforms.get_children():
+			if name == plat.name:
+				platform = plat
+				break
+				
+	if not platform or name.length() == 0:
+		for plat: Node2D in $CanActivatePlatforms.get_children():
+			var distance: float = pos.distance_to(plat.position)
+			if distance < previousDistance:
+				previousDistance = distance
+				platform = plat
 		
-	if platform is HoverPlatform or platform is SwingHammer or platform is GateDoor or platform is FanBlade:
+	activatePlatform(platform)
+
+func activatePlatform(platform: Node2D) -> void:
+	if platform is HoverPlatform or platform is SwingHammer or platform is GateDoor or platform is FanBlade or platform is LargeElevator:
 		platform.activate()
 	if platform is Laser:
 		platform.deactivateLasers()
@@ -138,8 +167,7 @@ func _terminal_control(pos: Vector2, name: String) -> void:
 		player.hud.visible = true
 		player.can_use_controls = true
 		camera_2d.global_position = camera_pos.global_position
-
-
+	
 func _freeze_engine() -> void:
 	cameraShake = true
 	shake_amount = ENEMY_SHAKE_AMOUNT
@@ -162,9 +190,10 @@ func _on_player_introduction_body_entered(body: Node2D) -> void:
 	if body is Player:
 		zoom_camera(Vector2(3,3), 0.3)
 		await get_tree().create_timer(1).timeout
-		$UserInterface/TitleCard.visible = true
-		await get_tree().create_timer(5).timeout
-		$UserInterface/TitleCard.visible = false
+		title_card.visible = true
+		title_card.showTitleCard("Introduction")
+		await get_tree().create_timer(3).timeout
+		title_card.visible = false
 		showDialogue("timeline-1")
 		$CinematicAreas/PlayerIntroduction.disconnect("body_entered", _on_player_introduction_body_entered)
 
@@ -205,6 +234,11 @@ func _on_dialogic_signal(argument: String):
 		"timeline-2":
 			companion.companion_can_follow= true
 			companion.animated_sprite_2d.flip_h = false
+		"timeline-enemy-killed":
+			title_card.visible = true
+			title_card.showTitleCard("Object-Oriented Programming Concepts")
+			await get_tree().create_timer(3).timeout 
+			title_card.visible = false
 
 func _on_player_dead() -> void:
 	player._reset_player(checkpoint)

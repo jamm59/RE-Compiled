@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://dkpwee7xh20ud"]
+[gd_scene load_steps=2 format=3 uid="uid://dkpwee7xh20ud"]
+
+[ext_resource type="Script" uid="uid://ha7rek3f7xh4" path="res://Game/UserInterface/title_card.gd" id="1_imui0"]
 
 [node name="TitleCard" type="CanvasLayer"]
+script = ExtResource("1_imui0")
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
@@ -10,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
-custom_minimum_size = Vector2(500, 100)
+custom_minimum_size = Vector2(500, 300)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -27,4 +30,3 @@ bbcode_enabled = true
 text = "[center][b][font_size=5
 0]Introduction[/font_size][/b][/center]"
 horizontal_alignment = 1
-vertical_alignment = 1

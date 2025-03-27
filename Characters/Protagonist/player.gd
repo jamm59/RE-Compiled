@@ -270,8 +270,6 @@ func handleAnimationStateUpdate() -> void:
 			velocity.x = move_toward(velocity.x, 0, friction)
 			
 	animated_sprite_2d.play(animationName)
-	
-	
 	if statsInitDone:
 		var deductStaminaSpeed: float = 20
 		var increaseStaminaSpeed: float = 40
@@ -314,7 +312,7 @@ func _reset_player(checkpoint: Vector2) -> void:
 	dead_aimation.visible = false
 	tweenProgressBar(hud.stamina, stamina, 1.0)
 	tweenProgressBar(hud.health, scaleHealth(health), 1.0)
-	global_position = Vector2(checkpoint.x, checkpoint.y - 100)
+	global_position = Vector2(checkpoint.x, checkpoint.y)
 	
 func knockBack(enemy: EnemyBase) -> void:
 	position.x -= KNOCKBACKVALUE if enemy.position.x > self.position.x else -KNOCKBACKVALUE

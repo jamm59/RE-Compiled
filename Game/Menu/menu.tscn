@@ -1,25 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://cs4tb7qdetlxj"]
+[gd_scene load_steps=9 format=3 uid="uid://cs4tb7qdetlxj"]
 
 [ext_resource type="Script" uid="uid://dkiwav48vql5q" path="res://Game/Menu/Menu.gd" id="1_4taty"]
 [ext_resource type="FontFile" uid="uid://d4lcfsd3aa7w2" path="res://Assets/Font/Inkos-zrg60.ttf" id="8_1yp52"]
-
-[sub_resource type="Resource" id="Resource_kgkp1"]
-metadata/__load_path__ = "res://Assets/Background/1.png"
-
-[sub_resource type="Resource" id="Resource_7qfce"]
-metadata/__load_path__ = "res://Assets/Background/2.png"
-
-[sub_resource type="Resource" id="Resource_sfu0n"]
-metadata/__load_path__ = "res://Assets/Background/3.png"
-
-[sub_resource type="Resource" id="Resource_58fx6"]
-metadata/__load_path__ = "res://Assets/Background/4.png"
-
-[sub_resource type="Resource" id="Resource_jschg"]
-metadata/__load_path__ = "res://Assets/Background/5.png"
-
-[sub_resource type="Resource" id="Resource_jkm2y"]
-metadata/__load_path__ = "res://Assets/Background/6.png"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gll8e"]
 content_margin_left = 1.0
@@ -82,7 +64,6 @@ position = Vector2(711, 259)
 [node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(-1, 1)
 scale = Vector2(5, 5)
-texture = SubResource("Resource_kgkp1")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(711, 259)
@@ -90,7 +71,6 @@ position = Vector2(711, 259)
 [node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 position = Vector2(-1, 1)
 scale = Vector2(5, 5)
-texture = SubResource("Resource_7qfce")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(711, 259)
@@ -98,7 +78,6 @@ position = Vector2(711, 259)
 [node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
 position = Vector2(-1, 1)
 scale = Vector2(5, 5)
-texture = SubResource("Resource_sfu0n")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(711, 259)
@@ -106,7 +85,6 @@ position = Vector2(711, 259)
 [node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 position = Vector2(-1, 1)
 scale = Vector2(5, 5)
-texture = SubResource("Resource_58fx6")
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(711, 259)
@@ -114,7 +92,6 @@ position = Vector2(711, 259)
 [node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
 position = Vector2(-1, 1)
 scale = Vector2(5, 5)
-texture = SubResource("Resource_jschg")
 
 [node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(711, 259)
@@ -122,7 +99,6 @@ position = Vector2(711, 259)
 [node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
 position = Vector2(-1, 1)
 scale = Vector2(5, 5)
-texture = SubResource("Resource_jkm2y")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

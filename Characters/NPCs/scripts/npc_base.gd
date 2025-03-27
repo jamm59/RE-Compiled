@@ -14,9 +14,9 @@ class_name NPCBase
 
 
 @export_category("Jump Settings")
-@export var jump_height : float = 70
-@export var jump_time_to_peak : float = 0.4
-@export var jump_time_to_descent : float = 0.35
+@export var jump_height : float = 55.0
+@export var jump_time_to_peak : float = 0.35
+@export var jump_time_to_descent : float = 0.4
 
 
 @onready var JUMP_VELOCITY : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
@@ -49,7 +49,10 @@ func _ready() -> void:
 		
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
-	handle_input(delta)
+	if not remote_control_activated:
+		move_freely(delta)
+	else:
+		handle_input(delta)
 	update_state_animation()
 	move_and_slide()
 
@@ -74,10 +77,6 @@ func move_freely(delta: float) -> void:
 
 	
 func handle_input(delta: float) -> void:
-	if not remote_control_activated:
-		move_freely(delta)
-		return 
-		
 	direction = Input.get_axis("Left", "Right")
 	if not remote_control_activated:
 		return 
@@ -87,7 +86,7 @@ func handle_input(delta: float) -> void:
 
 	if direction == 0.0:
 		velocity.x = move_toward(velocity.x, 0, friction)
-		state = NPCSTATE.IDLE if velocity.y == 0.0 and velocity.x == 0.0 else NPCSTATE.MOVE
+		state = NPCSTATE.IDLE if velocity.y == 0.0 else NPCSTATE.MOVE
 	else:
 		previousDirection = direction
 	
@@ -109,14 +108,17 @@ func update_state_animation() -> void:
 		
 	match state:
 		NPCSTATE.IDLE:
+			velocity.x = move_toward(velocity.x, 0.0, friction)
 			var hasEatingAnimation: bool = animal.sprite_frames.get_animation_names().has("Eating")
 			if not hasEatingAnimation and not remote_control_activated:
 				animal.play("Idle")
 			elif hasEatingAnimation and not remote_control_activated:
 				animal.play("Eating")
-			
 			if remote_control_activated:
 				animal.play("Idle")
 		NPCSTATE.MOVE, NPCSTATE.JUMP, NPCSTATE.FALL:
 			animal.play("Move")
-			velocity.x = move_toward(velocity.x, direction * speed, acceleration)
+			if remote_control_activated:
+				velocity.x = move_toward(velocity.x, previousDirection * speed, acceleration)
+			else:
+				velocity.x = move_toward(velocity.x, direction * speed, acceleration)

@@ -11,6 +11,8 @@ signal terminal_control_signal_emit(pos: Vector2, name: String)
 
 signal termianl_control_npc_signal(pos: Vector2, name: String)
 
+signal termianl_control_education_signal(pos: Vector2, name: String, activate_multiple: bool)
+
 signal player_dead
 
 signal enemy_dead

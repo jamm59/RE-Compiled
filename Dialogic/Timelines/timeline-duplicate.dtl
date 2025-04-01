@@ -1,0 +1,10 @@
+Enemy: Ah, a reckless attacker! Every strike you land just makes me stronger. Did no one teach you about replication?
+Companion: Bad move. This one's like the [b][i]ILOVEYOU[/i][/b] virus from the early 2000s. One of the fastest-spreading malware outbreaks ever. It disguised itself as a love letter and tricked people into opening it.
+Player: And what happens after that?
+Companion: Once opened, it overwrote files, stole passwords, and emailed itself to every contact in the victim’s inbox. Just like this thing, it multiplied out of control.
+Player: So attacking it head-on makes it worse?
+Companion: Exactly. You’re basically helping it spread! But if you authorize me, I can take it down the right way with precise shots, no unnecessary contact
+Player: Alright, do it!
+Unknown: Authorise Companion to Neutralise the "ILOVEYOU" virus
+- Authorise Companion
+[signal arg="timeline-duplicate"]

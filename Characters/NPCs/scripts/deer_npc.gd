@@ -11,7 +11,7 @@ func _physics_process(delta: float) -> void:
 func move_freely(delta: float) -> void:	
 	for ray: RayCast2D in [ray_cast_right, ray_cast_right_ground,ray_cast_left, ray_cast_left_ground]:
 		if ray.get_collider() is GrassFood:
-			state = NPCSTATE.IDLE
+			state = STATE.IDLE
 			var grassFood: GrassFood = ray.get_collider()
 			if grassFood.foodHealth <= 0.0:
 				grassFood.queue_free()
@@ -19,7 +19,7 @@ func move_freely(delta: float) -> void:
 				grassFood.foodHealth -= 0.8 * delta
 			return
 			
-	state = NPCSTATE.MOVE
+	state = STATE.MOVE
 	velocity.x = direction * speed
 		
 	if not ray_cast_right_ground.is_colliding() or ray_cast_right.is_colliding():

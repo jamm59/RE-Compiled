@@ -26,15 +26,20 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 directories/dch_directory={
 "Companion": "res://Dialogic/Characters/Companion.dch",
+"Enemy": "res://Dialogic/Characters/Enemy.dch",
+"MiniBoss": "res://Dialogic/Characters/MiniBoss.dch",
 "Player": "res://Dialogic/Characters/Player.dch",
 "Unknown": "res://Dialogic/Characters/Unknown.dch"
 }
 directories/dtl_directory={
 "timeline-1": "res://Dialogic/Timelines/timeline-1.dtl",
 "timeline-2": "res://Dialogic/Timelines/timeline-2.dtl",
+"timeline-duplicate": "res://Dialogic/Timelines/timeline-duplicate.dtl",
 "timeline-enemy-encounter": "res://Dialogic/Timelines/timeline-enemy-encounter.dtl",
 "timeline-enemy-killed": "res://Dialogic/Timelines/timeline-enemy-killed.dtl",
 "timeline-first-enemy": "res://Dialogic/Timelines/timeline-first-enemy.dtl",
+"timeline-mid-miniboss": "res://Dialogic/Timelines/timeline-mid-miniboss.dtl",
+"timeline-miniboss": "res://Dialogic/Timelines/timeline-miniboss.dtl",
 "timeline-npc-oop": "res://Dialogic/Timelines/timeline-npc-oop.dtl",
 "timeline-platform-oop": "res://Dialogic/Timelines/timeline-platform-oop.dtl",
 "timeline-short-range": "res://Dialogic/Timelines/timeline-short-range.dtl",

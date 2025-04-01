@@ -16,3 +16,6 @@ func _on_laser_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		print("applying damage")
 		body.applyHitDamage(self)
+	
+	if body is CrowNPC:
+		print("npc getting damaged")

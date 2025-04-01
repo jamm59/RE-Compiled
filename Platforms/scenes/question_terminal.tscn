@@ -145,7 +145,6 @@ _data = {
 
 [node name="QuestionTerminal" type="Node2D"]
 script = ExtResource("1_4te5c")
-activate_multiple = null
 
 [node name="Handle" type="Node2D" parent="."]
 position = Vector2(-48, -32)

@@ -11,8 +11,10 @@ class_name ShortRangeTerminal
 var radius = 0
 
 func _ready() -> void:
+	visible = hover
 	if not hover:
 		animation_player.play("RESET")
+
 		
 func _input(event: InputEvent) -> void:
 	if hover or not usable:

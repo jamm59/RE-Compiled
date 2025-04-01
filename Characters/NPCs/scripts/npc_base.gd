@@ -36,8 +36,8 @@ var direction: float = [1.0, -1.0].pick_random()
 var toggleGravity: bool = false
 var animal_in_danger: bool = false 
 
-enum NPCSTATE {IDLE, MOVE, JUMP,FALL, WALL_CLIMB}
-var state: NPCSTATE = NPCSTATE.IDLE
+enum STATE {IDLE, MOVE, JUMP,FALL, WALL_CLIMB}
+var state: STATE = STATE.IDLE
 
 func getGravity() -> float:
 	return JUMP_GRAVITY if velocity.y < 0.0 else FALL_GRAVITY
@@ -66,7 +66,7 @@ func apply_gravity(delta: float) -> void:
 		velocity.y += getGravity() * delta
 		
 func move_freely(delta: float) -> void:
-	state = NPCSTATE.MOVE
+	state = STATE.MOVE
 	if not ray_cast_right_ground.is_colliding() or ray_cast_right.is_colliding():
 		direction = -1
 		animal.flip_h = true
@@ -86,28 +86,28 @@ func handle_input(delta: float) -> void:
 
 	if direction == 0.0:
 		velocity.x = move_toward(velocity.x, 0, friction)
-		state = NPCSTATE.IDLE if velocity.y == 0.0 else NPCSTATE.MOVE
+		state = STATE.IDLE if velocity.y == 0.0 else STATE.MOVE
 	else:
 		previousDirection = direction
 	
 	if Input.is_action_pressed("Left") or Input.is_action_pressed("Right"):
-		state = NPCSTATE.MOVE
+		state = STATE.MOVE
 		if direction != 0.0:
 			animal.flip_h = false if direction > 0 else true
 		
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = jump_force
-		state = NPCSTATE.JUMP
+		state = STATE.JUMP
 		
 	if not is_on_floor() and velocity.y > 0:
-		state = NPCSTATE.FALL
+		state = STATE.FALL
 		
 func update_state_animation() -> void:
 	if remote_control_activated:
 		speed = 150
 		
 	match state:
-		NPCSTATE.IDLE:
+		STATE.IDLE:
 			velocity.x = move_toward(velocity.x, 0.0, friction)
 			var hasEatingAnimation: bool = animal.sprite_frames.get_animation_names().has("Eating")
 			if not hasEatingAnimation and not remote_control_activated:
@@ -116,7 +116,7 @@ func update_state_animation() -> void:
 				animal.play("Eating")
 			if remote_control_activated:
 				animal.play("Idle")
-		NPCSTATE.MOVE, NPCSTATE.JUMP, NPCSTATE.FALL:
+		STATE.MOVE, STATE.JUMP, STATE.FALL:
 			animal.play("Move")
 			if remote_control_activated:
 				velocity.x = move_toward(velocity.x, previousDirection * speed, acceleration)

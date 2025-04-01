@@ -44,7 +44,6 @@ font = ExtResource("8_1yp52")
 font_size = 80
 
 [node name="Menu" type="Control"]
-modulate = Color(0.855663, 0.845673, 0.789233, 1)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,51 +53,6 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 script = ExtResource("1_4taty")
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-visible = false
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(711, 259)
-
-[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(-1, 1)
-scale = Vector2(5, 5)
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(711, 259)
-
-[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(-1, 1)
-scale = Vector2(5, 5)
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(711, 259)
-
-[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-position = Vector2(-1, 1)
-scale = Vector2(5, 5)
-
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(711, 259)
-
-[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
-position = Vector2(-1, 1)
-scale = Vector2(5, 5)
-
-[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(711, 259)
-
-[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
-position = Vector2(-1, 1)
-scale = Vector2(5, 5)
-
-[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(711, 259)
-
-[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
-position = Vector2(-1, 1)
-scale = Vector2(5, 5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -116,15 +70,16 @@ theme = SubResource("Theme_kvnxf")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 50
 alignment = 1
 
 [node name="Title" type="Label" parent="MenuScreen/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Re:Compiled
 "
 label_settings = SubResource("LabelSettings_klavt")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuScreen/VBoxContainer"]
 layout_mode = 2
@@ -166,15 +121,16 @@ theme = SubResource("Theme_kvnxf")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 50
 alignment = 1
 
 [node name="Title" type="Label" parent="PlaySceen/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 1
 text = "Re:Compiled
 "
 label_settings = SubResource("LabelSettings_klavt")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlaySceen/VBoxContainer"]
 layout_mode = 2
@@ -204,4 +160,5 @@ text = "Back"
 [connection signal="pressed" from="MenuScreen/VBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MenuScreen/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="PlaySceen/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="PlaySceen/VBoxContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="PlaySceen/VBoxContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

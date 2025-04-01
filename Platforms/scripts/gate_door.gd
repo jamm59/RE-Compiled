@@ -5,3 +5,5 @@ class_name GateDoor
 
 func activate() -> void:
 	animation_player.play("Open")
+func deactivate() -> void:
+	animation_player.play_backwards("Open")

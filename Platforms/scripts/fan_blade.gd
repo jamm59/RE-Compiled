@@ -1,6 +1,6 @@
 extends Node2D
 class_name FanBlade
-
+@export var movement: bool = false
 #gears
 @onready var gear_sprites: Array = [
 	$Parent/Gear, $Parent/Extra/Gear2
@@ -12,11 +12,14 @@ class_name FanBlade
 
 const DAMAGE_POINT: int = 2
 
+func _ready() -> void:
+	if movement:
+		activate()
+		
 func activate() -> void:
 	fan.play("Spin")
 	for gear: AnimatedSprite2D in gear_sprites:
 		gear.play("Spin")
-	damage_area.connect("body_entered", _on_damage_area_body_entered)
 	cpu_particles_2d.emitting = true
 
 

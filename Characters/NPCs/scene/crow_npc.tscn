@@ -4,7 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://ecoxfbsafmh8" path="res://Characters/NPCs/The DARK Series - Animal Pack/Crow/Crow Sprite Sheet 17x21 BLUE.png" id="1_g8kvd"]
 [ext_resource type="Texture2D" uid="uid://bxias6hm6scyr" path="res://Characters/NPCs/Assets/Crow.png" id="3_n3iuq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qsxx5"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n3iuq"]
+radius = 6.0
+height = 16.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8kvd"]
 size = Vector2(143, 20)
@@ -138,13 +140,14 @@ animations = [{
 }]
 
 [node name="CrowNPC" type="CharacterBody2D"]
+z_index = 2
 script = ExtResource("1_bql6r")
 jump_height = 40.0
 jump_time_to_peak = 0.3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(24, -10)
-shape = SubResource("RectangleShape2D_qsxx5")
+position = Vector2(25, -8)
+shape = SubResource("CapsuleShape2D_n3iuq")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-45, 0)
@@ -178,8 +181,8 @@ target_position = Vector2(25, 19)
 zoom = Vector2(4, 4)
 
 [node name="Crow" type="AnimatedSprite2D" parent="."]
-position = Vector2(25, -7)
-scale = Vector2(0.8, 0.8)
+position = Vector2(25, -6)
+scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_6vbwi")
 animation = &"Idle"
 autoplay = "Idle"

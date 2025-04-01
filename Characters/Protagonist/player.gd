@@ -12,9 +12,7 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, LIGHT_AT
 @onready var attack_box_right: CollisionShape2D = $AttackBoxComponent/AttackBoxRight
 @onready var attack_box_left: CollisionShape2D = $AttackBoxComponent/AttackBoxLeft
 
-@onready var white: AnimatedSprite2D = $AnimatedSprites/White
 @onready var red: AnimatedSprite2D = $AnimatedSprites/Red
-@onready var dark: AnimatedSprite2D = $AnimatedSprites/Dark
 @onready var dead_aimation: AnimatedSprite2D = $DeadAimation
 @onready var vfx: AnimatedSprite2D = $Vfx
 
@@ -88,10 +86,11 @@ var emitShortRangeSignal: bool = false
 var inventory: Array[String] = []
 
 func _ready() -> void:
+	animated_sprite_2d = red
 	health = MAX_HEALTH
-	updateAnimatedSprite(red if previousAnimation == "Red" else white, true, false, false)
 	tweenProgressBar(hud.health, scaleHealth(health), 1.0)
 	tweenProgressBar(hud.stamina, stamina, 1.0)
+	
 	
 func _physics_process(delta: float) -> void:
 	if state == STATE.DEAD:
@@ -290,7 +289,7 @@ func applyHitDamage(body: Node2D):
 	if body is EnemyBase:
 		knockBack(body)
 		health = max(health - body.DAMAGE_POINT, 0.0)
-	if body is Laser or body is SwingHammer or body is FanBlade or body is CrushingPlatform:
+	if body is Laser or body is SwingHammer or body is FanBlade or body is CrushingPlatform or body is Bullet:
 		health = max(health - body.DAMAGE_POINT, 0.0)
 	
 	tweenProgressBar(hud.health, scaleHealth(health))
@@ -316,14 +315,7 @@ func _reset_player(checkpoint: Vector2) -> void:
 	
 func knockBack(enemy: EnemyBase) -> void:
 	position.x -= KNOCKBACKVALUE if enemy.position.x > self.position.x else -KNOCKBACKVALUE
-	
-func updateAnimatedSprite(aSprite: AnimatedSprite2D, red_visible: bool, white_visible: bool, dark_visible: bool) -> void:
-	var isFlipped: bool = animated_sprite_2d.flip_h
-	aSprite.flip_h = isFlipped
-	animated_sprite_2d = aSprite
-	red.visible = red_visible
-	white.visible = white_visible
-	dark.visible = dark_visible
+
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation in ["Light1","Light2","Light3","AttackCombo", "Heavy", "Roll"]:
@@ -331,14 +323,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			state = STATE.IDLE
 		else:
 			state = STATE.FALL
-	if animated_sprite_2d.animation == "Heavy" and animated_sprite_2d.name in ["Red", "White"]:
-		previousAnimation = animated_sprite_2d.name
-		updateAnimatedSprite(dark, false, false, true)
-	elif animated_sprite_2d.animation == "Heavy" and animated_sprite_2d.name == "Dark":
-		if previousAnimation == "Red":
-			updateAnimatedSprite(red, true, false, false)
-		elif previousAnimation == "White":
-			updateAnimatedSprite(white, false, true, false)
 		
 func _on_attack_box_component_body_entered(body: Node2D) -> void:
 	if body is EnemyBase:

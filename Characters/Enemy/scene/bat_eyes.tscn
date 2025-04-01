@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://jm2tosbfr2k7"]
+[gd_scene load_steps=62 format=3 uid="uid://jm2tosbfr2k7"]
 
 [ext_resource type="Script" uid="uid://dj7footnsrhgb" path="res://Characters/Enemy/scripts/flying_enemy.gd" id="1_0nf3q"]
 [ext_resource type="Shader" uid="uid://dpf3btpbxnldy" path="res://Shaders/HitFlash.gdshader" id="1_jewpb"]
@@ -16,13 +16,16 @@ size = Vector2(28, 18)
 size = Vector2(31, 18.1818)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0nf3q"]
-size = Vector2(140.182, 102)
+size = Vector2(187, 151)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xyxv5"]
 resource_local_to_scene = true
 shader = ExtResource("1_jewpb")
 shader_parameter/active = false
 shader_parameter/black_white = true
+shader_parameter/tolerance = 0.1
+shader_parameter/prev_color = Color(1, 1, 1, 1)
+shader_parameter/new_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h5j6u"]
 atlas = ExtResource("2_ajahp")
@@ -505,6 +508,16 @@ _data = {
 &"RESET": SubResource("Animation_o80mw")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3gkh"]
+bg_color = Color(0.945098, 0.403922, 0.403922, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_th0nx"]
+bg_color = Color(1, 0.607843, 0.0901961, 1)
+
+[sub_resource type="Theme" id="Theme_0nf3q"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_d3gkh")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_th0nx")
+
 [node name="BatEyes" type="CharacterBody2D"]
 material = SubResource("ShaderMaterial_0nf3q")
 script = ExtResource("1_0nf3q")
@@ -548,33 +561,35 @@ shape = SubResource("RectangleShape2D_4k81a")
 modulate = Color(0, 0.762311, 0.462637, 1)
 
 [node name="Detect" type="CollisionShape2D" parent="DetectPlayerArea"]
-position = Vector2(2, 0)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_0nf3q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_xyxv5")
-position = Vector2(-1, 0)
+position = Vector2(-2, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_2y1gh")
-animation = &"Dead 1"
+animation = &"Idle"
 autoplay = "Walk"
-frame = 3
-frame_progress = 1.0
+frame_progress = 0.186314
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_sjfte")
 }
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = -18.5714
-offset_top = -50.0
-offset_right = 21.4286
-offset_bottom = -10.0
-
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -11.0
+offset_top = -18.0
+offset_right = 12.0
+offset_bottom = -13.0
+theme = SubResource("Theme_0nf3q")
+value = 50.0
+show_percentage = false
 
 [connection signal="body_entered" from="HealthBoxComponent" to="." method="_on_health_box_component_body_entered"]
 [connection signal="body_entered" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_entered"]

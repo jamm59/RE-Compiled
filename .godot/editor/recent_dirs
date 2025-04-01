@@ -1,12 +1,23 @@
+res://Dialogic/Timelines
+res://Game
+res://Dialogic/Characters
+res://
+res://Game/UserInterface
+res://Characters/Enemy/scene
+res://Assets/Vfx
+res://Characters/Enemy/Assets/Mecha
+res://Characters/Enemy/Assets
+res://Characters/Enemy/Assets/6 Yellow
+res://Characters/Enemy/Assets/5 Tiny
+res://Characters/Enemy/Assets/4 Red
+res://Characters/Enemy/Assets/3 Ooze
+res://Characters/Enemy/Assets/2 Mage
+res://Characters/Enemy/Assets/1 Bear
 res://Characters/NPCs/scene
 res://Characters/NPCs/scripts
-res://Game/UserInterface
 res://Characters/NPCs/Assets
 res://Platforms/scenes
-res://Dialogic/Timelines
 C:/Users/ASUS-ROG/Desktop/Godot Projects/re-compiled/Assets/Json_data
 res://Characters/Protagonist/Vfx/attack
-res://Game
 res://Assets/other/coin
 C:/Users/ASUS-ROG/Desktop/Godot Projects/re-compiled/Build
-res://Platforms/scripts

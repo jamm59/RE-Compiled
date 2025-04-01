@@ -1,3 +1,57 @@
 {
-	"oop" : "Some random data"
+"oop": {
+	"text": "[b]Object-Oriented Programming (OOP)[/b] is a programming paradigm based on the concept of 'objects,' which can contain data and behavior. In [i]Re:Compiled[/i], everything in the simulation—from enemies to platforms—is an object, each with its own properties and methods.",
+	"questions": [
+		{
+			"question": "[b]In OOP, what is a class?[/b]",
+			"answers": [
+				"A blueprint for creating objects",
+				"A single instance of an object",
+				"A function inside an object",
+				"A type of enemy in [i]Re:Compiled[/i]"
+			],
+			"correct_answer": 0
+		},
+		{
+			"question": "[b]How does inheritance work in OOP?[/b]",
+			"answers": [
+				"One object copies another's behavior without modification",
+				"A class can inherit properties and methods from another class",
+				"An object takes control of another object",
+				"NPCs in [i]Re:Compiled[/i] become unkillable"
+			],
+			"correct_answer": 1
+		},
+		{
+			"question": "[b]In [i]Re:Compiled[/i], enemies, platforms, and NPCs all share some common properties. What OOP concept does this represent?[/b]",
+			"answers": [
+				"Polymorphism",
+				"Encapsulation",
+				"Inheritance",
+				"Debugging"
+			],
+			"correct_answer": 2
+		},
+		{
+			"question": "[b]What is polymorphism in OOP?[/b]",
+			"answers": [
+				"When different objects share the same method but behave differently",
+				"When an object hides its internal data",
+				"When an object can only be used once",
+				"When the AI in [i]Re:Compiled[/i] changes its dialogue"
+			],
+			"correct_answer": 0
+		},
+		{
+			"question": "[b]Why is encapsulation important in OOP?[/b]",
+			"answers": [
+				"It allows objects to inherit behavior",
+				"It protects an object's data and controls access to it",
+				"It forces all objects to act the same way",
+				"It makes debugging impossible"
+			],
+			"correct_answer": 1
+		}
+	]
+}
 }

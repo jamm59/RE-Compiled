@@ -7,7 +7,6 @@ class_name EducationModal
 @onready var http_request: HTTPRequest = $HTTPRequest
 
 var titleText: String = "[font_size=25][center][b]More Information[/b][/center][/font_size]\t\t [font_size=30][center][b]Object Oriented Programming[/b][/center][/font_size]\n\n"
-var text: String = "**Hello **"
 	
 enum EducationTopics {OOP, Binary, LogicGates, Networking}
 
@@ -15,6 +14,7 @@ var typingFinished: bool = false
 
 func _ready() -> void:
 	displayText.text = titleText
+	#_on_get_information_about_topic("oop")
 	SignalManager.connect("more_information_on_topic", _on_get_information_about_topic)
 	
 func _process(delta: float) -> void:
@@ -31,43 +31,23 @@ func textTypingAnimation(text: String) -> void:
 func clear() -> void:
 	await get_tree().create_timer(0.5).timeout
 	displayText.text = ""
-	
-
-func load_json(path: String) -> Dictionary:
-	var file := FileAccess.open(path, FileAccess.READ)
-	if not file:
-		print("Error: Unable to open file at %s" % path)
-		return {}
-	
-	var content = file.get_as_text()
-	var parsed_json = JSON.parse_string(content)
-	
-	if parsed_json == null:
-		print("Error: Failed to parse JSON.")
-		return {}
-
-	return parsed_json
-
-# Function to retrieve topic information from storage
-func get_topic_information_from_storage(topic: String) -> String:
-	var data := load_json("res://Assets/Json_data/education_data.json")
-	if topic in data:
-		return data[topic]
-	else:
-		return ""
 
 func _on_get_information_about_topic(topic: String) -> void:
-	var topicInformation: String = get_topic_information_from_storage(topic)
-	if topicInformation:
-		textTypingAnimation(topicInformation)
+	var topic_data: String = Variables.get_text_about_topic(topic)
+	if topic_data.length() > 0:
+		textTypingAnimation(topic_data)
 		return 
-		
-	var prompt: String = "You are an assistant AI inside a digital simulation designed to teach programming concepts interactively. \
-						 Your responses will be used in an educational 2D platformer game called 'Re:Compiled.' The game’s world is a computer system, \
-						 and the player learns by interacting with elements in the environment. \n\nExplain " + topic + " in a clear and concise manner, \
-						using in-game elements as examples where appropriate. Avoid unnecessary introductions or filler words. Structure your response as if \
-						guiding the player through the simulation, keeping explanations engaging and relevant to the world they are exploring."
+
+	var prompt := "[b]Simulation AI Assistant:[/b]\n\n"
+	prompt += "You are an advanced AI inside the digital simulation of 'Re:Compiled,' an educational 2D platformer game. "
+	prompt += "Your purpose is to guide the player through complex programming concepts by relating them to in-game elements. "
+	prompt += "For instance, enemies, platforms, and NPCs are all objects, demonstrating Object-Oriented Programming principles.\n\n"
+	prompt += "[b]Explain '" + topic + "'[/b] in a way that fits within the simulation's world. "
+	prompt += "Use in-game analogies and avoid generic explanations. Your response should be engaging, informative, and free from unnecessary introductions or filler words."
+
+	# Request information from the AI
 	getTopicInformationRequest(prompt)
+
 
 
 func getTopicInformationRequest(prompt: String) -> void:

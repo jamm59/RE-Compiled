@@ -1,15 +1,14 @@
 extends EnemyBase
-class_name BatN
+class_name BatEnemy
 
 
 
 func _ready() -> void:
 	super()
+	SPEED *= 3
 		
-	
 func _physics_process(delta: float) -> void:
 	super(delta)   
-
 
 func handleMoveAndAvoidObstacles()-> void:
 	velocity.x = start_direction * SPEED
@@ -22,33 +21,27 @@ func handleMoveAndAvoidObstacles()-> void:
 		animated_sprite_2d.flip_h = true
 		
 func handleFollowPlayerLogic() -> void:
-	if player != null:
-		if player.state == player.STATE.DEAD:
-			followPath = true
-			state = STATE.IDLE
-			return 
-		var player_position = player.global_position
-		var angle_between_enemy_and_player = atan2(player_position.y - global_position.y, player_position.x - global_position.x)
-		var dir_x = round(cos(angle_between_enemy_and_player))
-		var dir_y = round(sin(angle_between_enemy_and_player))
-		velocity.x = dir_x * SPEED
-		velocity.y = dir_y * SPEED
+	if not player:
+		return 
 		
-		if dir_x == 1:
-			animated_sprite_2d.flip_h = false
-		elif dir_x == -1:
-			animated_sprite_2d.flip_h = true
-			
-		if ray_cast_left.is_colliding() or ray_cast_right.is_colliding():
-			for coll in [ray_cast_left, ray_cast_right]:
-				var body = coll.get_collider()
-				if not body:
-					continue
-				if (body is TileMapLayer and is_on_wall()) or (body is EnemyBase and body.state == body.STATE.DEAD): # Tilemap base layer
-					global_position.y = player_position.y - 10
-		else:
-			state = STATE.RUN
+	if player.state == player.STATE.DEAD:
+		parolePath = true
+		state = STATE.IDLE
+		return 
+		
+	var angle: float = atan2(player.global_position.y - global_position.y, player.global_position.x - global_position.x)
+	var distance: float = player.global_position.distance_to(global_position)
+	var dir_x: float = round(cos(angle))
+	var dir_y: float = round(sin(angle))
+	velocity.x = dir_x * SPEED
+	velocity.y = dir_y * SPEED
+	
+	change_direction_of_sprite_animation(dir_x)
+	detect_obstacle_while_following_player()
+	_attack_player(distance, dir_x)
 				
 				
-func apply_gravity(delta: float) -> void:
-	pass
+func getGravity() -> float:
+	if state != STATE.DEAD:
+		return 0.0
+	return JUMP_GRAVITY if velocity.y < 0.0 else FALL_GRAVITY

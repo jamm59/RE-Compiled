@@ -13,7 +13,7 @@ func update_state_animation() -> void:
 		speed = 150
 		
 	match state:
-		NPCSTATE.IDLE:
+		STATE.IDLE:
 			velocity.x = move_toward(velocity.x, 0.0, friction)
 			var hasEatingAnimation: bool = animal.sprite_frames.get_animation_names().has("Eating")
 			if not hasEatingAnimation and not remote_control_activated:
@@ -22,13 +22,13 @@ func update_state_animation() -> void:
 				animal.play("Eating")
 			if remote_control_activated:
 				animal.play("Idle")
-		NPCSTATE.MOVE:
+		STATE.MOVE:
 			animal.play("Move")
 			if remote_control_activated:
 				velocity.x = move_toward(velocity.x, previousDirection * speed, acceleration)
 			else:
 				velocity.x = move_toward(velocity.x, direction * speed, acceleration)
-		NPCSTATE.JUMP:
+		STATE.JUMP:
 			animal.play("Jump")
-		NPCSTATE.FALL:
+		STATE.FALL:
 			animal.play("Fall")

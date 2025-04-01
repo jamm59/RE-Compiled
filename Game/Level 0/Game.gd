@@ -104,9 +104,10 @@ func _short_range_terminal_control(pos: Vector2, name: String) -> void:
 				previousDistance = distance
 				npc_animal = npc
 				
-	if npc_animal is FerretNPC:
+	if npc_animal is FerretNPC or npc_animal is CrowNPC:
 		npc_animal.remote_control_activated = true
 		player.can_use_controls = false
+	
 	
 				
 func _terminal_control(pos: Vector2, name: String) -> void:
@@ -153,15 +154,18 @@ func _terminal_control_education_signal(pos: Vector2, name: String, activate_mul
 	activatePlatform(platform)
 
 func activatePlatform(platform: Node2D) -> void:
-	if platform is HoverPlatform or platform is SwingHammer or platform is GateDoor or platform is FanBlade or platform is LargeElevator:
+	if platform is HoverPlatform or platform is SwingHammer or platform is GateDoor or platform is LargeElevator:
 		platform.activate()
+	if platform is FanBlade:
+		platform.activate()
+		$GravityRoomArea/CollisionShape2D.disabled = false
 	if platform is Laser:
 		platform.deactivateLasers()
 	if platform:
 		cinematic.visible = true
 		player.hud.visible = false
 		player.can_use_controls = false
-		camera_2d.global_position = platform.position
+		camera_2d.global_position = platform.global_position
 		await get_tree().create_timer(2).timeout
 		cinematic.visible = false
 		player.hud.visible = true
@@ -228,6 +232,20 @@ func _on_short_range_terminal_body_entered(body: Node2D) -> void:
 		showDialogue("timeline-short-range")
 		$CinematicAreas/ShortRangeTerminal.disconnect("body_entered", _on_short_range_terminal_body_entered)
 	
+func _on_mini_boss_introduction_body_entered(body: Node2D) -> void:
+	if body is Player:
+		camera_2d.global_position = $EnemyGroup/MiniBoss.global_position
+		await get_tree().create_timer(2).timeout
+		camera_2d.global_position = camera_pos.global_position
+		showDialogue("timeline-miniboss")
+		$CinematicAreas/MiniBossIntroduction.disconnect("body_entered",_on_mini_boss_introduction_body_entered )
+
+
+func _on_duplication_enemy_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		showDialogue("timeline-duplicate")
+		$CinematicAreas/DuplicationEnemyArea.disconnect("body_entered", _on_duplication_enemy_area_body_entered)
+
 func _on_dialogic_signal(argument: String):
 	DialogueDone()
 	match argument:
@@ -239,6 +257,11 @@ func _on_dialogic_signal(argument: String):
 			title_card.showTitleCard("Object-Oriented Programming Concepts")
 			await get_tree().create_timer(3).timeout 
 			title_card.visible = false
+		"timeline-miniboss":
+			$CanActivatePlatforms/GateDoor4.deactivate()
+			camera_2d.global_position = $CanActivatePlatforms/GateDoor4.global_position
+			await get_tree().create_timer(2).timeout
+			camera_2d.global_position = camera_pos.global_position
 
 func _on_player_dead() -> void:
 	player._reset_player(checkpoint)
@@ -261,7 +284,6 @@ func _on_ladder_area_body_exited(body: Node2D) -> void:
 func _on_check_points_body_entered(body: Node2D) -> void:
 	if body is Player:
 		checkpoint = body.global_position
-
 
 func _on_gravity_room_area_body_entered(body: Node2D) -> void:
 	if body is Player:

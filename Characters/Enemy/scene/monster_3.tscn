@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://fd7bouvrucnk"]
+[gd_scene load_steps=36 format=3 uid="uid://fd7bouvrucnk"]
 
 [ext_resource type="Shader" uid="uid://dpf3btpbxnldy" path="res://Shaders/HitFlash.gdshader" id="1_li8un"]
 [ext_resource type="Script" uid="uid://cwkkhjiqob0e6" path="res://Characters/Enemy/monster.gd" id="1_x3due"]
@@ -325,16 +325,6 @@ _data = {
 &"RESET": SubResource("Animation_o80mw")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8a12"]
-bg_color = Color(0.945098, 0.403922, 0.403922, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_khw34"]
-bg_color = Color(1, 0.607843, 0.0901961, 1)
-
-[sub_resource type="Theme" id="Theme_mxuxe"]
-ProgressBar/styles/background = SubResource("StyleBoxFlat_c8a12")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_khw34")
-
 [node name="Monster3" type="CharacterBody2D"]
 script = ExtResource("1_x3due")
 
@@ -397,15 +387,6 @@ frame_progress = 0.772414
 libraries = {
 &"": SubResource("AnimationLibrary_sjfte")
 }
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -15.0
-offset_top = -24.0
-offset_right = 15.0
-offset_bottom = -19.0
-theme = SubResource("Theme_mxuxe")
-value = 50.0
-show_percentage = false
 
 [connection signal="body_entered" from="HealthBoxComponent" to="." method="_on_health_box_component_body_entered"]
 [connection signal="body_entered" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_entered"]

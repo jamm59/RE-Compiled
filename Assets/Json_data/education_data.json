@@ -1,6 +1,16 @@
 {
 "oop": {
-	"text": "[b]Object-Oriented Programming (OOP)[/b] is a programming paradigm based on the concept of 'objects,' which can contain data and behavior. In [i]Re:Compiled[/i], everything in the simulation—from enemies to platforms—is an object, each with its own properties and methods.",
+	"title": "[font_size=25][center][b]More Information[/b][/center][/font_size]\t\t [font_size=30][center][b]Object Oriented Programming[/b][/center][/font_size]\n\n",
+	"text": 
+		
+	 "[b]Object-Oriented Programming (OOP)[/b] is a programming paradigm where everything is treated as an object with properties (data) and behaviors (methods). In [i]Re:Compiled[/i], the enemies, platforms, and NPCs are all objects, each built from blueprints called classes.\n
+	  [b]Classes and Objects[/b]: A [b]class[/b] is like a blueprint, and an [b]object[/b] is an instance of that blueprint. For example, all viruses in the game are based on an [b]Enemy[/b] class, but each has unique properties like speed or attack type.\n
+	  [b]Inheritance[/b]: Some objects share traits. Instead of rewriting code, a subclass inherits from a parent class. A [b]FirewallEnemy[/b] might inherit from [b]Enemy[/b] but have extra defenses.\n
+	  [b]Polymorphism[/b]: Different objects can respond differently to the same action. If the player uses [b]Absorb()[/b] on an enemy, the effect depends on the type of enemy absorbed.\n
+	  [b]Encapsulation[/b]: Objects hide internal details, exposing only what’s necessary. You can’t modify an enemy’s health directly, but you can reduce it with an attack.\n
+	  [b]Abstraction[/b]: Complex systems are simplified. When the player jumps on a platform, the underlying physics are hidden—only the outcome matters.\n
+	  In this digital world, understanding OOP is key. Every interaction follows these principles, and mastering them is the only way to escape the simulation.",
+	
 	"questions": [
 		{
 			"question": "[b]In OOP, what is a class?[/b]",

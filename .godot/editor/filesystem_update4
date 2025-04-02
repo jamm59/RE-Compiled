@@ -33,3 +33,6 @@ res://Game/UserInterface/hud.tscn
 res://AutoLoad/variables.gd
 res://Game/UserInterface/mcq_u_i.tscn
 res://Game/UserInterface/mcq_u_i.gd
+res://Dialogic/Timelines/timeline-mid-miniboss.dtl
+res://Characters/Companion/Companion.tscn
+res://Characters/Companion/companion.gd

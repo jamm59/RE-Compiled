@@ -2,10 +2,13 @@ extends EnemyBase
 class_name BatEnemy
 
 
+var prev_x: float = 0.0
+var prev_y: float = 0.0
+
 
 func _ready() -> void:
 	super()
-	SPEED *= 3
+	SPEED *= 2
 		
 func _physics_process(delta: float) -> void:
 	super(delta)   
@@ -33,6 +36,7 @@ func handleFollowPlayerLogic() -> void:
 	var distance: float = player.global_position.distance_to(global_position)
 	var dir_x: float = round(cos(angle))
 	var dir_y: float = round(sin(angle))
+		
 	velocity.x = dir_x * SPEED
 	velocity.y = dir_y * SPEED
 	

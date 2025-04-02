@@ -21,14 +21,14 @@ func load_json(path: String) -> Dictionary:
 	return parsed_json
 
 # Function to retrieve topic information from storage
-func get_text_about_topic(topic: String) -> String:
+func get_text_about_topic(topic: String) -> Dictionary:
 	var data: Dictionary = Variables.load_json("res://Assets/Json_data/education_data.json")
 	if topic in data and "text" in data[topic]:
-		var text: String = data[topic]["text"]
-		return text
+		var content: Dictionary = data[topic]
+		return content
 	
 	# Return an empty dictionary if no questions are found
-	return ""
+	return {}
 
 func get_random_question_from_topic(topic: String) -> Dictionary:
 	var data := load_json("res://Assets/Json_data/education_data.json")
@@ -40,3 +40,24 @@ func get_random_question_from_topic(topic: String) -> Dictionary:
 			return questions[randi() % questions.size()]  # Pick a random question
 	# Return an empty dictionary if no questions are found
 	return {}
+	
+	
+func _create_bullets(n_of_bullets: int, bullets: Node2D) -> void:
+	const BULLET = preload("res://Characters/Enemy/scene/bullet.tscn")
+	for i in n_of_bullets:
+		var bullet: Bullet = BULLET.instantiate()
+		bullet.visible = false
+		bullets.add_child(bullet)
+		
+		
+func shoot_bullets(fromBody: Node2D, toBody: Node2D, bullets: Node2D, bullet_start_location: Marker2D):
+	var index: int = 0;
+	var angle = atan2(toBody.global_position.y - fromBody.global_position.y, toBody.global_position.x - fromBody.global_position.x)
+	for bullet: Bullet in bullets.get_children():
+		if bullet.is_moving:
+			continue
+		bullet.visible = true
+		await get_tree().create_timer(0.7 * index).timeout
+		bullet.shoot(bullet_start_location.global_position, angle)
+		index += 1
+		

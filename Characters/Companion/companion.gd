@@ -5,6 +5,9 @@ enum CompanionState {IDLE, MOVE}
 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var bullet_start_location: Marker2D = $BulletStartLocation
+@onready var bullets: Node2D = $Bullets
+
 @export var left_pos: Marker2D
 @export var right_pos: Marker2D
 @export var companion_location: Marker2D
@@ -12,9 +15,13 @@ enum CompanionState {IDLE, MOVE}
 @export var companion_can_follow: bool = false
 @export var activate_companion_controls: bool = true
 
+var can_shoot: bool = false
 var state: CompanionState = CompanionState.IDLE
 var speed: float = 7.0
 var direction: float = 0.0
+
+func _ready() -> void:
+	Variables._create_bullets(5, bullets)
 
 func move(delta: float) -> void:
 	if not companion_can_follow:
@@ -44,3 +51,6 @@ func handleAnimationState() -> void:
 			animated_sprite_2d.play("Move")
 			
 		
+func _on_detect_enemy_area_body_entered(body: Node2D) -> void:
+	if body is EnemyDuplicate and can_shoot:
+		Variables.shoot_bullets(self, body, bullets, bullet_start_location)

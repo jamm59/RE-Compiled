@@ -1,22 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://buwj3qvnt1toe"]
+[gd_scene load_steps=4 format=3 uid="uid://buwj3qvnt1toe"]
 
 [ext_resource type="Script" uid="uid://uib7xb4wixs6" path="res://Characters/Enemy/scripts/bullet.gd" id="1_13oph"]
+[ext_resource type="Texture2D" uid="uid://ddekkc5jj8cek" path="res://Assets/other/ball.png" id="2_f2vuc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_13oph"]
-size = Vector2(11, 6)
+[sub_resource type="CircleShape2D" id="CircleShape2D_f2vuc"]
+radius = 4.0
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_13oph")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_13oph")
+rotation = 1.5708
+shape = SubResource("CircleShape2D_f2vuc")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -5.0
-offset_top = -3.0
-offset_right = 6.0
-offset_bottom = 3.0
-color = Color(0.886275, 0.894118, 0.792157, 1)
+[node name="Ball" type="Sprite2D" parent="."]
+position = Vector2(5.96046e-08, 4.76837e-07)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_f2vuc")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

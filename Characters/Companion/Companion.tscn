@@ -1,10 +1,26 @@
-[gd_scene load_steps=28 format=3 uid="uid://d2j3oa6ab5xqh"]
+[gd_scene load_steps=31 format=3 uid="uid://d2j3oa6ab5xqh"]
 
 [ext_resource type="Script" uid="uid://bch3c6j458eqs" path="res://Characters/Companion/companion.gd" id="1_kkq6f"]
+[ext_resource type="PackedScene" uid="uid://buwj3qvnt1toe" path="res://Characters/Enemy/scene/bullet.tscn" id="2_eysbv"]
 [ext_resource type="Shader" uid="uid://dvgk6116kbqbr" path="res://Shaders/custom-black-white.gdshader" id="2_wq0s5"]
 [ext_resource type="Texture2D" uid="uid://co8r8dim5xwa" path="res://Characters/Companion/Scout/Idle.png" id="4_g6vt0"]
 [ext_resource type="Texture2D" uid="uid://d1t0ts3cqmjl" path="res://Characters/Companion/Scout/Trans to Fly.png" id="5_wq0s5"]
 [ext_resource type="Texture2D" uid="uid://dbpm01iyp0xbx" path="res://Characters/Companion/Scout/Fly Forward.png" id="6_eysbv"]
+[ext_resource type="PackedScene" uid="uid://cycnm5bqylu70" path="res://Characters/Enemy/scene/monster_5.tscn" id="7_yms4k"]
+
+[sub_resource type="Animation" id="Animation_6dt7e"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_231a6"]
+resource_name = "hover"
+length = 2.0
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4c4un"]
+_data = {
+&"RESET": SubResource("Animation_6dt7e"),
+&"hover": SubResource("Animation_231a6")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wq0s5"]
 shader = ExtResource("2_wq0s5")
@@ -146,23 +162,25 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="Animation" id="Animation_6dt7e"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_231a6"]
-resource_name = "hover"
-length = 2.0
-loop_mode = 1
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4c4un"]
-_data = {
-&"RESET": SubResource("Animation_6dt7e"),
-&"hover": SubResource("Animation_231a6")
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eysbv"]
+size = Vector2(199, 119.5)
 
 [node name="Companion" type="Node2D"]
 script = ExtResource("1_kkq6f")
 metadata/_edit_vertical_guides_ = [-98.0]
+
+[node name="Monster5" parent="." instance=ExtResource("7_yms4k")]
+position = Vector2(79, 33)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4c4un")
+}
+autoplay = "hover"
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Bullet" parent="Bullets" instance=ExtResource("2_eysbv")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_wq0s5")
@@ -170,9 +188,13 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_sf11v")
 animation = &"Idle"
 autoplay = "Idle"
+flip_h = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_4c4un")
-}
-autoplay = "hover"
+[node name="DetectEnemyArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectEnemyArea"]
+shape = SubResource("RectangleShape2D_eysbv")
+
+[node name="BulletStartLocation" type="Marker2D" parent="."]
+
+[connection signal="body_entered" from="DetectEnemyArea" to="." method="_on_detect_enemy_area_body_entered"]

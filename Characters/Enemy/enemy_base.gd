@@ -7,7 +7,6 @@ class_name EnemyBase
 @export var jump_time_to_peak : float = 0.3
 @export var jump_time_to_descent : float = 0.3
 
-
 @onready var JUMP_VELOCITY : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var JUMP_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var FALL_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
@@ -19,7 +18,6 @@ class_name EnemyBase
 @onready var ray_cast_right_ground: RayCast2D = $RayCast/RayCastRightGround
 @onready var ray_cast_top_right: RayCast2D = $RayCast/RayCastTopRight
 @onready var ray_cast_top_left: RayCast2D = $RayCast/RayCastTopLeft
-@onready var progress_bar: ProgressBar = $ProgressBar
 
 @onready var attack_timer: Timer = $AttackTimer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -51,10 +49,6 @@ var health: float
 func scaleHealth(h: float) -> float:
 	return (h / MAX_HEALTH) * 100
 	
-func tweenProgressBar(progressBar: ProgressBar, value:float, time: float = 0.3) -> void:
-	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(progressBar, "value", value, time)
-	
 func getGravity() -> float:
 	return JUMP_GRAVITY if velocity.y < 0.0 else FALL_GRAVITY
 
@@ -63,7 +57,6 @@ func apply_damage(damagePoint: int) -> void:
 		return 
 	animation_player.play("Hit")
 	health  = max(health - damagePoint, 0)
-	tweenProgressBar(progress_bar, scaleHealth(health), 0.5)
 	if health <= 0:
 		animation_player.play("Dead")
 		await get_tree().create_timer(0.6).timeout
@@ -144,7 +137,6 @@ func handleFollowPlayerLogic() -> void:
 func _ready() -> void:
 	health = MAX_HEALTH
 	animated_sprite_2d.flip_h = true if start_direction != 1 else false
-	tweenProgressBar(progress_bar, scaleHealth(health), 0.5)
 	
 func _physics_process(delta: float) -> void:		
 	if state == STATE.DEAD:
@@ -206,6 +198,5 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			(is_player_to_the_right and distance <= attackDistanceRight):
 			print("Attack landed at distance:", distance)
 			player.applyHitDamage(self)
-
 		# Reset to default movement behavior
 		state = STATE.RUN

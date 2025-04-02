@@ -1,3 +1,5 @@
+res://Characters/Enemy/scripts
+res://Characters/Companion/Scout
 res://Dialogic/Timelines
 res://Game
 res://Dialogic/Characters
@@ -18,6 +20,4 @@ res://Characters/NPCs/scripts
 res://Characters/NPCs/Assets
 res://Platforms/scenes
 C:/Users/ASUS-ROG/Desktop/Godot Projects/re-compiled/Assets/Json_data
-res://Characters/Protagonist/Vfx/attack
-res://Assets/other/coin
 C:/Users/ASUS-ROG/Desktop/Godot Projects/re-compiled/Build

@@ -103,21 +103,25 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Hydrogen"
+autowrap_mode = 3
 
 [node name="AnswerButton2" type="Button" parent="Control/Panel/VBoxContainer/PanelContainer/VBoxContainer/AnswerPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Helium"
+autowrap_mode = 3
 
 [node name="AnswerButton3" type="Button" parent="Control/Panel/VBoxContainer/PanelContainer/VBoxContainer/AnswerPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Carbon"
+autowrap_mode = 3
 
 [node name="AnswerButton4" type="Button" parent="Control/Panel/VBoxContainer/PanelContainer/VBoxContainer/AnswerPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Nitrogen"
+autowrap_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2

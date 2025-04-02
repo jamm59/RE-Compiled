@@ -94,6 +94,7 @@ translation/file_mode=1
 translation/translation_folder=""
 translation/save_mode=0
 translation/add_separator=false
+text/autocolor_names=false
 
 [editor_plugins]
 

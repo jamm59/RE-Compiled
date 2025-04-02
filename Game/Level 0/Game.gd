@@ -34,7 +34,9 @@ func _ready() -> void:
 	camera_2d.zoom = defaultZoom
 	Engine.time_scale = 0.9
 	#player.can_use_controls = false
-	
+	Dialogic.Inputs.auto_advance.per_word_delay = 0.3
+	Dialogic.Inputs.auto_advance.per_character_delay = 0.1
+
 	#Signals
 	SignalManager.connect("body_hit", _freeze_engine)
 	SignalManager.connect("enemy_dead", _on_enemy_dead)

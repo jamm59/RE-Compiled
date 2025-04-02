@@ -24,7 +24,7 @@ var answers: Array
 var correct_answer: String
 
 func _ready() -> void:
-	#visible = false
+	visible = false
 	var question_data = Variables.get_random_question_from_topic(Variables.current_topic)
 	question = question_data["question"]
 	answers = question_data["answers"]

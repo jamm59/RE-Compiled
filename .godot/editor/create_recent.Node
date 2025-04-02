@@ -1,3 +1,11 @@
+EnemyDuplicate
+CollisionShape2D
+StaticBody2D
+Camera2D
+Marker2D
+Area2D
+AnimatedSprite2D
+Node2D
 Control
 MCQ
 CanvasLayer
@@ -5,11 +13,3 @@ Label
 HBoxContainer
 Button
 RichTextLabel
-ColorPickerButton
-MarginContainer
-ColorRect
-Panel
-VBoxContainer
-GridContainer
-ColorPicker
-Node2D

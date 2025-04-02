@@ -5,15 +5,12 @@ class_name EducationModal
 @onready var displayText: RichTextLabel = $Panel/MarginContainer/RichTextLabel
 @onready var markdownText: MarkdownLabel = $Panel/MarginContainer/MarkdownLabel
 @onready var http_request: HTTPRequest = $HTTPRequest
-
-var titleText: String = "[font_size=25][center][b]More Information[/b][/center][/font_size]\t\t [font_size=30][center][b]Object Oriented Programming[/b][/center][/font_size]\n\n"
 	
 enum EducationTopics {OOP, Binary, LogicGates, Networking}
 
 var typingFinished: bool = false
 
 func _ready() -> void:
-	displayText.text = titleText
 	#_on_get_information_about_topic("oop")
 	SignalManager.connect("more_information_on_topic", _on_get_information_about_topic)
 	
@@ -33,9 +30,10 @@ func clear() -> void:
 	displayText.text = ""
 
 func _on_get_information_about_topic(topic: String) -> void:
-	var topic_data: String = Variables.get_text_about_topic(topic)
-	if topic_data.length() > 0:
-		textTypingAnimation(topic_data)
+	var topic_data: Dictionary = Variables.get_text_about_topic(topic)
+	if topic_data["text"].length() > 0:
+		displayText.text = topic_data["title"]
+		textTypingAnimation(topic_data["text"])
 		return 
 
 	var prompt := "[b]Simulation AI Assistant:[/b]\n\n"

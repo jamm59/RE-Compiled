@@ -15,7 +15,7 @@ void fragment() {
     if (black_white) {
 		output_color.rgb = COLOR.ggg;
 	    }
-		
+
     if (active) {
         vec4 white_color = vec4(0.969, 0.969, 0.969, texture_color.a);
         output_color = white_color;

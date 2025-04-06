@@ -75,7 +75,7 @@ func progressTimer() -> void:
 	tween.tween_property(self, "timer", 0, time)
 	await tween.finished
 	if not tryAgain:
-		delete_self()
+		tryAgain = false
 		return
 		
 	progress_bar.value = 100

@@ -7,6 +7,7 @@ enum CompanionState {IDLE, MOVE}
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bullet_start_location: Marker2D = $BulletStartLocation
 @onready var bullets: Node2D = $Bullets
+@onready var attack_timer: Timer = $AttackTimer
 
 @export var left_pos: Marker2D
 @export var right_pos: Marker2D
@@ -19,10 +20,14 @@ var can_shoot: bool = false
 var state: CompanionState = CompanionState.IDLE
 var speed: float = 7.0
 var direction: float = 0.0
+var enemy: EnemyDuplicate = null
+var hasPermissionToShoot: bool = false
 
-func _ready() -> void:
-	Variables._create_bullets(5, bullets)
 
+func _physics_process(delta: float) -> void:
+	move(delta)
+	
+	
 func move(delta: float) -> void:
 	if not companion_can_follow:
 		return 
@@ -32,6 +37,12 @@ func move(delta: float) -> void:
 			companion_location.global_position = left_pos.global_position if direction > 0.0 else right_pos.global_position
 	global_position = lerp(global_position, companion_location.global_position, speed * delta)
 	
+	if enemy and can_shoot:
+		can_shoot = false
+		attack_timer.start(1.0)
+		Variables.shoot_bullets(self, enemy, bullets, bullet_start_location, true)
+		#animated_sprite_2d.play("Attack 1")
+		
 	handleInput()
 	handleAnimationState()
 
@@ -52,5 +63,11 @@ func handleAnimationState() -> void:
 			
 		
 func _on_detect_enemy_area_body_entered(body: Node2D) -> void:
-	if body is EnemyDuplicate and can_shoot:
-		Variables.shoot_bullets(self, body, bullets, bullet_start_location)
+	if body is EnemyDuplicate and hasPermissionToShoot:
+		enemy = body
+		can_shoot = true
+		
+
+
+func _on_attack_timer_timeout() -> void:
+	can_shoot = true

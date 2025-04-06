@@ -53,12 +53,13 @@ const STOMP_255897 = preload("res://Assets/Music/stomp-255897.mp3")
 const SWORD_HIT = preload("res://Assets/Music/sword-hit.mp3")
 
 # Constants
-const DASH_MULTIPLIER: int = 2
+const DASH_MULTIPLIER: float = 2.0
 const SPEED: float = 180.0
-const KNOCKBACKVALUE: int = 30
-const DAMAGE_POINT: int = 3
-const WALL_PUSHBACK: int = 200
-const FALL_DISTANCE_THRESHOLD: int = 100
+const KNOCKBACKVALUE: float = 30
+const DAMAGE_POINT: float = 3.0
+const DAMAGE_POINT_HEAVY: float = 5.0
+const WALL_PUSHBACK: float = 200.0
+const FALL_DISTANCE_THRESHOLD: float = 100.0
 
 var toggle_gravity: bool =  false
 
@@ -75,6 +76,7 @@ var initialScaleX: float = 0.0
 var jump_count: int = 2
 var previousDirection: float = 1.0
 var health: float = 0.0
+var coins: int = 0
 var stamina: float = 100.0
 var statsInitDone: bool = false
 
@@ -90,7 +92,6 @@ func _ready() -> void:
 	health = MAX_HEALTH
 	tweenProgressBar(hud.health, scaleHealth(health), 1.0)
 	tweenProgressBar(hud.stamina, stamina, 1.0)
-	
 	
 func _physics_process(delta: float) -> void:
 	if state == STATE.DEAD:
@@ -108,6 +109,10 @@ func _physics_process(delta: float) -> void:
 	handleAttackBoxVisibility()
 	handleAnimationStateUpdate()
 	move_and_slide()
+	
+func update_coin() -> void:
+	coins += 1
+	hud.coins.text = str(coins)
 	
 func _get_gravity() -> float:
 	if isWallSliding:
@@ -211,7 +216,7 @@ func handleInput() -> void:
 	if Input.is_action_pressed("Dash"): # DASH IS INDEPENDENT OF OTHER EVENTS
 		state = STATE.DASH
 		
-	if Input.is_action_pressed("Roll"):
+	if Input.is_action_pressed("Roll") and velocity.y == 0.0:
 		state = STATE.ROLL
 		$HitBoxComponent.disabled = true
 		$RollHitBoxComponent.disabled = false
@@ -316,7 +321,6 @@ func _reset_player(checkpoint: Vector2) -> void:
 func knockBack(enemy: EnemyBase) -> void:
 	position.x -= KNOCKBACKVALUE if enemy.position.x > self.position.x else -KNOCKBACKVALUE
 
-	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation in ["Light1","Light2","Light3","AttackCombo", "Heavy", "Roll"]:
 		if is_on_floor():
@@ -326,5 +330,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		
 func _on_attack_box_component_body_entered(body: Node2D) -> void:
 	if body is EnemyBase:
-		body.apply_damage(DAMAGE_POINT)
+		if animated_sprite_2d.animation == "Light3":
+			body.apply_damage(DAMAGE_POINT_HEAVY)
+		else:
+			body.apply_damage(DAMAGE_POINT)
 			

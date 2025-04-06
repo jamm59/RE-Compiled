@@ -38,6 +38,7 @@ directories/dtl_directory={
 "timeline-enemy-encounter": "res://Dialogic/Timelines/timeline-enemy-encounter.dtl",
 "timeline-enemy-killed": "res://Dialogic/Timelines/timeline-enemy-killed.dtl",
 "timeline-first-enemy": "res://Dialogic/Timelines/timeline-first-enemy.dtl",
+"timeline-game-end": "res://Dialogic/Timelines/timeline-game-end.dtl",
 "timeline-mid-miniboss": "res://Dialogic/Timelines/timeline-mid-miniboss.dtl",
 "timeline-miniboss": "res://Dialogic/Timelines/timeline-miniboss.dtl",
 "timeline-npc-oop": "res://Dialogic/Timelines/timeline-npc-oop.dtl",

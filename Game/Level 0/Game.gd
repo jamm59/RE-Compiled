@@ -106,7 +106,7 @@ func _short_range_terminal_control(pos: Vector2, name: String) -> void:
 				previousDistance = distance
 				npc_animal = npc
 				
-	if npc_animal is FerretNPC or npc_animal is CrowNPC:
+	if npc_animal is FerretNPC or npc_animal is CrowNPC or npc_animal is RobotNPC:
 		npc_animal.remote_control_activated = true
 		player.can_use_controls = false
 	
@@ -236,16 +236,17 @@ func _on_short_range_terminal_body_entered(body: Node2D) -> void:
 	
 func _on_mini_boss_introduction_body_entered(body: Node2D) -> void:
 	if body is Player:
+		$CinematicAreas/MiniBossIntroduction.disconnect("body_entered",_on_mini_boss_introduction_body_entered )
 		camera_2d.global_position = $EnemyGroup/MiniBoss.global_position
 		await get_tree().create_timer(2).timeout
 		camera_2d.global_position = camera_pos.global_position
 		showDialogue("timeline-miniboss")
-		$CinematicAreas/MiniBossIntroduction.disconnect("body_entered",_on_mini_boss_introduction_body_entered )
 
 
 func _on_duplication_enemy_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		showDialogue("timeline-duplicate")
+		companion.hasPermissionToShoot = true
 		$CinematicAreas/DuplicationEnemyArea.disconnect("body_entered", _on_duplication_enemy_area_body_entered)
 
 func _on_dialogic_signal(argument: String):
@@ -272,6 +273,15 @@ func _on_enemy_dead(name: String) -> void:
 	if name == "Monster": # first enemy encountered
 		await get_tree().create_timer(1).timeout
 		showDialogue("timeline-enemy-killed")
+	
+	if name == "MiniBoss":
+		await get_tree().create_timer(1).timeout
+		$CanActivatePlatforms/GateDoor6.activate()
+		camera_2d.global_position = $CanActivatePlatforms/GateDoor6.global_position
+		await get_tree().create_timer(2).timeout
+		camera_2d.global_position = camera_pos.global_position
+		showDialogue("timeline-game-end")
+		
 		
 func _on_ladder_area_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -304,3 +314,8 @@ func _on_dead_area_2d_body_entered(body: Node2D) -> void:
 		player._reset_player(checkpoint)
 	if body is EnemyBase:
 		body.queue_free()
+
+
+func _on_level_end_body_entered(body: Node2D) -> void:
+	if body is Player:
+		print("nothing ")

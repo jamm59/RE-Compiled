@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cwjfvt43rwlkq"]
+[gd_scene load_steps=30 format=3 uid="uid://cwjfvt43rwlkq"]
 
 [ext_resource type="Script" uid="uid://bygd4wo3txn30" path="res://Platforms/scripts/question_terminal.gd" id="1_4te5c"]
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="1_do2k0"]
@@ -21,6 +21,7 @@
 [ext_resource type="Shader" uid="uid://cm30ghxsl8exq" path="res://Shaders/blackandwhite.gdshader" id="17_5ra1n"]
 [ext_resource type="Texture2D" uid="uid://ccvbuud12l3oo" path="res://Assets/platforms/Weapons/WR_NightBoundSet_Spritesheet.png" id="18_e6gux"]
 [ext_resource type="PackedScene" uid="uid://dwey2803cs42s" path="res://Game/UserInterface/mcq_u_i.tscn" id="21_6qwk5"]
+[ext_resource type="AudioStream" uid="uid://cxgyd8gbjqgum" path="res://Assets/Music/lever.mp3" id="22_73o0j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_do2k0"]
 shader = ExtResource("17_5ra1n")
@@ -111,6 +112,18 @@ tracks/1/keys = {
 "points": PackedFloat32Array(5.236, -0.25, 0, 0.25, 0, 3.927, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_6qwk5"]
 length = 0.001
@@ -135,6 +148,18 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6qwk5"]
@@ -286,6 +311,10 @@ libraries = {
 }
 
 [node name="MCQ_U_I" parent="." instance=ExtResource("21_6qwk5")]
+visible = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_73o0j")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

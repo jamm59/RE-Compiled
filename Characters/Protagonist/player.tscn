@@ -113,7 +113,7 @@ shader_parameter/active = false
 shader_parameter/black_white = false
 shader_parameter/tolerance = 0.29
 shader_parameter/prev_color = Color(1, 1, 1, 1)
-shader_parameter/new_color = Color(1, 0.101961, 0, 1)
+shader_parameter/new_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sw72e"]
 atlas = ExtResource("16_2abuy")

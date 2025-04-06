@@ -2,7 +2,7 @@ class_name CrowNPC extends NPCBase
 
 func _ready() -> void:
 	super.initVariables()
-	animal = $Crow
+	npc = $Crow
 	
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
@@ -32,7 +32,7 @@ func handle_input(delta: float) -> void:
 		#tweenRotation(animal, -45) if animal.flip_h else tweenRotation(animal, 45)
 	
 	if not is_on_floor() and velocity.y < 0:
-		tweenRotation(animal, 0, 0.15)
+		tweenRotation(npc, 0, 0.15)
 		
 	if is_on_floor():
-		animal.rotation_degrees = 0
+		npc.rotation_degrees = 0

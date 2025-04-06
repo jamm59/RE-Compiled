@@ -1,10 +1,9 @@
 class_name DeerNPC extends NPCBase
 
 func _ready() -> void:
-	animal = $Deer
+	npc = $Deer
 	super.initVariables()
 		
-	
 func _physics_process(delta: float) -> void:
 	super(delta)   
 
@@ -24,18 +23,18 @@ func move_freely(delta: float) -> void:
 		
 	if not ray_cast_right_ground.is_colliding() or ray_cast_right.is_colliding():
 		direction = -1
-		animal.flip_h = true
+		npc.flip_h = true
 		
 	elif not ray_cast_left_ground.is_colliding() or ray_cast_left.is_colliding():
 		direction = 1
-		animal.flip_h = false
+		npc.flip_h = false
 		
 		
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
-		animal.play("Detected")
+		npc.play("Detected")
 		$Area2D.disconnect("body_entered", _on_area_2d_body_entered)
 
 func _on_deer_animation_finished() -> void:
-	if animal.animation == "Detected":
-		animal.play("Idle")
+	if npc.animation == "Detected":
+		npc.play("Idle")

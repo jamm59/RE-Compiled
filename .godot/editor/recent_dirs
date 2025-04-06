@@ -1,10 +1,10 @@
-res://Characters/Enemy/scripts
-res://Characters/Companion/Scout
 res://Dialogic/Timelines
+res://Game/UserInterface
+res://Characters/Companion/Scout
+res://Characters/Enemy/scripts
 res://Game
 res://Dialogic/Characters
 res://
-res://Game/UserInterface
 res://Characters/Enemy/scene
 res://Assets/Vfx
 res://Characters/Enemy/Assets/Mecha

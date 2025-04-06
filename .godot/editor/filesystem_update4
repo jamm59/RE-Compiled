@@ -1,10 +1,11 @@
-res://Characters/Enemy/scene/mini_boss.tscn
+res://Characters/Enemy/scene/bullet.tscn
 res://Shaders/HitFlash.gdshader
 res://Resources/panel-hud-theme.tres
 res://Resources/progress-bar-theme.tres
 res://Resources/panel-dark-theme.tres
-res://Characters/Enemy/enemy_base.gd
+res://Characters/Enemy/scripts/bullet.gd
 res://Game/Level 0/Game.tscn
+res://Characters/Companion/Companion.tscn
 res://Platforms/scenes/Coin.tscn
 res://Characters/Enemy/scene/monster.tscn
 res://Characters/Enemy/scene/monster_2.tscn
@@ -12,7 +13,7 @@ res://Characters/Enemy/scene/monster_3.tscn
 res://Characters/Enemy/scene/monster_4.tscn
 res://Characters/Enemy/scene/monster_5.tscn
 res://Characters/Enemy/scene/bat_eyes.tscn
-res://Characters/Enemy/scene/bullet.tscn
+res://Characters/Enemy/scene/mini_boss.tscn
 res://Platforms/scenes/question_terminal.tscn
 res://Characters/Protagonist/player.tscn
 res://Characters/Enemy/EnemyBase.tscn
@@ -20,19 +21,31 @@ res://Game/story_line.tscn
 res://Game/Menu/Menu.tscn
 res://Game/UserInterface/education_modal.tscn
 res://Game/select_player.tscn
-res://Characters/Enemy/scripts/mini_boss.gd
-res://Characters/Enemy/scripts/monster_duplicate.gd
-res://Characters/Enemy/scripts/flying_enemy.gd
-res://Dialogic/Characters/Enemy.dch
-res://Dialogic/Characters/MiniBoss.dch
-res://Characters/Enemy/scripts/bullet.gd
-res://Game/Level 0/game.gd
-res://Assets/Json_data/education_data.json
-res://Game/UserInterface/education_modal.gd
 res://Game/UserInterface/hud.tscn
-res://AutoLoad/variables.gd
 res://Game/UserInterface/mcq_u_i.tscn
-res://Game/UserInterface/mcq_u_i.gd
-res://Dialogic/Timelines/timeline-mid-miniboss.dtl
-res://Characters/Companion/Companion.tscn
+res://Characters/Enemy/scripts/mini_boss.gd
+res://Characters/Enemy/enemy_base.gd
+res://AutoLoad/variables.gd
+res://Game/Level 0/game.gd
+res://Game/UserInterface/touch_buttons.tscn
+res://Shaders/blackandwhite.gdshader
+res://Shaders/custom-black-white.gdshader
+res://Game/UserInterface/education_modal.gd
+res://Dialogic/Timelines/timeline-game-end.dtl
 res://Characters/Companion/companion.gd
+res://Characters/Protagonist/player.gd
+res://Platforms/scenes/small_elevator.tscn
+res://Platforms/scenes/room_elevator.tscn
+res://Platforms/scenes/Terminal.tscn
+res://Platforms/scenes/switch_button.tscn
+res://Platforms/scripts/switch_button.gd
+res://Game/story_line.gd
+res://Game/UserInterface/mcq_u_i.gd
+res://Characters/NPCs/scene/robot_npc.tscn
+res://Characters/NPCs/scripts/robot_npc.gd
+res://Characters/NPCs/scripts/npc_base.gd
+res://Characters/NPCs/scene/ferret_npc.tscn
+res://Characters/NPCs/scripts/ferret_npc.gd
+res://Characters/NPCs/scripts/crow_npc.gd
+res://Characters/NPCs/scene/deer_npc.tscn
+res://Characters/NPCs/scripts/deer_npc.gd

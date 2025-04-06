@@ -2,7 +2,7 @@ class_name FerretNPC extends NPCBase
 
 
 func _ready() -> void:
-	animal = $Ferret
+	npc = $Ferret
 	initVariables()
 
 func _physics_process(delta: float) -> void:
@@ -15,20 +15,20 @@ func update_state_animation() -> void:
 	match state:
 		STATE.IDLE:
 			velocity.x = move_toward(velocity.x, 0.0, friction)
-			var hasEatingAnimation: bool = animal.sprite_frames.get_animation_names().has("Eating")
+			var hasEatingAnimation: bool = npc.sprite_frames.get_animation_names().has("Eating")
 			if not hasEatingAnimation and not remote_control_activated:
-				animal.play("Idle")
+				npc.play("Idle")
 			elif hasEatingAnimation and not remote_control_activated:
-				animal.play("Eating")
+				npc.play("Eating")
 			if remote_control_activated:
-				animal.play("Idle")
+				npc.play("Idle")
 		STATE.MOVE:
-			animal.play("Move")
+			npc.play("Move")
 			if remote_control_activated:
 				velocity.x = move_toward(velocity.x, previousDirection * speed, acceleration)
 			else:
 				velocity.x = move_toward(velocity.x, direction * speed, acceleration)
 		STATE.JUMP:
-			animal.play("Jump")
+			npc.play("Jump")
 		STATE.FALL:
-			animal.play("Fall")
+			npc.play("Fall")

@@ -2,14 +2,13 @@ extends CharacterBody2D
 class_name NPCBase
 
 @onready var camera_2d: Camera2D = $Camera2D
-@onready var animal: AnimatedSprite2D
+@onready var npc: AnimatedSprite2D
 @onready var ray_cast_right: RayCast2D = $RayCast/RayCastRight
 @onready var ray_cast_left: RayCast2D = $RayCast/RayCastLeft
 @onready var ray_cast_left_ground: RayCast2D = $RayCast/RayCastLeftGround
 @onready var ray_cast_right_ground: RayCast2D = $RayCast/RayCastRightGround
 
 @export_group("NPC Settings")
-@export var is_animal: bool = true
 @export var remote_control_activated: bool = false
 
 
@@ -29,14 +28,15 @@ var acceleration: float = 50.0
 var friction: float = 40.0
 var wall_speed: float = 100.0
 var jump_force: float = -300.0
-var previousDirection: float = 0.0
+var previousDirection: float = 1.0
 
 var direction: float = [1.0, -1.0].pick_random()
 
 var toggleGravity: bool = false
-var animal_in_danger: bool = false 
+var npc_in_danger: bool = false 
 
-enum STATE {IDLE, MOVE, JUMP,FALL, WALL_CLIMB}
+enum STATE {IDLE, MOVE, JUMP,FALL, WALL_CLIMB, ATTACK}
+
 var state: STATE = STATE.IDLE
 
 func getGravity() -> float:
@@ -44,7 +44,8 @@ func getGravity() -> float:
 	
 	
 func _ready() -> void:
-	animal = $Fox
+	previousDirection = direction
+	npc = $Fox
 	initVariables()
 		
 func _physics_process(delta: float) -> void:
@@ -69,11 +70,11 @@ func move_freely(delta: float) -> void:
 	state = STATE.MOVE
 	if not ray_cast_right_ground.is_colliding() or ray_cast_right.is_colliding():
 		direction = -1
-		animal.flip_h = true
+		npc.flip_h = true
 		
 	elif not ray_cast_left_ground.is_colliding() or ray_cast_left.is_colliding():
 		direction = 1
-		animal.flip_h = false
+		npc.flip_h = false
 
 	
 func handle_input(delta: float) -> void:
@@ -93,7 +94,7 @@ func handle_input(delta: float) -> void:
 	if Input.is_action_pressed("Left") or Input.is_action_pressed("Right"):
 		state = STATE.MOVE
 		if direction != 0.0:
-			animal.flip_h = false if direction > 0 else true
+			npc.flip_h = false if direction > 0 else true
 		
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = jump_force
@@ -109,15 +110,15 @@ func update_state_animation() -> void:
 	match state:
 		STATE.IDLE:
 			velocity.x = move_toward(velocity.x, 0.0, friction)
-			var hasEatingAnimation: bool = animal.sprite_frames.get_animation_names().has("Eating")
+			var hasEatingAnimation: bool = npc.sprite_frames.get_animation_names().has("Eating")
 			if not hasEatingAnimation and not remote_control_activated:
-				animal.play("Idle")
+				npc.play("Idle")
 			elif hasEatingAnimation and not remote_control_activated:
-				animal.play("Eating")
+				npc.play("Eating")
 			if remote_control_activated:
-				animal.play("Idle")
+				npc.play("Idle")
 		STATE.MOVE, STATE.JUMP, STATE.FALL:
-			animal.play("Move")
+			npc.play("Move")
 			if remote_control_activated:
 				velocity.x = move_toward(velocity.x, previousDirection * speed, acceleration)
 			else:

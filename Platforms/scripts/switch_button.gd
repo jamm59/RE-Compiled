@@ -1,6 +1,7 @@
 extends Node2D
 class_name SwitchButtonControl
 
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var progress_bar: ProgressBar = $MarginContainer/ProgressBar
 @onready var button: AnimatedSprite2D = $Button
 @onready var gear_4: AnimatedSprite2D = $Extra/Gear4
@@ -25,6 +26,7 @@ func handleProgressBarAnimation() -> void:
 	if hasActivatedTerminal:
 		return 
 	button.play("Activate")
+	audio_stream_player_2d.playing = true
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(progress_bar, "value", 100, 1)
 	await tween.finished

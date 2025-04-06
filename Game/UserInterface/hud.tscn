@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmcea5ceiuldk"]
+[gd_scene load_steps=7 format=3 uid="uid://dmcea5ceiuldk"]
 
 [ext_resource type="Theme" uid="uid://chauuup64roty" path="res://Resources/panel-hud-theme.tres" id="1_4dw5v"]
 [ext_resource type="Script" uid="uid://dd0skj755ikcc" path="res://Game/UserInterface/hud.gd" id="1_f5l8x"]
 [ext_resource type="Theme" uid="uid://c6ns5y3kkumn2" path="res://Resources/progress-bar-theme.tres" id="2_4dw5v"]
+[ext_resource type="Texture2D" uid="uid://ch2l3hlkuruai" path="res://Assets/other/coin/C1011.png" id="4_7mw8c"]
+[ext_resource type="FontFile" uid="uid://c3mkp62fiw8yo" path="res://Assets/Font/DebugFreeTrial-MVdYB.otf" id="5_gpa17"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ge7g7"]
+font = ExtResource("5_gpa17")
+font_size = 70
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_f5l8x")
@@ -17,24 +23,32 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_4dw5v")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel"]
-layout_mode = 2
-offset_left = 30.0
-offset_top = 3.0
-offset_right = 1152.0
-offset_bottom = 73.0
+[node name="MarginContainer" type="MarginContainer" parent="TopPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VSplitContainer" parent="TopPanel/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VSplitContainer" parent="TopPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="RichTextLabel" parent="TopPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -44,20 +58,20 @@ text = "[right][font_size=10
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Health" type="ProgressBar" parent="TopPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Health" type="ProgressBar" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 theme = ExtResource("2_4dw5v")
 show_percentage = false
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="TopPanel/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="RichTextLabel" parent="TopPanel/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="RichTextLabel" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -67,8 +81,26 @@ text = "[right][font_size=10
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Stamina" type="ProgressBar" parent="TopPanel/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Stamina" type="ProgressBar" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(80, 20)
 layout_mode = 2
 theme = ExtResource("2_4dw5v")
 show_percentage = false
+
+[node name="VBoxContainer2" type="VSplitContainer" parent="TopPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_7mw8c")
+expand_mode = 3
+
+[node name="Coins" type="Label" parent="TopPanel/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_ge7g7")

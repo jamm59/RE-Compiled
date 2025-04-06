@@ -1,21 +1,110 @@
-[gd_scene load_steps=4 format=3 uid="uid://buwj3qvnt1toe"]
+[gd_scene load_steps=16 format=3 uid="uid://buwj3qvnt1toe"]
 
 [ext_resource type="Script" uid="uid://uib7xb4wixs6" path="res://Characters/Enemy/scripts/bullet.gd" id="1_13oph"]
 [ext_resource type="Texture2D" uid="uid://ddekkc5jj8cek" path="res://Assets/other/ball.png" id="2_f2vuc"]
+[ext_resource type="Texture2D" uid="uid://m7vd81y2e7rl" path="res://Characters/Companion/Scout/Bullet Impact.png" id="3_13oph"]
+[ext_resource type="Shader" uid="uid://cm30ghxsl8exq" path="res://Shaders/blackandwhite.gdshader" id="3_pmkpc"]
+[ext_resource type="Texture2D" uid="uid://bbsjbeugo7um8" path="res://Assets/other/bullet.png" id="5_282le"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_282le"]
+shader = ExtResource("3_pmkpc")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmkpc"]
+atlas = ExtResource("3_13oph")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_282le"]
+atlas = ExtResource("3_13oph")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huspt"]
+atlas = ExtResource("3_13oph")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0vp2"]
+atlas = ExtResource("3_13oph")
+region = Rect2(288, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sttg3"]
+atlas = ExtResource("3_13oph")
+region = Rect2(384, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f208i"]
+atlas = ExtResource("3_13oph")
+region = Rect2(480, 0, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ykbs2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmkpc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_282le")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_huspt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0vp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sttg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f208i")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"none",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2vuc"]
-radius = 4.0
+radius = 5.09902
 
-[node name="Bullet" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmkpc"]
+size = Vector2(12, 12)
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_13oph")
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_282le")
+sprite_frames = SubResource("SpriteFrames_ykbs2")
+animation = &"none"
+autoplay = "none"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CircleShape2D_f2vuc")
 
-[node name="Ball" type="Sprite2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_pmkpc")
+
+[node name="BallBullet" type="Sprite2D" parent="."]
 position = Vector2(5.96046e-08, 4.76837e-07)
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_f2vuc")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="StraightBullet" type="Sprite2D" parent="."]
+position = Vector2(0.039032, -3.91696e-07)
+rotation = 1.5708
+scale = Vector2(1, 0.439939)
+texture = ExtResource("5_282le")
+
+[connection signal="animation_finished" from="Explosion" to="." method="_on_explosion_animation_finished"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

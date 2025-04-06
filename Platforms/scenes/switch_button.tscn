@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cbb6nh3jgxbnq"]
+[gd_scene load_steps=34 format=3 uid="uid://cbb6nh3jgxbnq"]
 
 [ext_resource type="Script" uid="uid://cuy7kl2y4vhk0" path="res://Platforms/scripts/switch_button.gd" id="1_7iok3"]
 [ext_resource type="Shader" uid="uid://dvgk6116kbqbr" path="res://Shaders/custom-black-white.gdshader" id="2_7gaqu"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://7f2xhuuq5evw" path="res://Assets/platforms/Gears/14.png" id="20_sw1m3"]
 [ext_resource type="Texture2D" uid="uid://bcd1wkaiyurd" path="res://Assets/platforms/Gears/15.png" id="21_7uckj"]
 [ext_resource type="Texture2D" uid="uid://bednmkxybft6g" path="res://Assets/platforms/Gears/16.png" id="22_mlfhf"]
+[ext_resource type="AudioStream" uid="uid://dmxpohiidg0ol" path="res://Assets/Music/button_press.mp3" id="24_lp5m2"]
 
 [sub_resource type="Theme" id="Theme_lq0kt"]
 default_font_size = 15
@@ -259,6 +260,9 @@ autoplay = "Idle"
 frame = 5
 frame_progress = 1.0
 flip_h = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("24_lp5m2")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

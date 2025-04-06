@@ -1,8 +1,8 @@
 extends CanvasLayer
 class_name EducationModal 
 
-
-@onready var displayText: RichTextLabel = $Panel/MarginContainer/RichTextLabel
+@onready var title_rich_text_label: RichTextLabel = $Panel/MarginContainer/VBoxContainer/TitleRichTextLabel
+@onready var displayText: RichTextLabel = $Panel/MarginContainer/VBoxContainer/RichTextLabel
 @onready var markdownText: MarkdownLabel = $Panel/MarginContainer/MarkdownLabel
 @onready var http_request: HTTPRequest = $HTTPRequest
 	
@@ -11,13 +11,14 @@ enum EducationTopics {OOP, Binary, LogicGates, Networking}
 var typingFinished: bool = false
 
 func _ready() -> void:
-	#_on_get_information_about_topic("oop")
+	_on_get_information_about_topic(Variables.current_topic)
 	SignalManager.connect("more_information_on_topic", _on_get_information_about_topic)
 	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("MoreInfo"):
 		visible = not visible
 		get_tree().paused = visible
+		
 		
 func textTypingAnimation(text: String) -> void:
 	for s: String in text:
@@ -32,7 +33,7 @@ func clear() -> void:
 func _on_get_information_about_topic(topic: String) -> void:
 	var topic_data: Dictionary = Variables.get_text_about_topic(topic)
 	if topic_data["text"].length() > 0:
-		displayText.text = topic_data["title"]
+		title_rich_text_label.text = topic_data["title"]
 		textTypingAnimation(topic_data["text"])
 		return 
 

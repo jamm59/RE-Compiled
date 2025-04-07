@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name EnemyBase
 
+const HEALTH = preload("res://Platforms/scenes/health.tscn")
 
 @export_category("Jump Settings")
 @export var jump_height : float = 40
@@ -60,6 +61,7 @@ func apply_damage(damagePoint: int) -> void:
 	if health <= 0:
 		animation_player.play("Dead")
 		await get_tree().create_timer(0.6).timeout
+
 		handleEnemyDead()
 		
 func knockBack() -> void:
@@ -74,6 +76,11 @@ func handleEnemyDead() -> void:
 	state = STATE.DEAD
 	rotation_degrees = 0.0
 	animated_sprite_2d.play("Dead 1")
+	
+	var power_up: PowerUP = HEALTH.instantiate()
+	power_up.global_position = self.global_position
+	get_tree().current_scene.add_child(power_up)
+
 	animated_sprite_2d.material.set_shader_parameter("active", false)
 	SignalManager.emit_signal("enemy_dead", self.name)
 	

@@ -110,6 +110,7 @@ text = "Exit
 "
 
 [node name="PlaySceen" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,6 +142,7 @@ theme_override_constants/separation = 15
 [node name="Continue" type="Button" parent="PlaySceen/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+disabled = true
 text = "Continue"
 
 [node name="NewGame" type="Button" parent="PlaySceen/VBoxContainer/VBoxContainer"]
@@ -149,6 +151,7 @@ size_flags_vertical = 4
 text = "New Game"
 
 [node name="MultiplayerMode" type="Button" parent="PlaySceen/VBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 text = "Multiplayer"

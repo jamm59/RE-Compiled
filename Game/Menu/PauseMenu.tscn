@@ -39,11 +39,12 @@ expand_margin_bottom = 5.0
 color = Color(0.180392, 0.556863, 0.278431, 0.639216)
 
 [sub_resource type="Theme" id="Theme_7ha6y"]
-default_font = ExtResource("1_be3ng")
 default_font_size = 35
+Button/fonts/font = ExtResource("1_be3ng")
 Button/styles/focus = SubResource("StyleBoxFlat_o4cs7")
 Button/styles/hover = SubResource("StyleBoxFlat_182yl")
 Button/styles/normal = SubResource("StyleBoxFlat_wcq2h")
+Label/fonts/font = null
 PanelContainer/styles/panel = SubResource("StyleBoxLine_hlq68")
 
 [sub_resource type="LabelSettings" id="LabelSettings_8tofo"]
@@ -114,9 +115,140 @@ text = "Exit
 "
 
 [node name="ControlsContainer" type="VBoxContainer" parent="Panel/PanelContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]A or Left Arrow[/b] - Move Left[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]S or Right Arrow[/b] - Move Right[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]SPACEBAR[/b] - Jump[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]SPACEBAR 2x[/b] - Double Jump[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label9" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]J[/b] - Light Attack[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label10" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]H[/b] - Heavy Attack[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]E[/b] - Interact ,Climb Ladder, Float[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]Hold C[/b] - ROLL[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label12" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]Hold SHIFT [/b] - Dash[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label13" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]Hold Z[/b] - Short Zoom[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label14" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]Hold Ctrl[/b] - Long Zoom[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label7" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]I[/b] - Remote Control NPCs Around[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label8" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]M[/b] - More Information about Topic[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label11" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=20][b]ESC[/b] - Pause Game[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Back" type="Button" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer"]
 layout_mode = 2

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, LIGHT_ATTACK, HEAVY_ATTACK, MOVING_LEFT, MOVING_RIGHT, DEAD}
+enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, POWERUP, LIGHT_ATTACK, HEAVY_ATTACK, MOVING_LEFT, MOVING_RIGHT, DEAD}
 
 @onready var hud: PlayerHUD = $HUD
 
@@ -92,6 +92,7 @@ func _ready() -> void:
 	health = MAX_HEALTH
 	tweenProgressBar(hud.health, scaleHealth(health), 1.0)
 	tweenProgressBar(hud.stamina, stamina, 1.0)
+
 	
 func _physics_process(delta: float) -> void:
 	if state == STATE.DEAD:
@@ -99,9 +100,10 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return 
 		
-	if state in [STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK]:
+	if state in [STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK, STATE.POWERUP]:
 		applyDeadFallGravity(delta)
-		move_and_slide()
+		if state != STATE.POWERUP:
+			move_and_slide()
 		return
 
 	handleJumpInput(delta)
@@ -118,6 +120,13 @@ func _get_gravity() -> float:
 	if isWallSliding:
 		return WALL_FALL_GRAVITY
 	return JUMP_GRAVITY if velocity.y < 0.0 else FALL_GRAVITY
+	
+func apply_power_up(POWER_UP_VALUE: float) -> void:
+	health = min(MAX_HEALTH, health + POWER_UP_VALUE)
+	tweenProgressBar(hud.health, scaleHealth(health))
+	state = STATE.POWERUP
+	animated_sprite_2d.play("PowerUP")
+
 	
 func applyDeadFallGravity(delta: float):
 	if not is_on_floor():
@@ -193,7 +202,7 @@ func handleAttackBoxVisibility() -> void:
 func handleInput() -> void:
 	var dir = Input.get_axis("Left", "Right")
 	
-	if state not in [STATE.DEAD, STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK] and (dir == 0 and velocity.y == 0.0):
+	if state not in [STATE.DEAD, STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK, STATE.POWERUP] and (dir == 0 and velocity.y == 0.0):
 		state = STATE.IDLE
 		
 	if not can_use_controls:
@@ -249,8 +258,6 @@ func handleAnimationStateUpdate() -> void:
 			animationName = "Jump"
 		STATE.FALL:
 			animationName = "Fall"
-		STATE.WALLSLIDE:
-			animationName = "Move"
 		STATE.MOVING_RIGHT, STATE.MOVING_LEFT:
 			animationName = "Move" if velocity.y == 0.0 and is_on_floor() else ""
 			velocity.x = move_toward(velocity.x, previousDirection * SPEED, acceleration)
@@ -261,6 +268,8 @@ func handleAnimationStateUpdate() -> void:
 		STATE.HEAVY_ATTACK:
 			animationName = "Light3"
 			vfx.play("BigSlash")
+		STATE.POWERUP:
+			animationName = "PowerUP"
 		STATE.DASH:
 			velocity.x = move_toward(velocity.x, previousDirection * SPEED * DASH_MULTIPLIER, acceleration)
 			if velocity.y == 0.0:	
@@ -322,7 +331,7 @@ func knockBack(enemy: EnemyBase) -> void:
 	position.x -= KNOCKBACKVALUE if enemy.position.x > self.position.x else -KNOCKBACKVALUE
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite_2d.animation in ["Light1","Light2","Light3","AttackCombo", "Heavy", "Roll"]:
+	if animated_sprite_2d.animation in ["Light1","Light2","Light3","AttackCombo", "Heavy", "Roll", "PowerUP"]:
 		if is_on_floor():
 			state = STATE.IDLE
 		else:

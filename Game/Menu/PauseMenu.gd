@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var pause_container: VBoxContainer = $Panel/PanelContainer/VBoxContainer/PauseContainer
 @onready var controls_container: VBoxContainer = $Panel/PanelContainer/VBoxContainer/ControlsContainer
+@onready var title: Label = $Panel/PanelContainer/VBoxContainer/Title
 
 
 # Called when the node enters the scene tree for the first time.
@@ -32,7 +33,9 @@ func _on_check_point_pressed() -> void:
 func _on_controls_pressed() -> void:
 	controls_container.visible = true
 	pause_container.visible = false
+	title.text = "Keyboard Controls"
 	
 func _on_back_pressed() -> void:
 	controls_container.visible = false
 	pause_container.visible = true
+	title.text = "Game Paused"

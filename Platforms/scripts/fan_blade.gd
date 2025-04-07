@@ -24,5 +24,5 @@ func activate() -> void:
 
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
-	if body is Player:
+	if body is Player and movement:
 		body.applyHitDamage(self)

@@ -27,3 +27,7 @@ func _on_continue_pressed() -> void:
 
 func _on_new_game_pressed() -> void:
 	get_tree().change_scene_to_file("res://Game/story_line.tscn")
+
+
+func _on_controls_pressed() -> void:
+	pass # Replace with function body.

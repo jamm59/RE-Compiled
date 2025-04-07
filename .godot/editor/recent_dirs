@@ -1,3 +1,6 @@
+res://Characters/Protagonist/Assets/AssetPack/SpriteSheet
+res://Assets/items/medpack1/animated
+res://Platforms/scenes
 res://Dialogic/Timelines
 res://Characters/Companion/Scout
 res://Game/UserInterface
@@ -13,11 +16,5 @@ res://Characters/Enemy/Assets/6 Yellow
 res://Characters/Enemy/Assets/5 Tiny
 res://Characters/Enemy/Assets/4 Red
 res://Characters/Enemy/Assets/3 Ooze
-res://Characters/Enemy/Assets/2 Mage
-res://Characters/Enemy/Assets/1 Bear
-res://Characters/NPCs/scene
-res://Characters/NPCs/scripts
-res://Characters/NPCs/Assets
-res://Platforms/scenes
 C:/Users/ASUS-ROG/Desktop/Godot Projects/re-compiled/Assets/Json_data
 C:/Users/ASUS-ROG/Desktop/Godot Projects/re-compiled/Build

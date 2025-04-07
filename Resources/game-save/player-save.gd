@@ -3,16 +3,17 @@ class_name PlayerSave
 
 const SAVE_GAME_PATH: String = "res://Resources/game-save/player-save.gd"
 
-@export var player: String = ""
-@export var current_health: float = 0.0
+@export var health: float = 0.0
+@export var can_use_short_range_termibal: bool = false
 @export var checkpointLocation: Vector2 = Vector2(0,0)
+@export var coins: float
 
 
 func write_playerstate(body: Player) -> void:
-	player = body.previousAnimation
-	current_health = body.health
+	health = body.health
+	coins = body.coins
 	checkpointLocation = body.global_position
-	#canUseShortRangeTerminal = body.
+	can_use_short_range_termibal = body.short_range_terminal.usable
 	ResourceSaver.save(self, SAVE_GAME_PATH)
 
 static func load_playerstate() -> Resource:

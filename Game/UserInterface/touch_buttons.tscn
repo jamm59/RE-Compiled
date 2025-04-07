@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=3 uid="uid://br4g42wligyqn"]
+
+[ext_resource type="Texture2D" uid="uid://bd1q4cvnj4j61" path="res://Assets/other/direction.png" id="1_pafoe"]
+[ext_resource type="Shader" uid="uid://cm30ghxsl8exq" path="res://Shaders/blackandwhite.gdshader" id="1_qc6on"]
+[ext_resource type="Shader" uid="uid://dvgk6116kbqbr" path="res://Shaders/custom-black-white.gdshader" id="3_4ky3q"]
+[ext_resource type="Texture2D" uid="uid://cwimb04csw5j7" path="res://Assets/other/up-direction.png" id="3_5pyfj"]
+[ext_resource type="Texture2D" uid="uid://dpsihl331s2gm" path="res://Assets/other/keys/ESC.png" id="5_7rf0v"]
+[ext_resource type="Texture2D" uid="uid://c8u5s404m4f1q" path="res://Assets/other/keys/C.png" id="6_8igfs"]
+[ext_resource type="Texture2D" uid="uid://5kfoldglan80" path="res://Assets/other/keys/E.png" id="7_jen7h"]
+[ext_resource type="Texture2D" uid="uid://jr1d8t8uogs2" path="res://Assets/other/keys/J.png" id="8_c85xf"]
+[ext_resource type="Texture2D" uid="uid://0wml2jjp4rwb" path="res://Assets/other/keys/K.png" id="9_bcjw6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5pyfj"]
+shader = ExtResource("1_qc6on")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6b1wv"]
+shader = ExtResource("3_4ky3q")
+
+[node name="TouchButtons" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="GridContainer2" type="GridContainer" parent="Control/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/h_separation = 50
+columns = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/GridContainer2"]
+material = SubResource("ShaderMaterial_5pyfj")
+layout_mode = 2
+texture = ExtResource("1_pafoe")
+expand_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/GridContainer2"]
+material = SubResource("ShaderMaterial_5pyfj")
+layout_mode = 2
+texture = ExtResource("1_pafoe")
+flip_h = true
+
+[node name="TextureRect3" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/GridContainer2"]
+material = SubResource("ShaderMaterial_6b1wv")
+layout_mode = 2
+texture = ExtResource("3_5pyfj")
+
+[node name="TextureRect7" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/GridContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("5_7rf0v")
+
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("6_8igfs")
+
+[node name="TextureRect3" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("7_jen7h")
+
+[node name="TextureRect4" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("8_c85xf")
+
+[node name="TextureRect5" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("8_c85xf")
+
+[node name="TextureRect6" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("9_bcjw6")

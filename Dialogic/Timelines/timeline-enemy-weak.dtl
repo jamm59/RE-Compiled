@@ -1,0 +1,8 @@
+Player: What was that? You have flying enemies now?
+Companion: [b]Low-level anomaly detected.[/b] Looks like you're dealing with an old annoyance\: a joke virus.
+Player: Joke virus? That doesn’t sound too dangerous. Or didn't seem to be.
+Companion: It’s not. But it is incredibly [i]annoying[/i]. These things were designed to pop up fake alerts, reverse controls, or blast sound files at random. No real harm, just chaos.
+Companion: In this simulation, you’ll probably experience flickers, fake messages, maybe even reversed buttons. It’s like being trolled by the OS itself.
+Companion: So I’m getting punked by malware. Great.
+Companion: Exactly. Not every threat is lethal. Some just want to waste your time and make you question reality.
+[signal arg="timeline-enemy-weak"]

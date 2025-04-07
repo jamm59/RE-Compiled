@@ -20,9 +20,9 @@ resource_local_to_scene = true
 shader = ExtResource("1_jewpb")
 shader_parameter/active = false
 shader_parameter/black_white = true
-shader_parameter/tolerance = 0.1
+shader_parameter/tolerance = 0.46
 shader_parameter/prev_color = Color(1, 1, 1, 1)
-shader_parameter/new_color = Color(1, 1, 1, 1)
+shader_parameter/new_color = Color(0.968627, 0.215686, 0.309804, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h5j6u"]
 atlas = ExtResource("2_ajahp")
@@ -572,6 +572,10 @@ libraries = {
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 2.0
+debug_enabled = true
 
 [connection signal="body_entered" from="HealthBoxComponent" to="." method="_on_health_box_component_body_entered"]
 [connection signal="body_entered" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_entered"]

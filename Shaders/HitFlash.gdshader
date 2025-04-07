@@ -3,7 +3,7 @@ shader_type canvas_item;
 uniform bool active = false;
 uniform bool black_white = false;
 
-uniform float tolerance : hint_range(0.0, 1.0, 0.01) = 0.1;
+uniform float tolerance : hint_range(0.0, 1.0, 0.01) = 1;
 uniform vec4 prev_color : source_color = vec4(1.0);
 uniform vec4 new_color : source_color = vec4(1.0);
 

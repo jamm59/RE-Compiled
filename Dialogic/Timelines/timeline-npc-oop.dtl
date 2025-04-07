@@ -1,4 +1,6 @@
-Companion: See that deer? I’ve patched a remote signal to it. Think of it like a connected node in a network
+Companion: See that Ferret? I’ve patched a [b]remote signal[/b] to it. Think of it like a connected node in a network
 Player: So I can control it?
-Companion: For a short time, yeah. Guide it to attack those enemies. think of it as sending a command over a network.
+Companion: For a limited time, yes. Guide it to  find a way to disable one of the lasers above. It’s like sending a command packet through a network. direct, fast, and just long enough to get the job done. Just don’t stray too far, or the signal drops
+Companion: Oh and the signs that say [b]NPC AROUND[/b]? They’re signal markers. If you spot one, it means there’s a controllable entity in range. Keep an eye out.
+[signal arg="timeline-npc-oop"]
 [signal arg="timeline-npc_oop"]

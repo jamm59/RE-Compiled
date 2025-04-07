@@ -37,7 +37,7 @@ var start_direction: int = axisDir[randi() % 2]
 var parolePath: bool = true
 var player: Player = null
 var attackDistanceLeft: float = 31.0
-var attackDistanceRight: float = 12
+var attackDistanceRight: float = 12.0
 var hitCoolDownFinished: bool = false
 
 var isDead: bool = false
@@ -74,6 +74,7 @@ func handleEnemyDead() -> void:
 	state = STATE.DEAD
 	rotation_degrees = 0.0
 	animated_sprite_2d.play("Dead 1")
+	animated_sprite_2d.material.set_shader_parameter("active", false)
 	SignalManager.emit_signal("enemy_dead", self.name)
 	
 func handleMoveAndAvoidObstacles()-> void:
@@ -101,9 +102,9 @@ func handleEnemyJump() -> void:
 	velocity.y = JUMP_VELOCITY
 	
 func change_direction_of_sprite_animation(dir_x: float) -> void:
-	if dir_x == 1:
+	if dir_x > 0.0:
 		animated_sprite_2d.flip_h = false
-	elif dir_x == -1:
+	elif dir_x < 0.0:
 		animated_sprite_2d.flip_h = true
 	
 func detect_obstacle_while_following_player() -> void:
@@ -126,13 +127,8 @@ func handleFollowPlayerLogic() -> void:
 		state = STATE.IDLE
 		return 
 		
-	var angle: float = atan2(player.global_position.y - global_position.y, player.global_position.x - global_position.x)
-	var distance: float = player.global_position.distance_to(global_position)
-	var dir_x: float = round(cos(angle))
-	
-	change_direction_of_sprite_animation(dir_x)
-	detect_obstacle_while_following_player()
-	_attack_player(distance, dir_x)
+	_attack_player()
+
 
 func _ready() -> void:
 	health = MAX_HEALTH
@@ -170,25 +166,31 @@ func _on_detect_player_area_body_entered(body: Node2D) -> void:
 		player = body
 		parolePath = false
 
-func _attack_player(distance: float, dir_x: float) -> void:
-	if state == STATE.ATTACK:
-		return  # Prevent interrupting an active attack
+func _attack_player() -> void:
+	var angle: float = atan2(player.global_position.y - global_position.y, player.global_position.x - global_position.x)
+	var distance: float = player.global_position.distance_to(global_position)
+	var dir_x: float = round(cos(angle))
+	
+	if distance >= 200.0:
+		Variables._launch(self, 400, Vector2(dir_x, 1))
 
 	var is_player_to_the_left: bool = global_position.x > player.global_position.x
 	var is_player_to_the_right: bool = global_position.x < player.global_position.x
 
-	# If player is within attack range, trigger attack animation
+	# If player is within attack range, trigger attack animationa
 	if (is_player_to_the_left and distance <= attackDistanceLeft) or \
 		(is_player_to_the_right and distance <= attackDistanceRight):
 		state = STATE.ATTACK
-		#animated_sprite_2d.play("Attack 1")  # Start attack animation
+		animated_sprite_2d.play("Attack 1")  # Start attack animation
 	else:
 		state = STATE.RUN
 		velocity.x = move_toward(velocity.x, dir_x * SPEED, acceleration)
 	
+	change_direction_of_sprite_animation(dir_x)
+	detect_obstacle_while_following_player()
+	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation in ["Attack 1", "Attack 2"]:
-		print("animation finished")
 		var distance: float = player.global_position.distance_to(global_position)
 		var is_player_to_the_left: bool = global_position.x > player.global_position.x
 		var is_player_to_the_right: bool = global_position.x < player.global_position.x

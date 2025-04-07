@@ -49,3 +49,17 @@ res://Characters/NPCs/scripts/ferret_npc.gd
 res://Characters/NPCs/scripts/crow_npc.gd
 res://Characters/NPCs/scene/deer_npc.tscn
 res://Characters/NPCs/scripts/deer_npc.gd
+res://Characters/NPCs/scene/crow_npc.tscn
+res://Game/UserInterface/title_card.gd
+res://Game/Menu/PauseMenu.tscn
+res://Dialogic/Timelines/timeline-platform-oop.dtl
+res://Dialogic/Timelines/timeline-npc-oop.dtl
+res://Characters/Enemy/scripts/flying_enemy.gd
+res://Dialogic/Timelines/timeline-enemy-slowtime.dtl
+res://Dialogic/Timelines/timeline-enemy-yellow.dtl
+res://Dialogic/Timelines/timeline-enemy-weak.dtl
+res://Dialogic/Characters/MiniBoss.dch
+res://Dialogic/Characters/Player.dch
+res://Dialogic/Characters/Companion.dch
+res://Characters/Enemy/scripts/time_scale_monster.gd
+res://Game/Menu/PauseMenu.gd

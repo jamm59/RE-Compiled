@@ -1,7 +1,7 @@
 [gd_scene load_steps=36 format=3 uid="uid://fd7bouvrucnk"]
 
+[ext_resource type="Script" uid="uid://utmxdq8rv3wa" path="res://Characters/Enemy/scripts/time_scale_monster.gd" id="1_c8a12"]
 [ext_resource type="Shader" uid="uid://dpf3btpbxnldy" path="res://Shaders/HitFlash.gdshader" id="1_li8un"]
-[ext_resource type="Script" uid="uid://cwkkhjiqob0e6" path="res://Characters/Enemy/monster.gd" id="1_x3due"]
 [ext_resource type="Texture2D" uid="uid://ba2ll5om0dntc" path="res://Characters/Enemy/Assets/3 Ooze/Attack.png" id="3_c8a12"]
 [ext_resource type="Texture2D" uid="uid://cmukrvy68i2qr" path="res://Characters/Enemy/Assets/3 Ooze/Death.png" id="4_c8a12"]
 [ext_resource type="Texture2D" uid="uid://c8y1o4bqwh86e" path="res://Characters/Enemy/Assets/3 Ooze/Idle.png" id="5_c8a12"]
@@ -21,7 +21,7 @@ resource_local_to_scene = true
 shader = ExtResource("1_li8un")
 shader_parameter/active = false
 shader_parameter/black_white = true
-shader_parameter/tolerance = 0.1
+shader_parameter/tolerance = 1.0
 shader_parameter/prev_color = Color(1, 1, 1, 1)
 shader_parameter/new_color = Color(1, 1, 1, 1)
 
@@ -326,7 +326,7 @@ _data = {
 }
 
 [node name="Monster3" type="CharacterBody2D"]
-script = ExtResource("1_x3due")
+script = ExtResource("1_c8a12")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, -2)

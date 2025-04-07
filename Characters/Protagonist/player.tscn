@@ -1828,7 +1828,6 @@ animation = &"Punch"
 position = Vector2(16, 0)
 scale = Vector2(0.8, 0.8)
 hover = false
-usable = true
 
 [node name="LeftPosition" type="Marker2D" parent="Inventory/ShortRange"]
 position = Vector2(-22.8571, 0)

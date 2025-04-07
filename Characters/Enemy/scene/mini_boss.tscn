@@ -9,10 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://qd306x2awoex" path="res://Characters/Enemy/Assets/3 Ooze/Walk.png" id="11_4n3ew"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_di0vk"]
-size = Vector2(31, 46)
+size = Vector2(56, 46)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6qtx"]
-size = Vector2(39, 46)
+size = Vector2(60, 46)
 
 [sub_resource type="Animation" id="Animation_3x37w"]
 resource_name = "Dead"
@@ -75,6 +75,18 @@ tracks/2/keys = {
 "method": &"emitHitSignal"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, false]
+}
 
 [sub_resource type="Animation" id="Animation_o80mw"]
 length = 0.001
@@ -89,6 +101,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sjfte"]
@@ -106,9 +130,9 @@ resource_local_to_scene = true
 shader = ExtResource("2_th0nx")
 shader_parameter/active = false
 shader_parameter/black_white = true
-shader_parameter/tolerance = 0.1
+shader_parameter/tolerance = 1.0
 shader_parameter/prev_color = Color(1, 1, 1, 1)
-shader_parameter/new_color = Color(1, 1, 1, 1)
+shader_parameter/new_color = Color(0.968627, 0.215686, 0.309804, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_318ln"]
 atlas = ExtResource("8_x45kr")
@@ -207,7 +231,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack 1",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -283,38 +307,37 @@ script = ExtResource("1_d3gkh")
 MAX_HEALTH = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.5, -4)
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_di0vk")
 
 [node name="RayCast" type="Node2D" parent="."]
 
 [node name="RayCastRight" type="RayCast2D" parent="RayCast"]
 modulate = Color(0.868475, 0.63282, 1, 1)
-target_position = Vector2(35, 0)
+target_position = Vector2(44, 0)
 
 [node name="RayCastLeft" type="RayCast2D" parent="RayCast"]
 modulate = Color(0.868475, 0.63282, 1, 1)
-target_position = Vector2(-29, 0)
+target_position = Vector2(-45, 0)
 
 [node name="RayCastLeftGround" type="RayCast2D" parent="RayCast"]
 position = Vector2(1.81818, -0.909091)
-target_position = Vector2(-35.8182, 25.9091)
+target_position = Vector2(-44.8182, 30.9091)
 
 [node name="RayCastRightGround" type="RayCast2D" parent="RayCast"]
-position = Vector2(1.81818, -0.909091)
-target_position = Vector2(32.1818, 25.9091)
+target_position = Vector2(46.1818, 35.9091)
 
 [node name="RayCastTopRight" type="RayCast2D" parent="RayCast"]
-target_position = Vector2(32, -27)
+target_position = Vector2(40, -32)
 
 [node name="RayCastTopLeft" type="RayCast2D" parent="RayCast"]
-target_position = Vector2(-31, -27)
+target_position = Vector2(-37, -34)
 
 [node name="HealthBoxComponent" type="Area2D" parent="."]
 position = Vector2(-3.63636, 0)
 
 [node name="HealthBox" type="CollisionShape2D" parent="HealthBoxComponent"]
-position = Vector2(6.13636, -4)
+position = Vector2(3.63636, -4)
 shape = SubResource("RectangleShape2D_t6qtx")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -342,21 +365,24 @@ offset_top = -62.0
 offset_right = 78.0
 offset_bottom = -22.0
 bbcode_enabled = true
-text = "[b][font_size=5]Spawning...[/font_size][/b]"
+text = "[b][font_size=5]...[/font_size][/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_rp21w")
-position = Vector2(6, -19)
-scale = Vector2(-2, 2)
-sprite_frames = SubResource("SpriteFrames_i7p64")
-animation = &"Walk"
-autoplay = "Ilde"
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_rp21w")
+position = Vector2(6, -19)
+rotation = 3.14159
+scale = Vector2(2, -2)
+sprite_frames = SubResource("SpriteFrames_i7p64")
+animation = &"Attack 1"
+autoplay = "Ilde"
+frame = 3
+frame_progress = 1.0
 
 [connection signal="body_entered" from="HealthBoxComponent" to="." method="_on_health_box_component_body_entered"]
 [connection signal="body_entered" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_entered"]

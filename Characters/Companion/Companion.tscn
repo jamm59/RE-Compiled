@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://d2j3oa6ab5xqh"]
+[gd_scene load_steps=44 format=3 uid="uid://d2j3oa6ab5xqh"]
 
 [ext_resource type="Script" uid="uid://bch3c6j458eqs" path="res://Characters/Companion/companion.gd" id="1_kkq6f"]
-[ext_resource type="Shader" uid="uid://dvgk6116kbqbr" path="res://Shaders/custom-black-white.gdshader" id="2_wq0s5"]
+[ext_resource type="Shader" uid="uid://dpf3btpbxnldy" path="res://Shaders/HitFlash.gdshader" id="2_wq0s5"]
+[ext_resource type="Texture2D" uid="uid://ckag7qtx0oapj" path="res://Characters/Companion/Scout/Attack.png" id="3_eysbv"]
 [ext_resource type="Texture2D" uid="uid://co8r8dim5xwa" path="res://Characters/Companion/Scout/Idle.png" id="4_g6vt0"]
 [ext_resource type="Texture2D" uid="uid://d1t0ts3cqmjl" path="res://Characters/Companion/Scout/Trans to Fly.png" id="5_wq0s5"]
 [ext_resource type="Texture2D" uid="uid://dbpm01iyp0xbx" path="res://Characters/Companion/Scout/Fly Forward.png" id="6_eysbv"]
@@ -20,8 +21,72 @@ _data = {
 &"hover": SubResource("Animation_231a6")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eysbv"]
+size = Vector2(199, 119.5)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wq0s5"]
 shader = ExtResource("2_wq0s5")
+shader_parameter/active = false
+shader_parameter/black_white = true
+shader_parameter/tolerance = 1.0
+shader_parameter/prev_color = Color(1, 1, 1, 1)
+shader_parameter/new_color = Color(0.909804, 0.247059, 0.145098, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yms4k"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvfi0"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmyka"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r65rc"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(288, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5niib"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(384, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxxud"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(480, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s07yn"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(576, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6uap"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(672, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2pnu"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(768, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hten2"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(864, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsqc5"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(960, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kuih3"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(1056, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktdcm"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(1152, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccf5c"]
+atlas = ExtResource("3_eysbv")
+region = Rect2(1248, 0, 96, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wq0s5"]
 atlas = ExtResource("4_g6vt0")
@@ -95,6 +160,53 @@ region = Rect2(192, 0, 96, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_yms4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvfi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmyka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r65rc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5niib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxxud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s07yn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6uap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2pnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hten2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsqc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kuih3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktdcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccf5c")
+}],
+"loop": true,
+"name": &"Attack 1",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wq0s5")
 }, {
 "duration": 1.0,
@@ -160,9 +272,6 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eysbv"]
-size = Vector2(199, 119.5)
-
 [node name="Companion" type="Node2D"]
 script = ExtResource("1_kkq6f")
 metadata/_edit_vertical_guides_ = [-98.0]
@@ -175,14 +284,6 @@ autoplay = "hover"
 
 [node name="Bullets" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_wq0s5")
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_sf11v")
-animation = &"Idle"
-autoplay = "Idle"
-flip_h = true
-
 [node name="DetectEnemyArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectEnemyArea"]
@@ -191,6 +292,15 @@ shape = SubResource("RectangleShape2D_eysbv")
 [node name="BulletStartLocation" type="Marker2D" parent="."]
 
 [node name="AttackTimer" type="Timer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_wq0s5")
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_sf11v")
+animation = &"Attack 1"
+autoplay = "Idle"
+frame_progress = 0.276045
+flip_h = true
 
 [connection signal="body_entered" from="DetectEnemyArea" to="." method="_on_detect_enemy_area_body_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

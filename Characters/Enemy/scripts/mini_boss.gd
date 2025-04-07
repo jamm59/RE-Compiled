@@ -6,7 +6,7 @@ class_name MiniBoss
 @onready var enemy_group: Node2D = $".."
 @onready var bullets_parent: Node2D = $Bullets
 @onready var mcq_u_i: MCQ = $MCQ_U_I
-
+@onready var task: RichTextLabel = $Task
 @export var bullet_count: int = 3
 
 #@onready var bullet_location_left: Marker2D = $BulletLocationLeft
@@ -28,6 +28,7 @@ const Enemies = [
 
 func _spawn_enemy() -> void:
 	var location: Marker2D = spawn_location.pick_random()
+	textTypingAnimation("Spawning....")
 	if spawn_location:
 		var enemy: EnemyBase = Enemies.pick_random().instantiate()
 		enemy_group.call_deferred("add_child", enemy)
@@ -39,6 +40,7 @@ func _spawn_enemy() -> void:
 		
 func _ready() -> void:
 	super()
+	textTypingAnimation(str(health) + " %...")
 	attackDistanceLeft = 100.0
 	attackDistanceRight = 100.0
 	mcq_u_i.answer_wrong.connect(_answer_wrong)
@@ -50,19 +52,28 @@ func _answer_wrong() -> void:
 	mcq_u_i.delete_self()
 
 func _answer_correct() -> void:
-	apply_damage(5)
+	apply_damage(10)
 	
 func _physics_process(delta: float) -> void:
 	super(delta)
 			
-			
+func textTypingAnimation(text: String) -> void:
+	var content: String = ""
+	for s: String in text:
+		await get_tree().create_timer(0.05).timeout
+		content += s
+		task.text = "[b][font_size=5]" + content + "[/font_size][/b]"
+	
+	
 func apply_damage(damagePoint: int) -> void:
 	if isDead:
 		return 
 	animation_player.play("Hit")
 	var prevHealth: float = health
+	var percentage: float = 30
 	health  = max(health - damagePoint, 0)
-	if int(prevHealth / 20) > int(health / 20): # checking if we cross a multiple of 20 threshold
+# checking if we cross a multiple of percentage threshold
+	if int(prevHealth / percentage) > int(health / percentage):
 		_spawn_enemy()
 	if health <= 50 and health >= 48:
 		_spawn_enemy()
@@ -72,6 +83,8 @@ func apply_damage(damagePoint: int) -> void:
 	if health <= 0:
 		animation_player.play("Dead")
 		handleEnemyDead()
+		
+	textTypingAnimation(str(health) + "%...")
 		
 func _on_detect_player_area_body_entered(body: Node2D) -> void:
 	if state != STATE.DEAD and body is Player:

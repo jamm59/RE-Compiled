@@ -52,9 +52,9 @@ func _on_explosion_animation_finished() -> void:
 	$Explosion.play("none")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is TileMapLayer or body is NPCBase:
+	if body is TileMapLayer or body is EnemyBase:
 		reset()
-	elif body is EnemyDuplicate:
+	if body is EnemyDuplicate:
 		body.apply_damage(body.health)
-	elif body is EnemyBase:
+	if body is EnemyBase and body is not MiniBoss:
 		body.apply_damage(DAMAGE_POINT)

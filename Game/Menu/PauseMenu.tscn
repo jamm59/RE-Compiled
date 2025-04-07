@@ -86,33 +86,45 @@ text = "Game Paused"
 label_settings = SubResource("LabelSettings_8tofo")
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/PanelContainer/VBoxContainer"]
+[node name="PauseContainer" type="VBoxContainer" parent="Panel/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 15
 
-[node name="Resume" type="Button" parent="Panel/PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="Panel/PanelContainer/VBoxContainer/PauseContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Resume"
 
-[node name="CheckPoint" type="Button" parent="Panel/PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="CheckPoint" type="Button" parent="Panel/PanelContainer/VBoxContainer/PauseContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Last Checkpoint
 "
 
-[node name="Options" type="Button" parent="Panel/PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="Controls" type="Button" parent="Panel/PanelContainer/VBoxContainer/PauseContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-text = "Options"
+text = "Controls"
 
-[node name="Exit" type="Button" parent="Panel/PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="Panel/PanelContainer/VBoxContainer/PauseContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Exit
 "
 
-[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/CheckPoint" to="." method="_on_check_point_pressed"]
-[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[node name="ControlsContainer" type="VBoxContainer" parent="Panel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Back" type="Button" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Back"
+
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/PauseContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/PauseContainer/CheckPoint" to="." method="_on_check_point_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/PauseContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/PauseContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/ControlsContainer/Back" to="." method="_on_back_pressed"]

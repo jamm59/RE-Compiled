@@ -6,7 +6,6 @@ extends Node2D
 @onready var camera_2d: Camera2D = $Player/Camera2D
 @onready var player: Player = $Player
 @onready var companion: Companion = $Companion
-@onready var props_layer: TileMapLayer = $TileMap/PropsLayer
 @onready var cinematic: CanvasLayer = $UserInterface/Cinematic
 @onready var camera_pos: Marker2D = $Player/CameraPos
 @onready var title_card: TitleCard = $UserInterface/TitleCard
@@ -59,8 +58,6 @@ func _process(delta: float) -> void:
 	companion.move(delta)
 
 func _input(event) -> void:
-	if Input.is_action_just_pressed("Roll") and not player.can_use_controls:
-		DialogueDone()
 	if event.is_action_pressed("Control"):
 		zoom_camera(Vector2(1, 1))  # Zoom in
 	elif event.is_action_pressed("Zoom"):
@@ -192,6 +189,87 @@ func _remote_control_session_complete() -> void:
 	camera_2d.make_current()
 	player.can_use_controls = true
 	
+
+	
+func _on_dialogic_signal(argument: String):
+	DialogueDone()
+	match argument:
+		"timeline-2":
+			companion.companion_can_follow= true
+			companion.animated_sprite_2d.flip_h = false
+		"timeline-enemy-killed":
+			title_card.visible = true
+			title_card.showTitleCard("Object-Oriented Programming Concepts")
+			await get_tree().create_timer(3).timeout 
+			title_card.visible = false
+		"timeline-miniboss":
+			$CanActivatePlatforms/GateDoor4.deactivate()
+			camera_2d.global_position = $CanActivatePlatforms/GateDoor4.global_position
+			await get_tree().create_timer(2).timeout
+			camera_2d.global_position = camera_pos.global_position
+
+func _on_player_dead() -> void:
+	player._reset_player(checkpoint)
+	
+func _on_enemy_dead(name: String) -> void:
+	if name == "Monster": # first enemy encountered
+		await get_tree().create_timer(1).timeout
+		showDialogue("timeline-enemy-killed")
+	
+	elif name == "MiniBoss":
+		await get_tree().create_timer(1).timeout
+		$CanActivatePlatforms/GateDoor6.activate()
+		camera_2d.global_position = $CanActivatePlatforms/GateDoor6.global_position
+		await get_tree().create_timer(2).timeout
+		camera_2d.global_position = camera_pos.global_position
+		showDialogue("timeline-game-end")
+		
+	elif name == "BatEyes-Explained":
+		await get_tree().create_timer(1).timeout
+		showDialogue("timeline-enemy-weak")
+		
+func _on_ladder_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		player.canClimbLadder = true
+
+func _on_ladder_area_body_exited(body: Node2D) -> void:
+	if body is Player:
+		player.canClimbLadder = false
+		player.toggle_gravity = false
+		player.can_use_controls = true
+
+func _on_check_points_body_entered(body: Node2D) -> void:
+	if body is Player:
+		checkpoint = body.global_position
+
+func _on_gravity_room_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		player.canClimbLadder = true
+
+
+func _on_gravity_room_area_body_exited(body: Node2D) -> void:
+	if body is Player:
+		player.canClimbLadder = false
+		player.toggle_gravity = false
+		player.can_use_controls = true
+
+
+func _on_dead_area_2d_body_entered(body: Node2D) -> void:
+	if body is Player:
+		player._reset_player(checkpoint)
+	if body is EnemyBase:
+		body.queue_free()
+
+
+func _on_level_end_body_entered(body: Node2D) -> void:
+	if body is Player:
+		title_card.showTitleCard("Thank you for playing!")
+		Engine.time_scale = 0.1
+		await get_tree().create_timer(0.5).timeout
+		get_tree().change_scene_to_file("res://Game/Menu/Menu.tscn")
+		
+# Dialogue Signals
+
 func _on_player_introduction_body_entered(body: Node2D) -> void:
 	if body is Player:
 		zoom_camera(Vector2(3,3), 0.3)
@@ -230,9 +308,9 @@ func _on_interact_body_entered(body: Node2D) -> void:
 		
 func _on_short_range_terminal_body_entered(body: Node2D) -> void:
 	if body is Player:
+		$CinematicAreas/ShortRangeTerminal.disconnect("body_entered", _on_short_range_terminal_body_entered)
 		body.short_range_terminal.usable = true # makes it accessible to the player
 		showDialogue("timeline-short-range")
-		$CinematicAreas/ShortRangeTerminal.disconnect("body_entered", _on_short_range_terminal_body_entered)
 	
 func _on_mini_boss_introduction_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -242,80 +320,28 @@ func _on_mini_boss_introduction_body_entered(body: Node2D) -> void:
 		camera_2d.global_position = camera_pos.global_position
 		showDialogue("timeline-miniboss")
 
-
+func _on_platform_explained_body_entered(body: Node2D) -> void:
+	if body is Player:
+		$CinematicAreas/PlatformExplained.disconnect("body_entered", _on_platform_explained_body_entered)
+		showDialogue("timeline-platform-oop")
+		
 func _on_duplication_enemy_area_body_entered(body: Node2D) -> void:
 	if body is Player:
+		$CinematicAreas/DuplicationEnemyArea.disconnect("body_entered", _on_duplication_enemy_area_body_entered)
 		showDialogue("timeline-duplicate")
 		companion.hasPermissionToShoot = true
-		$CinematicAreas/DuplicationEnemyArea.disconnect("body_entered", _on_duplication_enemy_area_body_entered)
 
-func _on_dialogic_signal(argument: String):
-	DialogueDone()
-	match argument:
-		"timeline-2":
-			companion.companion_can_follow= true
-			companion.animated_sprite_2d.flip_h = false
-		"timeline-enemy-killed":
-			title_card.visible = true
-			title_card.showTitleCard("Object-Oriented Programming Concepts")
-			await get_tree().create_timer(3).timeout 
-			title_card.visible = false
-		"timeline-miniboss":
-			$CanActivatePlatforms/GateDoor4.deactivate()
-			camera_2d.global_position = $CanActivatePlatforms/GateDoor4.global_position
-			await get_tree().create_timer(2).timeout
-			camera_2d.global_position = camera_pos.global_position
-
-func _on_player_dead() -> void:
-	player._reset_player(checkpoint)
-	
-func _on_enemy_dead(name: String) -> void:
-	if name == "Monster": # first enemy encountered
-		await get_tree().create_timer(1).timeout
-		showDialogue("timeline-enemy-killed")
-	
-	if name == "MiniBoss":
-		await get_tree().create_timer(1).timeout
-		$CanActivatePlatforms/GateDoor6.activate()
-		camera_2d.global_position = $CanActivatePlatforms/GateDoor6.global_position
-		await get_tree().create_timer(2).timeout
-		camera_2d.global_position = camera_pos.global_position
-		showDialogue("timeline-game-end")
+func _on_ncp_explained_body_entered(body: Node2D) -> void:
+	if body is Player:
+		$CinematicAreas/NCPExplained.disconnect("body_entered", _on_ncp_explained_body_entered)
+		showDialogue("timeline-npc-oop")
 		
-		
-func _on_ladder_area_body_entered(body: Node2D) -> void:
+func _on_slow_down_enemy_body_entered(body: Node2D) -> void:
 	if body is Player:
-		player.canClimbLadder = true
+		$CinematicAreas/SlowDownEnemy.disconnect("body_entered", _on_slow_down_enemy_body_entered)
+		showDialogue("timeline-enemy-slowtime")
 
-func _on_ladder_area_body_exited(body: Node2D) -> void:
+func _on_quiet_enemy_body_entered(body: Node2D) -> void:
 	if body is Player:
-		player.canClimbLadder = false
-		player.toggle_gravity = false
-		player.can_use_controls = true
-
-func _on_check_points_body_entered(body: Node2D) -> void:
-	if body is Player:
-		checkpoint = body.global_position
-
-func _on_gravity_room_area_body_entered(body: Node2D) -> void:
-	if body is Player:
-		player.canClimbLadder = true
-
-
-func _on_gravity_room_area_body_exited(body: Node2D) -> void:
-	if body is Player:
-		player.canClimbLadder = false
-		player.toggle_gravity = false
-		player.can_use_controls = true
-
-
-func _on_dead_area_2d_body_entered(body: Node2D) -> void:
-	if body is Player:
-		player._reset_player(checkpoint)
-	if body is EnemyBase:
-		body.queue_free()
-
-
-func _on_level_end_body_entered(body: Node2D) -> void:
-	if body is Player:
-		print("nothing ")
+		$CinematicAreas/QuietEnemy.disconnect("body_entered", _on_quiet_enemy_body_entered)
+		showDialogue("timeline-enemy-yellow")

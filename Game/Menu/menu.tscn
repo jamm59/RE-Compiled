@@ -44,6 +44,7 @@ font = ExtResource("8_1yp52")
 font_size = 80
 
 [node name="Menu" type="Control"]
+modulate = Color(0.717647, 0.701961, 0.615686, 1)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

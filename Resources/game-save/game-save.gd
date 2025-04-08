@@ -2,10 +2,12 @@ class_name GameStateSave
 
 const SAVE_GAME_PATH: String = "user://game-save.cfg"  # Use `.cfg` for ConfigFile
 
-var start_new_game: bool = true
-
 func load_start_game() -> bool:
 	var config = ConfigFile.new()
+	var result = config.load(SAVE_GAME_PATH)
+	if result != OK:
+		print("Failed to load game state in load_start_game. Error code:", result)
+		return true
 	return config.get_value("Game", "start_new_game", true)
 	
 # Save the game state to a ConfigFile
@@ -55,8 +57,6 @@ func load_savegame(body: Game) -> void:
 	body.player.short_range_terminal.usable = config.get_value("Player", "can_use_short_range_terminal", false)
 	body.player.global_position = config.get_value("Player", "checkpoint_location", Vector2(-3313.0, 208.0))
 	
-	# Game state
-	start_new_game = config.get_value("Game", "start_new_game", true)
 	print("Game state loaded successfully from", SAVE_GAME_PATH)
 
 func reset_game_save() -> void:
@@ -76,7 +76,6 @@ func reset_game_save() -> void:
 
 	# Game state defaults
 	config.set_value("Game", "start_new_game", true)
-	start_new_game = true
 
 	var result = config.save(SAVE_GAME_PATH)
 	if result != OK:

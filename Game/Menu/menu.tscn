@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cs4tb7qdetlxj"]
+[gd_scene load_steps=10 format=3 uid="uid://cs4tb7qdetlxj"]
 
 [ext_resource type="Script" uid="uid://dkiwav48vql5q" path="res://Game/Menu/Menu.gd" id="1_4taty"]
 [ext_resource type="FontFile" uid="uid://d4lcfsd3aa7w2" path="res://Assets/Font/Inkos-zrg60.ttf" id="8_1yp52"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kgkp1"]
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gll8e"]
 content_margin_left = 1.0
@@ -34,6 +38,7 @@ expand_margin_bottom = 5.0
 [sub_resource type="Theme" id="Theme_kvnxf"]
 default_font = ExtResource("8_1yp52")
 default_font_size = 35
+Button/styles/disabled = SubResource("StyleBoxFlat_kgkp1")
 Button/styles/focus = SubResource("StyleBoxFlat_gll8e")
 Button/styles/hover = SubResource("StyleBoxFlat_k1j1b")
 Button/styles/normal = SubResource("StyleBoxFlat_y1bdr")

@@ -62,7 +62,5 @@ func _on_detect_enemy_area_body_entered(body: Node2D) -> void:
 		enemy = body
 		can_shoot = true
 		
-
-
 func _on_attack_timer_timeout() -> void:
 	can_shoot = true

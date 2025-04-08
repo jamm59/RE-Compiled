@@ -27,3 +27,11 @@ res://Platforms/scenes/Coin.tscn
 res://Characters/NPCs/scene/ferret_npc.tscn
 res://Resources/game-save/game-save.gd
 res://Game/Menu/Menu.gd
+res://Characters/NPCs/scripts/robot_npc.gd
+res://Game/Level 0/game.gd
+res://Characters/Enemy/enemy_base.gd
+res://Characters/Enemy/scripts/flying_enemy.gd
+res://Characters/Protagonist/player.gd
+res://Characters/Enemy/scripts/mini_boss.gd
+res://Game/UserInterface/education_modal.tscn
+res://Game/UserInterface/education_modal.gd

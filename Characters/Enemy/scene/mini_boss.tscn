@@ -231,7 +231,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack 1",
-"speed": 8.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -247,7 +247,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ssopu")
 }],
 "loop": false,
-"name": &"Dead 1",
+"name": &"Dead",
 "speed": 8.0
 }, {
 "frames": [{

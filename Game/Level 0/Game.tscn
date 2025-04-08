@@ -1557,7 +1557,7 @@ position = Vector2(-80, -107)
 
 [node name="Player" parent="." instance=ExtResource("2_xaqkc")]
 z_index = 1
-position = Vector2(12877, -496)
+position = Vector2(-3323, 276)
 can_use_controls = true
 
 [node name="LeftPos" type="Marker2D" parent="Player"]

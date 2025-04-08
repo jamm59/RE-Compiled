@@ -41,8 +41,8 @@ func _spawn_enemy() -> void:
 func _ready() -> void:
 	super()
 	textTypingAnimation(str(health) + " %...")
-	attackDistanceLeft = 100.0
-	attackDistanceRight = 100.0
+	attackDistanceLeft = 50.0
+	attackDistanceRight = 50.0
 	mcq_u_i.answer_wrong.connect(_answer_wrong)
 	mcq_u_i.answer_correct.connect(_answer_correct)
 	
@@ -52,7 +52,7 @@ func _answer_wrong() -> void:
 	mcq_u_i.delete_self()
 
 func _answer_correct() -> void:
-	apply_damage(10)
+	apply_damage(5)
 	
 func _physics_process(delta: float) -> void:
 	super(delta)
@@ -63,7 +63,6 @@ func textTypingAnimation(text: String) -> void:
 		await get_tree().create_timer(0.05).timeout
 		content += s
 		task.text = "[b][font_size=5]" + content + "[/font_size][/b]"
-	
 	
 func apply_damage(damagePoint: int) -> void:
 	if isDead:
@@ -82,6 +81,7 @@ func apply_damage(damagePoint: int) -> void:
 		mcq_u_i.activate()
 	if health <= 0:
 		animation_player.play("Dead")
+		await get_tree().create_timer(0.6).timeout	
 		handleEnemyDead()
 		
 	textTypingAnimation(str(health) + "%...")

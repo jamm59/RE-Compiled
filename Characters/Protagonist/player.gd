@@ -102,8 +102,7 @@ func _physics_process(delta: float) -> void:
 		
 	if state in [STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK, STATE.POWERUP]:
 		applyDeadFallGravity(delta)
-		if state != STATE.POWERUP:
-			move_and_slide()
+		move_and_slide() 
 		return
 
 	handleJumpInput(delta)

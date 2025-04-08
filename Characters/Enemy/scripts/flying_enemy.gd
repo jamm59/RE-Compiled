@@ -43,7 +43,6 @@ func _attack_player() -> void:
 	if player:
 		navigation_agent_2d.target_position = player.global_position
 		
-		
 	var current_agent_position: Vector2 = global_position
 	var next_path_pos: Vector2 = navigation_agent_2d.get_next_path_position()
 	var direction: Vector2 = current_agent_position.direction_to(next_path_pos)

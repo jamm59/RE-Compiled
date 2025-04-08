@@ -1,5 +1,7 @@
 class_name RobotNPC extends NPCBase
 
+@onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
+
 @onready var bullet_location_left: Marker2D = $BulletLocationLeft
 @onready var bullet_location_right: Marker2D = $BulletLocationRight
 @onready var attack_timer: Timer = $AttackTimer
@@ -35,7 +37,7 @@ func update_state_animation() -> void:
 		npc.play("Attack 1")
 		can_shoot = false
 		return
-		 
+
 	super()
 
 
@@ -48,3 +50,7 @@ func _on_robot_animation_finished() -> void:
 func _on_duration_timeout() -> void:
 	remote_control_activated = false
 	queue_free()
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is EnemyBase and body is not MiniBoss:
+		remote_control_activated = true

@@ -21,9 +21,11 @@ func _process(delta: float) -> void:
 		
 		
 func textTypingAnimation(text: String) -> void:
+	displayText.text = "[font_size=20]" 
 	for s: String in text:
 		await get_tree().create_timer(0.001).timeout
 		displayText.text += s
+	displayText.text += "[/font_size]"
 	typingFinished = true
 		
 func clear() -> void:

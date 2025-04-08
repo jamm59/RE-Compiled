@@ -61,7 +61,6 @@ func apply_damage(damagePoint: int) -> void:
 	if health <= 0:
 		animation_player.play("Dead")
 		await get_tree().create_timer(0.6).timeout
-
 		handleEnemyDead()
 		
 func knockBack() -> void:
@@ -97,6 +96,7 @@ func handleMoveAndAvoidObstacles()-> void:
 func handlestate() -> void:
 	if state == STATE.ATTACK:
 		animated_sprite_2d.play("Attack 1")
+		print("playing attack")
 		return 
 		
 	match state:
@@ -122,8 +122,6 @@ func detect_obstacle_while_following_player() -> void:
 				continue
 			if (body is TileMapLayer and is_on_wall()) or (body is EnemyBase and body.state == body.STATE.DEAD): # Tilemap base layer
 				handleEnemyJump()
-	else:
-		state = STATE.RUN
 	
 func handleFollowPlayerLogic() -> void:
 	if not player:
@@ -152,7 +150,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		handleFollowPlayerLogic()
 	
-		
+
 	apply_gravity(delta)
 	handle_input()
 	handlestate()
@@ -183,12 +181,13 @@ func _attack_player() -> void:
 
 	var is_player_to_the_left: bool = global_position.x > player.global_position.x
 	var is_player_to_the_right: bool = global_position.x < player.global_position.x
-
+	
 	# If player is within attack range, trigger attack animationa
 	if (is_player_to_the_left and distance <= attackDistanceLeft) or \
 		(is_player_to_the_right and distance <= attackDistanceRight):
 		state = STATE.ATTACK
-		animated_sprite_2d.play("Attack 1")  # Start attack animation
+		print("elsing")
+		#animated_sprite_2d.play("Attack 1")  # Start attack animation
 	else:
 		state = STATE.RUN
 		velocity.x = move_toward(velocity.x, dir_x * SPEED, acceleration)

@@ -114,7 +114,6 @@ func _physics_process(delta: float) -> void:
 	
 func update_coin() -> void:
 	coins += 1
-	hud.coins.text = str(coins)
 	
 func _get_gravity() -> float:
 	if isWallSliding:
@@ -240,8 +239,9 @@ func handleInput() -> void:
 
 		
 	wasOnFloor = is_on_floor()
-	previousDirection = dir if dir != 0 else previousDirection
+	hud.coins.text = str(coins)
 	vfx.flip_h = animated_sprite_2d.flip_h
+	previousDirection = dir if dir != 0 else previousDirection
 	vfx.global_position = attack_box_left.global_position if vfx.flip_h else attack_box_right.global_position
 		
 func handleAnimationStateUpdate() -> void:
@@ -283,6 +283,7 @@ func handleAnimationStateUpdate() -> void:
 			velocity.x = move_toward(velocity.x, 0, friction)
 			
 	animated_sprite_2d.play(animationName)
+	
 	if statsInitDone:
 		var deductStaminaSpeed: float = 20
 		var increaseStaminaSpeed: float = 40

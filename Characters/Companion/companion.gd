@@ -18,16 +18,12 @@ enum CompanionState {IDLE, MOVE}
 
 var can_shoot: bool = false
 var state: CompanionState = CompanionState.IDLE
-var speed: float = 7.0
+var speed: float = 4.0
 var direction: float = 0.0
 var enemy: EnemyDuplicate = null
 var hasPermissionToShoot: bool = false
 
 
-func _physics_process(delta: float) -> void:
-	move(delta)
-	
-	
 func move(delta: float) -> void:
 	if not companion_can_follow:
 		return 
@@ -36,7 +32,6 @@ func move(delta: float) -> void:
 		if activate_companion_controls:
 			companion_location.global_position = left_pos.global_position if direction > 0.0 else right_pos.global_position
 	global_position = lerp(global_position, companion_location.global_position, speed * delta)
-	
 	if enemy and can_shoot:
 		can_shoot = false
 		attack_timer.start(1.0)

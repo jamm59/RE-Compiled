@@ -1,4 +1,8 @@
 extends Node2D
+class_name Game
+
+const SAVE_GAME_PATH: String = "res://Resources/game-save/game-save.gd"
+
 
 @export var freeze_slow := 0.07
 @export var freeze_time := 0.4
@@ -21,15 +25,14 @@ var defaultZoom: Vector2 = Vector2(zoomValue, zoomValue)
 var shake_amount: int 
 var cameraShake: bool = false
 
-func save_player_state(body: Player) -> void:
-	pass
-	
-	
+var gs: GameStateSave = GameStateSave.new()
+
 func _ready() -> void:
-	var loaded_game: Resource = SaveGame.load_savegame()
+	#Loading saves
+	if gs:
+		gs.load_savegame(self)
+		
 	#Variables
-	checkpoint = $Player/startPosition.global_position
-	companion.companion_can_follow = false
 	camera_2d.zoom = defaultZoom
 	Engine.time_scale = 0.9
 	#player.can_use_controls = false
@@ -68,6 +71,7 @@ func _input(event) -> void:
 		
 func _last_checkpoint() -> void:
 	player.global_position = checkpoint
+
 	
 func zoom_camera(target_zoom: Vector2, time: float = 0.4):
 	var tween: Tween = get_tree().create_tween()
@@ -195,7 +199,7 @@ func _on_dialogic_signal(argument: String):
 	DialogueDone()
 	match argument:
 		"timeline-2":
-			companion.companion_can_follow= true
+			companion.companion_can_follow = true
 			companion.animated_sprite_2d.flip_h = false
 		"timeline-enemy-killed":
 			title_card.visible = true
@@ -241,6 +245,7 @@ func _on_ladder_area_body_exited(body: Node2D) -> void:
 func _on_check_points_body_entered(body: Node2D) -> void:
 	if body is Player:
 		checkpoint = body.global_position
+		gs.write_savegame(self)
 
 func _on_gravity_room_area_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -272,19 +277,19 @@ func _on_level_end_body_entered(body: Node2D) -> void:
 
 func _on_player_introduction_body_entered(body: Node2D) -> void:
 	if body is Player:
+		$CinematicAreas/PlayerIntroduction.disconnect("body_entered", _on_player_introduction_body_entered)
 		zoom_camera(Vector2(3,3), 0.3)
 		await get_tree().create_timer(1).timeout
 		title_card.visible = true
 		title_card.showTitleCard("Introduction")
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(1).timeout
 		title_card.visible = false
 		showDialogue("timeline-1")
-		$CinematicAreas/PlayerIntroduction.disconnect("body_entered", _on_player_introduction_body_entered)
 
 func _on_companion_introduction_body_entered(body: Node2D) -> void:
 	if body is Player:
-		showDialogue("timeline-2")
 		$CinematicAreas/CompanionIntroduction.disconnect("body_entered", _on_companion_introduction_body_entered)
+		showDialogue("timeline-2")
 		
 func _on_jump_area_scene_body_entered(body: Node2D) -> void:
 	if body is Player:

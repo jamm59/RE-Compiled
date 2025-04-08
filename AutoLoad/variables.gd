@@ -1,5 +1,6 @@
 extends Node
 
+var new_game: bool = false
 var current_topic: String = "oop"
 
 func _launch(ref: CharacterBody2D, strength: float, direction: Vector2) -> void:

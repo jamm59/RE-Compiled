@@ -101,6 +101,21 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0)
 }
 
+[sub_resource type="Animation" id="Animation_omymn"]
+resource_name = "hover"
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -10, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
 [sub_resource type="Animation" id="Animation_bkakn"]
 resource_name = "powerUP"
 tracks/0/type = "value"
@@ -142,21 +157,6 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_omymn"]
-resource_name = "hover"
-loop_mode = 2
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -10, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sm2bx"]
 _data = {
 &"RESET": SubResource("Animation_sm2bx"),
@@ -178,7 +178,7 @@ shape = SubResource("RectangleShape2D_i7tlw")
 material = SubResource("ShaderMaterial_omymn")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_26lph")
-frame_progress = 0.229962
+frame_progress = 0.423629
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_bkakn")

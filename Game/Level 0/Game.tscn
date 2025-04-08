@@ -1557,7 +1557,7 @@ position = Vector2(-80, -107)
 
 [node name="Player" parent="." instance=ExtResource("2_xaqkc")]
 z_index = 1
-position = Vector2(-501, 938)
+position = Vector2(-3313, 208)
 can_use_controls = true
 
 [node name="LeftPos" type="Marker2D" parent="Player"]
@@ -2026,7 +2026,7 @@ position = Vector2(-3120.5, 542)
 shape = SubResource("RectangleShape2D_inupi")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="CheckPoints"]
-position = Vector2(-2230, 832)
+position = Vector2(-2456, 832)
 shape = SubResource("RectangleShape2D_xpbf3")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="CheckPoints"]

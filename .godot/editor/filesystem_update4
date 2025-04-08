@@ -1,11 +1,10 @@
-res://Platforms/scenes/health.tscn
+res://Game/Menu/Menu.tscn
 res://Shaders/HitFlash.gdshader
 res://Shaders/blackandwhite.gdshader
 res://Resources/panel-hud-theme.tres
 res://Resources/progress-bar-theme.tres
 res://Shaders/custom-black-white.gdshader
 res://Resources/panel-dark-theme.tres
-res://Characters/Enemy/enemy_base.gd
 res://Game/Level 0/Game.tscn
 res://Characters/Enemy/scene/bat_eyes.tscn
 res://Characters/Enemy/scene/mini_boss.tscn
@@ -22,8 +21,10 @@ res://Characters/Enemy/scene/monster.tscn
 res://Characters/NPCs/scene/crow_npc.tscn
 res://Characters/Companion/Companion.tscn
 res://Game/Menu/PauseMenu.tscn
-res://Game/Menu/Menu.tscn
 res://Platforms/scenes/FanBlade.tscn
+res://Platforms/scenes/health.tscn
 res://Platforms/scenes/Coin.tscn
-res://Platforms/scripts/health.gd
+res://Resources/game-save/game-save.gd
+res://Game/Menu/Menu.gd
+res://Game/Level 0/game.gd
 res://Characters/Protagonist/player.gd

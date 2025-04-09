@@ -29,7 +29,8 @@ func _on_check_point_pressed() -> void:
 	await get_tree().create_timer(1).timeout
 	visible = false
 	get_tree().paused = false
-	SignalManager.emit_signal("last_checkpoint")
+	get_tree().change_scene_to_file("res://Game/Level 0/Game.tscn")
+	#SignalManager.emit_signal("last_checkpoint")
 
 func _on_controls_pressed() -> void:
 	controls_container.visible = true

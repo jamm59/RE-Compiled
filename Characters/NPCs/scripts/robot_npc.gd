@@ -24,10 +24,10 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 	
 	if remote_control_activated and not duration_activated:
-		duration.start(15)
+		duration.start(10)
 		duration_activated = true
 		
-		for i in 15:
+		for i in 10:
 			await get_tree().create_timer(1).timeout
 			timer.text = "[b][font_size=5]" + str(10 - i) + "..[/font_size][/b]"
 		
@@ -61,8 +61,8 @@ func _on_robot_animation_finished() -> void:
 	state = STATE.IDLE
 
 func _on_duration_timeout() -> void:
-	SignalManager.emit_signal("npc_dead")
 	remote_control_activated = false
+	SignalManager.emit_signal("npc_dead")
 	queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

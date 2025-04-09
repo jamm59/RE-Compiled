@@ -41,15 +41,15 @@ var content: String = "This is the test for the information section of the whole
 #signal typing_finished 
 
 func _ready() -> void:
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1).timeout
 	title.visible = false
 	for key in storyline.keys():
 		var entry = storyline[key] 
 		texture_rect.texture = entry["img_src"] 
 		await textTypingAnimation(entry["text"]) 
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(4).timeout
 		clearText()
-	get_tree().change_scene_to_file("res://Game/select_player.tscn")
+	get_tree().change_scene_to_file("res://Game/Level 0/Game.tscn")
 
 func textTypingAnimation(text: String) -> void:
 	var output = ""  

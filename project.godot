@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Re:Compiled"
-run/main_scene="uid://dsvplo6l32j5b"
+run/main_scene="uid://cs4tb7qdetlxj"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"

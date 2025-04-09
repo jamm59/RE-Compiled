@@ -36,9 +36,6 @@ func _start() -> void:
 		
 	
 	
-func _ready() -> void:
-	_start()
-	
 func activate() -> void:
 	_start()
 	visible = true
@@ -90,6 +87,7 @@ func progressTimer() -> void:
 	progressTimer()
 	
 func delete_self() -> void:
+	visible = false
+	tryAgain = false
 	get_tree().paused = false
 	await get_tree().create_timer(1).timeout
-	visible = true

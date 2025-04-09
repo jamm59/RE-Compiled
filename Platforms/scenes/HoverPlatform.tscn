@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://dq0v2nkulgl05"]
+[gd_scene load_steps=35 format=4 uid="uid://dq0v2nkulgl05"]
 
 [ext_resource type="Texture2D" uid="uid://cxriubbaxlfpv" path="res://Assets/platforms/Gears/1.png" id="1_7lnid"]
 [ext_resource type="Script" uid="uid://bvcy5emgfuoao" path="res://Platforms/scripts/hover_platform.gd" id="1_77a2x"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bednmkxybft6g" path="res://Assets/platforms/Gears/16.png" id="16_fanmr"]
 [ext_resource type="Texture2D" uid="uid://cjulhckf86it2" path="res://Assets/Tilesets/Props.png" id="17_7p4mc"]
 [ext_resource type="Texture2D" uid="uid://b74x3u7bvc5xi" path="res://Assets/Tilesets/Tileset.png" id="18_4svx8"]
+[ext_resource type="AudioStream" uid="uid://bi1gabuxyktxg" path="res://Assets/Music/cogwheel.mp3" id="21_visuu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smr7f"]
 texture = ExtResource("17_7p4mc")
@@ -2469,3 +2470,7 @@ shape = SubResource("RectangleShape2D_yolpd")
 libraries = {
 &"": SubResource("AnimationLibrary_46hb3")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_visuu")
+volume_db = -11.37

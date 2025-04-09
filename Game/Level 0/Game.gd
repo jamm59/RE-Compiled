@@ -159,7 +159,6 @@ func _terminal_control_education_signal(pos: Vector2, name: String, activate_mul
 	activatePlatform(platform)
 	
 func reset_camera_position() -> void:
-	await get_tree().create_timer(1.5).timeout
 	cinematic.visible = false
 	player.hud.visible = true
 	player.can_use_controls = true
@@ -278,6 +277,7 @@ func _on_dead_area_2d_body_entered(body: Node2D) -> void:
 func _on_level_end_body_entered(body: Node2D) -> void:
 	if body is Player:
 		title_card.showTitleCard("Thank you for playing!")
+		gs.reset_game_save()
 		Engine.time_scale = 0.1
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://Game/Menu/Menu.tscn")

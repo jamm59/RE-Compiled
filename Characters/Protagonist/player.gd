@@ -340,7 +340,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		
 func _on_attack_box_component_body_entered(body: Node2D) -> void:
 	if body is EnemyBase:
-		play_sound(SWORD_HIT)
 		if animated_sprite_2d.animation == "Light3":
 			body.apply_damage(DAMAGE_POINT_HEAVY)
 		else:

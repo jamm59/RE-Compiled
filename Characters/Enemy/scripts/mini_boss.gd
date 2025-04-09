@@ -17,12 +17,12 @@ var found_player_at: Vector2 = Vector2(0.0, 0.0)
 var can_shoot: bool = true
 
 const Enemies = [
-	preload("res://Characters/Enemy/scene/monster.tscn"),
+	#preload("res://Characters/Enemy/scene/monster.tscn"),
 	preload("res://Characters/Enemy/scene/monster_2.tscn"),
 	preload("res://Characters/Enemy/scene/monster_3.tscn"),
 	preload("res://Characters/Enemy/scene/monster_4.tscn"),
 	preload("res://Characters/Enemy/scene/bat_eyes.tscn"),
-	preload("res://Characters/Enemy/scene/monster_5.tscn"),
+	#preload("res://Characters/Enemy/scene/monster_5.tscn"),
 ]
 
 
@@ -75,7 +75,6 @@ func apply_damage(damagePoint: int) -> void:
 	if int(prevHealth / percentage) > int(health / percentage):
 		_spawn_enemy()
 	if health <= 50 and health >= 48:
-		_spawn_enemy()
 		Dialogic.start("timeline-mid-miniboss")
 	elif health <= 20 and health >= 18:
 		mcq_u_i.activate()

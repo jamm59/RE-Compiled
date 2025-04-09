@@ -46,9 +46,8 @@ func shoot_bullets(fromBody: Node2D, toBody: Node2D, bullets: Node2D, bullet_sta
 	const BULLET = preload("res://Characters/Enemy/scene/bullet.tscn")
 	var Angle = atan2(toBody.global_position.y - fromBody.global_position.y, toBody.global_position.x - fromBody.global_position.x)
 	var bullet: Bullet = BULLET.instantiate()
-	if not from_companion:
+	if bullets.ready:
 		bullets.add_child(bullet)
-	else:
-		bullets.call_deferred("add_child", bullet)
+		#bullets.call_deferred("add_child", bullet)
 	bullet.from_companion = from_companion
 	bullet.shoot(bullet_start_location.global_position, Angle)

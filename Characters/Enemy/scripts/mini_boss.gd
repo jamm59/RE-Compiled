@@ -21,8 +21,8 @@ const Enemies = [
 	preload("res://Characters/Enemy/scene/monster_2.tscn"),
 	preload("res://Characters/Enemy/scene/monster_3.tscn"),
 	preload("res://Characters/Enemy/scene/monster_4.tscn"),
-	preload("res://Characters/Enemy/scene/bat_eyes.tscn")
-	#preload("res://Characters/Enemy/scene/monster_5.tscn"),
+	preload("res://Characters/Enemy/scene/bat_eyes.tscn"),
+	preload("res://Characters/Enemy/scene/monster_5.tscn"),
 ]
 
 

@@ -3,7 +3,7 @@ class_name Laser
 
 @onready var laser_layers: Node2D = $LaserLayers
 @onready var head: AnimatedSprite2D = $Head
-const DAMAGE_POINT: float = 5
+const DAMAGE_POINT: float = 20
 
 func deactivateLasers() -> void:
 	for laser: AnimatedSprite2D in laser_layers.get_children():

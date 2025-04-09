@@ -12,8 +12,6 @@ class_name MCQ
 signal answer_correct
 signal answer_wrong
 
-
-var tween: Tween
 var shake_amount: float = 5.0
 var timer: float = 15.0
 var tryAgain: bool = false
@@ -23,7 +21,7 @@ var question: String
 var answers: Array
 var correct_answer: String
 
-func _ready() -> void:
+func _start() -> void:
 	visible = false
 	var question_data = Variables.get_random_question_from_topic(Variables.current_topic)
 	question = question_data["question"]
@@ -35,13 +33,18 @@ func _ready() -> void:
 	for button: Button in buttons:
 		button.text = answers[count]
 		count += 1
+		
+	
+	
+func _ready() -> void:
+	_start()
 	
 func activate() -> void:
+	_start()
 	visible = true
 	tryAgain = true
 	progressTimer()
 	get_tree().paused = true
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 
 func _process(delta: float) -> void:
 	count_down_label.text =  "[font_size=20][b]" + "%2.1f" % timer + "[/b][/font_size]"
@@ -69,7 +72,9 @@ func handle_button_press(button: Button) -> void:
 		
 func progressTimer() -> void:
 	var time: float = 15
-	tween = get_tree().create_tween()
+
+	var tween: Tween = get_tree().create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.set_parallel()
 	tween.tween_property(progress_bar, "value", 0, time)
 	tween.tween_property(self, "timer", 0, time)
@@ -78,13 +83,13 @@ func progressTimer() -> void:
 		tryAgain = false
 		return
 		
+	tween.kill()
 	progress_bar.value = 100
 	timer = 15.0
-	self.progressTimer()
+	await get_tree().process_frame  
+	progressTimer()
 	
 func delete_self() -> void:
 	get_tree().paused = false
-	if tween:
-		tween.kill()
-		await get_tree().create_timer(1).timeout
-		queue_free()
+	await get_tree().create_timer(1).timeout
+	visible = true

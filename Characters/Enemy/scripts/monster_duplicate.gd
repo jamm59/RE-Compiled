@@ -15,7 +15,7 @@ func _ready() -> void:
 	attackDistanceLeft = 20
 	attackDistanceRight = 20
 	if status != "Parent":
-		animated_sprite_2d.material.set_shader_parameter("black_white", true)
+		animated_sprite_2d.material.set_shader_parameter("new_color", Color("#16c47f"))
 	
 func _physics_process(delta: float) -> void:
 	super(delta)
@@ -27,6 +27,7 @@ func apply_damage(damagePoint: int) -> void:
 		return 
 	animation_player.play("Hit")
 	if status == "Parent":
+		await get_tree().create_timer(0.3).timeout
 		var n_monster: EnemyDuplicate = MonsterDuplicate.instantiate()
 		n_monster.status = "Child"
 		n_monster.player = player

@@ -510,6 +510,7 @@ _data = {
 }
 
 [node name="BatEyes" type="CharacterBody2D"]
+z_index = 2
 material = SubResource("ShaderMaterial_0nf3q")
 script = ExtResource("1_0nf3q")
 

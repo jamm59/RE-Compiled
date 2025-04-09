@@ -2,16 +2,21 @@
 
 [ext_resource type="Script" uid="uid://v5xxqexhchy0" path="res://Platforms/scripts/short_range_terminal.gd" id="1_0e0fa"]
 [ext_resource type="Texture2D" uid="uid://c6kyl0pjx1hls" path="res://Assets/other/tower.png" id="1_xmtmh"]
-[ext_resource type="Shader" uid="uid://dvgk6116kbqbr" path="res://Shaders/custom-black-white.gdshader" id="2_0e0fa"]
 [ext_resource type="Texture2D" uid="uid://cv2ta72nh8era" path="res://Assets/other/wifi.png" id="3_0e0fa"]
 [ext_resource type="Texture2D" uid="uid://br85yc8kiutkk" path="res://Assets/other/short-range.png" id="3_xmtmh"]
+[ext_resource type="Shader" uid="uid://dpf3btpbxnldy" path="res://Shaders/HitFlash.gdshader" id="4_7ajy2"]
 [ext_resource type="AudioStream" uid="uid://deg7dqc8jbg4f" path="res://Assets/Music/chip.mp3" id="6_7ajy2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0e0fa"]
 size = Vector2(16, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dlcqv"]
-shader = ExtResource("2_0e0fa")
+shader = ExtResource("4_7ajy2")
+shader_parameter/active = false
+shader_parameter/black_white = true
+shader_parameter/tolerance = 0.46
+shader_parameter/prev_color = Color(1, 1, 1, 1)
+shader_parameter/new_color = Color(0.909804, 0.247059, 0.145098, 1)
 
 [sub_resource type="Animation" id="Animation_7ajy2"]
 resource_name = "Activate"

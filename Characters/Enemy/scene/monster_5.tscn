@@ -23,7 +23,7 @@ shader_parameter/active = false
 shader_parameter/black_white = true
 shader_parameter/tolerance = 1.0
 shader_parameter/prev_color = Color(1, 1, 1, 1)
-shader_parameter/new_color = Color(0.968627, 0.215686, 0.309804, 1)
+shader_parameter/new_color = Color(0.909804, 0.247059, 0.145098, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qxvek"]
 atlas = ExtResource("3_sm4m7")
@@ -431,10 +431,10 @@ wait_time = 0.5
 one_shot = true
 
 [node name="SpawnLeftLocation" type="Marker2D" parent="."]
-position = Vector2(-35, -77)
+position = Vector2(-38, -49)
 
 [node name="SpawnRightLocation" type="Marker2D" parent="."]
-position = Vector2(30, -77)
+position = Vector2(27, -49)
 
 [connection signal="body_entered" from="HealthBoxComponent" to="." method="_on_health_box_component_body_entered"]
 [connection signal="body_entered" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_entered"]

@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://dq1psyohguleb" path="res://Assets/platforms/Animated/elevator 1.png" id="1_8bbjm"]
 [ext_resource type="Script" uid="uid://cs2ovphvcbj7q" path="res://Platforms/scripts/large_elevator.gd" id="1_fcvjo"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldrsj"]
+size = Vector2(64, 10)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8naq6"]
 atlas = ExtResource("1_8bbjm")
 region = Rect2(0, 0, 64, 32)
@@ -38,9 +41,6 @@ animations = [{
 "name": &"default",
 "speed": 8.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldrsj"]
-size = Vector2(64, 10)
 
 [sub_resource type="Animation" id="Animation_e7nml"]
 length = 0.001
@@ -99,15 +99,15 @@ position = Vector2(131, 0)
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
 
-[node name="Large" type="AnimatedSprite2D" parent="AnimatableBody2D"]
-sprite_frames = SubResource("SpriteFrames_1bhnj")
-autoplay = "default"
-frame_progress = 0.970726
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_ldrsj")
 one_way_collision = true
+
+[node name="Large" type="AnimatedSprite2D" parent="AnimatableBody2D"]
+sprite_frames = SubResource("SpriteFrames_1bhnj")
+autoplay = "default"
+frame_progress = 0.970726
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

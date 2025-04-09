@@ -320,6 +320,16 @@ shape = SubResource("RectangleShape2D_edljx")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
+[node name="timer" type="RichTextLabel" parent="."]
+offset_left = -67.0
+offset_top = -64.0
+offset_right = 75.0
+offset_bottom = -24.0
+bbcode_enabled = true
+text = "[b][font_size=5]....[/font_size][/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="animation_finished" from="Robot" to="." method="_on_robot_animation_finished"]
 [connection signal="timeout" from="Duration" to="." method="_on_duration_timeout"]

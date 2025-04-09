@@ -1,8 +1,7 @@
 extends CharacterBody2D
 class_name Bullet
 
-
-@onready var ball_bullet: Sprite2D = $BallBullet
+@onready var ball_bullet: AnimatedSprite2D = $BallBullet
 @onready var straight_bullet: Sprite2D = $StraightBullet
 
 @export var speed: float = 100.0
@@ -29,7 +28,7 @@ func shoot(startLocation: Vector2, angle: float):
 	dir_y = sin(angle)
 	
 	if from_companion:
-		speed = 10
+		speed = 50.0
 		ball_bullet.visible = true
 		straight_bullet.visible = false
 	else:
@@ -55,6 +54,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is TileMapLayer or body is EnemyBase:
 		reset()
 	if body is EnemyDuplicate:
-		body.apply_damage(body.health)
-	if body is EnemyBase and body is not MiniBoss:
+		body.apply_damage(body.health / 2)
+	if body is EnemyBase:
 		body.apply_damage(DAMAGE_POINT)

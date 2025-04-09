@@ -96,7 +96,6 @@ func handleMoveAndAvoidObstacles()-> void:
 func handlestate() -> void:
 	if state == STATE.ATTACK:
 		animated_sprite_2d.play("Attack 1")
-		print("playing attack")
 		return 
 		
 	match state:
@@ -186,8 +185,6 @@ func _attack_player() -> void:
 	if (is_player_to_the_left and distance <= attackDistanceLeft) or \
 		(is_player_to_the_right and distance <= attackDistanceRight):
 		state = STATE.ATTACK
-		print("elsing")
-		#animated_sprite_2d.play("Attack 1")  # Start attack animation
 	else:
 		state = STATE.RUN
 		velocity.x = move_toward(velocity.x, dir_x * SPEED, acceleration)
@@ -196,8 +193,10 @@ func _attack_player() -> void:
 	detect_obstacle_while_following_player()
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
+	print(animated_sprite_2d.animation)
 	if animated_sprite_2d.animation in ["Attack 1", "Attack 2"]:
 		var distance: float = player.global_position.distance_to(global_position)
+		print(distance)
 		var is_player_to_the_left: bool = global_position.x > player.global_position.x
 		var is_player_to_the_right: bool = global_position.x < player.global_position.x
 

@@ -5,4 +5,4 @@ Companion: In this simulation, you'll feel it as data bottlenecks. The more infe
 Companion: You won’t see dramatic effects here. But if things feel off like too many entities, slightly delayed responses that’s the echo of Mydoom. Subtle sabotage
 Player: So it's like a ghost haunting the system without being loud about it.
 Companion: Exactly. Sometimes, the worst infections are the quiet ones.
-[signal]
+[signal arg="timeline-enemy-yellow"]

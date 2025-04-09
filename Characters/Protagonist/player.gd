@@ -12,13 +12,17 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, POWERUP,
 @onready var attack_box_right: CollisionShape2D = $AttackBoxComponent/AttackBoxRight
 @onready var attack_box_left: CollisionShape2D = $AttackBoxComponent/AttackBoxLeft
 
-@onready var red: AnimatedSprite2D = $AnimatedSprites/Red
 @onready var dead_aimation: AnimatedSprite2D = $DeadAimation
 @onready var vfx: AnimatedSprite2D = $Vfx
 
 @onready var short_range_terminal: ShortRangeTerminal = $Inventory/ShortRange
-@onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $Node2D/AudioStreamPlayer2D
+
+@onready var bottom_ray_cast_2d: RayCast2D = $RayCast/bottomRayCast2D
+@onready var left_ray_cast_2d: RayCast2D = $RayCast/LeftRayCast2D
+@onready var right_ray_cast_2d: RayCast2D = $RayCast/RightRayCast2D
+
+
 
 @export_category("Jump Settings")
 @export var jump_height : float = 50
@@ -30,28 +34,17 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, POWERUP,
 
 @export_category("Other Settings")
 @export var can_use_controls: bool = false
-@export var previousAnimation: String = "Red"
 
 @onready var JUMP_VELOCITY : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var JUMP_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var FALL_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 @onready var WALL_FALL_GRAVITY: float = FALL_GRAVITY / 10
 
-
-const CHIP = preload("res://Assets/Music/chip.mp3")
-const COGWHEEL = preload("res://Assets/Music/cogwheel.mp3")
-const HEAVY_LAND = preload("res://Assets/Music/heavy-land.mp3")
-const HELLO = preload("res://Assets/Music/hello.mp3")
-const HUH_2 = preload("res://Assets/Music/huh-2.mp3")
-const HUH = preload("res://Assets/Music/huh.mp3")
-const LAND = preload("res://Assets/Music/land.mp3")
-const LEVER = preload("res://Assets/Music/lever.mp3")
+const LAND_HEAVY = preload("res://Assets/Music/land_heavy.mp3")
 const SLASH = preload("res://Assets/Music/slash.mp3")
-const STEP_1 = preload("res://Assets/Music/step-1.mp3")
-const STEP_2 = preload("res://Assets/Music/step-2.mp3")
-const STOMP_255897 = preload("res://Assets/Music/stomp-255897.mp3")
 const SWORD_HIT = preload("res://Assets/Music/sword-hit.mp3")
-
+const LAND = preload("res://Assets/Music/land-new.mp3")
+const STEP_NEW = preload("res://Assets/Music/step-new.mp3")
 # Constants
 const DASH_MULTIPLIER: float = 2.0
 const SPEED: float = 180.0
@@ -88,11 +81,9 @@ var emitShortRangeSignal: bool = false
 var inventory: Array[String] = []
 
 func _ready() -> void:
-	animated_sprite_2d = red
 	health = MAX_HEALTH
 	tweenProgressBar(hud.health, scaleHealth(health), 1.0)
 	tweenProgressBar(hud.stamina, stamina, 1.0)
-
 	
 func _physics_process(delta: float) -> void:
 	if state == STATE.DEAD:
@@ -111,12 +102,17 @@ func _physics_process(delta: float) -> void:
 	handleAnimationStateUpdate()
 	move_and_slide()
 	
+	
+func play_sound(source: AudioStreamMP3):
+	audio_stream_player_2d.stream = source
+	audio_stream_player_2d.play()
+	
 func update_coin() -> void:
 	coins += 1
 	
 func _get_gravity() -> float:
-	if isWallSliding:
-		return WALL_FALL_GRAVITY
+	if state == STATE.ROLL:
+		return 0.0
 	return JUMP_GRAVITY if velocity.y < 0.0 else FALL_GRAVITY
 	
 func apply_power_up(POWER_UP_VALUE: float) -> void:
@@ -151,10 +147,10 @@ func handleJumpInput(delta: float) -> void:
 			
 		if (can_use_controls and not isWallSliding) and Input.is_action_just_pressed("Jump"):
 			if (jump_count > 0 or is_on_floor()):
-				state = STATE.JUMP
-				animated_sprite_2d.play("Jump")
-				velocity.y = JUMP_VELOCITY
 				jump_count -= 1
+				state = STATE.JUMP
+				velocity.y = JUMP_VELOCITY
+				animated_sprite_2d.play("Jump")
 	else:
 		state = STATE.JUMP
 		velocity.y = JUMP_VELOCITY + 50
@@ -166,9 +162,10 @@ func handleJumpInput(delta: float) -> void:
 	if is_on_floor() and not wasOnFloor:
 		state = STATE.LAND
 		if global_position.y - last_ground_y > FALL_DISTANCE_THRESHOLD:
-			audio_stream_player_2d.stream = LAND
-			audio_stream_player_2d.play()
+			play_sound(LAND_HEAVY)
 			SignalManager.emit_signal("large_fall_detected")
+		else:
+			play_sound(LAND)
 		last_ground_y = global_position.y  
 		
 	if canClimbLadder and Input.is_action_pressed("Interact"):
@@ -206,8 +203,8 @@ func handleInput() -> void:
 	if not can_use_controls:
 		return 
 	
-	if ray_cast_2d.is_colliding():
-		var body: Node2D = ray_cast_2d.get_collider()
+	if bottom_ray_cast_2d.is_colliding():
+		var body: Node2D = bottom_ray_cast_2d.get_collider()
 		if body is EnemyBase:
 			state = STATE.JUMP
 			velocity.y += JUMP_VELOCITY
@@ -223,7 +220,7 @@ func handleInput() -> void:
 	if Input.is_action_pressed("Dash"): # DASH IS INDEPENDENT OF OTHER EVENTS
 		state = STATE.DASH
 		
-	if Input.is_action_pressed("Roll") and velocity.y == 0.0:
+	if Input.is_action_pressed("Roll") and bottom_ray_cast_2d.is_colliding() and velocity.y == 0.0:
 		state = STATE.ROLL
 		$HitBoxComponent.disabled = true
 		$RollHitBoxComponent.disabled = false
@@ -233,9 +230,13 @@ func handleInput() -> void:
 		
 	if Input.is_action_pressed("Light_A"):
 		state = STATE.LIGHT_ATTACK
+		play_sound(SLASH)
 	elif Input.is_action_pressed("Heavy_A"):
 		state = STATE.HEAVY_ATTACK
-
+		play_sound(SLASH)
+		
+	if state != STATE.ROLL:
+		$HitBoxComponent.disabled = false
 		
 	wasOnFloor = is_on_floor()
 	hud.coins.text = str(coins)
@@ -339,8 +340,24 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		
 func _on_attack_box_component_body_entered(body: Node2D) -> void:
 	if body is EnemyBase:
+		play_sound(SWORD_HIT)
 		if animated_sprite_2d.animation == "Light3":
 			body.apply_damage(DAMAGE_POINT_HEAVY)
 		else:
 			body.apply_damage(DAMAGE_POINT)
 			
+	#if Input.is_action_pressed("Roll") and velocity.y == 0.0:
+		#if not bottom_ray_cast_2d.is_colliding():
+			#$HitBoxComponent.disabled = false 
+		#else:
+			#state = STATE.ROLL
+			#for ray: RayCast2D in [left_ray_cast_2d, right_ray_cast_2d]:
+				#if not ray.is_colliding():
+					#$HitBoxComponent.disabled = true
+					#continue
+					#
+				#var collider: Node2D = ray.get_collider()
+				#if collider is TileMapLayer:
+					#$HitBoxComponent.disabled = false
+				#else:
+					#$HitBoxComponent.disabled = true

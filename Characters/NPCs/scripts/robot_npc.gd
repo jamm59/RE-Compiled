@@ -9,10 +9,12 @@ class_name RobotNPC extends NPCBase
 @onready var bullets: Node2D = $bullets
 
 @onready var duration: Timer = $Duration
+@onready var timer: RichTextLabel = $timer
+
 
 var duration_activated: bool = false
-
 var can_shoot: bool = false
+var wasOnFloor: bool = false
 
 func _ready() -> void:
 	npc = $Robot
@@ -20,9 +22,20 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	super(delta)
+	
 	if remote_control_activated and not duration_activated:
-		duration.start(60)
+		duration.start(15)
 		duration_activated = true
+		
+		for i in 15:
+			await get_tree().create_timer(1).timeout
+			timer.text = "[b][font_size=5]" + str(10 - i) + "..[/font_size][/b]"
+		
+		
+	if is_on_floor() and not wasOnFloor:
+		SignalManager.emit_signal("large_fall_detected")
+		
+	wasOnFloor = is_on_floor()
 
 func handle_input(delta: float) -> void:
 	super(delta)
@@ -48,9 +61,10 @@ func _on_robot_animation_finished() -> void:
 	state = STATE.IDLE
 
 func _on_duration_timeout() -> void:
+	SignalManager.emit_signal("npc_dead")
 	remote_control_activated = false
 	queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is EnemyBase and body is not MiniBoss:
+	if body is EnemyBase:
 		remote_control_activated = true

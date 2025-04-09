@@ -1,3 +1,7 @@
+RayCast2D
+Node2D
+AudioStreamPlayer
+AudioStreamPlayer2D
 NavigationAgent2D
 AnimationPlayer
 AnimatedSprite2D
@@ -9,6 +13,3 @@ GridContainer
 TextureRect
 HBoxContainer
 VBoxContainer
-PanelContainer
-NavigationRegion2D
-Timer

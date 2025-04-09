@@ -43,6 +43,7 @@ func _ready() -> void:
 	SignalManager.connect("body_hit", _freeze_engine)
 	SignalManager.connect("enemy_dead", _on_enemy_dead)
 	SignalManager.connect("player_dead", _on_player_dead)
+	SignalManager.connect("npc_dead", reset_camera_position)
 	SignalManager.connect("last_checkpoint", _last_checkpoint)
 	SignalManager.connect("large_fall_detected", _large_fall_detected)
 	SignalManager.connect("terminal_control_signal_emit", _terminal_control)
@@ -106,10 +107,11 @@ func _short_range_terminal_control(pos: Vector2, name: String) -> void:
 			if distance < previousDistance:
 				previousDistance = distance
 				npc_animal = npc
-				
-	if npc_animal is FerretNPC or npc_animal is CrowNPC or npc_animal is RobotNPC:
-		npc_animal.remote_control_activated = true
-		player.can_use_controls = false
+	
+	if previousDistance <= 600:
+		if npc_animal is FerretNPC or npc_animal is CrowNPC or npc_animal is RobotNPC:
+			npc_animal.remote_control_activated = true
+			player.can_use_controls = false
 	
 	
 				
@@ -155,6 +157,13 @@ func _terminal_control_education_signal(pos: Vector2, name: String, activate_mul
 				platform = plat
 		
 	activatePlatform(platform)
+	
+func reset_camera_position() -> void:
+	await get_tree().create_timer(1.5).timeout
+	cinematic.visible = false
+	player.hud.visible = true
+	player.can_use_controls = true
+	camera_2d.global_position = camera_pos.global_position
 
 func activatePlatform(platform: Node2D) -> void:
 	if platform is HoverPlatform or platform is SwingHammer or platform is GateDoor or platform is LargeElevator:
@@ -339,6 +348,14 @@ func _on_duplication_enemy_area_body_entered(body: Node2D) -> void:
 func _on_ncp_explained_body_entered(body: Node2D) -> void:
 	if body is Player:
 		$CinematicAreas/NCPExplained.disconnect("body_entered", _on_ncp_explained_body_entered)
+		player.hud.visible = false
+		player.can_use_controls = false
+		await get_tree().create_timer(1).timeout
+		camera_2d.global_position = $NPCs/FerretNPC.global_position
+		await get_tree().create_timer(3).timeout
+		player.hud.visible = true
+		player.can_use_controls = true
+		camera_2d.global_position = camera_pos.global_position
 		showDialogue("timeline-npc-oop")
 		
 func _on_slow_down_enemy_body_entered(body: Node2D) -> void:

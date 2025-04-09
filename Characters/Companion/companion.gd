@@ -59,6 +59,7 @@ func handleAnimationState() -> void:
 		
 func _on_detect_enemy_area_body_entered(body: Node2D) -> void:
 	if body is EnemyDuplicate and hasPermissionToShoot:
+		animated_sprite_2d.play("Attack 1")
 		enemy = body
 		can_shoot = true
 		

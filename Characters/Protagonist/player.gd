@@ -18,6 +18,7 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, POWERUP,
 @onready var short_range_terminal: ShortRangeTerminal = $Inventory/ShortRange
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $Node2D/AudioStreamPlayer2D
 
+@onready var top_ray_cast_2d: RayCast2D = $RayCast/topRayCast2D
 @onready var bottom_ray_cast_2d: RayCast2D = $RayCast/bottomRayCast2D
 @onready var left_ray_cast_2d: RayCast2D = $RayCast/LeftRayCast2D
 @onready var right_ray_cast_2d: RayCast2D = $RayCast/RightRayCast2D
@@ -47,6 +48,7 @@ const LAND = preload("res://Assets/Music/land-new.mp3")
 const STEP_NEW = preload("res://Assets/Music/step-new.mp3")
 # Constants
 const DASH_MULTIPLIER: float = 2.0
+const ROLL_MULTIPLIER: float = 2.0
 const SPEED: float = 180.0
 const KNOCKBACKVALUE: float = 30
 const DAMAGE_POINT: float = 3.0
@@ -86,13 +88,69 @@ func _ready() -> void:
 	tweenProgressBar(hud.stamina, stamina, 1.0)
 	
 func _physics_process(delta: float) -> void:
+	var sliding: bool = false
+	
 	if state == STATE.DEAD:
+		velocity.x = move_toward(velocity.x, 0, friction)
 		applyDeadFallGravity(delta)
+		sliding = true
 		move_and_slide()
 		return 
 		
-	if state in [STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK, STATE.POWERUP]:
+	if state == STATE.ROLL:
+		if is_on_floor():
+			
+			velocity.x = move_toward(velocity.x, previousDirection * SPEED * ROLL_MULTIPLIER, acceleration)
+			for ray: RayCast2D in [left_ray_cast_2d, right_ray_cast_2d]:
+				if not ray.is_colliding():
+					continue
+				var collider: Node2D = ray.get_collider()
+				if collider is TileMapLayer:
+					state = STATE.IDLE
+					velocity.x = move_toward(velocity.x, 0.0, friction)
+
+			if Input.is_action_just_pressed("Jump") and not top_ray_cast_2d.is_colliding() \
+			or (top_ray_cast_2d.is_colliding() and top_ray_cast_2d.get_collider() is not TileMapLayer):
+				state = STATE.JUMP
+				velocity.x = move_toward(velocity.x, 0, friction)
+				handleJumpInput(delta)
+				return 
+			
+			if Input.is_action_pressed("Left"):
+				state = STATE.MOVING_LEFT
+				animated_sprite_2d.flip_h = true
+				previousDirection = -1
+					
+			if Input.is_action_pressed("Right"):
+				state = STATE.MOVING_RIGHT
+				animated_sprite_2d.flip_h = false
+				previousDirection = 1
+				
+			if Input.is_action_pressed("Light_A"):
+				state = STATE.LIGHT_ATTACK
+				play_sound(SLASH)
+				handleAttackBoxVisibility()
+				handleAnimationStateUpdate()
+				
+			elif Input.is_action_pressed("Heavy_A"):
+				state = STATE.HEAVY_ATTACK
+				play_sound(SLASH)
+				handleAttackBoxVisibility()
+				handleAnimationStateUpdate()
+		
+		else:
+			state = STATE.IDLE
+			velocity.x = move_toward(velocity.x, 0.0, friction)
+			
 		applyDeadFallGravity(delta)
+		sliding = true
+		move_and_slide()
+		return
+		
+	if state in [STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK, STATE.POWERUP]:
+		velocity.x = move_toward(velocity.x, 0, friction)
+		applyDeadFallGravity(delta)
+		sliding = true
 		move_and_slide() 
 		return
 
@@ -100,7 +158,8 @@ func _physics_process(delta: float) -> void:
 	handleInput()
 	handleAttackBoxVisibility()
 	handleAnimationStateUpdate()
-	move_and_slide()
+	if not sliding:
+		move_and_slide()
 	
 	
 func play_sound(source: AudioStreamMP3):
@@ -136,9 +195,6 @@ func tweenProgressBar(progressBar: ProgressBar, value:float, time: float = 0.3) 
 	statsInitDone = true
 	
 func handleJumpInput(delta: float) -> void:
-	if is_on_ceiling() and state == STATE.FALL: #Checking if we stuck between a ceiling and floor
-		position.x += previousDirection * 10
-		
 	if not toggle_gravity:
 		if not is_on_floor():
 			velocity.y += _get_gravity() * delta
@@ -172,16 +228,6 @@ func handleJumpInput(delta: float) -> void:
 		toggle_gravity = true
 		can_use_controls = false
 		
-	#if Input.is_action_pressed("Left") or Input.is_action_pressed("Right") and is_on_wall_only() and velocity.y > 0.0:
-		#state = STATE.WALLSLIDE
-		#isWallSliding = true
-		#animated_sprite_2d.flip_h = true
-		#animated_sprite_2d.play("WallSlide")
-		#jump_count = 0 # this prevents jumping cause it puts a limit on player jump
-	#else:
-		#isWallSliding = false
-	#
-		
 func handleAttackBoxVisibility() -> void:
 	if state in [STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK]:
 		if previousDirection < 0:
@@ -208,7 +254,7 @@ func handleInput() -> void:
 		if body is EnemyBase:
 			state = STATE.JUMP
 			velocity.y += JUMP_VELOCITY
-		
+			
 	if Input.is_action_pressed("Left"):
 		state = STATE.MOVING_LEFT
 		animated_sprite_2d.flip_h = true
@@ -224,9 +270,16 @@ func handleInput() -> void:
 		state = STATE.ROLL
 		$HitBoxComponent.disabled = true
 		$RollHitBoxComponent.disabled = false
+		
 	else:
 		$HitBoxComponent.disabled = false
 		$RollHitBoxComponent.disabled = true
+		
+	if bottom_ray_cast_2d.is_colliding() and top_ray_cast_2d.is_colliding() \
+	and bottom_ray_cast_2d.get_collider() is TileMapLayer and top_ray_cast_2d.get_collider() is TileMapLayer:
+		state = STATE.ROLL
+		$HitBoxComponent.disabled = true
+		$RollHitBoxComponent.disabled = false
 		
 	if Input.is_action_pressed("Light_A"):
 		state = STATE.LIGHT_ATTACK
@@ -234,9 +287,7 @@ func handleInput() -> void:
 	elif Input.is_action_pressed("Heavy_A"):
 		state = STATE.HEAVY_ATTACK
 		play_sound(SLASH)
-		
-	if state != STATE.ROLL:
-		$HitBoxComponent.disabled = false
+
 		
 	wasOnFloor = is_on_floor()
 	hud.coins.text = str(coins)
@@ -270,16 +321,18 @@ func handleAnimationStateUpdate() -> void:
 			vfx.play("BigSlash")
 		STATE.POWERUP:
 			animationName = "PowerUP"
+			velocity.x = move_toward(velocity.x, 0, friction)
 		STATE.DASH:
 			velocity.x = move_toward(velocity.x, previousDirection * SPEED * DASH_MULTIPLIER, acceleration)
 			if velocity.y == 0.0:	
 				dash_particle.emitting = true
 				animationName = "Dash"
 		STATE.ROLL:
-			velocity.x = move_toward(velocity.x, previousDirection * SPEED * DASH_MULTIPLIER, acceleration)
 			animationName = "Roll" if velocity.y == 0.0 else ""
 		STATE.IDLE:
 			animationName = "Idle"
+			$HitBoxComponent.disabled = false
+			$RollHitBoxComponent.disabled = true
 			velocity.x = move_toward(velocity.x, 0, friction)
 			
 	animated_sprite_2d.play(animationName)
@@ -345,18 +398,3 @@ func _on_attack_box_component_body_entered(body: Node2D) -> void:
 		else:
 			body.apply_damage(DAMAGE_POINT)
 			
-	#if Input.is_action_pressed("Roll") and velocity.y == 0.0:
-		#if not bottom_ray_cast_2d.is_colliding():
-			#$HitBoxComponent.disabled = false 
-		#else:
-			#state = STATE.ROLL
-			#for ray: RayCast2D in [left_ray_cast_2d, right_ray_cast_2d]:
-				#if not ray.is_colliding():
-					#$HitBoxComponent.disabled = true
-					#continue
-					#
-				#var collider: Node2D = ray.get_collider()
-				#if collider is TileMapLayer:
-					#$HitBoxComponent.disabled = false
-				#else:
-					#$HitBoxComponent.disabled = true

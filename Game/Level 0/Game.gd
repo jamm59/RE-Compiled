@@ -29,8 +29,8 @@ var gs: GameStateSave = GameStateSave.new()
 
 func _ready() -> void:
 	#Loading saves
-	if gs:
-		gs.load_savegame(self)
+	#if gs:
+		#gs.load_savegame(self)
 		
 	#Variables
 	camera_2d.zoom = defaultZoom

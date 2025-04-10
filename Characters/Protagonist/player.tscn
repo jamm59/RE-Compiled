@@ -1641,6 +1641,11 @@ frame_progress = 1.0
 
 [node name="RayCast" type="Node2D" parent="."]
 
+[node name="topRayCast2D" type="RayCast2D" parent="RayCast"]
+position = Vector2(9, -7)
+rotation = 3.14159
+target_position = Vector2(9.53674e-07, 16)
+
 [node name="bottomRayCast2D" type="RayCast2D" parent="RayCast"]
 position = Vector2(9, -7)
 target_position = Vector2(0, 14)

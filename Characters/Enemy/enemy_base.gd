@@ -140,6 +140,7 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:		
 	if state == STATE.DEAD:
+		velocity.x = move_toward(velocity.x, 0, friction)
 		apply_gravity(delta)
 		move_and_slide()
 		return

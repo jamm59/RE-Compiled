@@ -1458,12 +1458,12 @@ text = "[center][font_size=33][b]TO DASH[/b][/font_size][/center]"
 [node name="Roll" type="RichTextLabel" parent="SignLabels"]
 modulate = Color(1, 1, 1, 0.729412)
 layout_mode = 0
-offset_left = 1454.0
+offset_left = 1450.0
 offset_top = -75.0
-offset_right = 1629.0
+offset_right = 1660.0
 scale = Vector2(0.2, 0.2)
 bbcode_enabled = true
-text = "[center][font_size=25][b]HOLD C AND DIRECTION[/b][/font_size][/center]"
+text = "[center][font_size=25][b]PRESS  C AND DIRECTION[/b][/font_size][/center]"
 
 [node name="Roll2" type="RichTextLabel" parent="SignLabels"]
 modulate = Color(1, 1, 1, 0.729412)
@@ -1644,7 +1644,7 @@ spawn_location = [NodePath("../../EnemySpawnLocation/LeftSpawn"), NodePath("../.
 
 [node name="Player" parent="." instance=ExtResource("2_xaqkc")]
 z_index = 1
-position = Vector2(-3314, 199)
+position = Vector2(174, 809)
 can_use_controls = true
 
 [node name="LeftPos" type="Marker2D" parent="Player"]

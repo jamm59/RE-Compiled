@@ -1644,7 +1644,7 @@ spawn_location = [NodePath("../../EnemySpawnLocation/LeftSpawn"), NodePath("../.
 
 [node name="Player" parent="." instance=ExtResource("2_xaqkc")]
 z_index = 1
-position = Vector2(174, 809)
+position = Vector2(-3338, 244)
 can_use_controls = true
 
 [node name="LeftPos" type="Marker2D" parent="Player"]

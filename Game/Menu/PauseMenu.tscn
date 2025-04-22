@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://6i2npt6ug54x"]
+[gd_scene load_steps=13 format=3 uid="uid://6i2npt6ug54x"]
 
 [ext_resource type="FontFile" uid="uid://d4lcfsd3aa7w2" path="res://Assets/Font/Inkos-zrg60.ttf" id="1_be3ng"]
 [ext_resource type="Script" uid="uid://cnru3c6nyh16p" path="res://Game/Menu/PauseMenu.gd" id="1_g4vf0"]
+[ext_resource type="FontFile" uid="uid://h8msqbviik0k" path="res://Assets/Font/OpenSans-VariableFont_wdth,wght.ttf" id="3_y7y6s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ie440"]
 bg_color = Color(0.101961, 0.101961, 0.113725, 1)
@@ -51,6 +52,8 @@ PanelContainer/styles/panel = SubResource("StyleBoxLine_hlq68")
 font = ExtResource("1_be3ng")
 font_size = 80
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7y6s"]
+
 [node name="PauseMenuUI" type="CanvasLayer"]
 process_mode = 3
 layer = 4
@@ -74,189 +77,610 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_7ha6y")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/PanelContainer"]
+[node name="ControlsContainer" type="ScrollContainer" parent="Panel/PanelContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/PanelContainer/ControlsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+text = "Keyboard Controls"
+label_settings = SubResource("LabelSettings_8tofo")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label8" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]M[/b] - More Information about Topic[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer2" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label11" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]ESC[/b] - Pause Game[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer4" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label7" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]I[/b] - Remote Control NPCs Around[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer4/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer5" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label14" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]Hold Ctrl[/b] - Long Zoom[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer5/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer6" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label13" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer6"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]Hold Z[/b] - Short Zoom[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer6/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer7" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label12" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer7"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]Hold SHIFT [/b] - Dash[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer7/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer8" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label6" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer8"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]Hold C[/b] - ROLL[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer8/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer9" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label5" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]E[/b] - Interact ,Climb Ladder, Float[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer9/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer10" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label10" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer10"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]H[/b] - Heavy Attack[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer10"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer10/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer11" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label9" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer11"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]J[/b] - Light Attack[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer11"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer11"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer11/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer12" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label4" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer12"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]SPACEBAR 2x[/b] - Double Jump[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer12"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer12"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer12/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer13" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label3" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer13"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]SPACEBAR[/b] - Jump[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer13"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer13"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer13/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer14" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label2" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer14"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]S or Right Arrow[/b] - Move Right[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer14"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer14"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer14/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="HBoxContainer15" type="GridContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 3
+
+[node name="Label15" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer15"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]P[/b] - Skip Dialogue[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer15"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_y7y6s")
+theme_override_font_sizes/font_size = 17
+placeholder_text = "New Key"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer15"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer15/MarginContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_be3ng")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_y7y6s")
+text = "update"
+
+[node name="Label" type="RichTextLabel" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer/HBoxContainer15"]
+custom_minimum_size = Vector2(0, 29)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=15][b]A or Left Arrow[/b] - Move Left[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="Button" parent="Panel/PanelContainer/ControlsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Back"
+
+[node name="PauseContainer" type="VBoxContainer" parent="Panel/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Title" type="Label" parent="Panel/PanelContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="Panel/PanelContainer/PauseContainer"]
 layout_mode = 2
 text = "Game Paused"
 label_settings = SubResource("LabelSettings_8tofo")
 horizontal_alignment = 1
 
-[node name="PauseContainer" type="VBoxContainer" parent="Panel/PanelContainer/VBoxContainer"]
+[node name="PauseContainer" type="VBoxContainer" parent="Panel/PanelContainer/PauseContainer"]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 15
 
-[node name="Resume" type="Button" parent="Panel/PanelContainer/VBoxContainer/PauseContainer"]
+[node name="Resume" type="Button" parent="Panel/PanelContainer/PauseContainer/PauseContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Resume"
 
-[node name="CheckPoint" type="Button" parent="Panel/PanelContainer/VBoxContainer/PauseContainer"]
+[node name="CheckPoint" type="Button" parent="Panel/PanelContainer/PauseContainer/PauseContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Last Checkpoint
 "
 
-[node name="Controls" type="Button" parent="Panel/PanelContainer/VBoxContainer/PauseContainer"]
+[node name="Controls" type="Button" parent="Panel/PanelContainer/PauseContainer/PauseContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Controls"
 
-[node name="Exit" type="Button" parent="Panel/PanelContainer/VBoxContainer/PauseContainer"]
+[node name="Exit" type="Button" parent="Panel/PanelContainer/PauseContainer/PauseContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Exit
 "
 
-[node name="ControlsContainer" type="VBoxContainer" parent="Panel/PanelContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer"]
-custom_minimum_size = Vector2(0, 300)
-layout_mode = 2
-
-[node name="Label" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]A or Left Arrow[/b] - Move Left[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]S or Right Arrow[/b] - Move Right[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]SPACEBAR[/b] - Jump[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label4" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]SPACEBAR 2x[/b] - Double Jump[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label9" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]J[/b] - Light Attack[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label10" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]H[/b] - Heavy Attack[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label5" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]E[/b] - Interact ,Climb Ladder, Float[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label6" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]Hold C[/b] - ROLL[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label12" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]Hold SHIFT [/b] - Dash[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label13" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]Hold Z[/b] - Short Zoom[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label14" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]Hold Ctrl[/b] - Long Zoom[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label7" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]I[/b] - Remote Control NPCs Around[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label8" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]M[/b] - More Information about Topic[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label11" type="RichTextLabel" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 29)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[font_size=20][b]ESC[/b] - Pause Game[/font_size]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Back" type="Button" parent="Panel/PanelContainer/VBoxContainer/ControlsContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-text = "Back"
-
-[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/PauseContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/PauseContainer/CheckPoint" to="." method="_on_check_point_pressed"]
-[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/PauseContainer/Controls" to="." method="_on_controls_pressed"]
-[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/PauseContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/ControlsContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/ControlsContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/PauseContainer/PauseContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/PauseContainer/PauseContainer/CheckPoint" to="." method="_on_check_point_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/PauseContainer/PauseContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/PauseContainer/PauseContainer/Exit" to="." method="_on_exit_pressed"]

@@ -33,6 +33,7 @@ func _draw() -> void:
 
 func handleEmitAnimation() -> void:
 	visible = true
+	SignalManager.emit_signal("searching_signal")
 	animation_player.play("Activate")
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(self, "radius", 2000, 3)

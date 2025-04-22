@@ -1,0 +1,6 @@
+keys,fr
+Text/6b/text,This elevator works just like the last platform we used. They all inherit from a base Platform class
+Text/6c/text,Like how the virus enemies came from the same Virus class?
+Text/6d/text,"Exactly! The base Platform class defines common traits, things like movement and activation. Then different platforms, like this elevator, can add their own unique behaviors."
+Text/6e/text,So the elevator extends Platform but adds vertical movement?
+Text/6f/text,"Yep! And just like enemies can behave differently while sharing a base class, platforms can too. That’s the power of inheritance!"

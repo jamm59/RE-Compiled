@@ -47,7 +47,7 @@ func _ready() -> void:
 		var entry = storyline[key] 
 		texture_rect.texture = entry["img_src"] 
 		await textTypingAnimation(entry["text"]) 
-		await get_tree().create_timer(4).timeout
+		await get_tree().create_timer(2).timeout
 		clearText()
 	get_tree().change_scene_to_file("res://Game/Level 0/Game.tscn")
 

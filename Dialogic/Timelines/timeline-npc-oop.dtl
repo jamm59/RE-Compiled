@@ -1,5 +1,5 @@
-Companion: See that Ferret? I’ve patched a [b]remote signal[/b] to it. Think of it like a connected node in a network
-Player: So I can control it?
-Companion: For a limited time, yes. Guide it to  find a way to disable one of the lasers above. It’s like sending a command packet through a network. direct, fast, and just long enough to get the job done. Just don’t stray too far, or the signal drops
-Companion: Oh and the signs that say [b]NPC AROUND[/b]? They’re signal markers. If you spot one, it means there’s a controllable entity in range. Keep an eye out.
+Companion: See that Ferret? I’ve patched a [b]remote signal[/b] to it. Think of it like a connected node in a network #id:67
+Player: So I can control it? #id:68
+Companion: For a limited time, yes. Guide it to  find a way to disable one of the lasers above. It’s like sending a command packet through a network. direct, fast, and just long enough to get the job done. Just don’t stray too far, or the signal drops #id:69
+Companion: Oh and the signs that say [b]NPC AROUND[/b]? They’re signal markers. If you spot one, it means there’s a controllable entity in range. Keep an eye out. #id:6a
 [signal arg="timeline-npc-oop"]

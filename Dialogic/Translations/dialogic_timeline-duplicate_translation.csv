@@ -1,0 +1,11 @@
+keys,fr
+Text/25/text,"Ah, a reckless attacker! Every strike you land just makes me stronger. Did no one teach you about replication?"
+Text/26/text,Bad move. This one's like the [b][i]ILOVEYOU[/i][/b] virus from the early 2000s. One of the fastest-spreading malware outbreaks ever. It disguised itself as a love letter and tricked people into opening it.
+Text/27/text,And what happens after that?
+Text/28/text,"Once opened, it overwrote files, stole passwords, and emailed itself to every contact in the victim’s inbox. Just like this thing, it multiplied out of control."
+Text/29/text,So attacking it head-on makes it worse?
+Text/2a/text,"Exactly. You’re basically helping it spread! But if you authorize me, I can take it down the right way with precise shots, no unnecessary contact"
+Text/2b/text,"Alright, do it!"
+Text/2c/text,"Authorise Companion to Neutralise the ""ILOVEYOU"" virus"
+Choice/2d/text,Authorise Companion
+Choice/2d/disabled_text,

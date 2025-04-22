@@ -1,9 +1,9 @@
-Player: What's this machine for? Is this some kind of control panel?
-Companion: That’s a [color=yellow]Terminal Control[/color]. 
-Companion: Think of it as your remote command center in this simulation.
-Companion: These terminals allow you to [b]activate platforms, unlock doors, and manipulate the environment[/b] remotely.
-Companion: Just like in real-world computing, sometimes you need a command-line interface to take control when direct interaction isn’t possible.
-Companion: You’ll find these all around the map—sometimes, they’re the only way forward. Try using it!
+Player: What's this machine for? Is this some kind of control panel? #id:75
+Companion: That’s a [color=yellow]Terminal Control[/color]. #id:76
+Companion: Think of it as your remote command center in this simulation. #id:77
+Companion: These terminals allow you to [b]activate platforms, unlock doors, and manipulate the environment[/b] remotely. #id:78
+Companion: Just like in real-world computing, sometimes you need a command-line interface to take control when direct interaction isn’t possible. #id:79
+Companion: You’ll find these all around the map—sometimes, they’re the only way forward. Try using it! #id:7a
 Unknown: [center][b]Controls Tutorial[/b][/center]\
-- Press [b]E[/b] to Interact with the terminal control.
+- Press [b]E[/b] to Interact with the terminal control. #id:7b
 [signal arg="timeline-tutorial-interact"]

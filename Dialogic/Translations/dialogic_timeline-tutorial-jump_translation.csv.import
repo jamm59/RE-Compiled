@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bf0ccek0wum1x"
+
+[deps]
+
+files=["res://Dialogic/Translations/dialogic_timeline-tutorial-jump_translation.fr.translation"]
+
+source_file="res://Dialogic/Translations/dialogic_timeline-tutorial-jump_translation.csv"
+dest_files=["res://Dialogic/Translations/dialogic_timeline-tutorial-jump_translation.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=0

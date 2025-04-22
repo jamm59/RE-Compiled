@@ -1,0 +1,9 @@
+keys,fr
+Text/75/text,What's this machine for? Is this some kind of control panel?
+Text/76/text,That’s a [color=yellow]Terminal Control[/color].
+Text/77/text,Think of it as your remote command center in this simulation.
+Text/78/text,"These terminals allow you to [b]activate platforms, unlock doors, and manipulate the environment[/b] remotely."
+Text/79/text,"Just like in real-world computing, sometimes you need a command-line interface to take control when direct interaction isn’t possible."
+Text/7a/text,"You’ll find these all around the map—sometimes, they’re the only way forward. Try using it!"
+Text/7b/text,"[center][b]Controls Tutorial[/b][/center]
+- Press [b]E[/b] to Interact with the terminal control."

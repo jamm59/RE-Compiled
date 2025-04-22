@@ -1,16 +1,16 @@
-Companion: Hello, Player. Welcome to the Computing simulation.
-Player: Whoa! Who are you? And what’s happening to me?!
-Companion: I am your [b]Personal Learning Assistant[/b], a program designed to guide you.
-Companion: You attempted to bypass learning with AI. Now, you must [b]truly understand[/b] computing to escape.
-Player: So… I’m stuck here?
-Companion: Not forever. If you complete the required tasks, you will regain control or move forward
-Player: Tasks? What kind of tasks?
-Companion: You’ll progress through different levels, just like a student advancing through university, learning key computing concepts along the way.
-Companion: You’ll interact with binary data, construct logic gates, optimise algorithms, and even battle real-world-inspired viruses that corrupt computer systems
-Player: Wait… what do you mean by "computing simulation"?
-Companion: This world is built on the core principles of computer science.
-Player: So, I have to… code my way out?
-Companion: More like learn how everything in a computer actually works. From the smallest bits and bytes to the more complex systems.
-Player: And what happens if I fail?
-Companion: Let’s just say you won’t like the results. But don’t worry! I’ll be here to guide you through every step. Now, let’s get started.
+Companion: Hello, Player. Welcome to the Computing simulation. #id:16
+Player: Whoa! Who are you? And what’s happening to me?! #id:17
+Companion: I am your [b]Personal Learning Assistant[/b], a program designed to guide you. #id:18
+Companion: You attempted to bypass learning with AI. Now, you must [b]truly understand[/b] computing to escape. #id:19
+Player: So… I’m stuck here? #id:1a
+Companion: Not forever. If you complete the required tasks, you will regain control or move forward #id:1b
+Player: Tasks? What kind of tasks? #id:1c
+Companion: You’ll progress through different levels, just like a student advancing through university, learning key computing concepts along the way. #id:1d
+Companion: You’ll interact with binary data, construct logic gates, optimise algorithms, and even battle real-world-inspired viruses that corrupt computer systems #id:1e
+Player: Wait… what do you mean by "computing simulation"? #id:1f
+Companion: This world is built on the core principles of computer science. #id:20
+Player: So, I have to… code my way out? #id:21
+Companion: More like learn how everything in a computer actually works. From the smallest bits and bytes to the more complex systems. #id:22
+Player: And what happens if I fail? #id:23
+Companion: Let’s just say you won’t like the results. But don’t worry! I’ll be here to guide you through every step. Now, let’s get started. #id:24
 [signal arg="timeline-2"]

@@ -1,10 +1,10 @@
-Enemy: Ah, a reckless attacker! Every strike you land just makes me stronger. Did no one teach you about replication?
-Companion: Bad move. This one's like the [b][i]ILOVEYOU[/i][/b] virus from the early 2000s. One of the fastest-spreading malware outbreaks ever. It disguised itself as a love letter and tricked people into opening it.
-Player: And what happens after that?
-Companion: Once opened, it overwrote files, stole passwords, and emailed itself to every contact in the victim’s inbox. Just like this thing, it multiplied out of control.
-Player: So attacking it head-on makes it worse?
-Companion: Exactly. You’re basically helping it spread! But if you authorize me, I can take it down the right way with precise shots, no unnecessary contact
-Player: Alright, do it!
-Unknown: Authorise Companion to Neutralise the "ILOVEYOU" virus
-- Authorise Companion
+Enemy: Ah, a reckless attacker! Every strike you land just makes me stronger. Did no one teach you about replication? #id:25
+Companion: Bad move. This one's like the [b][i]ILOVEYOU[/i][/b] virus from the early 2000s. One of the fastest-spreading malware outbreaks ever. It disguised itself as a love letter and tricked people into opening it. #id:26
+Player: And what happens after that? #id:27
+Companion: Once opened, it overwrote files, stole passwords, and emailed itself to every contact in the victim’s inbox. Just like this thing, it multiplied out of control. #id:28
+Player: So attacking it head-on makes it worse? #id:29
+Companion: Exactly. You’re basically helping it spread! But if you authorize me, I can take it down the right way with precise shots, no unnecessary contact #id:2a
+Player: Alright, do it! #id:2b
+Unknown: Authorise Companion to Neutralise the "ILOVEYOU" virus #id:2c
+- Authorise Companion #id:2d
 [signal arg="timeline-duplicate"]

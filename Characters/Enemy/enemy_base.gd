@@ -28,7 +28,7 @@ const HEALTH = preload("res://Platforms/scenes/health.tscn")
 
 enum STATE {IDLE, ATTACK, RUN, DEAD}
 
-const DAMAGE_POINT: int = 2
+const DAMAGE_POINT: int = 5
 const KNOCKBACKVALUE: float = 30.0
 const axisDir: Array[int] = [1, -1]
 
@@ -120,6 +120,7 @@ func detect_obstacle_while_following_player() -> void:
 			if not body:
 				continue
 			if (body is TileMapLayer and is_on_wall()) or (body is EnemyBase and body.state == body.STATE.DEAD): # Tilemap base layer
+				print("jumping", name)
 				handleEnemyJump()
 	
 func handleFollowPlayerLogic() -> void:

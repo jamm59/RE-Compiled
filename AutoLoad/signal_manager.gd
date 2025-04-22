@@ -1,12 +1,14 @@
 extends Node
 
+signal npc_dead 
+
 signal body_hit
 
 signal enemy_dead
 
 signal player_dead
 
-signal npc_dead 
+signal searching_signal
 
 signal large_fall_detected
 

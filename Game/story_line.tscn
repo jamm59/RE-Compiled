@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b552owm8xlhro" path="res://Game/story_line.gd" id="1_7awg3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ipgy"]
-bg_color = Color(0.945098, 0.403922, 0.403922, 1)
+bg_color = Color(0.945098, 0.403922, 0.403922, 0.501961)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20

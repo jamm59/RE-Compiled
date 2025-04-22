@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cik4xaui2vj36"
+
+[deps]
+
+files=["res://Dialogic/Translations/dialogic_timeline-miniboss_translation.fr.translation"]
+
+source_file="res://Dialogic/Translations/dialogic_timeline-miniboss_translation.csv"
+dest_files=["res://Dialogic/Translations/dialogic_timeline-miniboss_translation.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=0

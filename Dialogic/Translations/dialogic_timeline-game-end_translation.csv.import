@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b6f3enhbwubvt"
+
+[deps]
+
+files=["res://Dialogic/Translations/dialogic_timeline-game-end_translation.fr.translation"]
+
+source_file="res://Dialogic/Translations/dialogic_timeline-game-end_translation.csv"
+dest_files=["res://Dialogic/Translations/dialogic_timeline-game-end_translation.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=0

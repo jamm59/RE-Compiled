@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cctu003817b3s"
+
+[deps]
+
+files=["res://Dialogic/Translations/dialogic_timeline-enemy-killed_translation.fr.translation"]
+
+source_file="res://Dialogic/Translations/dialogic_timeline-enemy-killed_translation.csv"
+dest_files=["res://Dialogic/Translations/dialogic_timeline-enemy-killed_translation.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=0

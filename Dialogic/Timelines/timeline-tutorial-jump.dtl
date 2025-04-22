@@ -1,6 +1,6 @@
-Companion: Along the way, you will be provided with some tips on how the mechanics of this world work.
+Companion: Along the way, you will be provided with some tips on how the mechanics of this world work. #id:7c
 Unknown: [center][b]Controls Tutorial[/b][/center]\
-- To [b]Jump[/b] to the next step or platform, Press [b]Space[/b]
+- To [b]Jump[/b] to the next step or platform, Press [b]Space[/b] #id:7d
 Unknown: [center][b]Controls Tutorial[/b][/center]\
-- Press [b]Space 2x[/b] to Double Jump
+- Press [b]Space 2x[/b] to Double Jump #id:7e
 [signal arg="timeline-tutorial-jump"]

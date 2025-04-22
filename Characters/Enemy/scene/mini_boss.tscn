@@ -247,7 +247,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ssopu")
 }],
 "loop": false,
-"name": &"Dead",
+"name": &"Dead 1",
 "speed": 8.0
 }, {
 "frames": [{
@@ -379,10 +379,8 @@ position = Vector2(6, -19)
 rotation = 3.14159
 scale = Vector2(2, -2)
 sprite_frames = SubResource("SpriteFrames_i7p64")
-animation = &"Attack 1"
+animation = &"Dead 1"
 autoplay = "Ilde"
-frame = 3
-frame_progress = 1.0
 
 [connection signal="body_entered" from="HealthBoxComponent" to="." method="_on_health_box_component_body_entered"]
 [connection signal="body_entered" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_entered"]

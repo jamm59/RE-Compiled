@@ -1,6 +1,6 @@
-Companion: This elevator works just like the last platform we used. They all inherit from a base Platform class
-Player: Like how the virus enemies came from the same Virus class?
-Companion: Exactly! The base Platform class defines common traits, things like movement and activation. Then different platforms, like this elevator, can add their own unique behaviors.
-Player: So the elevator extends Platform but adds vertical movement?
-Companion: Yep! And just like enemies can behave differently while sharing a base class, platforms can too. That’s the power of inheritance!
+Companion: This elevator works just like the last platform we used. They all inherit from a base Platform class #id:6b
+Player: Like how the virus enemies came from the same Virus class? #id:6c
+Companion: Exactly! The base Platform class defines common traits, things like movement and activation. Then different platforms, like this elevator, can add their own unique behaviors. #id:6d
+Player: So the elevator extends Platform but adds vertical movement? #id:6e
+Companion: Yep! And just like enemies can behave differently while sharing a base class, platforms can too. That’s the power of inheritance! #id:6f
 [signal arg="timeline-platform-oop"]

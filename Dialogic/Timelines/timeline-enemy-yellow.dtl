@@ -1,8 +1,8 @@
-Companion: [b]Alert.[/b] System congestion increasing. You’re entering a zone affected by [color=red]Mydoom[/color].
-Player: Another virus? What’s this one do, shut down everything?
-Companion: It spread like wildfire in 2004, one of the fastest ever. Didn’t destroy things outright. It just... choked the system, drowned it in noise, and opened silent backdoors.
-Companion: In this simulation, you'll feel it as data bottlenecks. The more infected zones you pass, the more lag stacks up. It's subtle at first... then it hits hard.
-Companion: You won’t see dramatic effects here. But if things feel off like too many entities, slightly delayed responses that’s the echo of Mydoom. Subtle sabotage
-Player: So it's like a ghost haunting the system without being loud about it.
-Companion: Exactly. Sometimes, the worst infections are the quiet ones.
+Companion: [b]Alert.[/b] System congestion increasing. You’re entering a zone affected by [color=red]Mydoom[/color]. #id:4c
+Player: Another virus? What’s this one do, shut down everything? #id:4d
+Companion: It spread like wildfire in 2004, one of the fastest ever. Didn’t destroy things outright. It just... choked the system, drowned it in noise, and opened silent backdoors. #id:4e
+Companion: In this simulation, you'll feel it as data bottlenecks. The more infected zones you pass, the more lag stacks up. It's subtle at first... then it hits hard. #id:4f
+Companion: You won’t see dramatic effects here. But if things feel off like too many entities, slightly delayed responses that’s the echo of Mydoom. Subtle sabotage #id:50
+Player: So it's like a ghost haunting the system without being loud about it. #id:51
+Companion: Exactly. Sometimes, the worst infections are the quiet ones. #id:52
 [signal arg="timeline-enemy-yellow"]

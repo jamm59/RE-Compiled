@@ -1,0 +1,10 @@
+keys,fr
+Text/35/text,"Great job, you just defeated a virus! But did you know that just like in programming, this enemy is part of a bigger system?"
+Text/36/text,What do you mean?
+Text/37/text,"In [i]Object-Oriented Programming[/i], we have something called '[b]classes[/b].' Think of a class like a blueprint for creating objects, like our enemy."
+Text/38/text,"So, the enemy is like an [b]object[/b]"
+Text/39/text,Exactly! And we can have different types of enemies [i]inheriting[/i] from a base class called '[b]Virus[/b].' Each type can have unique behaviors.
+Text/3a/text,Like what?
+Text/3b/text,"Well, some might move faster or shoot projectiles. This is called '[b]inheritance[/b].' And if we want to change how they behave in different situations, that's '[b]polymorphism[/b]"
+Text/3c/text,I see! So each enemy can act differently even if they come from the same class.
+Text/3d/text,"""Exactly! Keep this in mind as you explore the simulation."

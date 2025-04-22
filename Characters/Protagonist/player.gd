@@ -23,8 +23,6 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, POWERUP,
 @onready var left_ray_cast_2d: RayCast2D = $RayCast/LeftRayCast2D
 @onready var right_ray_cast_2d: RayCast2D = $RayCast/RightRayCast2D
 
-
-
 @export_category("Jump Settings")
 @export var jump_height : float = 50
 @export var jump_time_to_peak : float = 0.3
@@ -48,7 +46,7 @@ const LAND = preload("res://Assets/Music/land-new.mp3")
 const STEP_NEW = preload("res://Assets/Music/step-new.mp3")
 # Constants
 const DASH_MULTIPLIER: float = 2.0
-const ROLL_MULTIPLIER: float = 2.0
+const ROLL_MULTIPLIER: float = 1.7
 const SPEED: float = 180.0
 const KNOCKBACKVALUE: float = 30
 const DAMAGE_POINT: float = 3.0
@@ -75,11 +73,11 @@ var coins: int = 0
 var stamina: float = 100.0
 var statsInitDone: bool = false
 
+var dash_cool_down: bool = false
 var last_ground_y: float = 0
 var state: STATE = STATE.IDLE
 
 var emitShortRangeSignal: bool = false
-
 var inventory: Array[String] = []
 
 func _ready() -> void:
@@ -147,7 +145,13 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 		
-	if state in [STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK, STATE.POWERUP]:
+	if state == STATE.POWERUP:
+		velocity.x = move_toward(velocity.x, 0.0, delta)
+		move_and_slide() 
+		print("powring up")
+		return
+		
+	if state in [STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK]:
 		velocity.x = move_toward(velocity.x, 0, friction)
 		applyDeadFallGravity(delta)
 		sliding = true
@@ -327,6 +331,7 @@ func handleAnimationStateUpdate() -> void:
 			if velocity.y == 0.0:	
 				dash_particle.emitting = true
 				animationName = "Dash"
+					
 		STATE.ROLL:
 			animationName = "Roll" if velocity.y == 0.0 else ""
 		STATE.IDLE:
@@ -340,7 +345,7 @@ func handleAnimationStateUpdate() -> void:
 	if statsInitDone:
 		var deductStaminaSpeed: float = 20
 		var increaseStaminaSpeed: float = 40
-		if animationName in ["Dash", "Roll"]:
+		if animationName in ["Dash"]:
 			stamina = max(stamina - deductStaminaSpeed, 10)
 		else:
 			stamina = min(stamina + increaseStaminaSpeed, 100)

@@ -54,6 +54,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is TileMapLayer or body is EnemyBase:
 		reset()
 	if body is EnemyDuplicate:
-		body.apply_damage(body.health / 2)
+		body.apply_damage(body.health)
 	if body is EnemyBase:
 		body.apply_damage(DAMAGE_POINT)

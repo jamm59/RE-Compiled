@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bo1j7gq840keb"
+
+[deps]
+
+files=["res://Dialogic/Translations/dialogic_timeline-enemy-slowtime_translation.fr.translation"]
+
+source_file="res://Dialogic/Translations/dialogic_timeline-enemy-slowtime_translation.csv"
+dest_files=["res://Dialogic/Translations/dialogic_timeline-enemy-slowtime_translation.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=0

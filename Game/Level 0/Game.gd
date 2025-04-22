@@ -45,6 +45,7 @@ func _ready() -> void:
 	SignalManager.connect("player_dead", _on_player_dead)
 	SignalManager.connect("npc_dead", reset_camera_position)
 	SignalManager.connect("last_checkpoint", _last_checkpoint)
+	SignalManager.connect("searching_signal", _searching_signal)
 	SignalManager.connect("large_fall_detected", _large_fall_detected)
 	SignalManager.connect("terminal_control_signal_emit", _terminal_control)
 	SignalManager.connect("termianl_control_npc_signal", _short_range_terminal_control)
@@ -62,13 +63,16 @@ func _process(delta: float) -> void:
 	companion.move(delta)
 
 func _input(event) -> void:
+	if Input.is_action_just_pressed("Skip_Dialogue") and Dialogic.current_timeline:
+		var current_timeline: String = Dialogic.current_timeline.get_identifier()
+		Dialogic.emit_signal("signal_event", current_timeline)
+		
 	if event.is_action_pressed("Control"):
 		zoom_camera(Vector2(1, 1))  # Zoom in
 	elif event.is_action_pressed("Zoom"):
 		zoom_camera(Vector2(2, 2))  # Zoom in
 	elif event.is_action_released("Zoom") or event.is_action_released("Control"):
 		zoom_camera(defaultZoom)  # Zoom out
-		
 		
 func _last_checkpoint() -> void:
 	player.global_position = checkpoint
@@ -108,10 +112,13 @@ func _short_range_terminal_control(pos: Vector2, name: String) -> void:
 				previousDistance = distance
 				npc_animal = npc
 	
-	if previousDistance <= 600:
+	if previousDistance <= 600.0:
 		if npc_animal is FerretNPC or npc_animal is CrowNPC or npc_animal is RobotNPC:
 			npc_animal.remote_control_activated = true
 			player.can_use_controls = false
+			player.hud.status.text= "CONNECTED..."
+	else:
+		player.hud.status.text= "NOT FOUND..."
 	
 	
 				
@@ -138,6 +145,7 @@ func _terminal_control_education_signal(pos: Vector2, name: String, activate_mul
 		for plat: Node2D in $Platforms.get_children():
 			if plat.name.contains(name):
 				if plat is LargeElevator:
+					player.hud.status.text= "ACTIVATING..."
 					activatePlatform(plat)
 		return
 	
@@ -177,11 +185,13 @@ func activatePlatform(platform: Node2D) -> void:
 		player.hud.visible = false
 		player.can_use_controls = false
 		camera_2d.global_position = platform.global_position
+		player.hud.status.text= "ACTIVATING..."
 		await get_tree().create_timer(2).timeout
 		cinematic.visible = false
 		player.hud.visible = true
 		player.can_use_controls = true
 		camera_2d.global_position = camera_pos.global_position
+		player.hud.status.text= "ACTIVATED..."
 	
 func _freeze_engine() -> void:
 	cameraShake = true
@@ -201,7 +211,8 @@ func _remote_control_session_complete() -> void:
 	camera_2d.make_current()
 	player.can_use_controls = true
 	
-
+func _searching_signal() -> void:
+	player.hud.status.text = "SEARCHING..."
 	
 func _on_dialogic_signal(argument: String):
 	DialogueDone()

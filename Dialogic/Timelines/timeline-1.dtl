@@ -1,8 +1,8 @@
-Player: uh....
-Player: What is this?
-Player: Where am I?!
+Player: uh.... #id:11
+Player: What is this? #id:12
+Player: Where am I?! #id:13
 Unknown: [center][b]Controls Tutorial[/b][/center]\
-- Press [b]A[/b] or [b]←[/b] to move Left [br][br]
+- Press [b]A[/b] or [b]←[/b] to move Left [br][br] #id:14
 [center][b]Controls Tutorial[/b][/center]\
-- Press [b]D[/b] or [b]→[/b] to move Right [br][br]
+- Press [b]D[/b] or [b]→[/b] to move Right [br][br] #id:15
 [signal arg="timeline-1"]

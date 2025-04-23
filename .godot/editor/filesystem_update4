@@ -33,3 +33,4 @@ res://Characters/Protagonist/player.gd
 res://Characters/Enemy/enemy_base.gd
 res://Platforms/scenes/question_terminal.tscn
 res://Game/Menu/PauseMenu.gd
+res://Game/Menu/Menu.gd

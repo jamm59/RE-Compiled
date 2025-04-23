@@ -1609,6 +1609,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="label" type="Label" parent="OtherLabels"]
+layout_mode = 0
 offset_left = 2296.0
 offset_top = 1392.0
 offset_right = 2441.0
@@ -1618,6 +1619,7 @@ text = "MCQ Terminal"
 label_settings = SubResource("LabelSettings_7tlli")
 
 [node name="label2" type="Label" parent="OtherLabels"]
+layout_mode = 0
 offset_left = 2981.0
 offset_top = 591.0
 offset_right = 3126.0
@@ -1627,6 +1629,7 @@ text = "MCQ Terminal"
 label_settings = SubResource("LabelSettings_7tlli")
 
 [node name="label3" type="Label" parent="OtherLabels"]
+layout_mode = 0
 offset_left = 7262.0
 offset_top = -1106.0
 offset_right = 7407.0
@@ -1636,6 +1639,7 @@ text = "MCQ Terminal"
 label_settings = SubResource("LabelSettings_7tlli")
 
 [node name="label4" type="Label" parent="OtherLabels"]
+layout_mode = 0
 offset_left = 11922.0
 offset_top = -512.0
 offset_right = 12067.0

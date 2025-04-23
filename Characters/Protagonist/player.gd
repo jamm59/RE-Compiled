@@ -5,6 +5,8 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, POWERUP,
 
 @onready var hud: PlayerHUD = $HUD
 
+@onready var props_layer: TileMapLayer = $"../TileMap/NavigationRegion2D/PropsLayer"
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -148,7 +150,6 @@ func _physics_process(delta: float) -> void:
 	if state == STATE.POWERUP:
 		velocity.x = move_toward(velocity.x, 0.0, delta)
 		move_and_slide() 
-		print("powring up")
 		return
 		
 	if state in [STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK]:
@@ -249,16 +250,19 @@ func handleInput() -> void:
 	
 	if state not in [STATE.DEAD, STATE.LIGHT_ATTACK, STATE.HEAVY_ATTACK, STATE.POWERUP] and (dir == 0 and velocity.y == 0.0):
 		state = STATE.IDLE
+		$HitBoxComponent.disabled = false
+		$RollHitBoxComponent.disabled = true
 		
 	if not can_use_controls:
 		return 
-	
+		
 	if bottom_ray_cast_2d.is_colliding():
 		var body: Node2D = bottom_ray_cast_2d.get_collider()
 		if body is EnemyBase:
 			state = STATE.JUMP
 			velocity.y += JUMP_VELOCITY
-			
+		
+				
 	if Input.is_action_pressed("Left"):
 		state = STATE.MOVING_LEFT
 		animated_sprite_2d.flip_h = true
@@ -291,6 +295,16 @@ func handleInput() -> void:
 	elif Input.is_action_pressed("Heavy_A"):
 		state = STATE.HEAVY_ATTACK
 		play_sound(SLASH)
+		
+	if bottom_ray_cast_2d.is_colliding() and Input.is_action_pressed("DropDown"):
+		var body: Node2D = bottom_ray_cast_2d.get_collider()
+		if body is TileMapLayer and body.name == "PropsLayer":
+			$HitBoxComponent.disabled = true
+			print("true")
+		#else:
+			#$HitBoxComponent.disabled = false
+	#else:
+		#$HitBoxComponent.disabled = false
 
 		
 	wasOnFloor = is_on_floor()
@@ -331,24 +345,25 @@ func handleAnimationStateUpdate() -> void:
 			if velocity.y == 0.0:	
 				dash_particle.emitting = true
 				animationName = "Dash"
-					
 		STATE.ROLL:
 			animationName = "Roll" if velocity.y == 0.0 else ""
 		STATE.IDLE:
 			animationName = "Idle"
-			$HitBoxComponent.disabled = false
-			$RollHitBoxComponent.disabled = true
 			velocity.x = move_toward(velocity.x, 0, friction)
 			
 	animated_sprite_2d.play(animationName)
 	
 	if statsInitDone:
-		var deductStaminaSpeed: float = 20
+		var deductStaminaSpeed: float = 1
 		var increaseStaminaSpeed: float = 40
 		if animationName in ["Dash"]:
-			stamina = max(stamina - deductStaminaSpeed, 10)
+			stamina = max(stamina - deductStaminaSpeed, 5)
 		else:
 			stamina = min(stamina + increaseStaminaSpeed, 100)
+			
+		if stamina <= 5.0:
+			applyHitDamage(null)
+			
 		tweenProgressBar(hud.stamina, stamina)
 	
 	if state != STATE.DASH:
@@ -359,11 +374,15 @@ func applyHitDamage(body: Node2D):
 	SignalManager.emit_signal("body_hit")
 	if state == STATE.DEAD:
 		return 
+	
 	if body is EnemyBase:
 		knockBack(body)
 		health = max(health - body.DAMAGE_POINT, 0.0)
-	if body is Laser or body is SwingHammer or body is FanBlade or body is CrushingPlatform or body is Bullet:
+	elif body is Laser or body is SwingHammer or body is FanBlade or body is CrushingPlatform or body is Bullet:
 		health = max(health - body.DAMAGE_POINT, 0.0)
+	
+	elif not body:
+		health = max(health - 0.1, 0.0)
 	
 	tweenProgressBar(hud.health, scaleHealth(health))
 	

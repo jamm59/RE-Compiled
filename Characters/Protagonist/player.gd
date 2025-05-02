@@ -30,6 +30,7 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, POWERUP,
 @export var jump_time_to_peak : float = 0.3
 @export var jump_time_to_descent : float = 0.3
 
+
 @export_category("Player Health")
 @export var MAX_HEALTH: float = 20.0
 
@@ -39,7 +40,6 @@ enum STATE {IDLE, JUMP, DASH, ROLL, DASH_ATTACK, FALL, LAND, WALLSLIDE, POWERUP,
 @onready var JUMP_VELOCITY : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var JUMP_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var FALL_GRAVITY : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
-@onready var WALL_FALL_GRAVITY: float = FALL_GRAVITY / 10
 
 const LAND_HEAVY = preload("res://Assets/Music/land_heavy.mp3")
 const SLASH = preload("res://Assets/Music/slash.mp3")
